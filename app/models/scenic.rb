@@ -7,5 +7,5 @@ class Scenic < ActiveRecord::Base
   has_one :description_image, :as => :imageable
   has_one :image,             :as => :imageable
   
-  belongs_to :map, counter_cache => true
+  belongs_to :map, :counter_cache => true
 end
