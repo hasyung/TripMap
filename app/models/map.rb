@@ -4,12 +4,7 @@ class Map < ActiveRecord::Base
 
   has_many  :scenics,     :dependent => :destroy 
   has_many  :places,      :dependent => :destroy
-  has_many  :recommend,   :dependent => :destroy
-  
-  has_one   :cover,       :as => :imageable
-  has_one   :plat,        :as => :imageable
-  has_many  :images,      :as => :imageable
-  has_one   :description,  :as => :textable
+  has_many  :recommends,   :dependent => :destroy
   
   belongs_to :province, :counter_cache => true
 end

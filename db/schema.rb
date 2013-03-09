@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130308113144) do
+ActiveRecord::Schema.define(:version => 20130309090229) do
 
   create_table "audios", :force => true do |t|
     t.integer  "audioable_id"
@@ -75,10 +75,11 @@ ActiveRecord::Schema.define(:version => 20130308113144) do
   end
 
   create_table "recommend_records", :force => true do |t|
-    t.integer  "recommend_id", :null => false
-    t.string   "name",         :null => false
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.integer  "recommend_id",                :null => false
+    t.string   "name",                        :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+    t.integer  "order",        :default => 0
   end
 
   create_table "recommends", :force => true do |t|
