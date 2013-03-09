@@ -1,6 +1,6 @@
 class Place < ActiveRecord::Base
-  
-  attr_accessible :name, :slug
+
+  attr_accessible :map_id, :name, :slug, :temp_icon, :temp
   
   # Associations
   has_one :icon,              :as => :imageable

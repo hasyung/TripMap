@@ -1,5 +1,5 @@
 class Scenic < ActiveRecord::Base
-  
+
   attr_accessible :name, :slug
   
   has_one :icon,              :as => :imageable
@@ -12,4 +12,5 @@ class Scenic < ActiveRecord::Base
   
   # Validates
   validates :name, :slug, :presence => true
+
 end

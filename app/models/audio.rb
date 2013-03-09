@@ -1,5 +1,5 @@
 class Audio < ActiveRecord::Base
-  
+    
   attr_accessible :audioable_id, :audioable_type, :file, :file_type, :file_size, :duration, :order
   
   # Associations
@@ -46,5 +46,5 @@ class Audio < ActiveRecord::Base
       self.file_type = file.file.content_type
     end
   end
-  
+
 end

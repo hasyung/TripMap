@@ -1,5 +1,5 @@
 class Image < ActiveRecord::Base
-  
+
   attr_accessible :imageable_id, :imageable_type, :file, :file_type, :file_size, :order, :group_id, :group_order
 
   # Associations
@@ -39,5 +39,5 @@ class Image < ActiveRecord::Base
       self.file_type = file.file.content_type
     end
   end
-    
+  
 end

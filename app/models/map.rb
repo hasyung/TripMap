@@ -1,5 +1,5 @@
 class Map < ActiveRecord::Base
-  
+
   attr_accessible :province_id, :name, :slug
 
   # Associations

@@ -1,5 +1,5 @@
 class Province < ActiveRecord::Base
-  
+
   attr_accessible :name, :slug
   
   # Associations
@@ -8,3 +8,4 @@ class Province < ActiveRecord::Base
   # Validates
   validates :name, :slug, :presence => true
 end
+
