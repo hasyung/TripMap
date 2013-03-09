@@ -1,6 +1,6 @@
 class Scenic < ActiveRecord::Base
   # attr_accessible :title, :body
-  
+  attr_accessible :map_id, :name, :slug, :temp_icon, :temp
   has_one :icon,              :as => :imageable
   has_many :videos,           :as => :videoable
   has_one :description,       :as => :textable
