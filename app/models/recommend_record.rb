@@ -1,6 +1,6 @@
 class RecommendRecord < ActiveRecord::Base
-  attr_accessible :name
-  
+  attr_accessible :name, :order
+
   has_many :videos, :as => :videoable
   has_many :audios, :as => :audioable
   has_many :images, :as => :imageable
