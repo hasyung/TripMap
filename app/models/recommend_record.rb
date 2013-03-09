@@ -8,5 +8,5 @@ class RecommendRecord < ActiveRecord::Base
   has_many :images, :as => :imageable
   has_many :texts,  :as => :textable
   
-  belongs_to :recommend, counter_cache => true
+  belongs_to :recommend, :counter_cache => true
 end
