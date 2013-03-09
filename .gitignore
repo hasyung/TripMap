@@ -14,5 +14,8 @@
 /log/*.log
 /tmp
 
-#Ignore aptana studio's .project file
+# Ignore aptana studio's .project file
 /.project
+
+# Ignore database.yml file
+/config/database.yml

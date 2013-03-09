@@ -14,6 +14,9 @@ end
 gem 'jquery-rails'
 gem 'quiet_assets'
 
+gem 'therubyracer'
+gem 'carrierwave'
+
 group :test, :development do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
