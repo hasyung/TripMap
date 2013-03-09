@@ -9,7 +9,7 @@ class Map < ActiveRecord::Base
   has_one   :cover,       :as => :imageable
   has_one   :plat,        :as => :imageable
   has_many  :images,      :as => :imageable
-  has_one   :desciption,  :as => :textable
+  has_one   :description,  :as => :textable
   
   belongs_to :province, :counter_cache => true
 end
