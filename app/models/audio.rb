@@ -1,16 +1,24 @@
 class Audio < ActiveRecord::Base
-    
-  attr_accessible :audioable_id, :audioable_type, :file, :file_type, :file_size, :duration, :order
+  
+  # Enumerable hash table, in growing.
+  as_enum :type,
+  {
+    :place_audio => 0,
+
+  },
+  :column => "audio_type"
+  
+  # White list
+  attr_accessible :file, :duration, :order
   
   # Associations
-  belongs_to :audioable, :polymorphic => true   
+  belongs_to :audioable, :polymorphic => true
   
   # Validates
-  validates :file, :file_size, :duration, :presence => true
+  validates :file, :duration, :presence => true
   
   with_options :if => :name? do |name|
-    name.validates :name, :length => { :within => 2..30 }
-    name.validates :name, :uniqueness => { :scope => :area_id }
+    name.validates :name, :length => { :within => 2..15 }
   end
   
   with_options :if => :order? do |order|

@@ -1,20 +1,26 @@
 class Map < ActiveRecord::Base
-
-  attr_accessible :province_id, :name, :slug
+  
+  attr_accessible :province, :province_id, :name, :slug
 
   # Associations
-  has_many  :scenics,     :dependent => :destroy
-  has_many  :places,      :dependent => :destroy
-  has_many  :recommend,   :dependent => :destroy
+  with_options :dependent => :destroy do |assoc|
+     assoc.has_many :scenics
+     assoc.has_many :places
+     assoc.has_many :recommend
+  end
   
-  has_one   :cover,       :as => :imageable
-  has_one   :plat,        :as => :imageable
-  has_many  :images,      :as => :imageable
-  has_one   :desciption,  :as => :textable
+  with_options :as => :imageable, :class_name => 'Image' do |assoc|
+     assoc.has_one  :map_cover,   :conditions => { :image_type => Image.map_cover }
+     assoc.has_one  :map_plat,    :conditions => { :image_type => Image.map_plat  }
+     assoc.has_many :map_slides
+  end
+
+  has_one :map_description, :as => :textable, :class_name => 'Text', :conditions => { :text_type => Text.map_description }
   
   belongs_to :province, :counter_cache => true
   
   # Validates
-  validates :name, :presence => true
+  validates :name, :length => { :within => 0..15 }, :presence => true
+  #validates :slug, :format => { :with => /([a-z]|[A-Z])+/ }, :if => :slug_required?
   
 end

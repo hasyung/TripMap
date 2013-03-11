@@ -3,8 +3,6 @@ source 'http://ruby.taobao.org/'
 gem 'rails', '3.2.10'
 gem 'mysql2'
 
-
-
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
@@ -15,7 +13,12 @@ gem 'jquery-rails'
 gem 'quiet_assets'
 
 gem 'therubyracer'
+
+gem 'mime-types'
+gem 'mini_magick'
 gem 'carrierwave'
+
+gem 'simple_enum'
 
 group :test, :development do
   gem 'rspec-rails'

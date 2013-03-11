@@ -5,9 +5,6 @@ class CreatePlaces < ActiveRecord::Migration
       t.string      :name,              :null => false, :limit => 20
       t.string      :slug,              :null => false, :limit => 20
       
-      t.string      :temp_icon
-      t.string      :temp
-      
       t.timestamps
     end
   end
