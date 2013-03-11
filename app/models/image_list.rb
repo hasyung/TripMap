@@ -1,7 +1,9 @@
 class ImageList < ActiveRecord::Base
 
-  has_many :images, :as => :imageable
+	attr_accessible :name
+
+ 	has_many :images, :as => :imageable
   
-  belongs_to :recommend_record
+ 	belongs_to :recommend_record
   
 end

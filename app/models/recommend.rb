@@ -5,5 +5,6 @@ class Recommend < ActiveRecord::Base
   
   has_many :recommend_records, :dependent => :destroy
   
-  belongs_to :map, :counter_cache => true
+  belongs_to :map, :counter_cache => true  
+  
 end

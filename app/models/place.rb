@@ -1,6 +1,8 @@
 class Place < ActiveRecord::Base
-  attr_accessible :map_id, :name, :slug, :temp_icon, :temp#, :icon, :video, :audio, :description, :description_image, :image
 
+  attr_accessible :map_id, :name, :slug, :temp_icon, :temp
+  
+  # Associations
   has_one :icon,              :as => :imageable
   has_one :video,             :as => :videoable
   has_one :audio,             :as => :audioable
@@ -9,5 +11,8 @@ class Place < ActiveRecord::Base
   has_one :image,             :as => :imageable
   
   belongs_to :map, :counter_cache => true
+  
+  # Validates
+  validates :name, :slug, :presence => true
   
 end
