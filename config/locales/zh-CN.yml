@@ -11,18 +11,49 @@
         root: "TripMap"
       home:
         index: "首页"
+      maps:
+        index: "地图"
+        new: "添加地图"
+        edit: "修改地图"
 
   links:
     home:
       index: "返回首页"
+    maps:
+      index: "地图列表"
+      show: "查看地图"
+      new: "添加地图"
+      edit: "修改地图"
+    commons:
+      action: "操作"
+      confirm: "你确定删除吗？"
 
   messages:
-    tests:
-      arguments_error: "参数错误！"
+    maps:
+      success: "操作地图成功！"
+      error: "操作地图失败！"
 
   activerecord:
     models:
       province: "省市"
+      map: "地图"
+      image: "图片"
+      text: "文本"
+    attributes:
+      map:
+        province: "省市"
+        name: "名称"
+        slug: "简码"
+        scenics_count: "景区数"
+        places_count: "景点数"
+        recommends_count: "推荐数"
+        created_at: "创建时间"
+      image:
+        file: "文件"
+      text:
+        body: "内容"
+
+
 
   helpers:
     links:

@@ -3,4 +3,5 @@
 //= require admin/bootstrap
 //= require jquery/uniform
 
-  
+$ ->
+	$('input[type=file]').uniform()

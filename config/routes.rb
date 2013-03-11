@@ -3,7 +3,7 @@ TripMap::Application.routes.draw do
   namespace :admin do
     root :to => 'home#index'
     
-    resources :maps
+    resources :maps, :except => :show
   end
 
 root :to => 'home#index'

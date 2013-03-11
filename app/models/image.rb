@@ -28,7 +28,7 @@ class Image < ActiveRecord::Base
   scope :created_desc, order("`created_at` DESC")
 
   # Carrierwave
-  mount_uploader :file, MapUploader
+  mount_uploader :file, ImageUploader
 
   # Callbacks
   before_save :update_image_attributes
