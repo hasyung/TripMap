@@ -1,4 +1,5 @@
 class Recommend < ActiveRecord::Base
+  attr_accessible :map_id, :name, :slug
   has_one :cover,             :as => :imageable
   has_one :video,             :as => :videoable
   
