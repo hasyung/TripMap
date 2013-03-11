@@ -1,9 +1,9 @@
 TripMap::Application.routes.draw do
 
   namespace :admin do
-    root :to => 'home#index'
-    
+    root :to => 'home#index'    
     resources :maps
+    resources :provinces
   end
 
 root :to => 'home#index'

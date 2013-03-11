@@ -4,6 +4,8 @@
       index: "首页"
     maps:
       index: "地图"
+    provinces:
+      index: "省市"
 
   breadcrumbs:
     admin:
@@ -11,18 +13,39 @@
         root: "TripMap"
       home:
         index: "首页"
+      provinces:
+        index: "省市"
+        new: "添加省市"
+        edit: "修改省市"
 
   links:
     home:
       index: "返回首页"
+    provinces:
+      index: "省市列表"
+      show: "查看省市"
+      new: "添加省市"
+      edit: "修改省市"
+    commons:
+      action: "操作"
+      confirm: "你确定删除吗？"
+
 
   messages:
     tests:
       arguments_error: "参数错误！"
+    provinces:
+      success: "操作省市成功！"
+      error: "操作省市失败！"
 
   activerecord:
     models:
       province: "省市"
+    attributes:
+      province:
+        name: "名称"
+        slug: "简码"
+        maps_count: "地图数"
 
   helpers:
     links:

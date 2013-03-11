@@ -24,6 +24,9 @@
               <li<%= raw ' class="active"' if %w(home).include?(controller_name) %>>
                 <%= link_to t("navs.home.index"), root_path %>
               </li>
+              <li<%= raw ' class="active"' if %w(provinces) .include?(controller_name) %>>
+                <%= link_to t("navs.provinces.index"), admin_provinces_path %>
+              </li>
               <li<%= raw ' class="active"' if %w(maps).include?(controller_name) %>>
                 <%= link_to t("navs.maps.index"), admin_maps_path %>
               </li>
