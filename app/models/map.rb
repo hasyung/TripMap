@@ -8,7 +8,11 @@ class Map < ActiveRecord::Base
   has_one   :cover,       :as => :imageable, :class_name => 'Image', :conditions => { :image_type => Image.cover }
   has_one   :plat,        :as => :imageable, :class_name => 'Image', :conditions => { :image_type => Image.plat }
   has_many  :slides,      :as => :imageable, :class_name => 'Image', :conditions => { :image_type => Image.slide }
-  has_one   :description, :as => :textable, :class_name => 'Text'
+  has_one   :description, :as => :textable,  :class_name => 'Text'
   
   belongs_to :province, :counter_cache => true
+  
+  # Validates
+  validates :name, :presence => true
+  
 end

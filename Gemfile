@@ -15,6 +15,8 @@ gem 'jquery-rails'
 gem 'quiet_assets'
 
 gem 'simple_enum'
+gem 'therubyracer'
+gem 'carrierwave'
 
 group :test, :development do
   gem 'rspec-rails'
