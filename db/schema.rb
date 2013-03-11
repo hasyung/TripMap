@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130308113144) do
+ActiveRecord::Schema.define(:version => 20130311024529) do
 
   create_table "audios", :force => true do |t|
     t.integer  "audioable_id"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(:version => 20130308113144) do
     t.integer  "order",          :default => 0
     t.integer  "group_id",       :default => 0
     t.integer  "group_order",    :default => 0
+    t.integer  "image_type",     :default => 0
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
   end
@@ -120,6 +121,7 @@ ActiveRecord::Schema.define(:version => 20130308113144) do
     t.integer  "cover_size",     :default => 0
     t.integer  "order",          :default => 0
     t.integer  "duration",       :default => 0
+    t.integer  "video_type",     :default => 0
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
   end
