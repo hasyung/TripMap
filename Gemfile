@@ -14,9 +14,18 @@ end
 gem 'jquery-rails'
 gem 'quiet_assets'
 
+# bootstrap
+gem 'less-rails'
+gem 'twitter-bootstrap-rails'
+
 gem 'simple_enum'
 gem 'therubyracer'
 gem 'carrierwave'
+gem 'settingslogic'
+gem 'rails-i18n'
+gem 'kaminari'
+gem 'simple_form'
+gem 'friendly_id'
 
 group :test, :development do
   gem 'rspec-rails'
