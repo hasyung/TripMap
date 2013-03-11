@@ -22,7 +22,7 @@
           <div class="container nav-collapse">
             <ul class="nav">
               <li<%= raw ' class="active"' if %w(home).include?(controller_name) %>>
-                <%= link_to t("navs.home.index"), root_path %>
+                <%= link_to t("navs.home.index"), admin_root_path %>
               </li>
               <li<%= raw ' class="active"' if %w(maps).include?(controller_name) %>>
                 <%= link_to t("navs.maps.index"), admin_maps_path %>
