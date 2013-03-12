@@ -14,6 +14,7 @@ class Admin::MapsController < Admin::ApplicationController
   end
   
   def create
+    add_breadcrumb :new
     @map = Map.new params[:map]
     if @map.save
       redirect_to admin_maps_path, :notice => t('messages.maps.success')
@@ -23,7 +24,6 @@ class Admin::MapsController < Admin::ApplicationController
        @description = @map.build_description
       render :new
     end
-    add_breadcrumb :new
   end
 
   def edit
@@ -35,13 +35,13 @@ class Admin::MapsController < Admin::ApplicationController
   end
   
   def update
+    add_breadcrumb :edit
     @map = Map.find params[:id]
     if @map.update_attributes params[:map]
       redirect_to admin_maps_path, :notice => t('messages.maps.success')
     else
       render :edit
     end
-    add_breadcrumb :edit
   end
   
   def destroy
