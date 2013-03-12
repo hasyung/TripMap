@@ -1,6 +1,29 @@
 class Image < ActiveRecord::Base
-  attr_accessible :file, :order, :group_id, :group_order
-
+  
+  # Enumerable hash table, in growing.
+  as_enum :type,
+  {
+    :map_cover                  => 0,
+    :map_plat                   => 1,
+    :map_slides                 => 2,
+    
+    :scenic_icon                => 3,
+    :scenic_description_image   => 4,
+    :scenic_image               => 5,
+    
+    :place_icon                 => 6,
+    :place_description_image    => 7,
+    :place_image                => 8,
+    
+    :recommend_cover            => 9,
+    
+    :recommend_record_cover      => 10,
+  },
+  :column => "image_type"
+  
+  # White list
+  attr_accessible  :file, :file_size, :order, :group_id, :group_order
+  
   # Associations
   belongs_to :imageable, :polymorphic => true
   

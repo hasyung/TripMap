@@ -5,6 +5,10 @@ class Province < ActiveRecord::Base
   has_many :maps, :dependent => :destroy
   
   # Validates
-  validates :name, :slug, :presence => true
+  with_options :presence => true do |column|
+    column.validates :name, :length => { :within => 2..15 }
+    column.validates :slug, :format => { :with => /([a-z]|[A-Z])+/ }
+  end
+  
 end
 

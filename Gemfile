@@ -3,8 +3,6 @@ source 'http://ruby.taobao.org/'
 gem 'rails', '3.2.10'
 gem 'mysql2'
 
-
-
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
@@ -17,7 +15,6 @@ gem 'quiet_assets'
 # bootstrap
 gem 'less-rails'
 gem 'twitter-bootstrap-rails'
-
 gem 'simple_enum'
 gem 'therubyracer'
 gem 'carrierwave'

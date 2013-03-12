@@ -1,6 +1,20 @@
 class Text < ActiveRecord::Base
   
-	attr_accessible :textable_id, :textable_type, :body, :order
+  # Enumerable hash table, in growing.
+  as_enum :type,
+  {
+    :map_description                => 0,
+    
+    :scenic_description             => 1,
+    
+    :place_description              => 2,
+    
+    :recommend_record_description   => 3
+  },
+  :column => "text_type"
+  
+  # White list
+	attr_accessible :body, :order
   
   # Associations
   belongs_to :textable, :polymorphic => true

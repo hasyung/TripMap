@@ -1,14 +1,20 @@
 class Map < ActiveRecord::Base
-  attr_accessible :name, :slug, :cover_attributes, :plat_attributes, :description_attributes, :province_id
+   attr_accessible :province, :province_id, :name, :slug
+
+  # Associations
+  with_options :dependent => :destroy do |assoc|
+    assoc.has_many :scenics
+    assoc.has_many :places
+    assoc.has_many :recommends
+  end
   
-  has_many  :scenics,     :dependent => :destroy 
-  has_many  :places,      :dependent => :destroy
-  has_many  :recommend,   :dependent => :destroy
-  
-  has_one   :cover,       :as => :imageable, :class_name => 'Image', :conditions => { :image_type => Image.cover }
-  has_one   :plat,        :as => :imageable, :class_name => 'Image', :conditions => { :image_type => Image.plat }
-  has_many  :slides,      :as => :imageable, :class_name => 'Image', :conditions => { :image_type => Image.slide }
-  has_one   :description, :as => :textable,  :class_name => 'Text'
+  with_options :as => :imageable, :class_name => 'Image' do |assoc|
+    assoc.has_one  :map_cover,   :conditions => { :image_type => Image.map_cover }
+    assoc.has_one  :map_plat,    :conditions => { :image_type => Image.map_plat  }
+    assoc.has_many :map_slides
+  end
+
+  has_one :map_description, :as => :textable, :class_name => 'Text', :conditions => { :text_type => Text.map_description }
   
   belongs_to :province, :counter_cache => true
 
@@ -21,6 +27,7 @@ class Map < ActiveRecord::Base
   scope :created_desc, order("created_at DESC")
 
   # Validates
-  validates :name, :presence => true
+  validates :name, :length => { :within => 0..15 }, :presence => true
+  #validates :slug, :format => { :with => /([a-z]|[A-Z])+/ }, :if => :slug_required?
   
 end

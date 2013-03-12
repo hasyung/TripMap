@@ -1,4 +1,3 @@
-
 # encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
@@ -12,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130311024529) do
+ActiveRecord::Schema.define(:version => 20130312055311) do
 
   create_table "audios", :force => true do |t|
     t.integer  "audioable_id"
@@ -22,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20130311024529) do
     t.integer  "file_size",      :default => 0
     t.integer  "order",          :default => 0
     t.integer  "duration",       :default => 0
+    t.integer  "audio_type",     :default => 0
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
   end
@@ -40,6 +40,8 @@ ActiveRecord::Schema.define(:version => 20130311024529) do
     t.string   "file_type"
     t.integer  "file_size",      :default => 0
     t.integer  "order",          :default => 0
+    t.integer  "height",         :default => 0
+    t.integer  "width",          :default => 0
     t.integer  "group_id",       :default => 0
     t.integer  "group_order",    :default => 0
     t.integer  "image_type",     :default => 0
@@ -77,11 +79,10 @@ ActiveRecord::Schema.define(:version => 20130311024529) do
   end
 
   create_table "recommend_records", :force => true do |t|
-    t.integer  "recommend_id",                :null => false
-    t.string   "name",                        :null => false
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
-    t.integer  "order",        :default => 0
+    t.integer  "recommend_id", :null => false
+    t.string   "name",         :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "recommends", :force => true do |t|
@@ -108,9 +109,28 @@ ActiveRecord::Schema.define(:version => 20130311024529) do
     t.string   "textable_type"
     t.text     "body",                         :null => false
     t.integer  "order",         :default => 0
+    t.integer  "text_type",     :default => 0
     t.datetime "created_at",                   :null => false
     t.datetime "updated_at",                   :null => false
   end
+
+  create_table "users", :force => true do |t|
+    t.string   "email",                  :default => "", :null => false
+    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+  end
+
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
   create_table "videos", :force => true do |t|
     t.integer  "videoable_id"
