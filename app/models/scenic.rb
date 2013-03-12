@@ -1,5 +1,6 @@
 class Scenic < ActiveRecord::Base
 
+  # White list
   attr_accessible :map, :map_id, :name, :slug
   
   # Validates
@@ -19,7 +20,10 @@ class Scenic < ActiveRecord::Base
     assoc.has_one :scenic_image,              :conditions => { :image_type => Image.scenic_image }
   end
   
-  has_one :scenic_description, :as => :textable, :class_name => "Text", :conditions => { :text_type => Text.scenic_description }
+  has_one :scenic_description, :as => :textable, :class_name => "Text",
+          :conditions => { :text_type => Text.scenic_description },
+          :dependent => :destroy
   
   belongs_to :map, :counter_cache => true
+  
 end

@@ -8,12 +8,14 @@ class Place < ActiveRecord::Base
   has_one :place_video, :as => :videoable, :conditions => { :video_type => Video.place_video }, :dependent => :destroy
   
   with_options :as => :imageable, :class_name => "Image", :dependent => :destroy do|assoc|
-    assoc.has_one :place_icon,              :conditions => { :video_type => Image.place_icon }
-    assoc.has_one :place_description_image, :conditions => { :video_type => Image.place_description_image }
-    assoc.has_one :place_image,             :conditions => { :video_type => Image.place_image }
+    assoc.has_one :place_icon,              :conditions => { :image_type => Image.place_icon }
+    assoc.has_one :place_description_image, :conditions => { :image_type => Image.place_description_image }
+    assoc.has_one :place_image,             :conditions => { :image_type => Image.place_image }
   end
   
-  has_one :place_description, :as => :textable, :class_name => "Text", :conditions => { :Text_type => Text.place_description }, :dependent => :destroy
+  has_one :place_description, :as => :textable, :class_name => "Text",
+          :conditions => { :Text_type => Text.place_description },
+          :dependent => :destroy
   
   belongs_to :map, :counter_cache => true
   

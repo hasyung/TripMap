@@ -1,4 +1,6 @@
 class Province < ActiveRecord::Base
+  
+  # White list
   attr_accessible :name, :slug
   
   # Associations
