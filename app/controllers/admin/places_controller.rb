@@ -22,7 +22,7 @@ class Admin::PlacesController < Admin::ApplicationController
 
   def create
     @place = Place.new params[:place]
-    if place.save
+    if @place.save
       redirect_to admin_places_path, notice: ''
     else
       redirect_to :new
