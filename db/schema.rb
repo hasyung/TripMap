@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130311112310) do
+ActiveRecord::Schema.define(:version => 20130312055311) do
 
   create_table "audios", :force => true do |t|
     t.integer  "audioable_id"
@@ -40,8 +40,8 @@ ActiveRecord::Schema.define(:version => 20130311112310) do
     t.string   "file_type"
     t.integer  "file_size",      :default => 0
     t.integer  "order",          :default => 0
-    t.integer  "height"
-    t.integer  "width"
+    t.integer  "height",         :default => 0
+    t.integer  "width",          :default => 0
     t.integer  "group_id",       :default => 0
     t.integer  "group_order",    :default => 0
     t.integer  "image_type",     :default => 0
