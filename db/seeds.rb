@@ -10,7 +10,7 @@ Map.create([
 ])
 
 Scenic.create([
-  { map: Map.first, name: "丽江市", slug: "LJS", },
+  { map: Map.first, name: "丽江市", slug: "LJS" },
   { map: Map.first, name: "玉龙雪山", slug: "YLXS" },
 ])
 
@@ -20,18 +20,18 @@ scenic.save
 
 Place.create([
   { map: Map.first, name: "束河古镇", slug: "SHGZ" },
-  { map: Map.first, name: "拉市海", slug: "LSH" },
+  { map: Map.first, name: "拉市海",   slug: "LSH" },
 ])
 
 Recommend.create([
   { map: Map.first, name: "吃美味", slug: "CMW" },
   { map: Map.first, name: "住客栈", slug: "ZKZ" },
-  { map: Map.first, name: "带回家", slug: "DHJ" }, 
+  { map: Map.first, name: "带回家", slug: "DHJ" },
 ])
 
 RecommendRecord.create([
   { recommend: Recommend.first, name: "丽江小吃" },
   { recommend: Recommend.first, name: "地道菜"   },
   { recommend: Recommend.first, name: "外地菜"   },
-  { recommend: Recommend.first, name: "美食街"   }, 
+  { recommend: Recommend.first, name: "美食街"   },
 ])
