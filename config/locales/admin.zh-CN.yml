@@ -6,6 +6,8 @@
       index: "地图"
     provinces:
       index: "省市"
+    shares:
+      index: "分享"
 
   breadcrumbs:
     admin:
@@ -21,6 +23,8 @@
         index: "省市"
         new: "添加省市"
         edit: "修改省市"
+      shares:
+        index: "分享"
 
   links:
     home:
@@ -35,6 +39,9 @@
       show: "查看省市"
       new: "添加省市"
       edit: "修改省市"
+    shares:
+      index: "分享列表"
+      show: "查看分享"
     commons:
       action: "操作"
       confirm: "你确定删除吗？"
@@ -46,6 +53,11 @@
     provinces:
       success: "操作省市成功！"
       error: "操作省市失败！"
+    shares:
+      success: "操作分享成功！"
+      error: "操作分享失败！"
+      publish: "审核分享通过！"
+      draft: "审核分享不通过！"
 
   activerecord:
     models:
@@ -70,6 +82,12 @@
         file: "文件"
       text:
         body: "内容"
+      share:
+        map: "地图"
+        ip: "IP地址"
+        title: "标题"
+        state_cd: "状态"
+        created_at: "创建时间"
 
 
 
@@ -96,3 +114,9 @@
       previous: "上一页"
       next: "下一页"
       truncate: ""
+
+  enums:
+      share:
+        states:
+          draft: "未通过"
+          publish: "通过"
