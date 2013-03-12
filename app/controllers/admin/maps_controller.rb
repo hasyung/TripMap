@@ -8,9 +8,9 @@ class Admin::MapsController < Admin::ApplicationController
   def new
     add_breadcrumb :new
     @map = Map.new
-    @cover = @map.build_cover
-    @plat = @map.build_plat
-    @description = @map.build_description
+    @map_cover = @map.build_map_cover
+    @map_plat = @map.build_map_plat
+    @map_description = @map.build_map_description
   end
   
   def create
@@ -19,18 +19,18 @@ class Admin::MapsController < Admin::ApplicationController
     if @map.save
       redirect_to admin_maps_path, :notice => t('messages.maps.success')
     else
-       @cover = @map.build_cover
-       @plat = @map.build_plat
-       @description = @map.build_description
+       @map_cover = @map.build_map_cover
+       @map_plat = @map.build_map_plat
+       @map_description = @map.build_map_description
       render :new
     end
   end
 
   def edit
     @map = Map.find params[:id]
-    @cover = @map.cover
-    @plat = @map.plat
-    @description = @map.description
+    @map_cover = @map.build_map_cover if !@map_cover = @map.map_cover
+    @map_plat = @map.build_map_plat if !@map_plat = @map.map_plat
+    @map_description = @map.build_map_description if !@map_description = @map.map_description
     add_breadcrumb :edit
   end
   
@@ -40,6 +40,9 @@ class Admin::MapsController < Admin::ApplicationController
     if @map.update_attributes params[:map]
       redirect_to admin_maps_path, :notice => t('messages.maps.success')
     else
+      @map_cover = @map.build_map_cover if !@map_cover = @map.map_cover
+      @map_plat = @map.build_map_plat if !@map_plat = @map.map_plat
+      @map_description = @map.build_map_description if !@map_description = @map.map_description
       render :edit
     end
   end

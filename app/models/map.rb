@@ -1,5 +1,5 @@
 class Map < ActiveRecord::Base
-   attr_accessible :province, :province_id, :name, :slug
+   attr_accessible :province, :province_id, :name, :slug, :map_description_attributes, :map_cover_attributes; :map_plat_attributes
 
   # Associations
   with_options :dependent => :destroy do |assoc|
@@ -19,9 +19,9 @@ class Map < ActiveRecord::Base
   belongs_to :province, :counter_cache => true
 
   # NestedAttributes
-  accepts_nested_attributes_for :cover, :reject_if => lambda { |a| a[:file].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :plat, :reject_if => lambda { |a| a[:file].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :description, :reject_if => lambda { |a| a[:body].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :map_cover, :reject_if => lambda { |a| a[:file].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :map_plat, :reject_if => lambda { |a| a[:file].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :map_description, :reject_if => lambda { |a| a[:body].blank? }, :allow_destroy => true
   
    # Scopes
   scope :created_desc, order("created_at DESC")
