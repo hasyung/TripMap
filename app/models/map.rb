@@ -4,15 +4,15 @@ class Map < ActiveRecord::Base
 
   # Associations
   with_options :dependent => :destroy do |assoc|
-     assoc.has_many :scenics
-     assoc.has_many :places
-     assoc.has_many :recommend
+    assoc.has_many :scenics
+    assoc.has_many :places
+    assoc.has_many :recommends
   end
   
   with_options :as => :imageable, :class_name => 'Image' do |assoc|
-     assoc.has_one  :map_cover,   :conditions => { :image_type => Image.map_cover }
-     assoc.has_one  :map_plat,    :conditions => { :image_type => Image.map_plat  }
-     assoc.has_many :map_slides
+    assoc.has_one  :map_cover,   :conditions => { :image_type => Image.map_cover }
+    assoc.has_one  :map_plat,    :conditions => { :image_type => Image.map_plat  }
+    assoc.has_many :map_slides
   end
 
   has_one :map_description, :as => :textable, :class_name => 'Text', :conditions => { :text_type => Text.map_description }

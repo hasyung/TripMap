@@ -22,7 +22,7 @@ class Image < ActiveRecord::Base
   :column => "image_type"
   
   # White list
-  attr_accessible  :file, :order, :group_id, :group_order
+  attr_accessible  :file, :file_size, :order, :group_id, :group_order
   
   # Associations
   belongs_to :imageable, :polymorphic => true

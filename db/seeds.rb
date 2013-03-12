@@ -1,37 +1,26 @@
 # encoding: utf-8;
+yn = Province.new name: "云南", slug: "yn"
 
-Province.create([
-  { name: "云南", slug: "YN" },
-  { name: "四川", slug: "SC" } 
-])
+lj = yn.maps.build name: "丽江", slug: "lj"
 
-Map.create([
-  { province: Province.first, name: "丽江", slug: "" },
-])
+ljs = lj.scenics.build name: "丽江市", slug: "ljs"
+                            
+lj.scenics.build name: "玉龙雪山", slug: "ylxs"
 
-Scenic.create([
-  { map: Map.first, name: "丽江市", slug: "LJS" },
-  { map: Map.first, name: "玉龙雪山", slug: "YLXS" },
-])
+lj.places.build name: "束河古镇", slug: "shgz"
+lj.places.build name: "拉市海", slug: "lsh"
 
-scenic = Scenic.first
-scenic.build_scenic_impression :file => "初始印象", :file_type => "rmvb", :file_size => 10240, :cover => "初始印象封面图", :cover_type => "png", :cover_size => 1024, :order => 1, :duration => 12, :video_type => 0
-scenic.save
+cmw = lj.recommends.build name: "吃美味", slug: "cmw"
+zkz = lj.recommends.build name: "住客栈", slug: "zkz"
+dhj = lj.recommends.build name: "带回家", slug: "dhj"
 
-Place.create([
-  { map: Map.first, name: "束河古镇", slug: "SHGZ" },
-  { map: Map.first, name: "拉市海",   slug: "LSH" },
-])
+cmw.recommend_records.build name: "丽江小吃"
+cmw.recommend_records.build name: "地道菜"
+cmw.recommend_records.build name: "外地菜"
+cmw.recommend_records.build name: "美食街"
 
-Recommend.create([
-  { map: Map.first, name: "吃美味", slug: "CMW" },
-  { map: Map.first, name: "住客栈", slug: "ZKZ" },
-  { map: Map.first, name: "带回家", slug: "DHJ" },
-])
+yn.save
 
-RecommendRecord.create([
-  { recommend: Recommend.first, name: "丽江小吃" },
-  { recommend: Recommend.first, name: "地道菜"   },
-  { recommend: Recommend.first, name: "外地菜"   },
-  { recommend: Recommend.first, name: "美食街"   },
-])
+
+
+
