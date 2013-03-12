@@ -19,3 +19,9 @@
 
 # Ignore database.yml file
 /config/database.yml
+
+# Ignore database config file
+config/database.yml
+
+# Ignore uploaded files.
+public/uploads
