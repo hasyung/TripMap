@@ -18,6 +18,9 @@ class Admin::MapsController < Admin::ApplicationController
     if @map.save
       redirect_to admin_maps_path, :notice => t('messages.maps.success')
     else
+       @cover = @map.build_cover
+       @plat = @map.build_plat
+       @description = @map.build_description
       render :new
     end
     add_breadcrumb :new
