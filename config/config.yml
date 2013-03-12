@@ -1,0 +1,13 @@
+defaults: &defaults
+  app_name: "旅图后台管理"
+  company: "壹旅游"
+  page_size: '10'
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
