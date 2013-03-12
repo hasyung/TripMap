@@ -1,10 +1,11 @@
 class Place < ActiveRecord::Base
   
   # White list
-  attr_accessible :map, :map_id, :name, :slug
+  attr_accessible :map, :map_id, :name, :slug, :place_icon_attributes, :place_image_attributes, :place_description_image_attributes,
+                  :place_video_attributes, :place_audio_attributes, :place_description_attributes
   
   # Associations
-  has_one :place_audio, :as => :audioable, :conditions => { :video_type => Audio.place_audio }, :dependent => :destroy
+  has_one :place_audio, :as => :audioable, :class_name => "Video" :conditions => { :video_type => Audio.place_audio }, :dependent => :destroy
   has_one :place_video, :as => :videoable, :conditions => { :video_type => Video.place_video }, :dependent => :destroy
   
   with_options :as => :imageable, :class_name => "Image", :dependent => :destroy do|assoc|
@@ -22,5 +23,13 @@ class Place < ActiveRecord::Base
     column.validates :name, :length => { :within => 2..15 }
     column.validates :slug, :format => { :with => /([a-z]|[A-Z]|)+/ }
   end
+
+  # NestedAttributes
+  accepts_nested_attributes_for :place_icon,              reject_if: lambda { |i| i[:file].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :place_description_image, reject_if: lambda { |d| d[:file].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :place_image,             reject_if: lambda { |img| img[:file].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :place_audio,             reject_if: lambda { |pa| pa[:file].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :place_video,             reject_if: lambda { |pv| pv[:file].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :place_description,       reject_if: lambda { |pd| pd[:body].blank? }, allow_destroy: true
   
 end

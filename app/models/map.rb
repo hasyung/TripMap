@@ -1,5 +1,5 @@
 class Map < ActiveRecord::Base
-   attr_accessible :province, :province_id, :name, :slug, :map_description_attributes, :map_cover_attributes; :map_plat_attributes
+   attr_accessible :province, :province_id, :name, :slug, :map_description_attributes, :map_cover_attributes, :map_plat_attributes
 
   # Associations
   with_options :dependent => :destroy do |assoc|
