@@ -4,6 +4,7 @@ TripMap::Application.routes.draw do
     root :to => 'home#index'
     
     resources :maps, :except => :show
+    resources :provinces
   end
 
 root :to => 'home#index'

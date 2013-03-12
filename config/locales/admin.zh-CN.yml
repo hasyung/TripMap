@@ -4,6 +4,8 @@
       index: "首页"
     maps:
       index: "地图"
+    provinces:
+      index: "省市"
 
   breadcrumbs:
     admin:
@@ -15,6 +17,10 @@
         index: "地图"
         new: "添加地图"
         edit: "修改地图"
+      provinces:
+        index: "省市"
+        new: "添加省市"
+        edit: "修改省市"
 
   links:
     home:
@@ -24,6 +30,11 @@
       show: "查看地图"
       new: "添加地图"
       edit: "修改地图"
+    provinces:
+      index: "省市列表"
+      show: "查看省市"
+      new: "添加省市"
+      edit: "修改省市"
     commons:
       action: "操作"
       confirm: "你确定删除吗？"
@@ -32,6 +43,9 @@
     maps:
       success: "操作地图成功！"
       error: "操作地图失败！"
+    provinces:
+      success: "操作省市成功！"
+      error: "操作省市失败！"
 
   activerecord:
     models:
@@ -48,6 +62,10 @@
         places_count: "景点数"
         recommends_count: "推荐数"
         created_at: "创建时间"
+      province:
+        name: "名称"
+        slug: "简码"
+        maps_count: "地图数"
       image:
         file: "文件"
       text:

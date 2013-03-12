@@ -1,5 +1,4 @@
 class Recommend < ActiveRecord::Base
-
   # White list
   attr_accessible :map, :map_id, :name, :slug
 
