@@ -38,6 +38,7 @@ class Admin::PlacesController < Admin::ApplicationController
 
   def update
     @place = Place.find params[:place]
+    binding.pry
     if @place.update_attributes
       redirect_to admin_places_path, notice: t('messages.places.success')
     else
