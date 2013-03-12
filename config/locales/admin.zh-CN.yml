@@ -57,6 +57,9 @@
     provinces:
       success: "操作省市成功！"
       error: "操作省市失败！"
+    places:
+      success: "操作景点成功！"
+      error: "操作景点失败！"
 
   activerecord:
     models:

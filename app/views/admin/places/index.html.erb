@@ -24,7 +24,7 @@
           <td>
             <%= link_to raw("<i class=\"icon-edit\"></i>"), edit_admin_place_path(p), 
                                                             title: t('links.places.edit') %>
-            <%= link_to raw("<i class=\"icon-trash\"></i>"), admin_places_path(p), method: :delete, data: {confirm: t('links.commons.confirm')} %>
+            <%= link_to raw("<i class=\"icon-trash\"></i>"), admin_place_path(p), method: :delete, data: {confirm: t('links.commons.confirm')} %>
           </td>
         </tr>
       <% end %>
