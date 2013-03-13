@@ -76,6 +76,10 @@
         created_at: "创建时间"
       map_cover:
         file: "封面"
+      province:
+        name: "名称"
+        slug: "简码"
+        maps_count: "地图数"
         
   simple_form:
     labels:
@@ -86,10 +90,6 @@
           file: "原图"
         map_description:
           body: "描述"
-      province:
-        name: "名称"
-        slug: "简码"
-        maps_count: "地图数"
       image:
         file: "文件"
       text:

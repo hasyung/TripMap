@@ -28,7 +28,7 @@ class Map < ActiveRecord::Base
   scope :created_desc, order("created_at DESC")
 
   # Validates
-  validates :name, :slug, :province_id, :presence => true
+  validates :name, :slug, :province_id, :map_cover, :presence => true
   with_options :if => :name? do |name|
     name.validates :name, :length => { :within => 0..15 }
   end
