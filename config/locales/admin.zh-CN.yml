@@ -48,12 +48,18 @@
         places_count: "景点数"
         recommends_count: "推荐数"
         created_at: "创建时间"
-      image:
-        file: "文件"
-      text:
-        body: "内容"
-
-
+      map_cover:
+        file: "封面"
+        
+  simple_form:
+    labels:
+      map:
+        map_cover:
+          file: "封面"
+        map_plat:
+          file: "原图"
+        map_description:
+          body: "描述"
 
   helpers:
     links:
