@@ -9,6 +9,10 @@ class BaseUploader < CarrierWave::Uploader::Base
   CarrierWave::SanitizedFile.sanitize_regexp = /[^[:word:]\.\-\+]/
 
   storage :file
+
+  def store_dir
+    "uploads/#{model.class.to_s.underscore}"
+  end
   
   def filename
     if super.present?

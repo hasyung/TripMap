@@ -7,10 +7,10 @@ class Image < ActiveRecord::Base
   belongs_to :imageable, :polymorphic => true
   
   # Validates
-  with_options :presence => true do |column|
-    column.validates :file, :file_size => { :maximum => 5.megabytes.to_i, :message => I18n.t("errors.type.big_image_file") }
-    column.validates_numericality_of :order, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999
-  end
+  validates :file, :presence => true
+  validates :file, :file_size => { :maximum => 5.megabytes.to_i, :message => I18n.t("errors.type.big_image_file") }
+  
+  validates_numericality_of :order, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999, :if => :order?
 
   # SampleEnum. hash table is in growing.
   as_enum :type,
@@ -28,8 +28,10 @@ class Image < ActiveRecord::Base
     :place_image                => 8,
     
     :recommend_cover            => 9,
-    
+
     :recommend_record_cover     => 10,
+
+    :share_image                => 11
   },
   :column => "image_type"
   

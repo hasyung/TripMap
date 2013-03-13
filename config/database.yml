@@ -4,7 +4,6 @@ development:
   reconnect: false
   database: TripMap_v1.0_development
   pool: 5
-  #host: 172.27.3.4
   username: root
   password: '123123'
   socket: /var/run/mysqld/mysqld.sock
@@ -15,7 +14,6 @@ test:
   reconnect: false
   database: TripMap_v1.0_test
   pool: 5
-  #host: 172.27.3.4
   username: root
   password: '123123'
   socket: /var/run/mysqld/mysqld.sock
@@ -26,7 +24,6 @@ production:
   reconnect: false
   database: TripMap_v1.0_production
   pool: 5
-  #host: 172.27.3.4
   username: root
   password: '123123'
   socket: /var/run/mysqld/mysqld.sock

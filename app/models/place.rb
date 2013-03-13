@@ -4,8 +4,10 @@ class Place < ActiveRecord::Base
   attr_accessible :map, :map_id, :name, :slug
   
   # Associations
-  has_one :place_audio, :as => :audioable, :conditions => { :video_type => Audio.place_audio }, :dependent => :destroy
-  has_one :place_video, :as => :videoable, :conditions => { :video_type => Video.place_video }, :dependent => :destroy
+  with_options :dependent => :destroy do |assoc|
+    assoc.has_one :place_audio, :as => :audioable, :class_name => "Audio", :conditions => { :audio_type => Audio.place_audio }
+    assoc.has_one :place_video, :as => :videoable, :class_name => "Video", :conditions => { :video_type => Video.place_video }
+  end
   
   with_options :as => :imageable, :class_name => "Image", :dependent => :destroy do|assoc|
     assoc.has_one :place_icon,              :conditions => { :image_type => Image.place_icon }
@@ -22,7 +24,7 @@ class Place < ActiveRecord::Base
   # Validates
   with_options :presence => true do |column|
     column.validates :name, :length => { :within => 2..15 }
-    column.validates :slug, :format => { :with => /([a-z]|[A-Z]|)+/ }
+    column.validates :slug, :format => { :with => /([a-z])+/, :message => I18n.t("errors.type.slug") }
   end
   
 end

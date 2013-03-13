@@ -1,14 +1,15 @@
 class Map < ActiveRecord::Base
-  
+
   #White list
   attr_accessible :province, :province_id, :name, :slug,
                   :map_description_attributes, :map_cover_attributes; :map_plat_attributes
 
   # Associations
   with_options :dependent => :destroy do |assoc|
-    assoc.has_many :scenics
-    assoc.has_many :places
-    assoc.has_many :recommends
+    assoc.has_many :scenics, :autosave => true
+    assoc.has_many :places, :autosave => true
+    assoc.has_many :recommends, :autosave => true
+    assoc.has_many :shares, :autosave => true
   end
   
   with_options :as => :imageable, :class_name => 'Image' do |assoc|
@@ -37,5 +38,7 @@ class Map < ActiveRecord::Base
   
   # Scopes
   scope :created_desc, order("created_at DESC")
+  
+  # Methods  
     
 end

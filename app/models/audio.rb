@@ -8,11 +8,11 @@ class Audio < ActiveRecord::Base
   
   # Validates
   with_options :presence => true do |column|
-    column.validates :name, :length => { :within => 2..15, :message => t("errors.type.name") }
     column.validates :file, :file_size => { :maximum => 10.megabytes.to_i, :message => I18n.t("errors.type.big_audio_file") }
-    column.validates :duration, :format => { :with => /(?:[01]\d|2[0-3])(?::[0-5]\d){2}$/, :message => I18n.t("errors.type.duration") }
-    column.validates_numericality_of :order, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999
+    column.validates_numericality_of :duration, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999999
   end
+  
+  validates_numericality_of :order, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999, :if => :order?
   
   # SampleEnum. hash table is in growing.
   as_enum :type,

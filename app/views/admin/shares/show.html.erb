@@ -1,0 +1,12 @@
+<%= render "base" %>
+<div class="box">
+  <div class="box-title">
+    <span class="icon"><i class="icon-list"></i></span>
+    <h5><%= t('links.shares.index') %></h5>
+  </div>
+  <div class="box-content">
+    <div class="share-content clearfix">
+    <div class="share-image pull-left"><%= image_tag @share.share_image.file.url %></div>
+    <div class="share-text"><%= simple_format @share.share_text.body %></div>
+  </div>
+</div>

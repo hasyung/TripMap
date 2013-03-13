@@ -30,6 +30,9 @@
               <li<%= raw ' class="active"' if %w(maps).include?(controller_name) %>>
                 <%= link_to t("navs.maps.index"), admin_maps_path %>
               </li>
+              <li<%= raw ' class="active"' if %w(shares).include?(controller_name) %>>
+                <%= link_to t("navs.shares.index"), admin_shares_path %>
+              </li>
             </ul>
 
             <ul class="nav pull-right">
