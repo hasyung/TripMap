@@ -25,6 +25,7 @@ gem 'rails-i18n'
 gem 'kaminari'
 gem 'simple_form'
 gem 'friendly_id'
+gem 'devise'
 
 group :test, :development do
   gem 'rspec-rails'

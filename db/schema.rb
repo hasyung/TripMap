@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130312111321) do
+ActiveRecord::Schema.define(:version => 20130312131815) do
 
   create_table "audios", :force => true do |t|
     t.integer  "audioable_id"
@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(:version => 20130312111321) do
   create_table "maps", :force => true do |t|
     t.integer  "province_id",                                   :null => false
     t.string   "name",             :limit => 20,                :null => false
-    t.string   "slug",             :limit => 20,                :null => false
+    t.string   "slug",             :limit => 20
     t.integer  "scenics_count",                  :default => 0
     t.integer  "places_count",                   :default => 0
     t.integer  "recommends_count",               :default => 0
@@ -65,8 +65,6 @@ ActiveRecord::Schema.define(:version => 20130312111321) do
     t.integer  "map_id",                   :null => false
     t.string   "name",       :limit => 20, :null => false
     t.string   "slug",       :limit => 20, :null => false
-    t.string   "temp_icon"
-    t.string   "temp"
     t.datetime "created_at",               :null => false
     t.datetime "updated_at",               :null => false
   end
@@ -99,8 +97,6 @@ ActiveRecord::Schema.define(:version => 20130312111321) do
     t.integer  "map_id",                   :null => false
     t.string   "name",       :limit => 20, :null => false
     t.string   "slug",       :limit => 20, :null => false
-    t.string   "temp_icon"
-    t.string   "temp"
     t.datetime "created_at",               :null => false
     t.datetime "updated_at",               :null => false
   end
