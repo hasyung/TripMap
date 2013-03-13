@@ -3,7 +3,7 @@ require "base_uploader"
 
 class ImageUploader  < BaseUploader
   
-  version :thumbnail, :if => :is_share? do
+  version :thumbnail, :if => :is_share?  do
     process :resize_to_fit => [80, 80]
   end
 

@@ -37,6 +37,8 @@
         edit: "修改景区"
       shares:
         index: "分享"
+        new: "添加分享"
+        edit: "修改分享"
 
   links:
     home:
@@ -64,6 +66,8 @@
     shares:
       index: "分享列表"
       show: "查看分享"
+      new: "添加分享"
+      edit: "修改分享"
     commons:
       action: "操作"
       confirm: "你确定删除吗？"
@@ -95,6 +99,7 @@
       map: "地图"
       image: "图片"
       text: "文本"
+      share: "分享"
     attributes:
       map:
         province: "省市"
@@ -103,7 +108,6 @@
         scenics_count: "景区数"
         places_count: "景点数"
         recommends_count: "推荐数"
-        created_at: "创建时间"
       map_cover:
         file: "封面"
       province:
@@ -118,6 +122,12 @@
         name: "名称"
         slug: "简码"
         map: "地图"
+      share:
+        title: "标题"
+        ip: "IP地址"
+        map: "地图"
+        state_cd: "审核状态"
+        created_at: "创建时间"
         
   simple_form:
     labels:
@@ -165,17 +175,15 @@
           file: "景点描述"
         scenic_description:
           body: "内容"
-
+      share:
+        share_image:
+          file: "分享图片"
+        share_text:
+          body: "分享内容"
       image:
         file: "文件"
       text:
         body: "内容"
-      share:
-        map: "地图"
-        ip: "IP地址"
-        title: "标题"
-        state_cd: "状态"
-        created_at: "创建时间"
 
   helpers:
     links:
