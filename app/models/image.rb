@@ -1,6 +1,18 @@
 class Image < ActiveRecord::Base
   
-  # Enumerable hash table, in growing.
+  # White list
+  attr_accessible  :file, :file_size, :order, :group_id, :group_order
+  
+  # Associations
+  belongs_to :imageable, :polymorphic => true
+  
+  # Validates
+  validates :file, :imageable_type, :image_type, :presence => true
+  validates :file, :file_size => { :maximum => 5.megabytes.to_i, :message => I18n.t("errors.type.big_image_file") }
+  
+  validates_numericality_of :order, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999, :if => :order?
+
+  # SampleEnum. hash table is in growing.
   as_enum :type,
   {
     :map_cover                  => 0,
@@ -16,49 +28,26 @@ class Image < ActiveRecord::Base
     :place_image                => 8,
     
     :recommend_cover            => 9,
-    
-    :recommend_record_cover      => 10,
 
-    :share_image           => 11
+    :recommend_record_cover     => 10,
+
+    :share_image                => 11
   },
   :column => "image_type"
-  
-  # White list
-  attr_accessible  :file, :file_size, :order, :group_id, :group_order
-  
-  # Associations
-  belongs_to :imageable, :polymorphic => true
-  
-  # SimpleEnum
-  as_enum :type, :cover => 0, :plat => 1, :slide => 2, :icon => 3, :column => "image_type"
-  
-  # Validates
-  validates :file, :presence => true
-  
-  with_options :if => :order? do |order|
-    order.validates :order, :numericality =>
-    {
-      :only_integer => true,
-      :greater_than_or_equal_to => 0,
-      :less_than_or_equal_to => 999
-    }
-  end
-  
-  with_options :if => :file? do |image|
-    image.validates :file, :file_size => { :maximum => 5.megabytes.to_i }
-  end
-
-  # Scopes
-  scope :order_asc, order("`order` ASC")
-  scope :created_desc, order("`created_at` DESC")
 
   # Carrierwave
   mount_uploader :file, ImageUploader
-
+  
+  # Scopes
+  scope :order_asc, order("`order` ASC")
+  scope :created_desc, order("`created_at` DESC")
+  
   # Callbacks
   before_save :update_image_attributes
 
   # Methods
+  private
+  
   def update_image_attributes
     if file.present? && file_changed?
       self.file_size = file.file.size

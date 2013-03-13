@@ -31,6 +31,8 @@
             <td class="action">
               <%= link_to raw("<i class=\"icon-eye-open\"></i>"), admin_share_path(share), 
                           :title => t('links.shares.show') %>
+              <%= link_to raw("<i class=\"icon-edit\"></i>"), edit_admin_share_path(share), 
+                          :title => t('links.shares.edit') %>
               <%= link_to raw("<i class=\"icon-trash\"></i>"),
                           admin_share_path(share),
                           :method => :delete,
