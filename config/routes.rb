@@ -1,10 +1,13 @@
 TripMap::Application.routes.draw do
 
+  get "places/index"
+
   namespace :admin do
     root :to => 'home#index'
     
     resources :maps, :except => :show
     resources :provinces
+    resources :places
   end
 
 root :to => 'home#index'

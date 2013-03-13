@@ -17,9 +17,10 @@ class Audio < ActiveRecord::Base
   # Validates
   validates :file, :duration, :presence => true
   
-  with_options :if => :name? do |name|
-    name.validates :name, :length => { :within => 2..15 }
-  end
+  
+  # with_options :if => :name? do |name|
+  #   name.validates :name, :length => { :within => 2..15 }
+  # end
   
   with_options :if => :order? do |order|
     order.validates :order, :numericality =>
@@ -30,13 +31,13 @@ class Audio < ActiveRecord::Base
     }
   end
   
-  with_options :if => :duration do |duration|
-    duration.validates :duration, :format =>
-    {
-      :with => /(?:[01]\d|2[0-3])(?::[0-5]\d){2}$/, 
-      :message => I18n.translate("errors.messages.format_invalid")
-    }
-  end
+  # with_options :if => :duration do |duration|
+  #   duration.validates :duration, :format =>
+  #   {
+  #     :with => /(?:[01]\d|2[0-3])(?::[0-5]\d){2}$/, 
+  #     :message => I18n.translate("errors.messages.format_invalid")
+  #   }
+  # end
   
   with_options :if => :file? do |attachment|
     attachment.validates :file, :file_size => { :maximum => 10.megabytes.to_i }
