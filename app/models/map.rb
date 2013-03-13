@@ -11,7 +11,7 @@ class Map < ActiveRecord::Base
     assoc.has_many :recommends, :autosave => true
     assoc.has_many :shares, :autosave => true
   end
-  
+
   with_options :as => :imageable, :class_name => 'Image' do |assoc|
     assoc.has_one  :map_cover,   :conditions => { :image_type => Image.map_cover   }
     assoc.has_one  :map_plat,    :conditions => { :image_type => Image.map_plat    }
@@ -32,9 +32,9 @@ class Map < ActiveRecord::Base
   end
 
   # NestedAttributes
-  accepts_nested_attributes_for :map_cover, :reject_if => lambda { |a| a[:file].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :map_plat, :reject_if => lambda { |a| a[:file].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :map_description, :reject_if => lambda { |a| a[:body].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :map_cover, :allow_destroy => true
+  accepts_nested_attributes_for :map_plat, :allow_destroy => true
+  accepts_nested_attributes_for :map_description, :allow_destroy => true
   
   # Scopes
   scope :created_desc, order("created_at DESC")
