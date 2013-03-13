@@ -8,11 +8,11 @@ class Share < ActiveRecord::Base
 	has_one :share_text, :as => :textable, :class_name => 'Text', :conditions => { :text_type => Text.share_text }, :dependent => :destroy
 
 	#SimpleEnum
-  	as_enum :state, { :draft => 0, :publish => 1 }
+  as_enum :state, { :draft => 0, :publish => 1 }
 
 	# Scopes
-  	scope :created_desc, order("created_at DESC")
+  scope :created_desc, order("created_at DESC")
 
-  	# Validates
-  	validates :title, :length => { :within => 0..20 }, :presence => true
+  # Validates
+  validates :title, :length => { :within => 0..20 }, :presence => true
 end
