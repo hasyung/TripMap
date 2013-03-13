@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130312055311) do
+ActiveRecord::Schema.define(:version => 20130312111321) do
 
   create_table "audios", :force => true do |t|
     t.integer  "audioable_id"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(:version => 20130312055311) do
     t.integer  "recommends_count",               :default => 0
     t.datetime "created_at",                                    :null => false
     t.datetime "updated_at",                                    :null => false
+    t.integer  "shares_count",                   :default => 0
   end
 
   create_table "places", :force => true do |t|
@@ -102,6 +103,15 @@ ActiveRecord::Schema.define(:version => 20130312055311) do
     t.string   "temp"
     t.datetime "created_at",               :null => false
     t.datetime "updated_at",               :null => false
+  end
+
+  create_table "shares", :force => true do |t|
+    t.integer  "map_id",                                  :null => false
+    t.string   "ip"
+    t.string   "title",      :limit => 20,                :null => false
+    t.integer  "state_cd",                 :default => 0
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
   end
 
   create_table "texts", :force => true do |t|

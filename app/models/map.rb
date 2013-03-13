@@ -6,6 +6,7 @@ class Map < ActiveRecord::Base
     assoc.has_many :scenics
     assoc.has_many :places
     assoc.has_many :recommends
+    assoc.has_many :shares
   end
   
   with_options :as => :imageable, :class_name => 'Image', :dependent => :destroy do |assoc|

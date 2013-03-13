@@ -11,7 +11,7 @@ class BaseUploader < CarrierWave::Uploader::Base
   storage :file
 
   def store_dir
-    "uploads"
+    "uploads/#{model.class.to_s.underscore}"
   end
   
   def filename
