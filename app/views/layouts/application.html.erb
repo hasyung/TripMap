@@ -29,18 +29,6 @@
           <a class="brand" href="#"><%= Setting.app_name %></a>
           <div class="container nav-collapse">
             <ul class="nav">
-              <li<%= raw ' class="active"' if %w(home).include?(controller_name) %>>
-                <%= link_to t("navs.home.index"), root_path %>
-              </li>
-              <li<%= raw ' class="active"' if %w(places frames).include?(controller_name) %>>
-                <%= link_to t("navs.places.index"), places_path %>
-              </li>
-              <li<%= raw ' class="active"' if %w(tests).include?(controller_name) %>>
-                <%= link_to t("navs.tests.show"), test_path %>
-              </li>
-              <li<%= raw ' class="active"' if %w(logs).include?(controller_name) %>>
-                <%= link_to t("navs.logs.index"), logs_path %>
-              </li>
             </ul>
 
             <ul class="nav pull-right">
@@ -54,7 +42,7 @@
                       <li><%= link_to(t("helpers.links.logout"), destroy_user_session_path, :method => :delete) %></li>
                     </ul>
                   </li>
-                <% end -%>
+                <% end %>
               </ul>
           </div>
         </div>
