@@ -16,7 +16,6 @@
           <th><%= model_class.human_attribute_name(:scenics_count) %></th>
           <th><%= model_class.human_attribute_name(:places_count) %></th>
           <th><%= model_class.human_attribute_name(:recommends_count) %></th>
-          <th><%= model_class.human_attribute_name(:created_at) %></th>
           <th class="action"><%= t('links.commons.action') %></th>
         </tr>
       </thead>
@@ -30,7 +29,6 @@
             <td><%= map.scenics_count %></td>
             <td><%= map.places_count %></td>
             <td><%= map.recommends_count %></td>
-            <td><%= l map.created_at.to_date, :format => :long %></td>
             <td class="action">
               <%= link_to raw("<i class=\"icon-edit\"></i>"), edit_admin_map_path(map), 
                           :title => t('links.maps.edit') %>

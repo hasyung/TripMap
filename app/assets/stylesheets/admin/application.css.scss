@@ -89,6 +89,12 @@ body {
     &:last-child {
     	border-bottom: 0;
     }
+    &.image {
+      img {
+        max-width: 100px;
+        max-height: 100px;
+      }
+    }
   }
   .control-label {
   	padding-top: 15px;
@@ -123,6 +129,8 @@ body {
   }
   .help-inline {
     padding-left: 0;
+    display: block;
+    padding-top: 3px;
   }
   .control-group.error {
     .control-label {
@@ -200,4 +208,13 @@ body {
     text-align:right;
     vertical-align:middle;
   }
+}
+
+/* shares */
+#shares .control-label {
+text-align:left;
+  width:40px;
+}
+#shares .controls {
+  margin-left:40px;
 }

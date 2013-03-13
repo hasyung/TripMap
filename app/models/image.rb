@@ -18,20 +18,19 @@ class Image < ActiveRecord::Base
     :recommend_cover            => 9,
     
     :recommend_record_cover      => 10,
+
+    :share_image           => 11
   },
   :column => "image_type"
   
   # White list
-  attr_accessible  :file, :file_size, :order, :group_id, :group_order
+  attr_accessible :file, :order, :group_id, :group_order
   
   # Associations
   belongs_to :imageable, :polymorphic => true
   
-  # SimpleEnum
-  as_enum :type, :cover => 0, :plat => 1, :slide => 2, :icon => 3, :column => "image_type"
-  
   # Validates
-  validates :file, :presence => true
+  validates :file, :imageable_type, :image_type, :presence => true
   
   with_options :if => :order? do |order|
     order.validates :order, :numericality =>

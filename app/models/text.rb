@@ -9,7 +9,9 @@ class Text < ActiveRecord::Base
     
     :place_description              => 2,
     
-    :recommend_record_description   => 3
+    :recommend_record_description   => 3,
+
+    :share_text           => 4
   },
   :column => "text_type"
   
