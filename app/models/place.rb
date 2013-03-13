@@ -22,6 +22,7 @@ class Place < ActiveRecord::Base
   with_options :presence => true do |column|
     column.validates :name, :length => { :within => 2..15 }
     column.validates :slug, :format => { :with => /([a-z]|[A-Z]|)+/ }
+    column.validates :map_id
   end
 
   # NestedAttributes
