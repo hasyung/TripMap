@@ -7,6 +7,9 @@ class Video < ActiveRecord::Base
 
   # Associations
   belongs_to :videoable, :polymorphic => true
+
+  # Callbacks
+  before_save :update_video_attributes, :update_video_cover_attributes
   
   # Validates
   with_options :presence => true do |column|
@@ -15,8 +18,17 @@ class Video < ActiveRecord::Base
     column.validates_numericality_of :duration, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999999
   end
   
+
+  # with_options :if => :duration do |duration|
+  #   duration.validates :duration, :format =>
+  #   {
+  #     :with => /(?:[01]\d|2[0-3])(?::[0-5]\d){2}$/,
+  #     :message => I18n.translate("errors.messages.format_invalid")
+  #   }
+  # end
   validates_numericality_of :order, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999, :if => :order?
-  
+
+
   # SampleEnum. hash table is in growing.
   as_enum :type,
   {

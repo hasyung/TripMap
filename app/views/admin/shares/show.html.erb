@@ -7,6 +7,8 @@
   <div class="box-content">
     <div class="share-content clearfix">
     <div class="share-image pull-left"><%= image_tag @share.share_image.file.url %></div>
-    <div class="share-text"><%= simple_format @share.share_text.body %></div>
+    <% if @share.share_text.present? %>
+    	<div class="share-text"><%= simple_format @share.share_text.body %></div>
+    <% end %>
   </div>
 </div>
