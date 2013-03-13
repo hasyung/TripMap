@@ -4,9 +4,11 @@ class Share < ActiveRecord::Base
 	belongs_to :map, :counter_cache => true
 
 	# Associations
-	has_one :share_image, :as => :imageable, :class_name => 'Image', :conditions => { :image_type => Image.share_image }, :dependent => :destroy
-	has_one :share_text, :as => :textable, :class_name => 'Text', :conditions => { :text_type => Text.share_text }, :dependent => :destroy
-
+	with_options :dependent => :destroy do |assoc|
+	  assoc.has_one :share_image, :as => :imageable, :class_name => 'Image', :conditions => { :image_type => Image.share_image }
+	  assoc.has_one :share_text, :as => :textable, :class_name => 'Text', :conditions => { :text_type => Text.share_text }
+	end
+	
 	#SimpleEnum
   as_enum :state, { :draft => 0, :publish => 1 }
 
@@ -15,4 +17,5 @@ class Share < ActiveRecord::Base
 
   # Validates
   validates :title, :length => { :within => 0..20 }, :presence => true
+  
 end

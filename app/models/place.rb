@@ -5,8 +5,10 @@ class Place < ActiveRecord::Base
                   :place_video_attributes, :place_audio_attributes, :place_description_attributes
   
   # Associations
-  has_one :place_audio, :as => :audioable, :class_name => "Audio", :conditions => { :audio_type => Audio.place_audio }, :dependent => :destroy
-  has_one :place_video, :as => :videoable, :class_name => "Video", :conditions => { :video_type => Video.place_video }, :dependent => :destroy
+  with_options :dependent => :destroy do |assoc|
+    assoc.has_one :place_audio, :as => :audioable, :class_name => "Audio", :conditions => { :audio_type => Audio.place_audio }
+    assoc.has_one :place_video, :as => :videoable, :class_name => "Video", :conditions => { :video_type => Video.place_video }
+  end
   
   with_options :as => :imageable, :class_name => "Image", :dependent => :destroy do|assoc|
     assoc.has_one :place_icon,              :conditions => { :image_type => Image.place_icon }
@@ -15,6 +17,8 @@ class Place < ActiveRecord::Base
   end
   
   has_one :place_description, :as => :textable, :class_name => "Text", :conditions => { :text_type => Text.place_description }, :dependent => :destroy
+
+
   
   belongs_to :map, :counter_cache => true
   
@@ -23,6 +27,7 @@ class Place < ActiveRecord::Base
     column.validates :name, :length => { :within => 2..15 }
     column.validates :slug, :format => { :with => /([a-z]|[A-Z]|)+/ }
     column.validates :map_id
+    column.validates :slug, :format => { :with => /([a-z])+/, :message => I18n.t("errors.type.slug") }
   end
 
   # NestedAttributes

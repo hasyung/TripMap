@@ -1,13 +1,5 @@
 class Audio < ActiveRecord::Base
   
-  # Enumerable hash table, in growing.
-  as_enum :type,
-  {
-    :place_audio => 0,
-
-  },
-  :column => "audio_type"
-  
   # White list
   attr_accessible :file, :duration, :order
   
@@ -21,16 +13,14 @@ class Audio < ActiveRecord::Base
   # with_options :if => :name? do |name|
   #   name.validates :name, :length => { :within => 2..15 }
   # end
-  
-  with_options :if => :order? do |order|
-    order.validates :order, :numericality =>
-    {
-      :only_integer => true,
-      :greater_than_or_equal_to => 0,
-      :less_than_or_equal_to => 999
-    }
+  with_options :presence => true do |column|
+    column.validates :file, :file_size => { :maximum => 10.megabytes.to_i, :message => I18n.t("errors.type.big_audio_file") }
+    column.validates_numericality_of :duration, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999999
   end
   
+  validates_numericality_of :order, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999, :if => :order?
+
+
   # with_options :if => :duration do |duration|
   #   duration.validates :duration, :format =>
   #   {
@@ -42,8 +32,14 @@ class Audio < ActiveRecord::Base
   with_options :if => :file? do |attachment|
     attachment.validates :file, :file_size => { :maximum => 10.megabytes.to_i }
   end
+  # SampleEnum. hash table is in growing.
+  as_enum :type,
+  {
+    :place_audio => 0,
+  },
+  :column => "audio_type"
   
-  # Carrierwave
+  # Carrierwave.
   mount_uploader :file, AudioUploader
   
   # Callbacks

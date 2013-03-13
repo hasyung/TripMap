@@ -1,16 +1,6 @@
 class Video < ActiveRecord::Base
   
-  # Enumerable hash table, in growing.
-  as_enum :type,
-  {
-    :scenic_impression      => 0,
-    :scenic_route           => 1,
-    
-    :place_video            => 2,
-    
-    :recommend_video        => 3,
-  },
-  :column => "video_type"
+  
   
   # White list
   attr_accessible :file, :file_type, :file_size, :cover,  :cover_type, :cover_size, :order, :duration, :video_type
@@ -22,17 +12,13 @@ class Video < ActiveRecord::Base
   before_save :update_video_attributes, :update_video_cover_attributes
   
   # Validates
-  validates :file, :cover, :duration, :presence => true
-  
-  with_options :if => :order? do |order|
-    order.validates :order, :numericality => 
-    {
-      :only_integer => true,
-      :greater_than_or_equal_to => 0,
-      :less_than_or_equal_to => 999
-    }
+  with_options :presence => true do |column|
+    column.validates :file, :file_size => { :maximum => 100.megabytes.to_i, :message => I18n.t("errors.type.big_video_file") }
+    column.validates :cover, :file_size => { :maximum => 10.megabytes.to_i, :message => I18n.t("errors.type.big_image_file") }
+    column.validates_numericality_of :duration, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999999
   end
   
+
   # with_options :if => :duration do |duration|
   #   duration.validates :duration, :format =>
   #   {
@@ -40,15 +26,21 @@ class Video < ActiveRecord::Base
   #     :message => I18n.translate("errors.messages.format_invalid")
   #   }
   # end
-  
-  with_options :if => :file? do |attachment|
-    attachment.validates :file, :file_size => { :maximum => 100.megabytes.to_i }
-  end
-  
-  with_options :if => :cover? do |cover|
-    cover.validates :cover, :file_size => { :maximum => 10.megabytes.to_i }
-  end
+  validates_numericality_of :order, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999, :if => :order?
 
+
+  # SampleEnum. hash table is in growing.
+  as_enum :type,
+  {
+    :scenic_impression      => 0,
+    :scenic_route           => 1,
+    
+    :place_video            => 2,
+    
+    :recommend_video        => 3,
+  },
+  :column => "video_type"
+  
   # Carrierwave
   mount_uploader :file,   VideoUploader
   mount_uploader :cover,  ImageUploader
@@ -56,6 +48,12 @@ class Video < ActiveRecord::Base
   # Scopes
   scope :order_asc, order("`order` ASC")
   scope :created_desc, order("`created_at` DESC")
+  
+  # Callbacks
+  before_save :update_video_attributes, :update_video_cover_attributes
+  
+  # Methods
+  private
   
   def update_video_attributes
     if file.present? and file_changed?
