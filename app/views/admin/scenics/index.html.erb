@@ -1,0 +1,47 @@
+<%- model_class = Scenic-%>
+<%= render 'base' %>
+<div class='box'>
+  <div class='box-title'>
+    <span class="icon"><i class="icon-th"></i></span>
+    <h5><%= t('links.scenics.index') %></h5>
+  </div>
+  <div class="box-content">
+    <table class="table table-bordered table-striped with-check">
+      <thead>
+        <tr>
+          <th>
+            <input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" />
+          </th>
+          <th>
+            <%= model_class.human_attribute_name(:name) %>
+          </th>
+          <th>
+            <%= model_class.human_attribute_name(:slug) %>
+          </th>
+          <th class="action">
+            <%= t('links.commons.action') %>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @scenics.each do |s| %>
+        <tr>
+          <td>
+            <%= check_box_tag "scenics_ids[]", s.id, false, id: "scenics_#{s.id}" %>
+          </td>
+          <td><%= s.name %></td>
+          <td><%= s.slug %></td>
+          <td class="action">
+            <%= link_to raw("<i class=\"icon-edit\"></i>"), 
+                        edit_admin_scenic_path(s),
+                        title: t('links.places.edit') %>
+            <%= link_to raw("<i class=\"icon-trash\"></i>"),
+                        admin_scenic_path(s), 
+                        method: :delete, data: {confirm: t('links.commons.confirm')} %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

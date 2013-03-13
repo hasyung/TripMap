@@ -6,6 +6,8 @@
       index: "地图"
     provinces:
       index: "省市"
+    scenics:
+      index: "景区"
     places:
       index: "景点"
     shares:
@@ -29,6 +31,10 @@
         index: "景点"
         new: "添加景点"
         edit: "修改景点"
+      scenics:
+        index: "景区"
+        new: "添加景区"
+        edit: "修改景区"
       shares:
         index: "分享"
         new: "添加分享"
@@ -52,6 +58,11 @@
       show: "查看景点"
       new: "添加景点"
       edit: "修改景点"
+    scenics:
+      index: "景区"
+      show: "查看景点"
+      new: "添加景区"
+      edit: "修改景区"
     shares:
       index: "分享列表"
       show: "查看分享"
@@ -71,6 +82,9 @@
     places:
       success: "操作景点成功！"
       error: "操作景点失败！"
+    scenics:
+      success: "操作景区成功！"
+      error: "操作景区失败！"
     shares:
       success: "操作分享成功！"
       error: "操作分享失败！"
@@ -80,6 +94,7 @@
   activerecord:
     models:
       place: "景点"
+      scenic: "景区"
       province: "省市"
       map: "地图"
       image: "图片"
@@ -100,6 +115,10 @@
         slug: "简码"
         maps_count: "地图数"
       place:
+        name: "名称"
+        slug: "简码"
+        map: "地图"
+      scenic:
         name: "名称"
         slug: "简码"
         map: "地图"
@@ -136,6 +155,25 @@
           duration: "时长"
           order: "排序"
         place_description:
+          body: "内容"
+      scenic:
+        scenic_impression:
+          file: "初识印象"
+          cover: "封面"
+          duration: "时长"
+          order: "排序"
+        scenic_route:
+          file: "游览线路"
+          cover: "封面"
+          duration: "时长"
+          order: "排序"
+        scenic_icon:
+          file: "景点图标"
+        scenic_image:
+          file: "背景图"
+        scenic_description_image:
+          file: "景点描述"
+        scenic_description:
           body: "内容"
       share:
         share_image:

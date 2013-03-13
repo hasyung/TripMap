@@ -1,12 +1,15 @@
 class Scenic < ActiveRecord::Base
 
   # White list
-  attr_accessible :map, :map_id, :name, :slug
+  attr_accessible :map, :map_id, :name, :slug, :scenic_impression_attributes, 
+                  :scenic_route_attributes, :scenic_icon_attributes, :scenic_image_attributes, 
+                  :scenic_description_attributes, :scenic_description_image_attributes
   
   # Validates
   with_options :presence => true do |column|
     column.validates :name, :length => { :within => 2..15 }
     column.validates :slug, :format => { :with => /([a-z])+/, :message => I18n.t("errors.type.slug") }
+    column.validates :map_id
   end
   
   with_options :as => :videoable, :class_name => "Video", :dependent => :destroy do |assoc|
@@ -25,5 +28,13 @@ class Scenic < ActiveRecord::Base
           :dependent => :destroy
   
   belongs_to :map, :counter_cache => true
+
+  #NestedAttributes
+  accepts_nested_attributes_for :scenic_impression,    reject_if: lambda { |i| i[:file].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :scenic_route,         reject_if: lambda { |r| r[:file].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :scenic_icon,          reject_if: lambda { |icon| icon[:file].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :scenic_image,         reject_if: lambda { |image| image[:file].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :scenic_description,   reject_if: lambda { |d| d[:body].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :scenic_description_image,   reject_if: lambda { |di| di[:file].blank? }, allow_destroy: true
   
 end
