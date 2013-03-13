@@ -4,10 +4,8 @@ TripMap::Application.routes.draw do
              :path => "",
              :path_names => { :sign_in => 'login', :sign_out => 'logout' },
              :skip => [:passwords, :registrations],
-             :controllers => { :sessions => 'sessions' }
+             :controllers => { :sessions => 'admin/sessions' }
              
-  root :to => 'home#index'
-
   namespace :admin do
     root :to => 'home#index'
     
