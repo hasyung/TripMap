@@ -85,6 +85,15 @@
         name: "名称"
         slug: "简码"
         map: "地图"
+      video:        
+        file: "视频文件"
+        cover: "封面"
+        duration: "时长"
+        order: "排序"
+      audio:
+        file: "音频文件"
+        duration: "时长"
+        order: "排序"
       image:
         file: "文件"
       text:

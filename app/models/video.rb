@@ -19,7 +19,7 @@ class Video < ActiveRecord::Base
   belongs_to :videoable, :polymorphic => true
 
   # Callbacks
-  before_save :update_video_attributes, :update_cover_attributes
+  before_save :update_video_attributes, :update_video_cover_attributes
   
   # Validates
   validates :file, :cover, :duration, :presence => true
@@ -33,13 +33,13 @@ class Video < ActiveRecord::Base
     }
   end
   
-  with_options :if => :duration do |duration|
-    duration.validates :duration, :format =>
-    {
-      :with => /(?:[01]\d|2[0-3])(?::[0-5]\d){2}$/,
-      :message => I18n.translate("errors.messages.format_invalid")
-    }
-  end
+  # with_options :if => :duration do |duration|
+  #   duration.validates :duration, :format =>
+  #   {
+  #     :with => /(?:[01]\d|2[0-3])(?::[0-5]\d){2}$/,
+  #     :message => I18n.translate("errors.messages.format_invalid")
+  #   }
+  # end
   
   with_options :if => :file? do |attachment|
     attachment.validates :file, :file_size => { :maximum => 100.megabytes.to_i }

@@ -17,10 +17,15 @@
 
   <%= p.fields_for :place_audio, @place_audio do |pa|  %>  
     <%= pa.input :file, :as => :file %>
+    <%= pa.input :duration %>
+    <%= pa.input :order %>
   <% end %>
 
-  <%= p.fields_for :place_video, @place_audio do |pv|  %>  
-    <%= pv.input :file, :as => :file %>
+  <%= p.fields_for :place_video, @place_video do |pv|  %>  
+    <%= pv.input :file,  :as => :file %>
+    <%= pv.input :cover, :as => :file %>
+    <%= pv.input :duration %>
+    <%= pv.input :order %>
   <% end %>
 
   <%= p.fields_for :place_description, @place_description do |pd|  %>  
