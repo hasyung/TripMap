@@ -4,6 +4,36 @@ class Admin::SharesController < Admin::ApplicationController
     add_breadcrumb :index
   end
 
+  def new
+    @share = Share.new
+    add_breadcrumb :new
+  end
+  
+  def create
+    @share = Share.new params[:share]
+    if @share.save
+      redirect_to admin_shares_path, :notice => t('messages.shares.success')
+    else
+      render :new
+    end
+    add_breadcrumb :new
+  end
+
+  def edit
+    @share = Share.find params[:id]
+    add_breadcrumb :edit
+  end
+  
+  def update
+    @share = Share.find params[:id]
+    if @share.update_attributes params[:share]
+      redirect_to admin_shares_path, :notice => t('messages.shares.success')
+    else
+      render :edit
+    end
+    add_breadcrumb :edit
+  end
+
   def select
     @map = Map.find params[:map][:name]
     add_breadcrumb :index

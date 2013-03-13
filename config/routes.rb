@@ -1,21 +1,31 @@
 TripMap::Application.routes.draw do
 
+
   devise_for :users,
              :path => "",
              :path_names => { :sign_in => 'login', :sign_out => 'logout' },
              :skip => [:passwords, :registrations],
              :controllers => { :sessions => 'admin/sessions' }
              
+
+  get "scenics/index"
+
+  get "places/index"
+
   namespace :admin do
     root :to => 'home#index'
     
     resources :maps, :except => :show
     resources :provinces
+    resources :places
+    resources :scenics
     resources :shares, :only => [:index, :show, :destroy] do
+    resources :shares do
       get 'publish/:status', :action => :publish, :on => :member, :as => :publish
       post 'select', :on => :collection
     end
   end
+end
 
 root :to => 'home#index'
   # The priority is based upon order of creation:

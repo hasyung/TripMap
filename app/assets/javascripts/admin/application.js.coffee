@@ -1,7 +1,8 @@
 //= require jquery
 //= require jquery_ujs
-//= require admin/bootstrap
+//= require twitter/bootstrap
 //= require jquery/uniform
 
 $ ->
-	$('input[type=file]').uniform()
+  $('input[type=checkbox], input[type=radio], input[type=file]').uniform()
+  return
