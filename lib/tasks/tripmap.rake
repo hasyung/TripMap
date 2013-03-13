@@ -3,6 +3,7 @@
 require File.expand_path('lib/serials/generator.rb', Rails.root)
 
 namespace :tripmap do
+  
   desc "生成序列号"
   task :generate_serial_code => :environment do
     map = Map.first
