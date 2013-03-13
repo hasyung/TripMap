@@ -9,7 +9,7 @@ class ImageUploader  < BaseUploader
 
   protected
   
-  def is_share?
+  def is_share?(new_file)
     model.class == "Share"
   end
   

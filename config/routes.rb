@@ -1,5 +1,7 @@
 TripMap::Application.routes.draw do
 
+  get "scenics/index"
+
   get "places/index"
 
   namespace :admin do
@@ -8,6 +10,7 @@ TripMap::Application.routes.draw do
     resources :maps, :except => :show
     resources :provinces
     resources :places
+    resources :scenics
     resources :shares, :only => [:index, :show, :destroy] do
       get 'publish/:status', :action => :publish, :on => :member, :as => :publish
       post 'select', :on => :collection

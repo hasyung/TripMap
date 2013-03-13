@@ -2,7 +2,7 @@ development:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: TripMap_v1.0_development
+  database: TripMap_development
   pool: 5
   username: root
   password: '123123'
@@ -12,7 +12,7 @@ test:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: TripMap_v1.0_test
+  database: TripMap_test
   pool: 5
   username: root
   password: '123123'
@@ -22,7 +22,7 @@ production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: TripMap_v1.0_production
+  database: TripMap_production
   pool: 5
   username: root
   password: '123123'
