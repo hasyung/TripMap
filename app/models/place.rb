@@ -17,8 +17,6 @@ class Place < ActiveRecord::Base
   end
   
   has_one :place_description, :as => :textable, :class_name => "Text", :conditions => { :text_type => Text.place_description }, :dependent => :destroy
-
-
   
   belongs_to :map, :counter_cache => true
   
