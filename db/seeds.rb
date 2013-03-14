@@ -26,3 +26,5 @@ cmw.recommend_records.build name: "外地菜"
 cmw.recommend_records.build name: "美食街"
 
 cmw.save
+
+u = User.create email: "2891@qq.com", password: "123123"
