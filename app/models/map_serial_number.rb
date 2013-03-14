@@ -1,3 +1,3 @@
 class MapSerialNumber < ActiveRecord::Base
-  attr_accessible :code, :map_id, :type
+  attr_accessible :map , :map_id, :code, :type, :count, :printed
 end
