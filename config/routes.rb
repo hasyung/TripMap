@@ -19,12 +19,10 @@ TripMap::Application.routes.draw do
     resources :provinces
     resources :places
     resources :scenics
-    resources :shares, :only => [:index, :show, :destroy] do
     resources :shares do
       get 'publish/:status', :action => :publish, :on => :member, :as => :publish
       post 'select', :on => :collection
     end
-  end
 end
 
 root :to => 'home#index'
