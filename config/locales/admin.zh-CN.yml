@@ -59,7 +59,7 @@
       new: "添加景点"
       edit: "修改景点"
     scenics:
-      index: "景区"
+      index: "景区列表"
       show: "查看景点"
       new: "添加景区"
       edit: "修改景区"
