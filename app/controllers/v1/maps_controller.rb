@@ -15,7 +15,7 @@ class V1::MapsController < V1::ApplicationController
 
     def show
       @map = Map.find params[:id]
-      result = slides = places = scenics = recommends = records = detaileds = []
+      result, slides, places, scenics, recommends, records, detaileds = [], [], [], [], [], [], []
       if @map.map_slides.present?
         @map.map_slides.order_asc.each do |slide|
           slides << {:image => slide.file.url}
