@@ -12,7 +12,7 @@ class V1::SharesController < V1::ApplicationController
 			@shares.each do |share|
 				result << {id: share.id,
 								 title: share.title,
-								  ip: share.ip,
+								  ip: share.ip ||=  "",
 								  image: share.share_image.file.url,
 								  cover: share.share_image.file.thumbnail.url,
 								  text: share.share_text.body
@@ -34,7 +34,7 @@ class V1::SharesController < V1::ApplicationController
 				@shares.values_at(first..last).each do |share|
 					result << {id: share.id,
 									 title: share.title,
-									  ip: share.ip,
+									  ip: share.ip ||=  "",
 									  image: share.share_image.file.url,
 									  cover: share.share_image.file.thumbnail.url,
 									  text: share.share_text.body
@@ -46,11 +46,16 @@ class V1::SharesController < V1::ApplicationController
 	end
 
 	def create
-		@share = Share.new params[:share]
+		@share = Share.new
+		@share.map_id = params[:share][:map_id]
+		@share.title = params[:share][:title]
+		@share.ip = params[:share][:ip]
+		@share.build_share_image file: params[:share][:image]
+		@share.build_share_text body: params[:share][:text]
 		if @scenic.save
-      		result = true
+      		result = {result: true}
     		else
-      		result = false
+      		result = {result: false}
     		end
     		render :json => result
 	end
