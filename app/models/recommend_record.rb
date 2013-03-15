@@ -20,4 +20,8 @@ class RecommendRecord < ActiveRecord::Base
   has_many :image_lists
   
   belongs_to :recommend, :counter_cache => true
+
+  # Scopes
+  scope :order_asc, order("`order` ASC")
+  
 end

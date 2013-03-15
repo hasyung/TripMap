@@ -1,7 +1,5 @@
 class Video < ActiveRecord::Base
   
-  
-  
   # White list
   attr_accessible :file, :file_type, :file_size, :cover,  :cover_type, :cover_size, :order, :duration, :video_type
 
@@ -18,7 +16,6 @@ class Video < ActiveRecord::Base
     column.validates_numericality_of :duration, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999999
   end
   
-
   # with_options :if => :duration do |duration|
   #   duration.validates :duration, :format =>
   #   {

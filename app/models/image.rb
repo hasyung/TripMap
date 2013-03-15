@@ -40,6 +40,7 @@ class Image < ActiveRecord::Base
   
   # Scopes
   scope :order_asc, order("`order` ASC")
+  scope :group_order_asc, order("`group_order` ASC")
   scope :created_desc, order("`created_at` DESC")
   
   # Callbacks
