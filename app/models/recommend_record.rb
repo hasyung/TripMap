@@ -20,4 +20,5 @@ class RecommendRecord < ActiveRecord::Base
   has_many :image_lists
   
   belongs_to :recommend, :counter_cache => true
+  
 end
