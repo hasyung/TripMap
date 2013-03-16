@@ -15,13 +15,13 @@ class V1::MapsController < V1::ApplicationController
 
     def show
       @map = Map.find params[:id]
-      result, slides, places, scenics, recommends, records, detaileds = [], [], [], [], [], [], []
+      result, slides, places, scenics, recommends, records, detaileds, infos = [], [], [], [], [], [], [], []
       if @map.map_slides.present?
         @map.map_slides.order_asc.each do |slide|
           slides << {:image => slide.file.url}
         end
       end
-      if @map.places.present?
+      if @map.places_count > 0
         @map.places.each do |place|
           places << {:id => place.id,
                                  :name => place.name,
@@ -39,7 +39,7 @@ class V1::MapsController < V1::ApplicationController
                                }
         end
       end
-      if @map.scenics.present?
+      if @map.scenics_count > 0
         @map.scenics.each do |scenic|
           scenics << {:id => scenic.id,
                                  :name => scenic.name,
@@ -58,7 +58,7 @@ class V1::MapsController < V1::ApplicationController
                                }
         end
       end
-      if @map.recommends.present?
+      if @map.recommends_count > 0
         @map.recommends.each do |recommend|
           if recommend.recommend_records.present?
             recommend.recommend_records.order_asc.each do |record|
@@ -109,10 +109,19 @@ class V1::MapsController < V1::ApplicationController
                                           }
         end
       end
+      if @map.infos_count > 0
+        @map.infos.order_asc.each do |info|
+          infos << {  :name => info.name,
+                                 :slug => info.slug,
+                                 :description => get_file_value(info.text,"body",false)
+                               }
+        end
+      end
       result << { :slides => slides,
                               :scenics => scenics,
                               :places => places,
                               :recommends => recommends
+                              :infos => infos
                             }
       render :json => result
     end
