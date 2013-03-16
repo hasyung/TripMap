@@ -120,7 +120,7 @@ class V1::MapsController < V1::ApplicationController
       result << { :slides => slides,
                               :scenics => scenics,
                               :places => places,
-                              :recommends => recommends
+                              :recommends => recommends,
                               :infos => infos
                             }
       render :json => result
