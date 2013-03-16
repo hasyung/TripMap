@@ -2,7 +2,7 @@ class Map < ActiveRecord::Base
 
   #White list
   attr_accessible :province, :province_id, :name, :slug,
-                  :map_description_attributes, :map_cover_attributes; :map_plat_attributes
+                  :map_description_attributes, :map_cover_attributes, :map_plat_attributes
 
   # Associations
   with_options :dependent => :destroy do |assoc|
@@ -18,8 +18,8 @@ class Map < ActiveRecord::Base
     assoc.has_many :map_slides,  :conditions => { :image_type => Image.map_slides  }
   end
 
-  has_one :map_description, :as => :textable, :class_name => 'Text', 
-          :conditions => { :text_type => Text.map_description },
+  has_one :map_description, :as => :textable, :class_name => 'Context', 
+          :conditions => { :text_type => Context.map_description },
           :dependent => :destroy
   
   belongs_to :province, :counter_cache => true

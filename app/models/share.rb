@@ -6,7 +6,7 @@ class Share < ActiveRecord::Base
 	# Associations
 	with_options :dependent => :destroy do |assoc|
 	  assoc.has_one :share_image, :as => :imageable, :class_name => 'Image', :conditions => { :image_type => Image.share_image }
-	  assoc.has_one :share_text, :as => :textable, :class_name => 'Text', :conditions => { :text_type => Text.share_text }
+	  assoc.has_one :share_text, :as => :textable, :class_name => 'Context', :conditions => { :text_type => Context.share_text }
 	end
 	
 	#SimpleEnum
