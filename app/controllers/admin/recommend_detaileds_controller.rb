@@ -2,13 +2,17 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
 
   def index
     record = RecommendRecord.find params[:record_id]
-    @detaileds = record.recommend_detaileds.page(params[:page]).per(Setting.page_size)
+    @detaileds = record.recommend_detaileds.page(params[:page]).per(Setting.page_size).order_asc
+
+    add_breadcrumb :index
   end
 
   def new
     recommend = Recommend.find params[:recommend_id]
     @record = recommend.recommend_records.find params[:record_id]
     @detailed = @record.recommend_detaileds.new
+
+    add_breadcrumb :new
   end
 
   def create
@@ -28,13 +32,15 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
     recommend = Recommend.find params[:recommend_id]
     @record = recommend.recommend_records.find params[:record_id]
     @detailed = @record.recommend_detaileds.find params[:id]
+
+    add_breadcrumb :edit
   end
 
   def update
     @detailed = RecommendDetailed.find params[:id]
 
     if @detailed.update_attributes params[:recommend_detailed]
-      redirect_to admin_recommend_recommend_record_recommend_detaileds_path(
+      redirect_to admin_recommend_record_detaileds_path(
                   params[:recommend_id],
                   params[:record_id]),
                   notice: t('messages.recommend_detaileds.success')
@@ -46,12 +52,12 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
   def destroy
     detailed = RecommendDetailed.find params[:id]
     if detailed.destroy
-      redirect_to admin_recommend_recommend_record_recommend_detaileds_path(
+      redirect_to admin_recommend_record_detaileds_path(
                   params[:recommend_id],
                   params[:record_id]),
                   notice: t('messages.recommend_detaileds.success')
     else
-      redirect_to admin_recommend_recommend_record_recommend_detaileds_path(
+      redirect_to admin_recommend_record_detaileds_path(
                   params[:recommend_id],                  
                   params[:record_id]),
                   notice: t('messages.recommend_detaileds.error')
@@ -65,6 +71,8 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
     @images = @detailed.images
     @texts  = @detailed.texts
     @imagelists = @detailed.image_lists.all
+
+    add_breadcrumb :show
   end
 
   def new_video
@@ -82,7 +90,7 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
                   params[:recommend_id],
                   params[:record_id],
                   params[:detailed_id]),
-                  notice: t('messages.recommend_detaileds.success')
+                  notice: t('messages.recommend_detaileds.video.success')
     else
       render :new_video
     end
@@ -100,7 +108,8 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
       redirect_to admin_recommend_record_detailed_path(
                   params[:recommend_id],
                   params[:record_id],
-                  params[:detailed_id])
+                  params[:detailed_id]),
+                  notice: t('messages.recommend_detaileds.video.success')
     else
       render :edit_video
     end
@@ -113,12 +122,14 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
       redirect_to admin_recommend_record_detailed_path(
                   params[:recommend_id],
                   params[:record_id],
-                  params[:detailed_id])
+                  params[:detailed_id]),
+                  notice: t('messages.recommend_detaileds.video.success')
     else
       redirect_to admin_recommend_record_detailed_path(
                   params[:recommend_id],
                   params[:record_id],
-                  params[:detailed_id])
+                  params[:detailed_id]),
+                  notice: t('messages.recommend_detaileds.video.error')
     end
   end
 
@@ -137,7 +148,7 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
                   params[:recommend_id],
                   params[:record_id],
                   params[:detailed_id]),
-                  notice: t('messages.recommend_detaileds.success')
+                  notice: t('messages.recommend_detaileds.audio.success')
     else
       render :new_audio
     end
@@ -155,7 +166,8 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
       redirect_to admin_recommend_record_detailed_path(
                   params[:recommend_id],
                   params[:record_id],
-                  params[:detailed_id])
+                  params[:detailed_id]),
+                  notice: t('messages.recommend_detaileds.audio.success')
     else
       render :edit_audio
     end
@@ -167,12 +179,14 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
       redirect_to admin_recommend_record_detailed_path(
                   params[:recommend_id],
                   params[:record_id],
-                  params[:detailed_id])
+                  params[:detailed_id]),
+                  notice: t('messages.recommend_detaileds.success')
     else
       redirect_to admin_recommend_record_detailed_path(
                   params[:recommend_id],
                   params[:record_id],
-                  params[:detailed_id])
+                  params[:detailed_id]),
+                  notice: t('messages.recommend_detaileds.image.success')
     end
   end
 
@@ -191,7 +205,7 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
                   params[:recommend_id],
                   params[:record_id],
                   params[:detailed_id]),
-                  notice: t('messages.recommend_detaileds.success')
+                  notice: t('messages.recommend_detaileds.image.success')
     else
       render :new_image
     end
@@ -209,7 +223,8 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
       redirect_to admin_recommend_record_detailed_path(
                   params[:recommend_id],
                   params[:record_id],
-                  params[:detailed_id])
+                  params[:detailed_id]),
+                  notice: t('messages.recommend_detaileds.image.success')
     else
       render :edit_image
     end
@@ -221,12 +236,14 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
       redirect_to admin_recommend_record_detailed_path(
                   params[:recommend_id],
                   params[:record_id],
-                  params[:detailed_id])
+                  params[:detailed_id]),
+                  notice: t('messages.recommend_detaileds.image.success')
     else
       redirect_to admin_recommend_record_detailed_path(
                   params[:recommend_id],
                   params[:record_id],
-                  params[:detailed_id])
+                  params[:detailed_id]),
+                  notice: t('messages.recommend_detaileds.image.error')
     end
   end
 
@@ -245,7 +262,7 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
                   params[:recommend_id],
                   params[:record_id],
                   params[:detailed_id]),
-                  notice: t('messages.recommend_detaileds.success')
+                  notice: t('messages.recommend_detaileds.text.success')
     else
       render :new_text
     end
@@ -263,7 +280,8 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
       redirect_to admin_recommend_record_detailed_path(
                   params[:recommend_id],
                   params[:record_id],
-                  params[:detailed_id])
+                  params[:detailed_id]),
+                  notice: t('messages.recommend_detaileds.text.success')
     else
       render :edit_text
     end
@@ -275,12 +293,14 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
       redirect_to admin_recommend_record_detailed_path(
                   params[:recommend_id],
                   params[:record_id],
-                  params[:detailed_id])
+                  params[:detailed_id]),
+                  notice: t('messages.recommend_detaileds.text.success')
     else
       redirect_to admin_recommend_record_detailed_path(
                   params[:recommend_id],
                   params[:record_id],
-                  params[:detailed_id])
+                  params[:detailed_id]),
+                  notice: t('messages.recommend_detaileds.text.error')
     end
   end
 
@@ -299,7 +319,7 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
                   params[:recommend_id],
                   params[:record_id],
                   params[:detailed_id]),
-                  notice: t('messages.recommend_detaileds.success')
+                  notice: t('messages.recommend_detaileds.images.success')
     else
       render :new_imagelist
     end
@@ -317,7 +337,8 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
       redirect_to admin_recommend_record_detailed_path(
                   params[:recommend_id],
                   params[:record_id],
-                  params[:detailed_id])
+                  params[:detailed_id]),
+                  notice: t('messages.recommend_detaileds.images.success')
     else
       render :edit_imagelist
     end
@@ -329,13 +350,77 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
       redirect_to admin_recommend_record_detailed_path(
                   params[:recommend_id],
                   params[:record_id],
-                  params[:detailed_id])
+                  params[:detailed_id]),
+                  notice: t('messages.recommend_detaileds.images.success')
     else
       redirect_to admin_recommend_record_detailed_path(
                   params[:recommend_id],
                   params[:record_id],
-                  params[:detailed_id])
+                  params[:detailed_id]),
+                  notice: t('messages.recommend_detaileds.images.success')
     end
   end
 
+  def images
+    @imagelist = ImageList.find params[:id]
+    @images = @imagelist.images
+  end
+
+  def new_images
+    @imageslist = ImageList.find params[:image_id]
+    @image = @imageslist.images.new
+  end
+
+  def create_images
+    @imagelist = ImageList.find params[:image_id]
+    @image = @imagelist.images.new params[:image]
+    binding.pry
+    if @image.save
+      redirect_to admin_recommend_record_detailed_imageslist_path(
+                  params[:recommend_id],
+                  params[:record_id],
+                  params[:detailed_id],
+                  params[:image_id]),
+                  notice: t('messages.recommend_detaileds.images.success')
+    else
+      render :new_images
+    end
+  end
+
+  def edit_images
+    @image = Image.find params[:id]
+  end
+
+  def update_images
+    @image = Image.find params[:id]
+    if @image.update_attributes params[:image]
+      redirect_to admin_recommend_record_detailed_imageslist_path(
+                  params[:recommend_id],
+                  params[:record_id],
+                  params[:detailed_id],
+                  params[:image_id]),
+                  notice: t('messages.recommend_detaileds.images.success')
+    else
+      render :edit_images
+    end
+  end
+
+  def destroy_images
+    @image = Image.find params[:id]
+    if @image.destroy
+      redirect_to admin_recommend_record_detailed_imageslist_path(
+                  params[:recommend_id],
+                  params[:record_id],
+                  params[:detailed_id],
+                  params[:image_id]),
+                  notice: t('messages.recommend_detaileds.images.success')
+    else
+      redirect_to admin_recommend_record_detailed_imageslist_path(
+                  params[:recommend_id],
+                  params[:record_id],
+                  params[:detailed_id],
+                  params[:image_id]),
+                  notice: t('messages.recommend_detaileds.images.error')
+    end
+  end
 end

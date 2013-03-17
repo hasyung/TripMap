@@ -1,16 +1,6 @@
-<div class="toolbar">
-  <div class="btn-toolbar">
-    <div clss="btn_group">
-      <%= link_to t('links.recommend_detaileds.index'), 
-                  admin_recommend_record_detaileds_path(
-                    params[:recommend_id],
-                    params[:record_id]), 
-                    class: "btn btn-success" %>
-    </div>
-  </div>
-</div>
+<%= render 'base' %>
 <%= render 'videos' %>
 <%= render 'audios' %>
-<%= render 'images' %>
+<%= render 'image' %>
 <%= render 'imagelists' %>
 <%= render 'texts' %>

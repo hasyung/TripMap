@@ -5,6 +5,10 @@
           t('links.recommend_detaileds.new'), 
           new_admin_recommend_record_detailed_path(params[:recommend_id], params[:record_id]), 
           class: "btn btn-success" %>
+      <%= link_to_if %w(index show).include?(action_name), 
+          t('links.recommend_detaileds.back'), 
+          admin_recommend_records_path(params[:recommend_id]), 
+          class: "btn btn-success backinfo" %>
       <%= link_to_if %w(new create edit update).include?(action_name), 
           t('links.recommend_records.index'), 
           admin_recommend_record_detaileds_path(params[:record_id]), 

@@ -45,6 +45,11 @@
         index: "推荐记录"
         new: "添加推荐记录"
         edit: "修改推荐记录"
+      recommend_detaileds:
+        index: "推荐详细"
+        new: "添加推荐详细"
+        edit: "修改推荐详细"
+        show: "推荐详细记录"
       shares:
         index: "分享"
         new: "添加分享"
@@ -82,8 +87,10 @@
         index: "推荐记录列表"
         new: "添加推荐记录"
         edit: "修改推荐记录"  
+        back: "返回推荐列表"
     recommend_detaileds:
         index: "推荐记录详细列表"
+        back: "返回推荐记录列表"
         new: "添加推荐记录详细"
         edit: "修改推荐记录详细"  
         videos: "视频列表"
@@ -97,6 +104,11 @@
         editimagelist: "修改图集"
         newtext: "添加描述"
         edittext: "修改描述"
+        videolist: "视频列表"
+        audiolist: "音频列表"
+        imagelist: "图片列表"
+        imageslist: "图集列表"
+        textlist: "描述列表"
     shares:
       index: "分享列表"
       show: "查看分享"
@@ -128,6 +140,21 @@
     recommend_detaileds:
       success: "操作推荐记录成功！"
       error: "操作推荐记录失败！"
+      video:        
+        success: "操作视频成功！"
+        error: "操作视频失败！"
+      audio:        
+        success: "操作音频成功！"
+        error: "操作音频失败！"
+      image:        
+        success: "操作图片成功！"
+        error: "操作图片失败！"
+      images:        
+        success: "操作图集成功！"
+        error: "操作图集失败！"
+      text:        
+        success: "操作描述成功！"
+        error: "操作描述失败！"
     shares:
       success: "操作分享成功！"
       error: "操作分享失败！"
@@ -179,6 +206,12 @@
       recommend_detailed:
         name: "名称"
         order: "排序"
+        videos:          
+          file: "视频文件"
+          cover: "视频封面"
+          duration: "视频时长"
+          order: "视频排序"
+
       share:
         title: "标题"
         ip: "IP地址"

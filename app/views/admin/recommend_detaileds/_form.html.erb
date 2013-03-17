@@ -1,10 +1,10 @@
 <%= simple_form_for @detailed, 
                     html: { class: 'form-horizontal' },
                     url: @detailed.new_record? ? 
-                         new_admin_recommend_record_detailed_path(
+                         admin_recommend_record_detaileds_path(
                             params[:recommend_id], 
                             params[:record_id]) :
-                         edit_admin_recommend_record_detailed_path(
+                         admin_recommend_record_detailed_path(
                             params[:recommend_id],
                             params[:record_id],
                             @detailed)  do |d| %>

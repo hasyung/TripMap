@@ -1,6 +1,10 @@
-<%= simple_form_for @record, 
-      url: @record.new_record? ? new_admin_recommend_record_path(params[:recommend_id]) : edit_admin_recommend_record_path(params[:recommend_id], @record), 
-      html: { class: 'form-horizontal' } do |r| %>
+<%= simple_form_for @record,
+      html: { class: 'form-horizontal' }, 
+      url: @record.new_record? ? 
+           admin_recommend_records_path(
+              params[:recommend_id]) : 
+           admin_recommend_record_path(
+              params[:recommend_id], @record) do |r| %>
   <%= r.input :name %>
   <%= r.input :order %>
 

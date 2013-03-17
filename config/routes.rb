@@ -39,7 +39,15 @@ TripMap::Application.routes.draw do
           post   'imagelists'     => 'recommend_detaileds#create_imagelist'
           put    'imagelist/:id'  => 'recommend_detaileds#update_imagelist',  :as => 'imagelist'
           delete 'imagelist/:id'  => 'recommend_detaileds#destroy_imagelist'
-          get    'imagelists/:id/edit' => 'recommend_detaileds#edit_imagelist', :as => 'imagelist_edit' 
+          get    'imagelists/:id/edit'   => 'recommend_detaileds#edit_imagelist', :as => 'imagelist_edit' 
+
+          get    'imagelist/:id/images/'  => 'recommend_detaileds#images', :as => 'imageslist'
+          post   'imagelist/:image_id/images'   => 'recommend_detaileds#create_images'
+          put    'imagelist/:image_id/image/:id' => 'recommend_detaileds#update_images', :as => 'photos'
+          delete 'imagelist/:image_id/image/:id' => 'recommend_detaileds#destroy_images'
+          get    'imagelist/:image_id/image/:id/edit' => 'recommend_detaileds#edit_images', :as => 'edit_images'
+          get    'imagelist/:image_id/image/new' => 'recommend_detaileds#new_images', :as => 'new_images'
+
 
           get    'text/new'  => 'recommend_detaileds#new_text'
           post   'texts'     => 'recommend_detaileds#create_text'
