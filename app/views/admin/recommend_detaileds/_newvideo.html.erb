@@ -1,0 +1,21 @@
+<%= simple_form_for @video, 
+                    html: { class: 'form-horizontal' },
+                    url: @video.new_record? ? 
+                         admin_recommend_record_detailed_videos_path(
+                            params[:recommend_id],
+                            params[:record_id],
+                            params[:detailed_id]) :
+                         admin_recommend_record_detailed_video_path(
+                            params[:recommend_id],
+                            params[:record_id],
+                            params[:detailed_id],
+                            @video) do |d| %>
+  <%= d.input :file,  as: :file %>
+  <%= d.input :cover, as: :file %>
+  <%= d.input :duration %>
+  <%= d.input :order %>
+  <div class="form-actions">
+    <%= d.button :submit, :class => 'btn-primary' %>
+  </div>
+
+<% end %>

@@ -34,6 +34,8 @@
                 <%= link_to t("navs.scenics.index"), admin_scenics_path %>
               <li<%= raw ' class="active"' if %w(places).include?(controller_name) %>>
                 <%= link_to t("navs.places.index"), admin_places_path %>
+              <li<%= raw ' class="active"' if %w(recommends).include?(controller_name) %>>
+                <%= link_to t("navs.recommends.index"), admin_recommends_path %>
               <li<%= raw ' class="active"' if %w(shares).include?(controller_name) %>>
                 <%= link_to t("navs.shares.index"), admin_shares_path %>
               </li>

@@ -1,0 +1,49 @@
+<%- model_class = ImageList -%>
+<div class="box" %>
+  <div class="box-title">
+    <span class="icon"><i class="icon-th"></i></span>
+    <h5><%= t('links.recommend_detaileds.imageslist') %>
+      <%= link_to t('links.recommend_detaileds.newimagelist'), 
+                    admin_recommend_record_detailed_imagelist_new_path(
+                      params[:recommend_id],
+                      params[:record_id],
+                      params[:id]) %>
+    </h5>
+  </div>
+  <div class="box-content">
+  <table class="table table-bordered table-striped with-check">
+  <thead>
+    <tr>
+      <th>
+        <input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" />
+      </th>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th class="action"><%= t('links.commons.action') %></th>
+  </thead>
+  <% if !@imagelists.blank? %>
+  <% @imagelists.each do |i| %>
+    <tbody>
+      <tr>
+        <td><%= check_box_tag "province_ids[]", i.id, false, id: "province_#{i.id}" %></td>
+        <td>
+          <%= link_to i.name, admin_recommend_record_detailed_imageslist_path(
+                     params[:recommend_id],
+                     params[:record_id],
+                     params[:id],
+                     i) %>
+        </td>
+        <td class="action">
+          <%= link_to raw("<i class=\"icon-edit\"></i>"), 
+              admin_recommend_record_detailed_imagelist_edit_path(params[:recommend_id], params[:record_id], params[:id], i.id) %>
+          <%= link_to raw("<i class=\"icon-trash\"></i>"), 
+              admin_recommend_record_detailed_imagelist_path(params[:recommend_id], params[:record_id], params[:id], i.id), 
+              method: :delete, 
+              data: { confirm: t('links.commons.confirm')} %>
+        </td>
+      </tr>
+  <% end %>
+  <% end %>
+  </tbody>
+</table>    
+</div>
+</div>

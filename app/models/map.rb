@@ -18,8 +18,8 @@ class Map < ActiveRecord::Base
     assoc.has_many :map_slides,  :conditions => { :image_type => Image.map_slides  }
   end
 
-  has_one :map_description, :as => :textable, :class_name => 'Text', 
-          :conditions => { :text_type => Text.map_description },
+  has_one :map_description, :as => :textable, :class_name => 'Letter', 
+          :conditions => { :text_type => Letter.map_description },
           :dependent => :destroy
   
   belongs_to :province, :counter_cache => true

@@ -1,0 +1,8 @@
+<div class="toolbar">
+  <div class="btn-toolbar">
+    <div clss="btn_group">
+      <%= link_to_if %w(index).include?(action_name), t('links.recommends.new'), new_admin_recommend_path, class: "btn btn-success" %>
+      <%= link_to_if %w(new create edit update).include?(action_name), t('links.recommends.index'), admin_recommends_path, class: "btn btn-success" %>
+    </div>
+  </div>
+</div>

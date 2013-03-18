@@ -1,5 +1,7 @@
-class Text < ActiveRecord::Base
+class Letter < ActiveRecord::Base
   
+  self.table_name = 'texts'
+
   # White list
 	attr_accessible :body, :order
   

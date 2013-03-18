@@ -2,7 +2,6 @@ class Video < ActiveRecord::Base
   
   # White list
   attr_accessible :file, :file_type, :file_size, :cover,  :cover_type, :cover_size, :order, :duration, :video_type
-
   # Associations
   belongs_to :videoable, :polymorphic => true
 
