@@ -1,7 +1,7 @@
 class Image < ActiveRecord::Base
   
   # White list
-  attr_accessible  :file, :file_size, :order, :group_id, :group_order
+  attr_accessible  :file, :file_size, :order
   
   # Associations
   belongs_to :imageable, :polymorphic => true
@@ -40,7 +40,6 @@ class Image < ActiveRecord::Base
   
   # Scopes
   scope :order_asc, order("`order` ASC")
-  scope :group_order_asc, order("`group_order` ASC")
   scope :created_desc, order("`created_at` DESC")
   
   # Callbacks
