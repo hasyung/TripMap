@@ -1,13 +1,13 @@
 class Info < ActiveRecord::Base
   # attr_accessible :title, :body
-  attr_accessible :map_id, :name, :slug, :order, :text_attributes
+  attr_accessible :map_id, :name, :slug, :order, :letter_attributes
 
-  has_one :text,  :as => :textable,   :dependent => :destroy
+  has_one :letter,  :as => :textable,   :dependent => :destroy
 
   belongs_to :map, :counter_cache => true
   
   # NestedAttributes
-  accepts_nested_attributes_for :text, reject_if: lambda { |pd| pd[:body].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :letter, reject_if: lambda { |pd| pd[:body].blank? }, :allow_destroy => true
 
    # Validates
   with_options :presence=> true do |column|
