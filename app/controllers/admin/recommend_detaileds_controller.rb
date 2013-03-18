@@ -80,6 +80,8 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
     @record = recommend.recommend_records.find params[:record_id]
     @detailed = RecommendDetailed.find params[:detailed_id]
     @video = @detailed.videos.new
+
+    add_breadcrumb :new_video
   end
 
   def create_video    
@@ -99,6 +101,8 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
   def edit_video
     @detailed = RecommendDetailed.find params[:detailed_id]
     @video = @detailed.videos.find params[:id]
+
+    add_breadcrumb :edit_video
   end
 
   def update_video
@@ -117,7 +121,6 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
 
   def destroy_video
     @video = Video.find params[:id]
-    binding.pry
     if @video.destroy
       redirect_to admin_recommend_record_detailed_path(
                   params[:recommend_id],
@@ -138,6 +141,8 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
     @record = recommend.recommend_records.find params[:record_id]
     @detailed = RecommendDetailed.find params[:detailed_id]
     @audio = @detailed.audios.new
+
+    add_breadcrumb :new_audio
   end
 
   def create_audio    
@@ -157,6 +162,8 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
   def edit_audio
     @detailed = RecommendDetailed.find params[:detailed_id]
     @audio = @detailed.audios.find params[:id]
+
+    add_breadcrumb :edit_audio
   end
 
   def update_audio
@@ -195,6 +202,8 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
     @record = recommend.recommend_records.find params[:record_id]
     @detailed = RecommendDetailed.find params[:detailed_id]
     @image = @detailed.images.new
+
+    add_breadcrumb :new_image
   end
 
   def create_image    
@@ -214,6 +223,8 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
   def edit_image
     @detailed = RecommendDetailed.find params[:detailed_id]
     @image = @detailed.images.find params[:id]
+
+    add_breadcrumb :edit_image
   end
 
   def update_image
@@ -252,11 +263,13 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
     @record = recommend.recommend_records.find params[:record_id]
     @detailed = RecommendDetailed.find params[:detailed_id]
     @text = @detailed.texts.new
+
+    add_breadcrumb :new_text
   end
 
   def create_text    
     @detailed = RecommendDetailed.find params[:detailed_id]
-    @text = @detailed.texts.new params[:context]
+    @text = @detailed.texts.new params[:letter]
     if @text.save
       redirect_to admin_recommend_record_detailed_path(
                   params[:recommend_id],
@@ -271,12 +284,14 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
   def edit_text
     @detailed = RecommendDetailed.find params[:detailed_id]
     @text = @detailed.texts.find params[:id]
+
+    add_breadcrumb :edit_text
   end
 
   def update_text
     @detailed = RecommendDetailed.find params[:detailed_id]
     @text = @detailed.texts.find params[:id]
-    if @text.update_attributes params[:context]
+    if @text.update_attributes params[:letter]
       redirect_to admin_recommend_record_detailed_path(
                   params[:recommend_id],
                   params[:record_id],
@@ -309,6 +324,8 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
     @record = recommend.recommend_records.find params[:record_id]
     @detailed = RecommendDetailed.find params[:detailed_id]
     @imagelist = @detailed.image_lists.new
+
+    add_breadcrumb :new_imagelist
   end
 
   def create_imagelist    
@@ -328,6 +345,8 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
   def edit_imagelist
     @detailed = RecommendDetailed.find params[:detailed_id]
     @imagelist = @detailed.image_lists.find params[:id]
+
+    add_breadcrumb :edit_imagelist
   end
 
   def update_imagelist
@@ -364,17 +383,20 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
   def images
     @imagelist = ImageList.find params[:id]
     @images = @imagelist.images
+
+    add_breadcrumb :images
   end
 
   def new_images
     @imageslist = ImageList.find params[:image_id]
     @image = @imageslist.images.new
+
+    add_breadcrumb :new_images
   end
 
   def create_images
     @imagelist = ImageList.find params[:image_id]
     @image = @imagelist.images.new params[:image]
-    binding.pry
     if @image.save
       redirect_to admin_recommend_record_detailed_imageslist_path(
                   params[:recommend_id],
@@ -389,6 +411,8 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
 
   def edit_images
     @image = Image.find params[:id]
+
+    add_breadcrumb :edit_images
   end
 
   def update_images

@@ -7,7 +7,7 @@
           class: "btn btn-success" %>
       <%= link_to_if %w(index).include?(action_name), 
           t('links.recommend_records.back'), 
-          admin_recommends_path(params[:recommend_id]), 
+          admin_recommends_path, 
           class: "btn btn-success backinfo" %>
       <%= link_to_if %w(new create edit update).include?(action_name), 
           t('links.recommend_records.back'), 

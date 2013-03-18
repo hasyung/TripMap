@@ -14,6 +14,8 @@
       index: "推荐"
     shares:
       index: "分享"
+    infos:
+      index: "信息"
 
   breadcrumbs:
     admin:
@@ -50,10 +52,27 @@
         new: "添加推荐详细"
         edit: "修改推荐详细"
         show: "推荐详细记录"
+        new_video: "添加推荐视频"
+        edit_video: "修改推荐视频"
+        new_audio: "添加推荐音频"
+        edit_audio: "修改推荐音频"
+        new_image: "添加推荐图片"
+        edit_image: "修改推荐图片"
+        new_imagelist: "添加推荐图集"
+        edit_imagelist: "修改推荐图集"
+        images: "推荐图集图片"
+        new_images: "添加推荐图集图片"
+        edit_images: "修改推荐图集图片"
+        new_text: "添加推荐描述"
+        edit_text: "修改推荐描述"
       shares:
         index: "分享"
         new: "添加分享"
         edit: "修改分享"
+      infos:
+        index: "信息"
+        new: "添加信息"
+        edit: "修改信息"
 
   links:
     home:
@@ -114,6 +133,10 @@
       show: "查看分享"
       new: "添加分享"
       edit: "修改分享"
+    infos:
+      index: "信息"
+      new: "添加信息"
+      edit: "修改信息"
     commons:
       action: "操作"
       confirm: "你确定删除吗？"
@@ -160,6 +183,9 @@
       error: "操作分享失败！"
       publish: "审核分享通过！"
       draft: "审核分享不通过！"
+    infos:
+      success: "操作信息成功！"
+      error: "操作信息失败！"
 
   activerecord:
     models:
@@ -173,6 +199,7 @@
       image: "图片"
       text: "文本"
       share: "分享"
+      info: "信息"
     attributes:
       map:
         province: "省市"
@@ -218,6 +245,10 @@
         map: "地图"
         state_cd: "审核状态"
         created_at: "创建时间"
+      info:
+        map: "地图"
+        name: "名称"
+        slug: "简码"
         
   simple_form:
     labels:
@@ -290,9 +321,12 @@
           body: "分享内容"
       image:
         file: "文件"
-      text:
+      letter:
         body: "内容"
         order: "排序"
+      share:
+        letter:
+          file: "详细信息"
 
   helpers:
     links:

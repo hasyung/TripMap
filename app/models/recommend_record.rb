@@ -9,8 +9,8 @@ class RecommendRecord < ActiveRecord::Base
           :conditions => { :image_type => Image.recommend_record_cover },
           :dependent => :destroy
             
-  has_one :recommend_record_description, :as => :textable, :class_name => "Context",
-          :conditions => { :text_type => Context.recommend_record_description },
+  has_one :recommend_record_description, :as => :textable, :class_name => "Letter",
+          :conditions => { :text_type => Letter.recommend_record_description },
           :dependent => :destroy 
 
   has_many :recommend_detaileds, :dependent => :destroy
@@ -22,9 +22,14 @@ class RecommendRecord < ActiveRecord::Base
   
   belongs_to :recommend, :counter_cache => true
 
+
   accepts_nested_attributes_for :recommend_record_cover,          reject_if: lambda { |c| c[:file].blank? }, allow_destroy: true
   accepts_nested_attributes_for :recommend_record_description,    reject_if: lambda { |d| d[:body].blank? }, allow_destroy: true
 
   scope :order_asc, order("`order` ASC")
   scope :created_desc, order("`created_at` DESC")
+
+  # Scopes
+  scope :order_asc, order("`order` ASC")
+  
 end

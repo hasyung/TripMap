@@ -1,4 +1,4 @@
-class Context < ActiveRecord::Base
+class Letter < ActiveRecord::Base
   
   self.table_name = 'texts'
 

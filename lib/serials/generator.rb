@@ -1,5 +1,5 @@
 class MapSerialGenerator
-    
+  
   def self.generate_one_serial( options = {} )
     
     return nil if options.length.zero? or options[:type].nil? or options[:map_id].nil?
@@ -10,8 +10,8 @@ class MapSerialGenerator
     
     return nil if  bit3.nil? or bit3.empty?
     
-    #code = self.format_serial_code( bit1 + bit3 + bit8 )
-    code = bit1 + bit3 + bit8    
+    code =  options[:split].nil? ? (bit1 + bit3 + bit8) : self.format_serial_code( bit1 + bit3 + bit8 )
+    
   end
   
   private
