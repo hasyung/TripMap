@@ -259,6 +259,7 @@
         map: "地图"
         name: "名称"
         slug: "简码"
+        order: "排序"
         
   simple_form:
     labels:
@@ -330,10 +331,7 @@
         order: "图片排序"
       letter:
         body: "内容"
-        order: "排序"
-      share:
-        letter:
-          file: "详细信息"      
+        order: "排序"    
       video:          
         file: "视频文件"
         cover: "视频封面"

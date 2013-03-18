@@ -64,12 +64,13 @@ class V1::MapsController < V1::ApplicationController
             recommend.recommend_records.order_asc.each do |record|
               if record.recommend_detaileds.present?
                 record.recommend_detaileds.order_asc.each do |detailed|
-                  detail << detailed.images if detailed.images.present?
-                  detail << detailed.videos if detailed.videos.present?
-                  detail << detailed.audios if detailed.audios.present?
-                  detail << detailed.texts if detailed.texts.present?
-                  detail << detailed.image_lists if detailed.image_lists.present?
-                  detail = detail.sort {|a,b| a.order <=> b.order}
+                  detail = []
+                  detail += detailed.images if detailed.images.present?
+                  detail += detailed.videos if detailed.videos.present?
+                  detail += detailed.audios if detailed.audios.present?
+                  detail += detailed.texts if detailed.texts.present?
+                  detail += detailed.image_lists if detailed.image_lists.present?
+                  detail = detail.sort {|a,b| a[:order] <=> b[:order]}
                   content = {:name => detailed.name}
                   detail.each do |d|
                     case d.class.to_s
@@ -113,7 +114,7 @@ class V1::MapsController < V1::ApplicationController
         @map.infos.order_asc.each do |info|
           infos << {  :name => info.name,
                                  :slug => info.slug,
-                                 :description => get_file_value(info.text,"body",false)
+                                 :description => get_file_value(info.letter,"body",false)
                                }
         end
       end
@@ -127,7 +128,7 @@ class V1::MapsController < V1::ApplicationController
     end
 
   	def validate
-  		if MapSerialNumber.all.find{|num| num.map_id ==  params[:map_id].to_i && num.code == params[:serial] }.blank?
+  		if MapSerialNumber.all.find{|num| num.map_id ==  params[:map_id].to_i && num.code == params[:serial] &&num.count > 0 }.blank?
   			result = {result: false}
   		else
   			result = {result: true}
