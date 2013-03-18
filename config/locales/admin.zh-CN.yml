@@ -325,9 +325,6 @@
       letter:
         body: "内容"
         order: "排序"
-      share:
-        letter:
-          file: "详细信息"
 
   helpers:
     links:

@@ -3,7 +3,7 @@
   <%= f.input :slug %>
   <%= f.input :order %>
   <%= f.association :map, :collection => Map.all, :prompt => t("helpers.links.select", :model_name => Map.model_name.human) %>
-  <%= f.fields_for :text, @info.text ||= @info.build_text do |l|  %>  
+  <%= f.fields_for :letter, @info.letter ||= @info.build_letter do |l|  %>  
     <%= l.input :body, :as => :text, :input_html => { :class => "span-full" } %>
   <% end %>
   <div class="form-actions">
