@@ -10,6 +10,7 @@ class Map < ActiveRecord::Base
     assoc.has_many :places, :autosave => true
     assoc.has_many :recommends, :autosave => true
     assoc.has_many :shares, :autosave => true
+    assoc.has_many :infos, :autosave => true
   end
 
   with_options :as => :imageable, :class_name => 'Image', :dependent => :destroy do |assoc|
