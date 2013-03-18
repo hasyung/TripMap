@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130313095438) do
+ActiveRecord::Schema.define(:version => 20130316090448) do
 
   create_table "activate_maps", :force => true do |t|
     t.integer  "map_id",               :null => false
@@ -35,10 +35,10 @@ ActiveRecord::Schema.define(:version => 20130313095438) do
   end
 
   create_table "image_lists", :force => true do |t|
-    t.integer  "recommend_record_id", :null => false
-    t.string   "name",                :null => false
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.integer  "recommend_detailed_id", :null => false
+    t.string   "name",                  :null => false
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
   end
 
   create_table "images", :force => true do |t|
@@ -107,11 +107,21 @@ ActiveRecord::Schema.define(:version => 20130313095438) do
   add_index "provinces", ["name"], :name => "index_provinces_on_name", :unique => true
   add_index "provinces", ["slug"], :name => "index_provinces_on_slug", :unique => true
 
+  create_table "recommend_detaileds", :force => true do |t|
+    t.integer  "recommend_record_id"
+    t.string   "name"
+    t.integer  "order"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
   create_table "recommend_records", :force => true do |t|
-    t.integer  "recommend_id", :null => false
-    t.string   "name",         :null => false
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.integer  "recommend_id",                             :null => false
+    t.string   "name",                                     :null => false
+    t.integer  "order",                     :default => 0
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+    t.integer  "recommend_detaileds_count", :default => 0
   end
 
   create_table "recommends", :force => true do |t|

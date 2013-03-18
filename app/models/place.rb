@@ -16,7 +16,7 @@ class Place < ActiveRecord::Base
     assoc.has_one :place_image,             :conditions => { :image_type => Image.place_image }
   end
   
-  has_one :place_description, :as => :textable, :class_name => "Text", :conditions => { :text_type => Text.place_description }, :dependent => :destroy
+  has_one :place_description, :as => :textable, :class_name => "Context", :conditions => { :text_type => Text.place_description }, :dependent => :destroy
 
 
   
@@ -37,5 +37,6 @@ class Place < ActiveRecord::Base
   accepts_nested_attributes_for :place_audio,             reject_if: lambda { |pa| pa[:file].blank? }, allow_destroy: true
   accepts_nested_attributes_for :place_video,             reject_if: lambda { |pv| pv[:file].blank? }, allow_destroy: true
   accepts_nested_attributes_for :place_description,       reject_if: lambda { |pd| pd[:body].blank? }, allow_destroy: true
+
   
 end

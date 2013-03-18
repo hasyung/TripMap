@@ -6,6 +6,6 @@ class ImageList < ActiveRecord::Base
   # Associations
  	has_many :images, :as => :imageable
   
- 	belongs_to :recommend_record
+ 	belongs_to :recommend_detailed
   
 end
