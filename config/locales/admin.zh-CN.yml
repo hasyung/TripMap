@@ -146,6 +146,7 @@
         map: "地图"
         name: "名称"
         slug: "简码"
+        order: "排序"
         
   simple_form:
     labels:
