@@ -24,7 +24,6 @@ class Place < ActiveRecord::Base
   # Validates
   with_options :presence => true do |column|
     column.validates :name, :length => { :within => 2..15 }
-    column.validates :slug, :format => { :with => /([a-z]|[A-Z]|)+/ }
     column.validates :map_id
     column.validates :slug, :format => { :with => /([a-z])+/, :message => I18n.t("errors.type.slug") }
   end

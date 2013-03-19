@@ -1,4 +1,4 @@
-<%- model_class = Audio -%>
+<%- model_class = RecommendDetailed -%>
 <div class="box" %>
   <div class="box-title">
     <span class="icon"><i class="icon-th"></i></span>
@@ -17,9 +17,9 @@
       <th>
         <input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" />
       </th>
-      <th><%= model_class.human_attribute_name(:file) %></th>
-      <th><%= model_class.human_attribute_name(:file_type) %></th>
-      <th><%= model_class.human_attribute_name(:file_size) %></th>
+      <th><%= model_class.human_attribute_name(:audio_file) %></th>
+      <th><%= model_class.human_attribute_name(:audio_file_type) %></th>
+      <th><%= model_class.human_attribute_name(:audio_file_size) %></th>
       <th><%= model_class.human_attribute_name(:order) %></th>
       <th class="action"><%= t('links.commons.action') %></th>
   </thead>

@@ -98,18 +98,18 @@
       new: "添加景区"
       edit: "修改景区"
     recommends:
-      index: "推荐列表"
+      index: "返回推荐列表"
       show: "查看推荐"
       new: "添加推荐"
       edit: "修改推荐"
     recommend_records:
         index: "推荐记录列表"
+        back: "返回推荐记录列表"
         new: "添加推荐记录"
-        edit: "修改推荐记录"  
-        back: "返回推荐列表"
+        edit: "修改推荐记录"
     recommend_detaileds:
         index: "推荐记录详细列表"
-        back: "返回推荐记录列表"
+        back: "返回推荐记录详细列表"
         new: "添加推荐记录详细"
         edit: "修改推荐记录详细"  
         videos: "视频列表"
@@ -127,6 +127,8 @@
         audiolist: "音频列表"
         imagelist: "图片列表"
         imageslist: "图集列表"
+        newimages: "添加图集"
+        images: "图集详细列表"
         textlist: "描述列表"
     shares:
       index: "分享列表"
@@ -200,6 +202,9 @@
       text: "文本"
       share: "分享"
       info: "信息"
+      video: "视频"
+      audio: "音频"
+      letter: "文本"
     attributes:
       map:
         province: "省市"
@@ -233,12 +238,17 @@
       recommend_detailed:
         name: "名称"
         order: "排序"
-        videos:          
-          file: "视频文件"
-          cover: "视频封面"
-          duration: "视频时长"
-          order: "视频排序"
-
+        video_file: "视频文件"
+        vodeo_file_type: "视频类型"
+        video_file_size: "视频大小"
+        audio_file: "音频文件"
+        audio_file_type: "音频类型"
+        audio_file_size: "音频大小"
+        image_file: "图片文件"
+        imageslist: "图集名称"
+        images_file: "图片文件"
+        text_body: "内容"
+        order: "排序"
       share:
         title: "标题"
         ip: "IP地址"
@@ -305,26 +315,32 @@
           cover: "视频封面"
           duration: "视频时长"
       recommend_record:
+        order: "排序"
         recommend_record_cover:
           file: "推荐记录封面"
         recommend_record_description:
           body: "推荐记录描述"
       recommend_detailed:
-          videos:          
-            file: "视频文件"
-            cover: "视频封面"
-            duration: "视频时长"
-            order: "视频排序"
       share:
         share_image:
           file: "分享图片"
         share_text:
           body: "分享内容"
       image:
-        file: "文件"
+        file: "图片文件"
+        order: "图片排序"
       letter:
         body: "内容"
-        order: "排序"
+        order: "排序"    
+      video:          
+        file: "视频文件"
+        cover: "视频封面"
+        duration: "视频时长"
+        order: "视频排序"
+      audio:
+        file: "音频文件"
+        duration: "音频时长"
+        order: "音频排序"
 
   helpers:
     links:

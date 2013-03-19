@@ -66,11 +66,11 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
 
   def show
     @detailed = RecommendDetailed.find params[:id]
-    @videos = @detailed.videos
-    @audios = @detailed.audios
-    @images = @detailed.images
-    @texts  = @detailed.texts
-    @imagelists = @detailed.image_lists.all
+    @videos = @detailed.videos.order_asc
+    @audios = @detailed.audios.order_asc
+    @images = @detailed.images.order_asc
+    @texts  = @detailed.texts.order_asc
+    @imagelists = @detailed.image_lists.order_asc
 
     add_breadcrumb :show
   end
@@ -382,7 +382,7 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
 
   def images
     @imagelist = ImageList.find params[:id]
-    @images = @imagelist.images
+    @images = @imagelist.images.order_asc
 
     add_breadcrumb :images
   end

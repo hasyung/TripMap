@@ -26,6 +26,7 @@ gem 'kaminari'
 gem 'simple_form'
 gem 'friendly_id'
 gem 'devise'
+gem 'httpclient'
 
 group :test, :development do
   gem 'rspec-rails'

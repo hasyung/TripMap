@@ -22,11 +22,10 @@
           <tbody>
             <tr>
               <td><%= check_box_tag "province_ids[]", r.id, false, id: "province_#{r.id}" %></td>
-              <td><%= r.name %></td>
               <td>
-                <%= link_to r.recommend_detaileds_count,
+                <%= link_to r.name,
                             admin_recommend_record_detaileds_path(params[:recommend_id], r.id) %>
-              </td>
+              </td><td><%= r.recommend_detaileds_count %></td>
               <td><%= r.order %></td>
               <td class="action">
                 <%= link_to raw("<i class=\"icon-edit\"></i>"), 
@@ -41,6 +40,5 @@
         <% end %>
         </tbody>
       </table>
-    </div>
   </div>
 </div>
