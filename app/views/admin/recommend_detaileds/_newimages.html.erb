@@ -13,7 +13,6 @@
                             params[:image_id],
                             @image)  do |i| %>
   <%= i.input :file,  as: :file %>
-  <%= i.input :group_order %>
   <%= i.input :order %>
   <div class="form-actions">
     <%= i.button :submit, :class => 'btn-primary' %>

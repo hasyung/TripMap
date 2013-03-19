@@ -22,5 +22,10 @@ class Letter < ActiveRecord::Base
     :share_text                     => 4
   },
   :column => "text_type"
+
+  validates_numericality_of :order, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999, :if => :order?
   
+  # Scopes
+  scope :order_asc, order("`order` ASC")
+  scope :created_desc, order("`created_at` DESC")
 end

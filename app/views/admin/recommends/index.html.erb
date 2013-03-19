@@ -21,11 +21,11 @@
         <tbody>
           <tr>
             <td><%= check_box_tag "province_ids[]", r.id, false, id: "province_#{r.id}" %></td>
-            <td><%= r.name %></td>
-            <td><%= r.slug %></td>
             <td>
-              <%= link_to r.recommend_records_count, admin_recommend_records_path(r) %>
+              <%= link_to r.name, admin_recommend_records_path(r) %>
             </td>
+            <td><%= r.slug %></td>
+            <td><%=r.recommend_records_count %></td>
             <td class="action">
               <%= link_to raw("<i class=\"icon-edit\"></i>"), edit_admin_recommend_path(r) %>
               <%= link_to raw("<i class=\"icon-trash\"></i>"), admin_recommend_path(r), method: :delete, data: { confirm: t('links.commons.confirm')} %>
@@ -34,6 +34,5 @@
         <% end %>
         </tbody>
       </table>
-    </div>
   </div>
 </div>

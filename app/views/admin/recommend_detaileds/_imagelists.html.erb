@@ -1,4 +1,4 @@
-<%- model_class = ImageList -%>
+<%- model_class = RecommendDetailed -%>
 <div class="box" %>
   <div class="box-title">
     <span class="icon"><i class="icon-th"></i></span>
@@ -17,7 +17,7 @@
       <th>
         <input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" />
       </th>
-      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:imageslist) %></th>
       <th class="action"><%= t('links.commons.action') %></th>
   </thead>
   <% if !@imagelists.blank? %>

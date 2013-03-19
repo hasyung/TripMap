@@ -1,0 +1,10 @@
+<div class="toolbar">
+  <div class="btn-toolbar pull-right">
+    <div clss="btn_group">
+      <%= link_to_if %w(new_video edit_video new_audio edit_audio new_image edit_image new_text edit_text new_imagelist edit_imagelist images new_images edit_images).include?(action_name), 
+          t('links.recommend_records.back'), 
+          admin_recommend_record_detailed_path(params[:recommend_id], params[:record_id], params[:detailed_id]), 
+          class: "btn btn-success" %>
+    </div>
+  </div>
+</div>

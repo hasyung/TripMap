@@ -39,5 +39,9 @@ class Audio < ActiveRecord::Base
       self.file_type = file.file.content_type
     end
   end
+  
+  # Scopes
+  scope :order_asc, order("`order` ASC")
+  scope :created_desc, order("`created_at` DESC")
 
 end

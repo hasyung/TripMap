@@ -16,9 +16,10 @@ class RecommendRecord < ActiveRecord::Base
   has_many :recommend_detaileds, :dependent => :destroy
 
   with_options :presence => true do |column|
-    column.validates :name, :length => { :within => 2..15,    :message => I18n.t("errors.type.name") }
+    column.validates :name, :length => { :within => 2..15,    :message => I18n.t("errors.type.name") }, :uniqueness => true
     column.validates :order
   end
+  validates_numericality_of :order, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999, :if => :order?
   
   belongs_to :recommend, :counter_cache => true
 

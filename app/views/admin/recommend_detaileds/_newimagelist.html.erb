@@ -11,6 +11,7 @@
                             params[:detailed_id],
                             @imagelist) do |t| %>
   <%= t.input :name %>
+  <%= t.input :order %>
   <div class="form-actions">
     <%= t.button :submit, :class => 'btn-primary' %>
   </div>

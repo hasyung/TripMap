@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130316091322) do
+ActiveRecord::Schema.define(:version => 20130318065942) do
 
   create_table "activate_maps", :force => true do |t|
     t.integer  "map_id",               :null => false
@@ -35,10 +35,11 @@ ActiveRecord::Schema.define(:version => 20130316091322) do
   end
 
   create_table "image_lists", :force => true do |t|
-    t.integer  "recommend_detailed_id", :null => false
-    t.string   "name",                  :null => false
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
+    t.integer  "recommend_detailed_id",                :null => false
+    t.string   "name",                                 :null => false
+    t.integer  "order",                 :default => 0
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
   end
 
   create_table "images", :force => true do |t|
@@ -50,8 +51,6 @@ ActiveRecord::Schema.define(:version => 20130316091322) do
     t.integer  "order",          :default => 0
     t.integer  "height",         :default => 0
     t.integer  "width",          :default => 0
-    t.integer  "group_id",       :default => 0
-    t.integer  "group_order",    :default => 0
     t.integer  "image_type",     :default => 0
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
@@ -120,9 +119,9 @@ ActiveRecord::Schema.define(:version => 20130316091322) do
   create_table "recommend_detaileds", :force => true do |t|
     t.integer  "recommend_record_id"
     t.string   "name"
-    t.integer  "order"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.integer  "order",               :default => 0
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
   end
 
   create_table "recommend_records", :force => true do |t|
