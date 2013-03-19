@@ -237,7 +237,9 @@
         recommend_records_count: "推荐记录"
       recommend_record:  
         name: "名称"      
-        recommend_detaileds_count: "推荐详细"
+        recommend: "推荐名称"
+        recommend_detaileds_count: "推荐详细数"
+        order: "排序"
       recommend_detailed:
         name: "名称"
         order: "排序"
