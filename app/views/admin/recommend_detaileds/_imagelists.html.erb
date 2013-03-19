@@ -20,9 +20,9 @@
       <th><%= model_class.human_attribute_name(:imageslist) %></th>
       <th class="action"><%= t('links.commons.action') %></th>
   </thead>
+    <tbody>
   <% if !@imagelists.blank? %>
   <% @imagelists.each do |i| %>
-    <tbody>
       <tr>
         <td><%= check_box_tag "province_ids[]", i.id, false, id: "province_#{i.id}" %></td>
         <td>

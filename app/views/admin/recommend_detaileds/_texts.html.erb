@@ -21,9 +21,9 @@
       <th><%= model_class.human_attribute_name(:order) %></th>
       <th class="action"><%= t('links.commons.action') %></th>
   </thead>
+    <tbody>
   <% if !@texts.blank? %>
   <% @texts.each do |t| %>
-    <tbody>
       <tr>
         <td><%= check_box_tag "province_ids[]", t.id, false, id: "province_#{t.id}" %></td>
         <td><%= t.body %></td>
