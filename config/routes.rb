@@ -69,8 +69,9 @@ TripMap::Application.routes.draw do
 end
 
 namespace :v1 do
-  resources :maps, :only => [:index, :show] do
-    post 'validate', :on => :collection
+  resources :maps, :only => :index do
+    resources :weathers, :only => :index
+    post 'show', :on => :member
     resources :shares, :only => :create do
       post 'nearby', :on => :collection
       post 'current', :on => :collection
