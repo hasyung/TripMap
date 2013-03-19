@@ -26,7 +26,7 @@
   <% @texts.each do |t| %>
       <tr>
         <td><%= check_box_tag "province_ids[]", t.id, false, id: "province_#{t.id}" %></td>
-        <td><%= t.body %></td>
+        <td><%= t.body.truncate(20) %></td>
         <td><%= t.order %></td>
         <td class="action">
           <%= link_to raw("<i class=\"icon-edit\"></i>"), 

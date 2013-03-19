@@ -12,6 +12,13 @@
   <%= r.fields_for :recommend_record_cover, 
                    @record.recommend_record_cover ||= @record.build_recommend_record_cover  do |c|%>
     <%= c.input :file, as: :file %>
+    <% if @record.recommend_record_cover && @record.recommend_record_cover.file.present? %>
+      <div class="control-group image">
+        <div class="controls">
+          <%= image_tag @record.recommend_record_cover.file %>
+        </div>
+      </div>
+    <% end %>
   <% end %>
 
   <%= r.fields_for :recommend_record_description,

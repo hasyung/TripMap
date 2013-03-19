@@ -142,6 +142,8 @@
     commons:
       action: "操作"
       confirm: "你确定删除吗？"
+      video: "查看视频"
+      audio: "查看音频"
 
   messages:
     maps:

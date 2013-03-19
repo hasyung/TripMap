@@ -26,7 +26,6 @@
   <% @imagelists.each do |i| %>
       <tr>
         <td><%= check_box_tag "province_ids[]", i.id, false, id: "province_#{i.id}" %></td>
-        <td><%= i.order %></td>
         <td>
           <%= link_to i.name, admin_recommend_record_detailed_imageslist_path(
                      params[:recommend_id],
@@ -34,6 +33,7 @@
                      params[:id],
                      i) %>
         </td>
+        <td><%= i.order %></td>
         <td class="action">
           <%= link_to raw("<i class=\"icon-edit\"></i>"), 
               admin_recommend_record_detailed_imagelist_edit_path(params[:recommend_id], params[:record_id], params[:id], i.id) %>
