@@ -24,7 +24,7 @@ class Admin::RecommendRecordsController < Admin::ApplicationController
   end
 
   def edit
-    @recommend = Recommend.find params[:recommend_id]
+    #@recommend = Recommend.find params[:recommend_id]
     @record = RecommendRecord.find params[:id]
     
     add_breadcrumb :edit

@@ -36,5 +36,7 @@ class Place < ActiveRecord::Base
   accepts_nested_attributes_for :place_video,             reject_if: lambda { |pv| pv[:file].blank? }, allow_destroy: true
   accepts_nested_attributes_for :place_description,       reject_if: lambda { |pd| pd[:body].blank? }, allow_destroy: true
 
+
+  scope :created_desc, order("`created_at` DESC")
   
 end

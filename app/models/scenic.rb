@@ -37,4 +37,5 @@ class Scenic < ActiveRecord::Base
   accepts_nested_attributes_for :scenic_description,   reject_if: lambda { |d| d[:body].blank? }, allow_destroy: true
   accepts_nested_attributes_for :scenic_description_image,   reject_if: lambda { |di| di[:file].blank? }, allow_destroy: true
   
+  scope :created_desc, order("`created_at` DESC") 
 end

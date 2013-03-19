@@ -1,6 +1,6 @@
 class Admin::ScenicsController < Admin::ApplicationController
   def index
-    @scenics = Scenic.page(params[:page]).per(Setting.page_size)
+    @scenics = Scenic.page(params[:page]).per(Setting.page_size).created_desc
   end
 
   def new
