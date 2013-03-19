@@ -18,12 +18,19 @@
           <th>
             <%= model_class.human_attribute_name(:slug) %>
           </th>
+          <th>
+            <%= model_class.human_attribute_name(:province) %>
+          </th>
+          <th>
+            <%= model_class.human_attribute_name(:map) %>
+          </th>
           <th class="action">
             <%= t('links.commons.action') %>
           </th>
         </tr>
       </thead>
       <tbody>
+      <% if !@scenics.blank? %>
       <% @scenics.each do |s| %>
         <tr>
           <td>
@@ -31,6 +38,8 @@
           </td>
           <td><%= s.name %></td>
           <td><%= s.slug %></td>
+          <td><%= s.map.province.name %></td>
+          <td><%= s.map.name %></td>
           <td class="action">
             <%= link_to raw("<i class=\"icon-edit\"></i>"), 
                         edit_admin_scenic_path(s),
@@ -40,6 +49,7 @@
                         method: :delete, data: {confirm: t('links.commons.confirm')} %>
           </td>
         </tr>
+      <% end %>
       <% end %>
       </tbody>
     </table>

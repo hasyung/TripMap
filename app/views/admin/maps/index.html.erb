@@ -20,6 +20,7 @@
         </tr>
       </thead>
       </tbody>
+        <% if !@maps.blank? %>
         <% @maps.each do |map| %>
           <tr>
             <td><%= check_box_tag "map_ids[]", map.id, false, :id => "map_#{map.id}" %></td>
@@ -38,6 +39,7 @@
                           :data => { :confirm => t('links.commons.confirm') } %>
             </td>
           </tr>
+        <% end %>
         <% end %>
       </tbody>
     </table>

@@ -223,14 +223,17 @@
         name: "名称"
         slug: "简码"
         map: "地图"
+        province: "省市"
       scenic:
         name: "名称"
         slug: "简码"
         map: "地图"
+        province: "省市"
       recommend:        
         name: "名称"
         slug: "简码"
         map: "地图"
+        province: "省市"
         recommend_records_count: "推荐记录"
       recommend_record:  
         name: "名称"      
