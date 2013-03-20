@@ -224,11 +224,13 @@
       place:
         name: "名称"
         slug: "简码"
+        subtitle: "副标题"
         map: "地图"
         province: "省市"
       scenic:
         name: "名称"
         slug: "简码"
+        subtitle: "副标题"
         map: "地图"
         province: "省市"
       recommend:        

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130318065942) do
+ActiveRecord::Schema.define(:version => 20130320013512) do
 
   create_table "activate_maps", :force => true do |t|
     t.integer  "map_id",               :null => false
@@ -98,6 +98,7 @@ ActiveRecord::Schema.define(:version => 20130318065942) do
     t.integer  "map_id",                   :null => false
     t.string   "name",       :limit => 20, :null => false
     t.string   "slug",       :limit => 20, :null => false
+    t.string   "subtitle",   :limit => 30
     t.datetime "created_at",               :null => false
     t.datetime "updated_at",               :null => false
   end
@@ -149,6 +150,7 @@ ActiveRecord::Schema.define(:version => 20130318065942) do
     t.integer  "map_id",                   :null => false
     t.string   "name",       :limit => 20, :null => false
     t.string   "slug",       :limit => 20, :null => false
+    t.string   "subtitle",   :limit => 30
     t.datetime "created_at",               :null => false
     t.datetime "updated_at",               :null => false
   end

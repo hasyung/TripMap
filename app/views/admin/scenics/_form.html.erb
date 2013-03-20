@@ -1,6 +1,7 @@
 <%= simple_form_for [:admin, @scenic], html: { class: 'form-horizontal'} do |s| %>
   <%= s.input :name %>
   <%= s.input :slug %>
+  <%= s.input :subtitle %>
   <%= s.association :map, collection: Map.all, 
                           prompt: t("helpers.links.select", 
                           :model_name => Map.model_name.human) %>

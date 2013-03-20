@@ -1,7 +1,7 @@
 class Scenic < ActiveRecord::Base
 
   # White list
-  attr_accessible :map, :map_id, :name, :slug, :scenic_impression_attributes, 
+  attr_accessible :map, :map_id, :name, :slug, :subtitle, :scenic_impression_attributes, 
                   :scenic_route_attributes, :scenic_icon_attributes, :scenic_image_attributes, 
                   :scenic_description_attributes, :scenic_description_image_attributes
   
@@ -10,6 +10,7 @@ class Scenic < ActiveRecord::Base
     column.validates :name, :length => { :within => 2..15 }, :uniqueness => true
     column.validates :slug, :format => { :with => /([a-z])+/, :message => I18n.t("errors.type.slug") }, :uniqueness => true
     column.validates :map_id
+    column.validates :subtitle, :length => { :within => 2..30 }
   end
   
   with_options :as => :videoable, :class_name => "Video", :dependent => :destroy do |assoc|
