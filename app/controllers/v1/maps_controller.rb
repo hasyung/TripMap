@@ -19,10 +19,10 @@ class V1::MapsController < V1::ApplicationController
   	end
 
     def show
-      @map = Map.find params[:id]
+      @map = Map.find params[:map_id]
       serial = MapSerialNumber.find{|num| num.code == params[:serial] }
       result= []
-      if (serial.present? && serial.map_id == params[:id].to_i && serial.count > 0) || (params[:serial].blank? && params[:map_type] == "free")
+      if (serial.present? && serial.map_id == params[:map_id].to_i && serial.count > 0) || (params[:serial].blank? && params[:map_type] == "free")
         if serial.present?
           serial.count -= 1
           serial.save
