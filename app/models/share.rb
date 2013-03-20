@@ -1,5 +1,5 @@
 class Share < ActiveRecord::Base
-	attr_accessible :map, :map_id, :ip, :title, :state_cd, :share_text_attributes, :share_image_attributes
+	attr_accessible :map, :map_id, :nickname, :title, :state_cd, :share_text_attributes, :share_image_attributes
 
 	belongs_to :map, :counter_cache => true
 
@@ -20,10 +20,10 @@ class Share < ActiveRecord::Base
   scope :created_desc, order("created_at DESC")
 
   # Validates
-  validates :ip, :length => { :within => 0..15 }, :format => { :with => /^([0-9:]*)+$/ }
   with_options :presence=> true do |column|
     column.validates :map_id
     column.validates :title, :length => { :within => 1..20,    :message => I18n.t("errors.type.name") }
+    column.validates :nickname, :length => { :within => 0..30 }
   end
   
 end

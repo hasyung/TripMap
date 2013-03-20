@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130320013512) do
+ActiveRecord::Schema.define(:version => 20130320104617) do
 
   create_table "activate_maps", :force => true do |t|
     t.integer  "map_id",               :null => false
@@ -160,7 +160,7 @@ ActiveRecord::Schema.define(:version => 20130320013512) do
 
   create_table "shares", :force => true do |t|
     t.integer  "map_id",                                  :null => false
-    t.string   "ip",         :limit => 15
+    t.string   "nickname",   :limit => 30
     t.string   "title",      :limit => 20,                :null => false
     t.integer  "state_cd",                 :default => 0
     t.datetime "created_at",                              :null => false
