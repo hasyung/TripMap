@@ -7,13 +7,27 @@ namespace :tripmap do
   desc "生成一个序列号并入库"
   task :generate_serial_code => :environment do
     map = Map.first
-    free_type, sale_type = 0, 1
-    options = { :map_id => map.id, :type => sale_type, :split => true }
+    free_type, sale_collection, sale_general = 0, 1, 2
+    options = { :map_id => map.id, :split => true }
+        
+    t_begin = Time.now
+    puts t_begin
+    code_free = MapSerialGenerator.generate_one_serial options.merge({:type => free_type})
     
-    code = MapSerialGenerator.generate_one_serial options
-    puts code
-    entity = { :map_id => map.id, :code => code, :count => 5, :type => 1, :printed => 0 }
-    MapSerialNumber.create entity
+    code_sale_collection = MapSerialGenerator.generate_one_serial options.merge({:type => sale_collection})
+    code_sale_general = MapSerialGenerator.generate_one_serial options.merge({:type => sale_general})
+    t_end = Time.now
+    puts t_end
+    puts "Generate one serial time span: " + (t_end - t_begin).to_s
+    puts code_free + "\n" + code_sale_collection + "\n" + code_sale_general
+    
+    entity_free = { :map_id => map.id, :code => code_free, :count => 1, :type => free_type, :printed => 0 }
+    entity_sale_collection = { :map_id => map.id, :code => code_sale_collection, :count => 5, :type => sale_collection, :printed => 0 }
+    entity_sale_general = { :map_id => map.id, :code => code_sale_general, :count => 5, :type => sale_general, :printed => 0 }
+    
+    MapSerialNumber.create entity_free
+    MapSerialNumber.create entity_sale_collection
+    MapSerialNumber.create entity_sale_general
     
   end
 

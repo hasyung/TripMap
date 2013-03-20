@@ -7,17 +7,29 @@ class V1::MapsController < V1::ApplicationController
                                    :name => map.name,
                                    :slug => map.slug,
                                    :cover => get_file_value(map.map_cover,"file",true),
-                                   :description => get_file_value(map.map_description,"body",false)
+                                   :description => get_file_value(map.map_description,"body",false),
+                                   :scenics_count => map.scenics_count,
+                                   :places_count => map.places_count,
+                                   :recommends_count => map.recommends_count,
+                                   :shares_count => map.shares_count,
+                                   :infos_count => map.infos_count
                                  }
     		end
     		render :json => result
   	end
 
     def show
-      @map = Map.find params[:id]
-      if MapSerialNumber.all.find{|num| num.map_id ==  params[:map_id].to_i && num.code == params[:serial] &&num.count > 0 }.blank?
-        return result= []
-      else
+      @map = Map.find params[:map_id]
+      serial = MapSerialNumber.find{|num| num.code == params[:serial] }
+      result= []
+      if (serial.present? && serial.map_id == params[:map_id].to_i && serial.count > 0) || (params[:serial].blank? && params[:map_type] == "free")
+        if serial.present?
+          serial.count -= 1
+          serial.save
+          active_entity =  { :device_id => params[:device_id], :map_id => @map.id, :map_serial_number_id => serial.id }
+          ActivateMap.create active_entity
+        end
+
         slides, places, scenics, recommends, records, detaileds, infos = [], [], [], [], [], [], []
         if @map.map_slides.present?
           @map.map_slides.order_asc.each do |slide|
@@ -28,7 +40,7 @@ class V1::MapsController < V1::ApplicationController
           @map.places.each do |place|
             places << {:id => place.id,
                                    :name => place.name,
-                                   :title => place.title,
+                                   :subtitle => place.subtitle,
                                    :slug => place.slug,
                                    :icon => get_file_value(place.place_icon,"file",true),
                                    :image => get_file_value(place.place_image,"file",true),
@@ -46,7 +58,7 @@ class V1::MapsController < V1::ApplicationController
           @map.scenics.each do |scenic|
             scenics << {:id => scenic.id,
                                    :name => scenic.name,
-                                   :title => scenic.title,
+                                   :subtitle => scenic.subtitle,
                                    :slug => scenic.slug,
                                    :icon => get_file_value(scenic.scenic_icon,"file",true),
                                    :image => get_file_value(scenic.scenic_image,"file",true),
@@ -74,24 +86,30 @@ class V1::MapsController < V1::ApplicationController
                     detail += detailed.image_lists if detailed.image_lists.present?
                     detail = detail.sort {|a,b| a[:order] <=> b[:order]}
                     content = {:name => detailed.name}
+                    images, videos,  audios, texts, image_lists= [], [], [], [], []
                     detail.each do |d|
                       case d.class.to_s
                       when "Image"
-                        content.merge!({ :image => d.file.url,  :image_order => d.order})
+                        images << { :image=> d.file.url,  :order => d.order}
                       when "Video"
-                        content.merge!({ :video => d.file.url, :video_size => d.file_size, :video_duration => d.duration, :video_cover => d.cover.url,  :video_order => d.order })
+                        videos << { :video => d.file.url,  :size => d.file_size, :duration => d.duration, :cover => d.cover.url,  :order => d.order}
                       when "Audio"
-                        content.merge!({ :audio => d.file.url, :audio_size => d.file_size, :audio_duration => d.duration,  :audio_order => d.order })
+                        audios << { :audio => d.file.url,  :size => d.file_size, :duration => d.duration,  :order => d.order}
                       when "Letter"
-                        content.merge!({ :text => d.body,  :text_order => d.order })
+                         texts << { :text => d.body, :order => d.order}
                       when "ImageList"
-                        images = []
-                        d.images.group_order_asc.each do |img|
-                          images << {:image => img.file.url}
+                        imgs = []
+                        d.images.order_asc.each do |img|
+                          imgs << {:image => img.file.url}
                         end
-                        content.merge!({ :images => images,  :images_order => d.order })
+                        image_lists << {:images => imgs,  :order => d.order}
                       end
                     end
+                    content.merge!({ :images => images}) if images.present?
+                    content.merge!({ :videos => videos}) if videos.present?
+                    content.merge!({ :audios => audios}) if audios.present?
+                    content.merge!({ :texts => texts}) if texts.present?
+                    content.merge!({ :image_lists => image_lists}) if image_lists.present?
                     detaileds << content
                   end
                 end
@@ -110,8 +128,8 @@ class V1::MapsController < V1::ApplicationController
                                               :cover => get_file_value(recommend.recommend_cover,"file",true),
                                               :records => records
                                             }
-          end
         end
+      end
         if @map.infos_count > 0
           @map.infos.order_asc.each do |info|
             infos << {  :name => info.name,
@@ -128,6 +146,8 @@ class V1::MapsController < V1::ApplicationController
                                 :recommends => recommends,
                                 :infos => infos
                               }
-        render :json => result
-      end
+
     end
+        render :json => result
+  end
+end
