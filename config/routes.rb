@@ -71,7 +71,7 @@ end
 namespace :v1 do
   resources :maps, :only => :index do
     resources :weathers, :only => :index
-    post 'show', :on => :member
+    post '/show', :on => :collection
     resources :shares, :only => :create do
       post 'nearby', :on => :collection
       post 'current', :on => :collection
