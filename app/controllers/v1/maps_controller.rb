@@ -86,24 +86,30 @@ class V1::MapsController < V1::ApplicationController
                     detail += detailed.image_lists if detailed.image_lists.present?
                     detail = detail.sort {|a,b| a[:order] <=> b[:order]}
                     content = {:name => detailed.name}
+                    images, videos,  audios, texts, image_lists= [], [], [], [], []
                     detail.each do |d|
                       case d.class.to_s
                       when "Image"
-                        content.merge!({ :image => d.file.url,  :image_order => d.order})
+                        images << { :image=> d.file.url,  :order => d.order}
                       when "Video"
-                        content.merge!({ :video => d.file.url, :video_size => d.file_size, :video_duration => d.duration, :video_cover => d.cover.url,  :video_order => d.order })
+                        videos << { :video => d.file.url,  :size => d.file_size, :duration => d.duration, :cover => d.cover.url,  :order => d.order}
                       when "Audio"
-                        content.merge!({ :audio => d.file.url, :audio_size => d.file_size, :audio_duration => d.duration,  :audio_order => d.order })
+                        audios << { :audio => d.file.url,  :size => d.file_size, :duration => d.duration,  :order => d.order}
                       when "Letter"
-                        content.merge!({ :text => d.body,  :text_order => d.order })
+                         texts << { :text => d.body, :order => d.order}
                       when "ImageList"
-                        images = []
+                        imgs = []
                         d.images.order_asc.each do |img|
-                          images << {:image => img.file.url}
+                          imgs << {:image => img.file.url}
                         end
-                        content.merge!({ :images => images,  :images_order => d.order })
+                        image_lists << {:images => imgs,  :order => d.order}
                       end
                     end
+                    content.merge!({ :images => images}) if images.present?
+                    content.merge!({ :videos => videos}) if videos.present?
+                    content.merge!({ :audios => audios}) if audios.present?
+                    content.merge!({ :texts => texts}) if texts.present?
+                    content.merge!({ :image_lists => image_lists}) if image_lists.present?
                     detaileds << content
                   end
                 end
