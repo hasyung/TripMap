@@ -15,10 +15,10 @@
           <th><%= model_class.human_attribute_name(:name) %></th>
           <th><%= model_class.human_attribute_name(:order) %></th>
           <th class="action"><%= t('links.commons.action') %></th>
-        </thead>
-        <% if !@detaileds.blank? %>
+      </thead>
+        <tbody>
+          <% if !@detaileds.blank? %>
           <% @detaileds.each do |d| %>
-          <tbody>
             <tr>
               <td><%= check_box_tag "province_ids[]", d.id, false, id: "province_#{d.id}" %></td>
               <td><%= link_to d.name, 
@@ -35,8 +35,8 @@
               </td>
             </tr>
           <% end %>
-        <% end %>
-        </tbody>
-      </table>
+          <% end %>
+          </tbody>
+        </table>
   </div>
 </div>

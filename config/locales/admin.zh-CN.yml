@@ -142,6 +142,8 @@
     commons:
       action: "操作"
       confirm: "你确定删除吗？"
+      video: "查看视频"
+      audio: "查看音频"
 
   messages:
     maps:
@@ -222,19 +224,26 @@
       place:
         name: "名称"
         slug: "简码"
+        subtitle: "副标题"
         map: "地图"
+        province: "省市"
       scenic:
         name: "名称"
         slug: "简码"
+        subtitle: "副标题"
         map: "地图"
+        province: "省市"
       recommend:        
         name: "名称"
         slug: "简码"
         map: "地图"
+        province: "省市"
         recommend_records_count: "推荐记录"
       recommend_record:  
         name: "名称"      
-        recommend_detaileds_count: "推荐详细"
+        recommend: "推荐名称"
+        recommend_detaileds_count: "推荐详细数"
+        order: "排序"
       recommend_detailed:
         name: "名称"
         order: "排序"

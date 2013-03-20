@@ -1,10 +1,14 @@
 class Admin::ScenicsController < Admin::ApplicationController
   def index
-    @scenics = Scenic.page(params[:page]).per(Setting.page_size)
+    @scenics = Scenic.page(params[:page]).per(Setting.page_size).created_desc
+
+    add_breadcrumb :index
   end
 
   def new
     @scenic = Scenic.new
+
+    add_breadcrumb :new
   end
 
   def create
@@ -18,6 +22,8 @@ class Admin::ScenicsController < Admin::ApplicationController
 
   def edit
     @scenic = Scenic.find params[:id]
+
+    add_breadcrumb :edit
   end
 
   def update

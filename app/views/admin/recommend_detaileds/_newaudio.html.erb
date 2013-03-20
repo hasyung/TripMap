@@ -13,6 +13,13 @@
 	<%= a.input :file,  as: :file %>
 	<%= a.input :duration %>
 	<%= a.input :order %>
+  <% if @audio.file && @audio.file.present? %>
+    <div class="control-group">
+      <div class="controls">
+      <%= audio_tag(@audio.file, :autoplay => false, :controls => true) %>
+      </div>
+    </div>
+  <% end %>
   <div class="form-actions">
     <%= a.button :submit, :class => 'btn-primary' %>
   </div>

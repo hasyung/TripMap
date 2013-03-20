@@ -14,6 +14,13 @@
                             @image)  do |i| %>
   <%= i.input :file,  as: :file %>
   <%= i.input :order %>
+  <% if @image.file && @image.file.present? %>
+      <div class="control-group image">
+        <div class="controls">
+          <%= image_tag @image.file %>
+        </div>
+      </div>
+    <% end %>
   <div class="form-actions">
     <%= i.button :submit, :class => 'btn-primary' %>
   </div>

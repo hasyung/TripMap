@@ -1,6 +1,6 @@
 class Admin::PlacesController < Admin::ApplicationController
   def index
-    @places = Place.page(params[:page]).per(Setting.page_size)
+    @places = Place.page(params[:page]).per(Setting.page_size).created_desc
 
     add_breadcrumb :index
   end
@@ -43,5 +43,7 @@ class Admin::PlacesController < Admin::ApplicationController
       redirect_to admin_places_path, notice: t('messages.places.error')
     end
   end
+
+  
 
 end

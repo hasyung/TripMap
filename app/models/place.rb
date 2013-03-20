@@ -1,7 +1,7 @@
 class Place < ActiveRecord::Base
   
   # White list
-  attr_accessible :map, :map_id, :name, :slug, :place_icon_attributes, :place_image_attributes, :place_description_image_attributes,
+  attr_accessible :map, :map_id, :name, :slug, :subtitle, :place_icon_attributes, :place_image_attributes, :place_description_image_attributes,
                   :place_video_attributes, :place_audio_attributes, :place_description_attributes
   
   # Associations
@@ -26,6 +26,7 @@ class Place < ActiveRecord::Base
     column.validates :name, :length => { :within => 2..15 }
     column.validates :map_id
     column.validates :slug, :format => { :with => /([a-z])+/, :message => I18n.t("errors.type.slug") }
+    column.validates :subtitle, :length => { :within => 2..30 }
   end
 
   # NestedAttributes
@@ -36,5 +37,7 @@ class Place < ActiveRecord::Base
   accepts_nested_attributes_for :place_video,             reject_if: lambda { |pv| pv[:file].blank? }, allow_destroy: true
   accepts_nested_attributes_for :place_description,       reject_if: lambda { |pd| pd[:body].blank? }, allow_destroy: true
 
+
+  scope :created_desc, order("`created_at` DESC")
   
 end

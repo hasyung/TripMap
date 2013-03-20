@@ -12,7 +12,7 @@
       </div>
     <% end %>
   <% end %>
-  <%= f.fields_for :map_plat, @map.map_cover ||= @map.build_map_cover do |p| %>
+  <%= f.fields_for :map_plat, @map.map_plat ||= @map.build_map_plat do |p| %>
     <%= p.input :file, :as => :file %>
     <% if @map.map_plat && @map.map_plat.file.present? %>
       <div class="control-group image">

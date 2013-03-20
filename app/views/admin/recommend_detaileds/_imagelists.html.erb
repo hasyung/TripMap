@@ -18,11 +18,12 @@
         <input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" />
       </th>
       <th><%= model_class.human_attribute_name(:imageslist) %></th>
+      <th><%= model_class.human_attribute_name(:order) %></th>
       <th class="action"><%= t('links.commons.action') %></th>
   </thead>
+    <tbody>
   <% if !@imagelists.blank? %>
   <% @imagelists.each do |i| %>
-    <tbody>
       <tr>
         <td><%= check_box_tag "province_ids[]", i.id, false, id: "province_#{i.id}" %></td>
         <td>
@@ -32,6 +33,7 @@
                      params[:id],
                      i) %>
         </td>
+        <td><%= i.order %></td>
         <td class="action">
           <%= link_to raw("<i class=\"icon-edit\"></i>"), 
               admin_recommend_record_detailed_imagelist_edit_path(params[:recommend_id], params[:record_id], params[:id], i.id) %>

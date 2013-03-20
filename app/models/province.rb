@@ -11,5 +11,8 @@ class Province < ActiveRecord::Base
     column.validates :name, :length => { :within => 2..15,    :message => I18n.t("errors.type.name") }, :uniqueness => true
     column.validates :slug, :format => { :with => /([a-z])+/, :message => I18n.t("errors.type.slug") }, :uniqueness => true
   end
+
+  
+  scope :created_desc, order("`created_at` DESC")
   
 end

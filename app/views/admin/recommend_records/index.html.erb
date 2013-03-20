@@ -15,18 +15,21 @@
           <th><%= model_class.human_attribute_name(:name) %></th>
           <th><%= model_class.human_attribute_name(:recommend_detaileds_count) %></th>
           <th><%= model_class.human_attribute_name(:order) %></th>
+          <th><%= model_class.human_attribute_name(:recommend) %></th>
           <th class="action"><%= t('links.commons.action') %></th>
         </thead>
+          <tbody>
         <% if !@records.blank? %>
           <% @records.each do |r| %>
-          <tbody>
             <tr>
               <td><%= check_box_tag "province_ids[]", r.id, false, id: "province_#{r.id}" %></td>
               <td>
                 <%= link_to r.name,
                             admin_recommend_record_detaileds_path(params[:recommend_id], r.id) %>
-              </td><td><%= r.recommend_detaileds_count %></td>
+              </td>
+              <td><%= r.recommend_detaileds_count %></td>
               <td><%= r.order %></td>
+              <td><%= r.recommend.name %></td>
               <td class="action">
                 <%= link_to raw("<i class=\"icon-edit\"></i>"), 
                     edit_admin_recommend_record_path(params[:recommend_id], r.id) %>
