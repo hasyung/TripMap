@@ -4,10 +4,10 @@ class MapSerialGenerator
   #       it looks like : 1001-8M0P-KNH4-2U43, 7001-P8H3-4N20-MK4U
   # params:
   #       <type>   : indicates current map is FREE or for SALE(COLLECTION | GENERAL) .
-  #                  type = 0,  1bit(LTR) can be one of 1-2, FREE
-  #                  type = 1,  1bit(LTR) can be one of 3-4, SALE(COLLECTION)
-  #                  type = 2,  1bit(LTR) can be one of 5-6, SALE(GENERAL)
-  #                  type = 3+, [7,9], system reserved for future use.
+  #                  type = 0,  1bit(LTR) can be one of A-B, FREE
+  #                  type = 1,  1bit(LTR) can be one of C-D, SALE(COLLECTION)
+  #                  type = 2,  1bit(LTR) can be one of E-F, SALE(GENERAL)
+  #                  type = 3+, [G,..,Z], system reserved for future use.
   #       <map_id> : map id, integer.
   #       <split>  : true or false. serial number whether will split by '-'.
   #output serial excludes:
@@ -30,22 +30,21 @@ class MapSerialGenerator
   end
   
   private
-  def self.get_type( type ) # 1bit
-    rd = Random.new
-    first_bit = rd.rand(1..2).to_s if type.zero?
-    first_bit = rd.rand(3..4).to_s if type == 1
-    first_bit = rd.rand(5..6).to_s if type == 2
-    first_bit
+  def self.get_type( type ) # 1bit   
+    first_bit = ('A'..'B').to_a.sample(1) if type.zero?
+    first_bit = ('C'..'D').to_a.sample(1) if type == 1
+    first_bit = ('E'..'F').to_a.sample(1) if type == 2
+    first_bit[0]
   end
   
   def self.get_map_id ( map_id ) # 3bit
-    tmp = map_id.to_s
+    tmp = map_id.to_s.gsub(/1/, 'B').gsub(/0/, 'A')
     len = tmp.length
     
     return "" if tmp.length > 3
     
-    formatted_map_id = tmp.insert(0, "00") if len == 1
-    formatted_map_id = tmp.insert(0, "0")  if len == 2
+    formatted_map_id = tmp.insert(0, "FF") if len == 1
+    formatted_map_id = tmp.insert(0, "F")  if len == 2
     formatted_map_id
   end
   
