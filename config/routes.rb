@@ -1,6 +1,5 @@
 TripMap::Application.routes.draw do
 
-
   devise_for :users,
              :path => "",
              :path_names => { :sign_in => 'login', :sign_out => 'logout' },
@@ -10,10 +9,17 @@ TripMap::Application.routes.draw do
   namespace :admin do
     root :to => 'home#index'
     
-    resources :maps, :except => :show
+    resources :maps, :except => :show do 
+      get 'image/new'    => 'maps#new_image'
+      post 'images'      => 'maps#create_image'
+      put 'image/:id'    => 'maps#update_image', :as => "image"
+      delete 'image/:id' => 'maps#destroy_image'
+      get 'images/:id/edit' => 'maps#edit_image', :as => "image_edit"
+    end
     resources :provinces
     resources :places
     resources :scenics
+    resources :serialnumbers
     resources :recommends do
       resources :recommend_records, 
                 path: 'records',:as => "records" do
