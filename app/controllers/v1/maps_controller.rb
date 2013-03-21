@@ -6,6 +6,7 @@ class V1::MapsController < V1::ApplicationController
     		  result << {:id => map.id,
                                    :name => map.name,
                                    :slug => map.slug,
+                                   :version => map.version,
                                    :cover => get_file_value(map.map_cover,"file",true),
                                    :description => get_file_value(map.map_description,"body",false),
                                    :scenics_count => map.scenics_count,
@@ -13,6 +14,7 @@ class V1::MapsController < V1::ApplicationController
                                    :recommends_count => map.recommends_count,
                                    :shares_count => map.shares_count,
                                    :infos_count => map.infos_count
+                                   
                                  }
     		end
     		render :json => result
