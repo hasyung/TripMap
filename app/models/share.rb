@@ -2,12 +2,6 @@ class Share < ActiveRecord::Base
 	attr_accessible :map, :map_id, :nickname, :title, :state_cd, :share_text_attributes, :share_image_attributes
 
 	belongs_to :map, :counter_cache => true
-
-    # Carrierwave
-    mount_uploader :file, ImageUploader
-
-    # Callbacks
-    before_save :update_image_attributes
     
 	# Associations
 	with_options :dependent => :destroy do |assoc|
@@ -30,16 +24,6 @@ class Share < ActiveRecord::Base
     column.validates :map_id
     column.validates :title, :length => { :within => 1..20,    :message => I18n.t("errors.type.name") }
     column.validates :nickname, :length => { :within => 0..30 }
-  end
-  
-  # Methods
-  private
-  
-  def update_image_attributes
-    if file.present? && file_changed?
-      self.file_size = file.file.size
-      self.file_type = file.file.content_type
-    end
   end
 
 end
