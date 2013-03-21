@@ -52,7 +52,7 @@ class V1::SharesController < V1::ApplicationController
 		@share.nickname = params[:nickname]
 		@share.build_share_image file: params[:image]
 		@share.build_share_text body: params[:text]
-		if @scenic.save
+		if @share.save
       		result = {result: true}
     		else
       		result = {result: false}
