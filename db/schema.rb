@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130320104617) do
+ActiveRecord::Schema.define(:version => 20130321070011) do
 
   create_table "activate_maps", :force => true do |t|
     t.integer  "map_id",               :null => false
@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(:version => 20130320104617) do
   create_table "map_serial_numbers", :force => true do |t|
     t.integer  "map_id",                    :null => false
     t.string   "code",                      :null => false
-    t.integer  "type",       :default => 0
+    t.integer  "type_cd",    :default => 0
     t.integer  "used",       :default => 0
     t.integer  "printed",    :default => 0
     t.integer  "count",      :default => 0

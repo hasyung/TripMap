@@ -290,6 +290,14 @@
       image:
         file: "图片"
         order: "排序"
+      map_serial_number:
+        map: "地图"
+        code: "序列号"
+        type: "序列号类型"
+        used: "使用次数"
+        printed: "打印"
+        count: "默认使用次数"
+        created_at: "创建时间"
         
   simple_form:
     labels:
@@ -408,3 +416,8 @@
         states:
           draft: "未通过"
           publish: "通过"
+      mapserialnumer:
+        type:
+          free: "免费版"
+          ordinary: "普通版"
+          favorite: "收藏版"
