@@ -1,0 +1,100 @@
+<%= render "base" %>
+
+<div class="page-header">
+  <h1><%= t("admin.pages.api.v1") %>API</h1>
+</div>
+<div class="api-description">
+  <blockquote>
+    <p class="text-info">此API参考文档专为旅图项目服务（服务器端名TripMap），当前版本号为0.1.0，该API参考文档是稳定的。</p>
+    <small>最后更新时间 2012-12-06 21:45</small>
+  </blockquote>
+</div>
+<div class="api-list">
+  <h4>API列表</h4>
+  <ol>
+    <li><a href="#maps">获取所有地图简略信息</a></li>
+    <li><a href="#maps_active">激活地图</a></li>
+    <li><a href="#share_current">获取当前分享</a></li>
+    <li><a href="#share_arround">获取周边分享</a></li>
+    <li><a href="#share_upload">上传我的分享</a></li>
+    <li><a href="#weathers">获取当前地图所在城市天气</a></li>
+  </ol>
+</div>
+<div class="api-content">
+  <div id="maps" class="api well">
+    <h3 class="name">/v1/maps.json</h3>
+    <small class="desc">获取所有的地图信息，结果为JSON数据格式。</small>
+    <dl>
+      <dt>URL</dt>
+      <dd><pre class="docs-example"><%= v1_maps_url(:format => :json) %></pre></dd>
+      <dt>HTTP请求方式</dt>
+      <dd>GET<dd>
+      <dt>支持格式</dt>
+      <dd>json<dd>
+      <dt>是否需要登录</dt>
+      <dd>否<dd>
+      <dt>请求参数</dt>
+      <dd>
+        无
+      <dd>
+    </dl>
+  </div>
+  <div id="maps_active" class="api well">
+    <h3 class="name">/v1/maps/id.json</h3>
+    <small class="desc">验证地图序列号可用性并获取地图详细信息，结果为JSON数据格式。</small>
+    <dl>
+      <dt>URL</dt>
+      <dd><pre class="docs-example"><%= v1_map_url(:id, :format => :json) %></pre></dd>
+      <dt>HTTP请求方式</dt>
+      <dd>POST<dd>
+      <dt>支持格式</dt>
+      <dd>json<dd>
+      <dt>是否需要登录</dt>
+      <dd>否<dd>
+      <dt>请求参数</dt>
+      <dd>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>名字</th>
+              <th>类型</th>
+              <th>类别</th>
+              <th>说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>id</td>
+              <td>整数</td>
+              <td>必选参数</td>
+              <td>地图编号，以指定查找哪张地图的内容。</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>serial</td>
+              <td>字符串</td>
+              <td>必选参数</td>
+              <td>地图注册码</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>device_id</td>
+              <td>字符串</td>
+              <td>必选参数</td>
+              <td>用户设备id</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>map_type</td>
+              <td>字符串</td>
+              <td>可选参数</td>
+              <td>如为试用版,则值为<b>free</b>。</td>
+            </tr>
+          </tbody>
+        </table>
+      <dd>
+    </dl>
+  </div>
+</div>

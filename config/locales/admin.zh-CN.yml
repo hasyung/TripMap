@@ -1,4 +1,14 @@
 'zh-CN':
+  admin:
+    menus:
+      api: "API"
+    pages:
+      api:
+        v1: "第一版本"
+        v2: "第二版本"
+    links:
+      v1: "第一版"
+      v2: "第二版"
   navs:
     home:
       index: "首页"
@@ -16,6 +26,8 @@
       index: "分享"
     infos:
       index: "信息"
+    apis:
+      index: "API"
 
   breadcrumbs:
     admin:
