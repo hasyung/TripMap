@@ -19,13 +19,11 @@ class Api::V1::MapsController < Api::V1::ApplicationController
       @map = Map.find params[:map_id].to_i
       serial = MapSerialNumber.find{|num| num.code == params[:serial] }
       result= {}
-      if (serial.present? && serial.map_id == params[:map_id].to_i && serial.count > 0) || (params[:serial].blank? && params[:map_type] == "free")
-        if serial.present?
+      if serial.present? && serial.map_id == params[:map_id].to_i && serial.count > 0
           serial.count -= 1
           serial.save
           active_entity =  { :device_id => params[:device_id], :map_id => @map.id, :map_serial_number_id => serial.id }
           ActivateMap.create active_entity
-        end
 
         slides, places, scenics, recommends, records, detaileds, infos = [], [], [], [], [], [], []
         if @map.map_slides.present?
