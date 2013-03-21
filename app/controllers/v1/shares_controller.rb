@@ -7,16 +7,32 @@ class V1::SharesController < V1::ApplicationController
 		index = params[:page_index].to_i
 		first = (index-1)*size+1
 		last = index*size
-		@shares = @map.shares.values_at(first..last)
+		@shares = @map.shares
 		if !@shares.blank?
-			@shares.each do |share|
-				result << {id: share.id,
+			if @shares.count > first
+				if @shares.count >= last
+				 	shares = @shares.values_at(first..last)
+				 else
+				 	shares = @shares.values_at(first..@shares.count)
+				 end 
+				shares.each do |share|
+					result << {id: share.id,
 								 title: share.title,
 								  nickname: share.nickname,
 								  image: share.share_image.file.url,
 								  cover: share.share_image.file.thumbnail.url,
 								  text: share.share_text.body
 								  }
+					end
+			elsif @shares.count == first
+				share = @shares[first]
+				result << {id: share.id,
+									 title: share.title,
+									  nickname: share.nickname,
+									  image: share.share_image.file.url,
+									  cover: share.share_image.file.thumbnail.url,
+									  text: share.share_text.body
+									  }
 			end
 		end
 		render :json => result
@@ -30,16 +46,30 @@ class V1::SharesController < V1::ApplicationController
 		first = (index-1)*size+1
 		last = index*size
 		if !@shares.blank?
-			if !@shares.values_at(first..last).blank?
-				@shares.values_at(first..last).each do |share|
+			if @shares.count > first
+				if @shares.count >= last
+				 	shares = @shares.values_at(first..last)
+				 else
+				 	shares = @shares.values_at(first..@shares.count)
+				 end 
+				shares.each do |share|
 					result << {id: share.id,
+								 title: share.title,
+								  nickname: share.nickname,
+								  image: share.share_image.file.url,
+								  cover: share.share_image.file.thumbnail.url,
+								  text: share.share_text.body
+								  }
+					end
+			elsif @shares.count == first
+				share = @shares[first]
+				result << {id: share.id,
 									 title: share.title,
 									  nickname: share.nickname,
 									  image: share.share_image.file.url,
 									  cover: share.share_image.file.thumbnail.url,
 									  text: share.share_text.body
 									  }
-				end
 			end
 		end
 		render :json => result
@@ -59,5 +89,4 @@ class V1::SharesController < V1::ApplicationController
     		end
     		render :json => result
 	end
-
 end
