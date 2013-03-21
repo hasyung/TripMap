@@ -14,6 +14,7 @@ class V1::MapsController < V1::ApplicationController
                                    :recommends_count => map.recommends_count,
                                    :shares_count => map.shares_count,
                                    :infos_count => map.infos_count
+                                   
                                  }
     		end
     		render :json => result
