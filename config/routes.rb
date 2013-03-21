@@ -8,11 +8,18 @@ TripMap::Application.routes.draw do
 
   namespace :admin do
     root :to => 'home#index'
+    resources :maps, :except => :show do
+      get 'image/new'    => 'maps#new_image'
+      post 'images'      => 'maps#create_image'
+      put 'image/:id'    => 'maps#update_image', :as => "image"
+      delete 'image/:id' => 'maps#destroy_image'
+      get 'images/:id/edit' => 'maps#edit_image', :as => "image_edit"
+    end
 
-    resources :maps, :except => :show
     resources :provinces
     resources :places
     resources :scenics
+    resources :serialnumbers
     resources :recommends do
       resources :recommend_records,
                 path: 'records',:as => "records" do
@@ -62,24 +69,22 @@ TripMap::Application.routes.draw do
       get 'publish/:status', :action => :publish, :on => :member, :as => :publish
       post 'select', :on => :collection
     end
-    
+
     resources :api, :only => [] do
       get 'v1', :on => :collection
       get 'v2', :on => :collection
     end
-    
   end
-
+  
   namespace :v1 do
     resources :maps, :only => :index do
       resources :weathers, :only => :index
-      post 'show', :on => :member
-      resources :shares, :only => :create do
-        post 'nearby', :on => :collection
-        post 'current', :on => :collection
-      end
+      post '/show', :on => :collection
+      post 'shares/nearby' => 'shares#nearby', :on => :collection
+      post 'shares/current' => 'shares#current', :on => :collection
+      post 'shares/create' => 'shares#create', :on => :collection
     end
   end
-
+  
   root :to => 'home#index'
 end
