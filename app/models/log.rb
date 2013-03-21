@@ -15,6 +15,6 @@ class Log < ActiveRecord::Base
 	with_options :presence=> true do |column|
 	  column.validates :map_id
 	  column.validates :activate_map_id
-	  column.validates :slug, :format => { :with => /([a-z])+/ }, :length => { :within => 1..20 }, :uniqueness => true
+	  column.validates :slug, :format => { :with => /([a-z])+/ }, :length => { :within => 1..20 }
 	end
 end

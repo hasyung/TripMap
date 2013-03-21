@@ -2,7 +2,7 @@ class V1::SharesController < V1::ApplicationController
 
 	def current
 		result = []
-		@map = Map.find params[:map_id]
+		@map = Map.find params[:map_id].to_i
 		size = params[:page_size].to_i
 		index = params[:page_index].to_i
 		first = (index-1)*size+1
@@ -47,12 +47,12 @@ class V1::SharesController < V1::ApplicationController
 
 	def create
 		@share = Share.new
-		@share.map_id = params[:map_id]
+		@share.map_id = params[:map_id].to_i
 		@share.title = params[:title]
 		@share.nickname = params[:nickname]
 		@share.build_share_image file: params[:image]
 		@share.build_share_text body: params[:text]
-		if @scenic.save
+		if @share.save
       		result = {result: true}
     		else
       		result = {result: false}

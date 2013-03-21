@@ -72,12 +72,12 @@ TripMap::Application.routes.draw do
     resources :logs, :only => :index do
       post 'select', :on => :collection
     end
-
+    
     resources :api, :only => [] do
       get 'v1', :on => :collection
     end
-end
-
+  end
+  
   namespace :v1 do
     resources :maps, :only => :index do
       resources :weathers, :only => :index

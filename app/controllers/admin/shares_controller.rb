@@ -11,6 +11,7 @@ class Admin::SharesController < Admin::ApplicationController
   
   def create
     @share = Share.new params[:share]
+    binding.pry
     if @share.save
       redirect_to admin_shares_path, :notice => t('messages.shares.success')
     else

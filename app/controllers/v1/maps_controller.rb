@@ -19,9 +19,9 @@ class V1::MapsController < V1::ApplicationController
   	end
 
     def show
-      @map = Map.find params[:map_id]
+      @map = Map.find params[:map_id].to_i
       serial = MapSerialNumber.find{|num| num.code == params[:serial] }
-      result= []
+      result= {}
       if (serial.present? && serial.map_id == params[:map_id].to_i && serial.count > 0) || (params[:serial].blank? && params[:map_type] == "free")
         if serial.present?
           serial.count -= 1
@@ -138,7 +138,7 @@ class V1::MapsController < V1::ApplicationController
                                  }
           end
         end
-        result << { :cover => get_file_value(@map.map_cover,"file",true),
+        result = {   :cover => get_file_value(@map.map_cover,"file",true),
                                 :description => get_file_value(@map.map_description,"body",false),
                                 :slides => slides,
                                 :scenics => scenics,
