@@ -15,6 +15,7 @@
     <%= stylesheet_link_tag "admin/application", :media => "all" %>
   </head>
   <body id="<%= "#{controller_name}-#{action_name}" %>">
+    
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
@@ -42,6 +43,8 @@
               <li<%= raw ' class="active"' if %w(infos).include?(controller_name) %>>
                 <%= link_to t("navs.infos.index"), admin_infos_path %>
               </li>
+              <li<%= raw ' class="active"' if %w(api).include?(controller_name) %>>
+                <%= link_to t("navs.apis.index"), v1_admin_api_index_path %>
               <li<%= raw ' class="active"' if %w(logs).include?(controller_name) %>>
                 <%= link_to t("navs.logs.index"), admin_logs_path %>
               </li>
@@ -67,7 +70,6 @@
         </div>
       </div>
     </div>
-
 
     <div class="container">
         <div class="row">

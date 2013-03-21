@@ -5,13 +5,13 @@ class Log < ActiveRecord::Base
 	belongs_to :activate_map
 
 	#SimpleEnum
-  	as_enum :device_type, { :iPhone => 0, :android => 1 }
-  	as_enum :message, { :success => 0, :time_out => 1, :not_found => 2, :error => 3 }
+	as_enum :device_type, { :iPhone => 0, :android => 1 }
+	as_enum :message, { :success => 0, :time_out => 1, :not_found => 2, :error => 3 }
 
-  	# Scopes
-  	scope :created_desc, order("created_at DESC")
+	# Scopes
+	scope :created_desc, order("created_at DESC")
 
-  	# Validates
+  # Validates
 	with_options :presence=> true do |column|
 	  column.validates :map_id
 	  column.validates :activate_map_id
