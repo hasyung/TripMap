@@ -150,4 +150,11 @@ class V1::MapsController < V1::ApplicationController
     end
         render :json => result
   end
+
+  def version
+    map = Map.find params[:id]
+    result = {version: map.version}
+    render :json => result
+  end
+
 end

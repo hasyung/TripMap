@@ -69,13 +69,15 @@ TripMap::Application.routes.draw do
       get 'publish/:status', :action => :publish, :on => :member, :as => :publish
       post 'select', :on => :collection
     end
+    resources :logs, :only => :index do
+      post 'select', :on => :collection
+    end
 
     resources :api, :only => [] do
       get 'v1', :on => :collection
-      get 'v2', :on => :collection
     end
-  end
-  
+end
+
   namespace :v1 do
     resources :maps, :only => :index do
       resources :weathers, :only => :index
@@ -83,6 +85,8 @@ TripMap::Application.routes.draw do
       post 'shares/nearby' => 'shares#nearby', :on => :collection
       post 'shares/current' => 'shares#current', :on => :collection
       post 'shares/create' => 'shares#create', :on => :collection
+      post 'logs' => 'logs#create', :on => :collection
+      get 'version' => 'maps#version', :on => :member
     end
   end
   

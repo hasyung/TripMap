@@ -47,11 +47,11 @@ class V1::SharesController < V1::ApplicationController
 
 	def create
 		@share = Share.new
-		@share.map_id = params[:share][:map_id]
-		@share.title = params[:share][:title]
-		@share.nickname = params[:share][:nickname]
-		@share.build_share_image file: params[:share][:image]
-		@share.build_share_text body: params[:share][:text]
+		@share.map_id = params[:map_id]
+		@share.title = params[:title]
+		@share.nickname = params[:nickname]
+		@share.build_share_image file: params[:image]
+		@share.build_share_text body: params[:text]
 		if @scenic.save
       		result = {result: true}
     		else

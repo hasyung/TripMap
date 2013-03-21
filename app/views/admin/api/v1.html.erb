@@ -6,7 +6,7 @@
 <div class="api-description">
   <blockquote>
     <p class="text-info">此API参考文档专为旅图项目服务（服务器端名TripMap），当前版本号为0.1.0，该API参考文档是稳定的。</p>
-    <small>最后更新时间 2012-12-06 21:45</small>
+    <small>最后更新时间 2013-03-21 21:45</small>
   </blockquote>
 </div>
 <div class="api-list">
@@ -320,7 +320,7 @@
     <small class="desc">上传当前地图使用日志</small>
     <dl>
       <dt>URL</dt>
-      <dd><pre class="docs-example"><%= v1_map_weathers_url(:map_id, :format => :json) %></pre></dd>
+      <dd><pre class="docs-example"><%= logs_v1_maps_url(:format => :json) %></pre></dd>
       <dt>HTTP请求方式</dt>
       <dd>POST<dd>
       <dt>支持格式</dt>
@@ -386,7 +386,7 @@
     <small class="desc">检测地图数据包是否更新</small>
     <dl>
       <dt>URL</dt>
-      <dd><pre class="docs-example"><%= v1_map_weathers_url(:map_id, :format => :json) %></pre></dd>
+      <dd><pre class="docs-example"><%= version_v1_map_url(:map_id, :format => :json) %></pre></dd>
       <dt>HTTP请求方式</dt>
       <dd>GET<dd>
       <dt>支持格式</dt>
@@ -417,7 +417,7 @@
         </table>
       <dd>
       <dt>例子</dt>
-      <dd><%= v1_map_weathers_url(:map_id => 1, :format => :json) %><dd>
+      <dd><%= version_v1_map_url(:id => 1, :format => :json) %><dd>
     </dl>
   </div>
   
