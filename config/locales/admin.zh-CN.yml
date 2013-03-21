@@ -16,6 +16,10 @@
       index: "分享"
     infos:
       index: "信息"
+    logs:
+      index: "日志"
+    serialnumber:
+      index: "序列号管理"
 
   breadcrumbs:
     admin:
@@ -27,6 +31,8 @@
         index: "地图"
         new: "添加地图"
         edit: "修改地图"
+        new_image: "添加幻灯片"
+        edit_image: "编辑幻灯片"
       provinces:
         index: "省市"
         new: "添加省市"
@@ -73,6 +79,10 @@
         index: "信息"
         new: "添加信息"
         edit: "修改信息"
+      logs:
+        index: "日志"
+      serialnumbers:
+        index: "序列号"
 
   links:
     home:
@@ -82,6 +92,12 @@
       show: "查看地图"
       new: "添加地图"
       edit: "修改地图"
+      edit_image: "添加幻灯片"
+      images:
+        index: "幻灯片列表"
+        new: "添加图片"
+        edit: "修改图片"
+        back: "地图信息"
     provinces:
       index: "省市列表"
       show: "查看省市"
@@ -135,10 +151,15 @@
       show: "查看分享"
       new: "添加分享"
       edit: "修改分享"
+    logs:
+      index: "日志列表"
     infos:
       index: "信息"
       new: "添加信息"
       edit: "修改信息"
+    serialnumbers:
+      index: "序列号列表"
+      new: "生成序列号"
     commons:
       action: "操作"
       confirm: "你确定删除吗？"
@@ -149,6 +170,9 @@
     maps:
       success: "操作地图成功！"
       error: "操作地图失败！"
+      images:
+        success: "操作幻灯片成功！"
+        error: "操作幻灯片失败！"
     provinces:
       success: "操作省市成功！"
       error: "操作省市失败！"
@@ -207,6 +231,7 @@
       video: "视频"
       audio: "音频"
       letter: "文本"
+      log: "日志"
     attributes:
       map:
         province: "省市"
@@ -260,7 +285,7 @@
         order: "排序"
       share:
         title: "标题"
-        ip: "IP地址"
+        nickname: "昵称"
         map: "地图"
         state_cd: "审核状态"
         created_at: "创建时间"
@@ -268,6 +293,15 @@
         map: "地图"
         name: "名称"
         slug: "简码"
+        order: "排序"
+      log: 
+        map: "地图"
+        activate_map: "设备"
+        slug: "简码"
+        message_cd: "状态"
+        created_at: "创建时间"
+      image:
+        file: "图片"
         order: "排序"
         
   simple_form:
@@ -387,3 +421,12 @@
         states:
           draft: "未通过"
           publish: "通过"
+      log:
+        device_types:
+          iPhone: "iPhone"
+          android: "Android"
+        messages:
+          success: "成功"
+          time_out: "超时"
+          not_found: "没有找到"
+          error: "失败"

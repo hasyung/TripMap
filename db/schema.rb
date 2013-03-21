@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130320013512) do
+ActiveRecord::Schema.define(:version => 20130321033522) do
 
   create_table "activate_maps", :force => true do |t|
     t.integer  "map_id",               :null => false
@@ -65,6 +65,16 @@ ActiveRecord::Schema.define(:version => 20130320013512) do
     t.datetime "updated_at",                              :null => false
   end
 
+  create_table "logs", :force => true do |t|
+    t.integer  "map_id",                                       :null => false
+    t.integer  "activate_map_id",                              :null => false
+    t.integer  "device_type_cd",                :default => 0
+    t.string   "slug",            :limit => 20,                :null => false
+    t.integer  "message_cd",                    :default => 0
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
+  end
+
   create_table "map_serial_numbers", :force => true do |t|
     t.integer  "map_id",                    :null => false
     t.string   "code",                      :null => false
@@ -82,6 +92,7 @@ ActiveRecord::Schema.define(:version => 20130320013512) do
     t.integer  "province_id",                                   :null => false
     t.string   "name",             :limit => 20,                :null => false
     t.string   "slug",             :limit => 20
+    t.string   "version",          :limit => 30
     t.integer  "scenics_count",                  :default => 0
     t.integer  "places_count",                   :default => 0
     t.integer  "recommends_count",               :default => 0
@@ -160,7 +171,7 @@ ActiveRecord::Schema.define(:version => 20130320013512) do
 
   create_table "shares", :force => true do |t|
     t.integer  "map_id",                                  :null => false
-    t.string   "ip",         :limit => 15
+    t.string   "nickname",   :limit => 30
     t.string   "title",      :limit => 20,                :null => false
     t.integer  "state_cd",                 :default => 0
     t.datetime "created_at",                              :null => false
