@@ -5,15 +5,15 @@ class V1::SharesController < V1::ApplicationController
 		@map = Map.find params[:map_id].to_i
 		size = params[:page_size].to_i
 		index = params[:page_index].to_i
-		first = (index-1)*size+1
-		last = index*size
+		first = (index-1)*size
+		last = index*size - 1
 		@shares = @map.shares
 		if !@shares.blank?
-			if @shares.count > first
-				if @shares.count >= last
+			if (@shares.count - 1) > first
+				if (@shares.count - 1) >= last
 				 	shares = @shares.values_at(first..last)
 				 else
-				 	shares = @shares.values_at(first..@shares.count)
+				 	shares = @shares.values_at(first..(@shares.count - 1))
 				 end 
 				shares.each do |share|
 					result << {id: share.id,
@@ -23,8 +23,8 @@ class V1::SharesController < V1::ApplicationController
 								  cover: share.share_image.file.thumbnail.url,
 								  text: share.share_text.body
 								  }
-					end
-			elsif @shares.count == first
+				end
+			elsif (@shares.count - 1) == first
 				share = @shares[first]
 				result << {id: share.id,
 									 title: share.title,
@@ -43,14 +43,14 @@ class V1::SharesController < V1::ApplicationController
 		@shares = Share.all.reject {|lambda| lambda.map_id == params[:map_id].to_i}
 		size = params[:page_size].to_i
 		index = params[:page_index].to_i
-		first = (index-1)*size+1
-		last = index*size
+		first = (index-1)*size
+		last = index*size - 1
 		if !@shares.blank?
-			if @shares.count > first
-				if @shares.count >= last
+			if (@shares.count - 1) > first
+				if (@shares.count - 1) >= last
 				 	shares = @shares.values_at(first..last)
 				 else
-				 	shares = @shares.values_at(first..@shares.count)
+				 	shares = @shares.values_at(first..(@shares.count - 1))
 				 end 
 				shares.each do |share|
 					result << {id: share.id,
@@ -61,7 +61,7 @@ class V1::SharesController < V1::ApplicationController
 								  text: share.share_text.body
 								  }
 					end
-			elsif @shares.count == first
+			elsif (@shares.count - 1) == first
 				share = @shares[first]
 				result << {id: share.id,
 									 title: share.title,
