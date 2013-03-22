@@ -6,10 +6,7 @@ class Api::V1::MapsController < Api::V1::ApplicationController
     		  result << {:id => map.id,
                                    :name => map.name,
                                    :slug => map.slug,
-                                   :version => map.version,
-                                   :cover => get_file_value(map.map_cover,"file",true),
-                                   :description => get_file_value(map.map_description,"body",false)
-                                   
+                                   :version => map.version
                                  }
     		end
     		render :json => result
@@ -133,11 +130,13 @@ class Api::V1::MapsController < Api::V1::ApplicationController
                                  }
           end
         end
-        result = {    :slides => slides,
-                                :scenics => scenics,
-                                :places => places,
-                                :recommends => recommends,
-                                :infos => infos
+        result = {  :cover => get_file_value(map.map_cover,"file",true),
+                     :description => get_file_value(map.map_description,"body",false),
+                     :slides => slides,
+                     :scenics => scenics,
+                     :places => places,
+                     :recommends => recommends,
+                     :infos => infos
                               }
 
     end
