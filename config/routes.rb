@@ -82,9 +82,9 @@ TripMap::Application.routes.draw do
     namespace :v1 do
       resources :maps, :only => :index do
         resources :weathers, :only => :index
-        post '/show', :on => :collection
-        post 'shares/nearby' => 'shares#nearby', :on => :collection
-        post 'shares/current' => 'shares#current', :on => :collection
+        get '/show', :on => :collection
+        get 'shares/nearby' => 'shares#nearby', :on => :collection
+        get 'shares/current' => 'shares#current', :on => :collection
         post 'shares/create' => 'shares#create', :on => :collection
         post 'logs' => 'logs#create', :on => :collection
         get 'version' => 'maps#version', :on => :member
