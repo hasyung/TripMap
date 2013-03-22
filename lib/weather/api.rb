@@ -13,10 +13,10 @@ module Weather
         return params = {}
       else
         params = {  :temp => body.split("string")[11].delete("<,>,/"),
-                               :weath => body.split("string")[13].delete("<,>,/").split(" ")[1],
-                               :picture => body.split("string")[17].delete("<,>,/").delete(".gif"),
-                               :wind =>body.split("string")[21].delete("<,>,/").split("；")[1].split("：")[1]
-                             }
+                    :weath => body.split("string")[13].delete("<,>,/").split(" ")[1],
+                    :picture => body.split("string")[17].delete("<,>,/").delete(".gif"),
+                    :wind =>body.split("string")[21].delete("<,>,/").split("；")[1].split("：")[1]
+                    }
         end
     end
 

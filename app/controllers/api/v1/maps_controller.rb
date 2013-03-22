@@ -4,10 +4,10 @@ class Api::V1::MapsController < Api::V1::ApplicationController
     		result = []
     		Map.all.each do |map|			
     		  result << {:id => map.id,
-                                   :name => map.name,
-                                   :slug => map.slug,
-                                   :version => map.version
-                                 }
+                     :name => map.name,
+                     :slug => map.slug,
+                     :version => map.version
+                     }
     		end
     		render :json => result
   	end
@@ -31,37 +31,37 @@ class Api::V1::MapsController < Api::V1::ApplicationController
         if @map.places_count > 0
           @map.places.each do |place|
             places << {:id => place.id,
-                                   :name => place.name,
-                                   :subtitle => place.subtitle,
-                                   :slug => place.slug,
-                                   :icon => get_file_value(place.place_icon,"file",true),
-                                   :image => get_file_value(place.place_image,"file",true),
-                                   :audio => get_file_value(place.place_audio,"file",true),
-                                   :audio_size => get_file_value(place.place_audio,"file_size",false),
-                                   :audio_duration => get_file_value(place.place_audio,"duration",false),
-                                   :video => get_file_value(place.place_video,"file",true),
-                                   :video_size => get_file_value(place.place_video,"file_size",false),
-                                   :video_duration =>get_file_value(place.place_video,"duration",false),
-                                   :description => get_file_value(place.place_description,"body",false)
-                                 }
+                       :name => place.name,
+                       :subtitle => place.subtitle,
+                       :slug => place.slug,
+                       :icon => get_file_value(place.place_icon,"file",true),
+                       :image => get_file_value(place.place_image,"file",true),
+                       :audio => get_file_value(place.place_audio,"file",true),
+                       :audio_size => get_file_value(place.place_audio,"file_size",false),
+                       :audio_duration => get_file_value(place.place_audio,"duration",false),
+                       :video => get_file_value(place.place_video,"file",true),
+                       :video_size => get_file_value(place.place_video,"file_size",false),
+                       :video_duration =>get_file_value(place.place_video,"duration",false),
+                       :description => get_file_value(place.place_description,"body",false)
+                       }
           end
         end
         if @map.scenics_count > 0
           @map.scenics.each do |scenic|
             scenics << {:id => scenic.id,
-                                   :name => scenic.name,
-                                   :subtitle => scenic.subtitle,
-                                   :slug => scenic.slug,
-                                   :icon => get_file_value(scenic.scenic_icon,"file",true),
-                                   :image => get_file_value(scenic.scenic_image,"file",true),
-                                   :impression => get_file_value(scenic.scenic_impression,"file",true),
-                                   :impression_size => get_file_value(scenic.scenic_impression,"file_size",false),
-                                   :impression_duration =>get_file_value(scenic.scenic_impression,"duration",false),
-                                   :route => get_file_value(scenic.scenic_route,"file",true),
-                                   :route_size => get_file_value(scenic.scenic_route,"file_size",false),
-                                   :route_duration =>get_file_value(scenic.scenic_route,"duration",false),
-                                   :description => get_file_value(scenic.scenic_description,"body",false)
-                                 }
+                        :name => scenic.name,
+                        :subtitle => scenic.subtitle,
+                        :slug => scenic.slug,
+                        :icon => get_file_value(scenic.scenic_icon,"file",true),
+                        :image => get_file_value(scenic.scenic_image,"file",true),
+                        :impression => get_file_value(scenic.scenic_impression,"file",true),
+                        :impression_size => get_file_value(scenic.scenic_impression,"file_size",false),
+                        :impression_duration =>get_file_value(scenic.scenic_impression,"duration",false),
+                        :route => get_file_value(scenic.scenic_route,"file",true),
+                        :route_size => get_file_value(scenic.scenic_route,"file_size",false),
+                        :route_duration =>get_file_value(scenic.scenic_route,"duration",false),
+                        :description => get_file_value(scenic.scenic_description,"body",false)
+                        }
           end
         end
         if @map.recommends_count > 0
@@ -106,38 +106,38 @@ class Api::V1::MapsController < Api::V1::ApplicationController
                   end
                 end
                 records << { :name =>record.name,
-                                          :cover => get_file_value(record.recommend_record_cover,"file",true),
-                                          :detaileds => detaileds
-                                        }
+                             :cover => get_file_value(record.recommend_record_cover,"file",true),
+                             :detaileds => detaileds
+                             }
               end
             end
             recommends << { :name => recommend.name,
-                                              :slug => recommend.slug,
-                                              :video => get_file_value(recommend.recommend_video,"file",true),
-                                              :video_size => get_file_value(recommend.recommend_video,"file_size",false),
-                                              :video_duration =>get_file_value(recommend.recommend_video,"duration",false),
-                                              :video_cover => get_file_value(recommend.recommend_video,"cover",true),
-                                              :cover => get_file_value(recommend.recommend_cover,"file",true),
-                                              :records => records
-                                            }
+                            :slug => recommend.slug,
+                            :video => get_file_value(recommend.recommend_video,"file",true),
+                            :video_size => get_file_value(recommend.recommend_video,"file_size",false),
+                            :video_duration =>get_file_value(recommend.recommend_video,"duration",false),
+                            :video_cover => get_file_value(recommend.recommend_video,"cover",true),
+                            :cover => get_file_value(recommend.recommend_cover,"file",true),
+                            :records => records
+                            }
         end
       end
         if @map.infos_count > 0
           @map.infos.order_asc.each do |info|
             infos << {  :name => info.name,
-                                   :slug => info.slug,
-                                   :description => get_file_value(info.letter,"body",false)
-                                 }
+                        :slug => info.slug,
+                        :description => get_file_value(info.letter,"body",false)
+                        }
           end
         end
-        result = {  :cover => get_file_value(@map.map_cover,"file",true),
+        result = {   :cover => get_file_value(@map.map_cover,"file",true),
                      :description => get_file_value(@map.map_description,"body",false),
                      :slides => slides,
                      :scenics => scenics,
                      :places => places,
                      :recommends => recommends,
                      :infos => infos
-                              }
+                     }
 
     end
         render :json => result
