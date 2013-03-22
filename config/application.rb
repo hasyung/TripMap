@@ -1,5 +1,4 @@
 require File.expand_path('../boot', __FILE__)
-
 require "active_record/railtie"
 require "action_controller/railtie"
 require "action_mailer/railtie"
@@ -27,6 +26,8 @@ module TripMap
     config.active_support.escape_html_entities_in_json = true
 
     config.active_record.whitelist_attributes = true
+    
+    config.active_record.observers = :trip_map_observer
 
     config.assets.enabled = true
 
