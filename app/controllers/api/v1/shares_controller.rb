@@ -7,7 +7,7 @@ class Api::V1::SharesController < Api::V1::ApplicationController
 		index = params[:page_index].to_i
 		first = (index-1)*size
 		last = index*size - 1
-		@shares = @map.shares
+		@shares = @map.shares.publish
 		if !@shares.blank?
 			if (@shares.count - 1) > first
 				if (@shares.count - 1) >= last
@@ -28,7 +28,7 @@ class Api::V1::SharesController < Api::V1::ApplicationController
 
 	def nearby
 		result = []
-		@shares = Share.all.reject {|lambda| lambda.map_id == params[:map_id].to_i}
+		@shares = Share.publish.reject {|lambda| lambda.map_id == params[:map_id].to_i}
 		size = params[:page_size].to_i
 		index = params[:page_index].to_i
 		first = (index-1)*size

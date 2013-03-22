@@ -18,6 +18,7 @@ class Share < ActiveRecord::Base
   
 	# Scopes
   scope :created_desc, order("created_at DESC")
+  scope :publish, where(:state_cd => Share.publish)
 
   # Validates
   with_options :presence=> true do |column|
