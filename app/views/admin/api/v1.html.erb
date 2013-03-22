@@ -28,7 +28,7 @@
     <small class="desc">获取所有的地图信息，结果为JSON数据格式。</small>
     <dl>
       <dt>URL</dt>
-      <dd><pre class="docs-example"><%= v1_maps_url(:format => :json) %></pre></dd>
+      <dd><pre class="docs-example"><%= api_v1_maps_url(:format => :json) %></pre></dd>
       <dt>HTTP请求方式</dt>
       <dd>GET<dd>
       <dt>支持格式</dt>
@@ -47,9 +47,9 @@
     <small class="desc">验证地图序列号可用性并获取地图详细信息，结果为JSON数据格式。</small>
     <dl>
       <dt>URL</dt>
-      <dd><pre class="docs-example"><%= show_v1_maps_url %></pre></dd>
+      <dd><pre class="docs-example"><%= show_api_v1_maps_url %></pre></dd>
       <dt>HTTP请求方式</dt>
-      <dd>POST<dd>
+      <dd>GET<dd>
       <dt>支持格式</dt>
       <dd>json<dd>
       <dt>是否需要登录</dt>
@@ -88,20 +88,11 @@
               <td>必选参数</td>
               <td>用户设备id</td>
             </tr>
-            <tr>
-              <td>4</td>
-              <td>map_type</td>
-              <td>字符串</td>
-              <td>可选参数</td>
-              <td>如为试用版,则值为<b>free</b>。</td>
-            </tr>
           </tbody>
         </table>
       <dd>
-      <dt>参数分组1</dt>
+      <dt>参数分组</dt>
       <dd>［map_id, serial, device_id］<dd>
-      <dt>参数分组2</dt>
-      <dd>［map_id, map_type=“free”］<dd>
     </dl>
   </div>
   
@@ -110,9 +101,9 @@
     <small class="desc">获取当前分享，结果为JSON数据格式。</small>
     <dl>
       <dt>URL</dt>
-      <dd><pre class="docs-example"><%= shares_current_v1_maps_url(:format => :json) %></pre></dd>
+      <dd><pre class="docs-example"><%= shares_current_api_v1_maps_url(:format => :json) %></pre></dd>
       <dt>HTTP请求方式</dt>
-      <dd>POST<dd>
+      <dd>GET<dd>
       <dt>支持格式</dt>
       <dd>json<dd>
       <dt>是否需要登录</dt>
@@ -162,9 +153,9 @@
     <small class="desc">获取周边分享，结果为JSON数据格式。</small>
     <dl>
       <dt>URL</dt>
-      <dd><pre class="docs-example"><%= shares_nearby_v1_maps_url(:format => :json) %></pre></dd>
+      <dd><pre class="docs-example"><%= shares_nearby_api_v1_maps_url(:format => :json) %></pre></dd>
       <dt>HTTP请求方式</dt>
-      <dd>POST<dd>
+      <dd>GET<dd>
       <dt>支持格式</dt>
       <dd>json<dd>
       <dt>是否需要登录</dt>
@@ -214,7 +205,7 @@
     <small class="desc">上传我的分享，结果为JSON数据格式。</small>
     <dl>
       <dt>URL</dt>
-      <dd><pre class="docs-example"><%= shares_create_v1_maps_url(:format => :json) %></pre></dd>
+      <dd><pre class="docs-example"><%= shares_create_api_v1_maps_url(:format => :json) %></pre></dd>
       <dt>HTTP请求方式</dt>
       <dd>POST<dd>
       <dt>支持格式</dt>
@@ -280,9 +271,9 @@
     <small class="desc">获取当前地图所在城市天气</small>
     <dl>
       <dt>URL</dt>
-      <dd><pre class="docs-example"><%= v1_map_weathers_url(:map_id, :format => :json) %></pre></dd>
+      <dd><pre class="docs-example"><%= api_v1_map_weathers_url(:map_id, :format => :json) %></pre></dd>
       <dt>HTTP请求方式</dt>
-      <dd>POST<dd>
+      <dd>GET<dd>
       <dt>支持格式</dt>
       <dd>json<dd>
       <dt>是否需要登录</dt>
@@ -311,7 +302,7 @@
         </table>
       <dd>
       <dt>例子</dt>
-      <dd><%= v1_map_weathers_url(:map_id => 1, :format => :json) %><dd>
+      <dd><%= api_v1_map_weathers_url(:map_id => 1, :format => :json) %><dd>
     </dl>
   </div>
   
@@ -320,7 +311,7 @@
     <small class="desc">上传当前地图使用日志</small>
     <dl>
       <dt>URL</dt>
-      <dd><pre class="docs-example"><%= logs_v1_maps_url(:format => :json) %></pre></dd>
+      <dd><pre class="docs-example"><%= logs_api_v1_maps_url(:format => :json) %></pre></dd>
       <dt>HTTP请求方式</dt>
       <dd>POST<dd>
       <dt>支持格式</dt>
@@ -386,7 +377,7 @@
     <small class="desc">检测地图数据包是否更新</small>
     <dl>
       <dt>URL</dt>
-      <dd><pre class="docs-example"><%= version_v1_map_url(:map_id, :format => :json) %></pre></dd>
+      <dd><pre class="docs-example"><%= version_api_v1_map_url(:map_id, :format => :json) %></pre></dd>
       <dt>HTTP请求方式</dt>
       <dd>GET<dd>
       <dt>支持格式</dt>
@@ -417,7 +408,7 @@
         </table>
       <dd>
       <dt>例子</dt>
-      <dd><%= version_v1_map_url(:id => 1, :format => :json) %><dd>
+      <dd><%= version_api_v1_map_url(:id => 1, :format => :json) %><dd>
     </dl>
   </div>
   
