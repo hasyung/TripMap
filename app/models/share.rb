@@ -22,6 +22,7 @@ class Share < ActiveRecord::Base
   # Validates
   with_options :presence=> true do |column|
     column.validates :map_id
+    column.validates :device_id
     column.validates :title, :length => { :within => 1..20,    :message => I18n.t("errors.type.name") }
     column.validates :nickname, :length => { :within => 0..30 }
   end

@@ -292,6 +292,7 @@
       share:
         title: "标题"
         nickname: "昵称"
+        device_id: "设备ID"
         map: "地图"
         state_cd: "审核状态"
         created_at: "创建时间"
