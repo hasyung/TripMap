@@ -130,8 +130,8 @@ class Api::V1::MapsController < Api::V1::ApplicationController
                                  }
           end
         end
-        result = {  :cover => get_file_value(map.map_cover,"file",true),
-                     :description => get_file_value(map.map_description,"body",false),
+        result = {  :cover => get_file_value(@map.map_cover,"file",true),
+                     :description => get_file_value(@map.map_description,"body",false),
                      :slides => slides,
                      :scenics => scenics,
                      :places => places,
