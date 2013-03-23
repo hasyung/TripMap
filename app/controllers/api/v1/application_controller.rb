@@ -1,4 +1,4 @@
-class V1::ApplicationController < ActionController::Base
+class Api::V1::ApplicationController < ActionController::Base
 	
   	before_filter :set_default_response_format
   	skip_before_filter :verify_authenticity_token

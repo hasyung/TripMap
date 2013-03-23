@@ -1,4 +1,4 @@
-class V1::WeathersController < V1::ApplicationController
+class Api::V1::WeathersController < Api::V1::ApplicationController
 
 	def index
 		@map = Map.find params[:map_id]
