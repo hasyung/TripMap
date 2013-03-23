@@ -1,29 +1,12 @@
 <div class="toolbar">
   <div class="btn-toolbar">
-    <div class="btn-group">
-      <%= simple_form_for [:admin, @serial], 
-                           :html => { class: 'form-horizontal' },
-                            url: search_admin_serialnumbers_path do |f| %>
-        <label><%= Map.model_name.human %></label>
-        <%= f.select :map_id, 
-                      Map.all.map{|m| [m.name, m.id]}, 
-                      prompt: t("helpers.links.select") %>
-
-        <label><%= MapSerialNumber.human_attribute_name(:type_cd) %></label>
-        <%=   select :map_serial_number,
-                     :type_cd, 
-                      MapSerialNumber.types_for_select(:value),
-                      prompt: t("helpers.links.select") %>
-        <label><%= MapSerialNumber.human_attribute_name(:printed_cd) %></label>
-        <%=   select :map_serial_number,
-                     :printed_cd,
-                      MapSerialNumber.printeds_for_select(:value),
-                      prompt: t("helpers.links.select") %>
-        <label><%= MapSerialNumber.human_attribute_name(:created_at) %></label>
-        <input id="date_start" name="date" type="text">
-
-        <%= f.button :submit, :value => t("helpers.links.search"), :class => 'btn-success' %>
-      <% end -%>
-      </div>
+    <div class="btn-group">   
+    <% if %w(index search).include?(action_name) %>   
+        <%= link_to t("links.serialnumbers.export"), export_admin_serialnumbers_path, :class => 'btn btn-success' %>
+    <% end -%>
+    <% if %w(export).include?(action_name) %>   
+        <%= link_to t("links.serialnumbers.index"), admin_serialnumbers_path, :class => 'btn btn-success' %>
+    <% end -%>
+    </div>
   </div>
 </div>

@@ -20,9 +20,10 @@ TripMap::Application.routes.draw do
     resources :places
     resources :scenics
     resources :serialnumbers, :except => :show do
-      post 'search', on: :collection
+      get  'search',    on: :collection
+      get  'export',    on: :collection
+      post 'ex_search', on: :collection
     end
-    get 'serialnumbers/export' => "serialnumbers#export", :as => "serialnumbers_export"
     
     resources :recommends do
       resources :recommend_records,
