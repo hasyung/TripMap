@@ -2,7 +2,7 @@ class Share < ActiveRecord::Base
 	attr_accessible :map, :map_id, :nickname, :title, :state_cd, :share_text_attributes, :share_image_attributes
 
 	belongs_to :map, :counter_cache => true
-
+    
 	# Associations
 	with_options :dependent => :destroy do |assoc|
 	  assoc.has_one :share_image, :as => :imageable, :class_name => 'Image', :conditions => { :image_type => Image.share_image }
@@ -25,5 +25,5 @@ class Share < ActiveRecord::Base
     column.validates :title, :length => { :within => 1..20,    :message => I18n.t("errors.type.name") }
     column.validates :nickname, :length => { :within => 0..30 }
   end
-  
+
 end

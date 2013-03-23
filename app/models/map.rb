@@ -1,7 +1,7 @@
 class Map < ActiveRecord::Base
 
   #White list
-  attr_accessible :province, :province_id, :name, :slug,
+  attr_accessible :province, :province_id, :name, :slug, :version,
                   :map_description_attributes, :map_cover_attributes, :map_plat_attributes
 
   # Associations
@@ -11,6 +11,7 @@ class Map < ActiveRecord::Base
     assoc.has_many :recommends, :autosave => true
     assoc.has_many :shares, :autosave => true
     assoc.has_many :infos, :autosave => true
+    assoc.has_many :logs
   end
   has_many :map_serial_numbers
 

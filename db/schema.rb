@@ -65,12 +65,22 @@ ActiveRecord::Schema.define(:version => 20130321070011) do
     t.datetime "updated_at",                              :null => false
   end
 
+  create_table "logs", :force => true do |t|
+    t.integer  "map_id",                                       :null => false
+    t.integer  "activate_map_id",                              :null => false
+    t.integer  "device_type_cd",                :default => 0
+    t.string   "slug",            :limit => 20,                :null => false
+    t.integer  "message_cd",                    :default => 0
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
+  end
+
   create_table "map_serial_numbers", :force => true do |t|
     t.integer  "map_id",                    :null => false
     t.string   "code",                      :null => false
     t.integer  "type_cd",    :default => 0
     t.integer  "used",       :default => 0
-    t.integer  "printed",    :default => 0
+    t.integer  "printed_cd", :default => 0
     t.integer  "count",      :default => 0
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
@@ -82,6 +92,7 @@ ActiveRecord::Schema.define(:version => 20130321070011) do
     t.integer  "province_id",                                   :null => false
     t.string   "name",             :limit => 20,                :null => false
     t.string   "slug",             :limit => 20
+    t.string   "version",          :limit => 30
     t.integer  "scenics_count",                  :default => 0
     t.integer  "places_count",                   :default => 0
     t.integer  "recommends_count",               :default => 0
