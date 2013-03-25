@@ -11,9 +11,9 @@ class Place < ActiveRecord::Base
   end
   
   with_options :as => :imageable, :class_name => "Image", :dependent => :destroy do|assoc|
-    assoc.has_one :place_icon,              :conditions => { :image_type => Image.place_icon }
-    assoc.has_one :place_description_image, :conditions => { :image_type => Image.place_description_image }
-    assoc.has_one :place_image,             :conditions => { :image_type => Image.place_image }
+    #assoc.has_one :place_icon,              :conditions => { :image_type => Image.place_icon }
+    #assoc.has_one :place_description_image, :conditions => { :image_type => Image.place_description_image }
+    #assoc.has_one :place_image,             :conditions => { :image_type => Image.place_image }
   end
   
 
@@ -30,9 +30,9 @@ class Place < ActiveRecord::Base
   end
 
   # NestedAttributes
-  accepts_nested_attributes_for :place_icon,              reject_if: lambda { |i| i[:file].blank? }, allow_destroy: true
-  accepts_nested_attributes_for :place_description_image, reject_if: lambda { |d| d[:file].blank? }, allow_destroy: true
-  accepts_nested_attributes_for :place_image,             reject_if: lambda { |img| img[:file].blank? }, allow_destroy: true
+  #accepts_nested_attributes_for :place_icon,              reject_if: lambda { |i| i[:file].blank? }, allow_destroy: true
+  #accepts_nested_attributes_for :place_description_image, reject_if: lambda { |d| d[:file].blank? }, allow_destroy: true
+  #accepts_nested_attributes_for :place_image,             reject_if: lambda { |img| img[:file].blank? }, allow_destroy: true
   accepts_nested_attributes_for :place_audio,             reject_if: lambda { |pa| pa[:file].blank? }, allow_destroy: true
   accepts_nested_attributes_for :place_video,             reject_if: lambda { |pv| pv[:file].blank? }, allow_destroy: true
   accepts_nested_attributes_for :place_description,       reject_if: lambda { |pd| pd[:body].blank? }, allow_destroy: true

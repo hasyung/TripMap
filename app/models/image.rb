@@ -19,13 +19,13 @@ class Image < ActiveRecord::Base
     :map_plat                   => 1,
     :map_slides                 => 2,
     
-    :scenic_icon                => 3,
-    :scenic_description_image   => 4,
-    :scenic_image               => 5,
+    #:scenic_icon                => 3,
+    #:scenic_description_image   => 4,
+    #:scenic_image               => 5,
     
-    :place_icon                 => 6,
-    :place_description_image    => 7,
-    :place_image                => 8,
+    #:place_icon                 => 6,
+    #:place_description_image    => 7,
+    #:place_image                => 8,
     
     :recommend_cover            => 9,
 
