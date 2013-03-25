@@ -10,7 +10,7 @@
                             url: ex_search_admin_serialnumbers_path do |f| %>
 
     <div class="control-group string required">
-        <label class="string required control-label">
+        <label class="string required control-label"><abbr title="required">*</abbr>
           <%= Map.model_name.human %>
         </label>
         <div class="controls">
@@ -21,7 +21,7 @@
     </div>
 
     <div class="control-group string required">
-        <label class="string required control-label">
+        <label class="string required control-label"><abbr title="required">*</abbr>
           <%= MapSerialNumber.human_attribute_name(:type_cd) %>
         </label>
         <div class="controls">
@@ -33,7 +33,7 @@
     </div>
 
     <div class="control-group string required">
-        <label class="string required control-label">
+        <label class="string required control-label"><abbr title="required">*</abbr>
           <%= MapSerialNumber.human_attribute_name(:created_at) %>
         </label>
         <div class="controls">
