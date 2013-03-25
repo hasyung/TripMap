@@ -5,7 +5,7 @@ class TripMapObserver < ActiveRecord::Observer
           :audio, :video, :image, :letter                 # Atom.
   
   NAV_PATH_OPTIONS = {
-    #class name        path to map
+    #model name        path to map
     :Scenic             => "map",
     :Place              => "map",
     :Recommend          => "map",
@@ -15,7 +15,7 @@ class TripMapObserver < ActiveRecord::Observer
 
     :ImageList          => "recommend_detailed.recommend_record.recommend.map",
   }
-
+  
   POLIABLE_NAME_OPTIONS = {
     :Video              => "videoable",
     :Audio              => "audioable",
@@ -24,16 +24,17 @@ class TripMapObserver < ActiveRecord::Observer
   }
   
   def after_save( model )
-    update_map_version(get_map(model))
+    update_map_version(model)
   end
 
   def after_destroy( model )
-    
+    update_map_version(model)
   end
 
   private
 
-  def update_map_version ( map_instance )
+  def update_map_version ( model )
+    map_instance = get_map(model)
     return nil if map_instance.nil?
     
     map_instance.version = Time.now.to_i
