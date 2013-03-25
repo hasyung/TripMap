@@ -3,7 +3,8 @@ class TripMapObserver < ActiveRecord::Observer
           :audio, :video, :image, :image_list, :letter
           
   def after_create( model )
-
+    which_map = get_map_instance(model)
+    update_map_version(which_map)
   end
 
   def after_update( model )
@@ -12,7 +13,8 @@ class TripMapObserver < ActiveRecord::Observer
   end
 
   def after_destroy( model )
-
+    which_map = get_map_instance(model)
+    update_map_version(which_map)
   end
 
   private
