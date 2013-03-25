@@ -24,7 +24,6 @@ class Admin::SerialnumbersController < Admin::ApplicationController
       s.save
     end
     map = Map.find params[:map_serial_number][:map_id]
-    binding.pry
     serial_type =  I18n.t("enums.mapserialnumber.type.#{MapSerialNumber.types.key(params[:map_serial_number][:type_cd].to_i)}")
     send_data @content, :type => 'text', :disposition => "attachment; filename=#{map.name}_#{serial_type}_#{Time.now}.txt"
 
