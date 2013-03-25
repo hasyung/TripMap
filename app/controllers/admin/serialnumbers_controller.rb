@@ -17,15 +17,19 @@ class Admin::SerialnumbersController < Admin::ApplicationController
                              params[:date]
 
     @serials = MapSerialNumber.where( conditions.compile ).all
-    @content =""
-    @serials.each do |s|
-      @content += "#{s.code}\n"
-      s.printed_cd = 1
-      s.save
+    if @serials.count>0
+      @content =""
+      @serials.each do |s|
+        @content += "#{s.code}\n"
+        s.printed_cd = 1
+        s.save
+      end
+      map = Map.find params[:map_serial_number][:map_id]
+      serial_type =  I18n.t("enums.mapserialnumber.type.#{MapSerialNumber.types.key(params[:map_serial_number][:type_cd].to_i)}")
+      send_data @content, :type => 'text', :disposition => "attachment; filename=#{map.name}_#{serial_type}_#{Time.now}.txt"
+    else
+      redirect_to export_admin_serialnumbers_path, notice: t('messages.serialnumbers.error')
     end
-    map = Map.find params[:map_serial_number][:map_id]
-    serial_type =  I18n.t("enums.mapserialnumber.type.#{MapSerialNumber.types.key(params[:map_serial_number][:type_cd].to_i)}")
-    send_data @content, :type => 'text', :disposition => "attachment; filename=#{map.name}_#{serial_type}_#{Time.now}.txt"
 
   end
 
