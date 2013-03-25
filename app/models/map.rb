@@ -168,10 +168,10 @@ class Map < ActiveRecord::Base
                 image_lists << {images: imgs,  order: d.order}
               end
             end
-            content.merge!({images: images}) if images.present?
-            content.merge!({videos: videos}) if videos.present?
-            content.merge!({audios: audios}) if audios.present?
-            content.merge!({texts: texts}) if texts.present?
+            content.merge!({images: images}) 
+            content.merge!({videos: videos})
+            content.merge!({audios: audios})
+            content.merge!({texts: texts})
             content.merge!({image_lists: image_lists}) if image_lists.present?
             detaileds << content
           end
