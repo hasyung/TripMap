@@ -45,3 +45,9 @@
       </table>
   </div>
 </div>
+
+
+<div class="table-footer clearfix">
+  <div class="paginates-info"><%= page_entries_info @records %></div>
+  <%= paginate @records, :theme => "admin" %>
+</div>
