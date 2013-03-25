@@ -1,0 +1,42 @@
+<%- model_class = RecommendDetailed -%>
+<%= render 'base' %>
+<div class="box">
+  <div class="box-title">
+    <span class="icon"><i class="icon-th"></i></span>
+    <h5><%= t('links.recommend_detaileds.index') %></h5>
+  </div>
+  <div class="box-content">
+    <table class="table table-bordered table-striped with-check">
+      <thead>
+        <tr>
+          <th>
+            <input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" />
+          </th>
+          <th><%= model_class.human_attribute_name(:name) %></th>
+          <th><%= model_class.human_attribute_name(:order) %></th>
+          <th class="action"><%= t('links.commons.action') %></th>
+      </thead>
+        <tbody>
+          <% if !@detaileds.blank? %>
+          <% @detaileds.each do |d| %>
+            <tr>
+              <td><%= check_box_tag "province_ids[]", d.id, false, id: "province_#{d.id}" %></td>
+              <td><%= link_to d.name, 
+                              admin_recommend_record_detailed_path(
+                                    params[:recommend_id], d.recommend_record_id, d) %>
+              <td><%= d.order %></td>
+              <td class="action">
+                <%= link_to raw("<i class=\"icon-edit\"></i>"), 
+                    edit_admin_recommend_record_detailed_path(params[:recommend_id], d.recommend_record_id, d.id) %>
+                <%= link_to raw("<i class=\"icon-trash\"></i>"), 
+                    admin_recommend_record_detailed_path(params[:recommend_id], d.recommend_record_id, d.id), 
+                    method: :delete, 
+                    data: { confirm: t('links.commons.confirm')} %>
+              </td>
+            </tr>
+          <% end %>
+          <% end %>
+          </tbody>
+        </table>
+  </div>
+</div>

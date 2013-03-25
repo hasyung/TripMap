@@ -1,0 +1,18 @@
+<%= simple_form_for @text, 
+                    html: { class: 'form-horizontal' },
+                    url: @text.new_record? ? 
+                         admin_recommend_record_detailed_texts_path(
+                            params[:recommend_id],
+                            params[:record_id],
+                            params[:detailed_id]) :
+                         admin_recommend_record_detailed_text_path(
+                            params[:recommend_id],
+                            params[:record_id],
+                            params[:detailed_id],
+                            @text) do |t| %>
+  <%= t.input :body,  input_html: {class: "span-full" } %>
+  <%= t.input :order %>
+  <div class="form-actions">
+    <%= t.button :submit, :class => 'btn-primary' %>
+  </div>
+<% end %>

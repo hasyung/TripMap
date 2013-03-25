@@ -1,12 +1,12 @@
 class Share < ActiveRecord::Base
-	attr_accessible :map, :map_id, :ip, :title, :state_cd, :share_text_attributes, :share_image_attributes
+	attr_accessible :map, :map_id, :nickname, :title, :state_cd, :share_text_attributes, :share_image_attributes
 
 	belongs_to :map, :counter_cache => true
-
+    
 	# Associations
 	with_options :dependent => :destroy do |assoc|
 	  assoc.has_one :share_image, :as => :imageable, :class_name => 'Image', :conditions => { :image_type => Image.share_image }
-	  assoc.has_one :share_text, :as => :textable, :class_name => 'Text', :conditions => { :text_type => Text.share_text }
+	  assoc.has_one :share_text, :as => :textable, :class_name => 'Letter', :conditions => { :text_type => Letter.share_text }
 	end
 	
 	#SimpleEnum
@@ -18,12 +18,14 @@ class Share < ActiveRecord::Base
   
 	# Scopes
   scope :created_desc, order("created_at DESC")
+  scope :publish, where(:state_cd => Share.publish)
 
   # Validates
-  validates :ip, :length => { :within => 2..15 }, :format => { :with => /([a-z:])+/ }
   with_options :presence=> true do |column|
     column.validates :map_id
+    column.validates :device_id
     column.validates :title, :length => { :within => 1..20,    :message => I18n.t("errors.type.name") }
+    column.validates :nickname, :length => { :within => 0..30 }
   end
-  
+
 end

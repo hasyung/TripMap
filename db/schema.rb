@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130313022824) do
+ActiveRecord::Schema.define(:version => 20130322033633) do
 
   create_table "activate_maps", :force => true do |t|
     t.integer  "map_id",               :null => false
@@ -35,10 +35,11 @@ ActiveRecord::Schema.define(:version => 20130313022824) do
   end
 
   create_table "image_lists", :force => true do |t|
-    t.integer  "recommend_record_id", :null => false
-    t.string   "name",                :null => false
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.integer  "recommend_detailed_id",                :null => false
+    t.string   "name",                                 :null => false
+    t.integer  "order",                 :default => 0
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
   end
 
   create_table "images", :force => true do |t|
@@ -50,18 +51,37 @@ ActiveRecord::Schema.define(:version => 20130313022824) do
     t.integer  "order",          :default => 0
     t.integer  "height",         :default => 0
     t.integer  "width",          :default => 0
-    t.integer  "group_id",       :default => 0
-    t.integer  "group_order",    :default => 0
     t.integer  "image_type",     :default => 0
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
   end
 
+  create_table "infos", :force => true do |t|
+    t.integer  "map_id",                                  :null => false
+    t.string   "name",       :limit => 20,                :null => false
+    t.string   "slug",       :limit => 20,                :null => false
+    t.integer  "order",                    :default => 0
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
+  end
+
+  create_table "logs", :force => true do |t|
+    t.integer  "map_id",                                       :null => false
+    t.integer  "activate_map_id",                              :null => false
+    t.integer  "device_type_cd",                :default => 0
+    t.string   "slug",            :limit => 20,                :null => false
+    t.integer  "message_cd",                    :default => 0
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
+  end
+
   create_table "map_serial_numbers", :force => true do |t|
     t.integer  "map_id",                    :null => false
     t.string   "code",                      :null => false
-    t.integer  "type",       :default => 0
+    t.integer  "type_cd",    :default => 0
     t.integer  "used",       :default => 0
+    t.integer  "printed_cd", :default => 0
+    t.integer  "count",      :default => 0
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
   end
@@ -72,12 +92,14 @@ ActiveRecord::Schema.define(:version => 20130313022824) do
     t.integer  "province_id",                                   :null => false
     t.string   "name",             :limit => 20,                :null => false
     t.string   "slug",             :limit => 20
+    t.string   "version",          :limit => 30
     t.integer  "scenics_count",                  :default => 0
     t.integer  "places_count",                   :default => 0
     t.integer  "recommends_count",               :default => 0
     t.datetime "created_at",                                    :null => false
     t.datetime "updated_at",                                    :null => false
     t.integer  "shares_count",                   :default => 0
+    t.integer  "infos_count",                    :default => 0
   end
 
   add_index "maps", ["name"], :name => "index_maps_on_name", :unique => true
@@ -87,6 +109,7 @@ ActiveRecord::Schema.define(:version => 20130313022824) do
     t.integer  "map_id",                   :null => false
     t.string   "name",       :limit => 20, :null => false
     t.string   "slug",       :limit => 20, :null => false
+    t.string   "subtitle",   :limit => 30
     t.datetime "created_at",               :null => false
     t.datetime "updated_at",               :null => false
   end
@@ -105,12 +128,21 @@ ActiveRecord::Schema.define(:version => 20130313022824) do
   add_index "provinces", ["name"], :name => "index_provinces_on_name", :unique => true
   add_index "provinces", ["slug"], :name => "index_provinces_on_slug", :unique => true
 
+  create_table "recommend_detaileds", :force => true do |t|
+    t.integer  "recommend_record_id"
+    t.string   "name"
+    t.integer  "order",               :default => 0
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+  end
+
   create_table "recommend_records", :force => true do |t|
-    t.integer  "recommend_id",                :null => false
-    t.string   "name",                        :null => false
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
-    t.integer  "order",        :default => 0
+    t.integer  "recommend_id",                             :null => false
+    t.string   "name",                                     :null => false
+    t.integer  "order",                     :default => 0
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+    t.integer  "recommend_detaileds_count", :default => 0
   end
 
   create_table "recommends", :force => true do |t|
@@ -129,6 +161,7 @@ ActiveRecord::Schema.define(:version => 20130313022824) do
     t.integer  "map_id",                   :null => false
     t.string   "name",       :limit => 20, :null => false
     t.string   "slug",       :limit => 20, :null => false
+    t.string   "subtitle",   :limit => 30
     t.datetime "created_at",               :null => false
     t.datetime "updated_at",               :null => false
   end
@@ -138,7 +171,8 @@ ActiveRecord::Schema.define(:version => 20130313022824) do
 
   create_table "shares", :force => true do |t|
     t.integer  "map_id",                                  :null => false
-    t.string   "ip",         :limit => 15
+    t.string   "nickname",   :limit => 30
+    t.string   "device_id",                               :null => false
     t.string   "title",      :limit => 20,                :null => false
     t.integer  "state_cd",                 :default => 0
     t.datetime "created_at",                              :null => false
@@ -154,6 +188,24 @@ ActiveRecord::Schema.define(:version => 20130313022824) do
     t.datetime "created_at",                   :null => false
     t.datetime "updated_at",                   :null => false
   end
+
+  create_table "users", :force => true do |t|
+    t.string   "email",                  :default => "", :null => false
+    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+  end
+
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
   create_table "videos", :force => true do |t|
     t.integer  "videoable_id"

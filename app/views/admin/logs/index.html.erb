@@ -1,0 +1,51 @@
+<%- model_class = Log -%>
+<%= render "base" %>
+<div class="box">
+  <div class="box-title">
+    <span class="icon"><i class="icon-th"></i></span>
+    <h5><%= t('links.logs.index') %></h5>
+  </div>
+  <div class="box-content">
+    <%= simple_form_for Map.new, :url => select_admin_logs_path, html: {id: "shares"} do |f| %>
+      <%= f.input :name, :collection => Map.all, input_html: {onchange: "submit()"}, :hint => false, required: false, :prompt => t("helpers.links.select") %>
+    <% end %>
+    <table class="table table-bordered table-striped with-check">
+      <thead>
+        <tr>
+          <th><input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" /></th>
+          <th><%= model_class.human_attribute_name(:slug) %></th>
+          <th><%= model_class.human_attribute_name(:map) %></th>
+          <th><%= model_class.human_attribute_name(:activate_map) %></th>
+          <th><%= model_class.human_attribute_name(:message_cd) %></th>
+          <th><%= model_class.human_attribute_name(:created_at) %></th>
+        </tr>
+      </thead>
+      </tbody>
+        <% @logs.each do |log| %>
+          <tr>
+            <td><%= check_box_tag "log_ids[]", log.id, false, :id => "log_#{log.id}" %></td>
+            <td><%= log.slug %></td>
+            <td><%= log.map.name %></td>
+            <td><%= log.activate_map.device_id %></td>
+            <td><%= t("enums.log.messages.#{model_class.messages.key(log.message_cd)}") %></td>
+            <td><%= l log.created_at.to_date, :format => :long %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="table-footer clearfix">
+  <div class="paginates-info"><%= page_entries_info @logs %></div>
+  <%= paginate @logs, :theme => "admin" %>
+</div>
+
+<%= content_for :scripts do -%>
+  <script type="text/javascript">
+    function submit() 
+    { 
+      $("form").submit();
+    }
+  </script>
+<% end -%>

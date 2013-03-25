@@ -1,5 +1,6 @@
 /*
  *= require admin/bootstrap_and_overrides
+ *= require admin/daterangepicker
  *= require jquery/uniform.default
  *= require_self
  */
@@ -218,3 +219,5 @@ text-align:left;
 #shares .controls {
   margin-left:40px;
 }
+
+.backinfo{ float:right }

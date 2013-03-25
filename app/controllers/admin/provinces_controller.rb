@@ -1,6 +1,6 @@
 class Admin::ProvincesController < Admin::ApplicationController
   def index
-    @provinces = Province.page(params[:page]).per(10)
+    @provinces = Province.page(params[:page]).per(Setting.page_size).created_desc
     add_breadcrumb :index
   end
 

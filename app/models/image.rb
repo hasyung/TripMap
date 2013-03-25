@@ -1,7 +1,7 @@
 class Image < ActiveRecord::Base
   
   # White list
-  attr_accessible  :file, :file_size, :order, :group_id, :group_order
+  attr_accessible  :file, :file_size, :order
   
   # Associations
   belongs_to :imageable, :polymorphic => true

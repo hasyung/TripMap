@@ -1,0 +1,18 @@
+<%= simple_form_for @imagelist, 
+                    html: { class: 'form-horizontal' },
+                    url: @imagelist.new_record? ? 
+                         admin_recommend_record_detailed_imagelists_path(
+                            params[:recommend_id],
+                            params[:record_id],
+                            params[:detailed_id]) :
+                         admin_recommend_record_detailed_imagelist_path(
+                            params[:recommend_id],
+                            params[:record_id],
+                            params[:detailed_id],
+                            @imagelist) do |t| %>
+  <%= t.input :name %>
+  <%= t.input :order %>
+  <div class="form-actions">
+    <%= t.button :submit, :class => 'btn-primary' %>
+  </div>
+<% end %>
