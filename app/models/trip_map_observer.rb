@@ -64,7 +64,7 @@ class TripMapObserver < ActiveRecord::Observer
   
   def get_map_by_path( ploy_object, path )
     return nil if path.nil?
-    
+
     map = ploy_object
     navs = path.split(".")
     navs.each{|curr_path| map = map.send curr_path }
