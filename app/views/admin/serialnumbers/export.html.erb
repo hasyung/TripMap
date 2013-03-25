@@ -1,0 +1,75 @@
+<%= render 'base' %>
+<div class="box">
+  <div class="box-title">
+    <span class="icon"><i class="icon-th"></i></span>
+    <h5><%= t('links.serialnumbers.export') %></h5>
+  </div>
+  <div class="box-content">
+    <%= simple_form_for [:admin, @serial], 
+                           :html => { class: 'form-horizontal' },
+                            url: ex_search_admin_serialnumbers_path do |f| %>
+
+    <div class="control-group string required">
+        <label class="string required control-label">
+          <%= Map.model_name.human %>
+        </label>
+        <div class="controls">
+        <%= f.select :map_id, 
+                      Map.all.map{|m| [m.name, m.id]}, 
+                      prompt: t("helpers.links.select") %>
+        </div>
+    </div>
+
+    <div class="control-group string required">
+        <label class="string required control-label">
+          <%= MapSerialNumber.human_attribute_name(:type_cd) %>
+        </label>
+        <div class="controls">
+        <%=   select :map_serial_number,
+                     :type_cd, 
+                      MapSerialNumber.types_for_select(:value),
+                      prompt: t("helpers.links.select") %>
+        </div>
+    </div>
+
+    <div class="control-group string required">
+        <label class="string required control-label">
+          <%= MapSerialNumber.human_attribute_name(:created_at) %>
+        </label>
+        <div class="controls">
+          <input id="date" name="date" type="text">
+        </div>
+    </div>
+
+    <div class="control-group string required">
+        <div class="controls">
+        <%= f.button :submit, :value => t("links.serialnumbers.export"), 
+                     :onclick  => "return valid();",
+                     :class => 'btn-success' %>
+        </div>
+    </div>
+      <% end -%>
+  </div>
+</div>
+
+<%= content_for :scripts do -%>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('input[name="date"]').daterangepicker({
+      format: 'yyyy-MM-dd'
+    });
+  });
+
+  function valid(){
+    var result = false;
+    if ($("#map_serial_number_map_id").find('option:selected').val()=="")
+      alert("请选择地图！");
+    else if ($("#map_serial_number_type_cd").val() == "")
+      alert("请选择类型！")
+    else if ($("#date").val()=="")
+      alert("请选择时间范围！")
+    else result = true;
+    return result;
+  }
+</script>
+<% end -%>

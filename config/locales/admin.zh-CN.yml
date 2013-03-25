@@ -165,7 +165,7 @@
       edit: "修改信息"
     serialnumbers:
       index: "序列号列表"
-      new: "生成序列号"
+      export: "导出序列号"
     commons:
       action: "操作"
       confirm: "你确定删除吗？"
@@ -222,6 +222,15 @@
       error: "操作信息失败！"
 
   activerecord:
+    enums:
+      map_serial_number:
+        types:
+          free: "免费版"
+          ordinary: "普通版"
+          favorite: "收藏版"
+        printeds:
+          yes_print: "已印刷"
+          no_print: "未印刷"
     models:
       place: "景点"
       scenic: "景区"
@@ -310,6 +319,17 @@
       image:
         file: "图片"
         order: "排序"
+      map_serial_number:
+        map: "地图"
+        code: "序列号"
+        type: "序列号类型"
+        types: "序列号类型"
+        type_cd: "序列号类型"
+        used: "已使用次数"
+        printed: "打印"
+        printed_cd: "打印"
+        count: "默认使用次数"
+        created_at: "创建时间"
         
   simple_form:
     labels:
@@ -397,6 +417,7 @@
       login: "登录"
       logout: "退出"
       select: "请选择"
+      search: "查询"
     submit:
       select: "查看"
     page_entries_info:
@@ -423,16 +444,24 @@
       big_video_file: "亲，你上传的文件超过了50MB！"
       duration: "时长格式不对！"
   enums:
-      share:
-        states:
-          draft: "未通过"
-          publish: "通过"
-      log:
-        device_types:
-          iPhone: "iPhone"
-          android: "Android"
-        messages:
-          success: "成功"
-          time_out: "超时"
-          not_found: "没有找到"
-          error: "失败"
+    share:
+      states:
+        draft: "未通过"
+        publish: "通过"
+    mapserialnumber:
+      print:
+        no_print: "未印刷"
+        yes_print: "已印刷"
+      type:
+        free: "免费版"
+        ordinary: "普通版"
+        favorite: "收藏版"
+    log:
+      device_types:
+        iPhone: "iPhone"
+        android: "Android"
+      messages:
+        success: "成功"
+        time_out: "超时"
+        not_found: "没有找到"
+        error: "失败"
