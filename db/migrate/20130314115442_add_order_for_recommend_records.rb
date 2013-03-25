@@ -4,5 +4,6 @@ class AddOrderForRecommendRecords < ActiveRecord::Migration
   end
 
   def down
+    remove_column :recommend_records, :order
   end
 end
