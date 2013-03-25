@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130312111321) do
+ActiveRecord::Schema.define(:version => 20130313022824) do
+
+  create_table "activate_maps", :force => true do |t|
+    t.integer  "map_id",               :null => false
+    t.integer  "map_serial_number_id", :null => false
+    t.string   "device_id",            :null => false
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
 
   create_table "audios", :force => true do |t|
     t.integer  "audioable_id"
@@ -49,6 +57,17 @@ ActiveRecord::Schema.define(:version => 20130312111321) do
     t.datetime "updated_at",                    :null => false
   end
 
+  create_table "map_serial_numbers", :force => true do |t|
+    t.integer  "map_id",                    :null => false
+    t.string   "code",                      :null => false
+    t.integer  "type",       :default => 0
+    t.integer  "used",       :default => 0
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "map_serial_numbers", ["code"], :name => "index_map_serial_numbers_on_code", :unique => true
+
   create_table "maps", :force => true do |t|
     t.integer  "province_id",                                   :null => false
     t.string   "name",             :limit => 20,                :null => false
@@ -61,6 +80,9 @@ ActiveRecord::Schema.define(:version => 20130312111321) do
     t.integer  "shares_count",                   :default => 0
   end
 
+  add_index "maps", ["name"], :name => "index_maps_on_name", :unique => true
+  add_index "maps", ["slug"], :name => "index_maps_on_slug", :unique => true
+
   create_table "places", :force => true do |t|
     t.integer  "map_id",                   :null => false
     t.string   "name",       :limit => 20, :null => false
@@ -69,6 +91,9 @@ ActiveRecord::Schema.define(:version => 20130312111321) do
     t.datetime "updated_at",               :null => false
   end
 
+  add_index "places", ["name"], :name => "index_places_on_name", :unique => true
+  add_index "places", ["slug"], :name => "index_places_on_slug", :unique => true
+
   create_table "provinces", :force => true do |t|
     t.string   "name",       :limit => 20,                :null => false
     t.string   "slug",       :limit => 20,                :null => false
@@ -76,6 +101,9 @@ ActiveRecord::Schema.define(:version => 20130312111321) do
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
   end
+
+  add_index "provinces", ["name"], :name => "index_provinces_on_name", :unique => true
+  add_index "provinces", ["slug"], :name => "index_provinces_on_slug", :unique => true
 
   create_table "recommend_records", :force => true do |t|
     t.integer  "recommend_id",                :null => false
@@ -94,6 +122,9 @@ ActiveRecord::Schema.define(:version => 20130312111321) do
     t.datetime "updated_at",                                           :null => false
   end
 
+  add_index "recommends", ["name"], :name => "index_recommends_on_name", :unique => true
+  add_index "recommends", ["slug"], :name => "index_recommends_on_slug", :unique => true
+
   create_table "scenics", :force => true do |t|
     t.integer  "map_id",                   :null => false
     t.string   "name",       :limit => 20, :null => false
@@ -101,6 +132,9 @@ ActiveRecord::Schema.define(:version => 20130312111321) do
     t.datetime "created_at",               :null => false
     t.datetime "updated_at",               :null => false
   end
+
+  add_index "scenics", ["name"], :name => "index_scenics_on_name", :unique => true
+  add_index "scenics", ["slug"], :name => "index_scenics_on_slug", :unique => true
 
   create_table "shares", :force => true do |t|
     t.integer  "map_id",                                  :null => false

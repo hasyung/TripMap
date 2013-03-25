@@ -6,6 +6,8 @@
       index: "地图"
     provinces:
       index: "省市"
+    places:
+      index: "景点"
     shares:
       index: "分享"
 
@@ -23,8 +25,14 @@
         index: "省市"
         new: "添加省市"
         edit: "修改省市"
+      places:
+        index: "景点"
+        new: "添加景点"
+        edit: "修改景点"
       shares:
         index: "分享"
+        new: "添加分享"
+        edit: "修改分享"
 
   links:
     home:
@@ -39,9 +47,16 @@
       show: "查看省市"
       new: "添加省市"
       edit: "修改省市"
+    places:
+      index: "景点列表"
+      show: "查看景点"
+      new: "添加景点"
+      edit: "修改景点"
     shares:
       index: "分享列表"
       show: "查看分享"
+      new: "添加分享"
+      edit: "修改分享"
     commons:
       action: "操作"
       confirm: "你确定删除吗？"
@@ -53,6 +68,9 @@
     provinces:
       success: "操作省市成功！"
       error: "操作省市失败！"
+    places:
+      success: "操作景点成功！"
+      error: "操作景点失败！"
     shares:
       success: "操作分享成功！"
       error: "操作分享失败！"
@@ -61,10 +79,12 @@
 
   activerecord:
     models:
+      place: "景点"
       province: "省市"
       map: "地图"
       image: "图片"
       text: "文本"
+      share: "分享"
     attributes:
       map:
         province: "省市"
@@ -73,13 +93,22 @@
         scenics_count: "景区数"
         places_count: "景点数"
         recommends_count: "推荐数"
-        created_at: "创建时间"
       map_cover:
         file: "封面"
       province:
         name: "名称"
         slug: "简码"
         maps_count: "地图数"
+      place:
+        name: "名称"
+        slug: "简码"
+        map: "地图"
+      share:
+        title: "标题"
+        ip: "IP地址"
+        map: "地图"
+        state_cd: "审核状态"
+        created_at: "创建时间"
         
   simple_form:
     labels:
@@ -90,16 +119,33 @@
           file: "原图"
         map_description:
           body: "描述"
+      place:
+        place_icon:
+          file: "景点图标"
+        place_image:
+          file: "背景图"
+        place_description_image:
+          file: "景点描述"
+        place_video:
+          file: "视频文件"
+          cover: "封面"
+          duration: "时长"
+          order: "排序"
+        place_audio:
+          file: "音频文件"
+          duration: "时长"
+          order: "排序"
+        place_description:
+          body: "内容"
+      share:
+        share_image:
+          file: "分享图片"
+        share_text:
+          body: "分享内容"
       image:
         file: "文件"
       text:
         body: "内容"
-      share:
-        map: "地图"
-        ip: "IP地址"
-        title: "标题"
-        state_cd: "状态"
-        created_at: "创建时间"
 
   helpers:
     links:
@@ -124,7 +170,14 @@
       previous: "上一页"
       next: "下一页"
       truncate: ""
-
+  errors:
+    type:
+      slug: "简码必须为小写字母！"
+      name: "名字长度不能超过15个汉字！"
+      big_image_file: "亲，你上传的文件超过了5MB！"
+      big_audio_file: "亲，你上传的文件超过了10MB！"
+      big_video_file: "亲，你上传的文件超过了50MB！"
+      duration: "时长格式不对！"
   enums:
       share:
         states:

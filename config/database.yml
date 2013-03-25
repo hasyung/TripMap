@@ -1,0 +1,28 @@
+development:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  username: root
+  password: '123123'
+  database: TripMap_development
+  socket: /tmp/mysql.sock
+
+test:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  username: root
+  password: '123123'
+  database: TripMap_test
+  socket: /tmp/mysql.sock
+  
+
+production:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  username: root
+  password: '123123'
+  database: TripMap_production
+  socket: /tmp/mysql.sock
+  

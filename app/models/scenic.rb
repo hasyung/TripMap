@@ -1,11 +1,12 @@
 class Scenic < ActiveRecord::Base
 
+  # White list
   attr_accessible :map, :map_id, :name, :slug
   
   # Validates
   with_options :presence => true do |column|
     column.validates :name, :length => { :within => 2..15 }
-    column.validates :slug, :format => { :with => /([a-z]|[A-Z])+/ }
+    column.validates :slug, :format => { :with => /([a-z])+/, :message => I18n.t("errors.type.slug") }
   end
   
   with_options :as => :videoable, :class_name => "Video", :dependent => :destroy do |assoc|
@@ -19,7 +20,10 @@ class Scenic < ActiveRecord::Base
     assoc.has_one :scenic_image,              :conditions => { :image_type => Image.scenic_image }
   end
   
-  has_one :scenic_description, :as => :textable, :class_name => "Text", :conditions => { :text_type => Text.scenic_description }
+  has_one :scenic_description, :as => :textable, :class_name => "Text",
+          :conditions => { :text_type => Text.scenic_description },
+          :dependent => :destroy
   
   belongs_to :map, :counter_cache => true
+  
 end

@@ -1,11 +1,14 @@
 TripMap::Application.routes.draw do
 
+  get "places/index"
+
   namespace :admin do
     root :to => 'home#index'
     
     resources :maps, :except => :show
     resources :provinces
-    resources :shares, :only => [:index, :show, :destroy] do
+    resources :places
+    resources :shares do
       get 'publish/:status', :action => :publish, :on => :member, :as => :publish
       post 'select', :on => :collection
     end
