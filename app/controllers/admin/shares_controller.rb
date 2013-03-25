@@ -11,7 +11,6 @@ class Admin::SharesController < Admin::ApplicationController
   
   def create
     @share = Share.new params[:share]
-    binding.pry
     if @share.save
       redirect_to admin_shares_path, :notice => t('messages.shares.success')
     else
@@ -49,6 +48,7 @@ class Admin::SharesController < Admin::ApplicationController
   end
 
   def publish
+    binding.pry
     @share = Share.find params[:id]
     @share.state = params[:status].to_s.to_sym
     if @share.save

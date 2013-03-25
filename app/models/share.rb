@@ -1,5 +1,6 @@
 class Share < ActiveRecord::Base
-	attr_accessible :map, :map_id, :nickname, :title, :state_cd, :share_text_attributes, :share_image_attributes
+	attr_accessible :map, :map_id, :nickname, :title, :state_cd, :device_id,
+	                :share_text_attributes, :share_image_attributes
 
 	belongs_to :map, :counter_cache => true
     
