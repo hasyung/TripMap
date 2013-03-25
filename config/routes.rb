@@ -72,10 +72,10 @@ TripMap::Application.routes.draw do
     resources :infos, :except => :show
     resources :shares do
       get 'publish/:status', :action => :publish, :on => :member, :as => :publish
-      post 'select', :on => :collection
+      match 'select', :on => :collection, :via => [:get, :post]
     end
     resources :logs, :only => :index do
-      post 'select', :on => :collection
+      match 'select', :on => :collection, :via => [:get, :post]
     end
     
     resources :api, :only => [] do
