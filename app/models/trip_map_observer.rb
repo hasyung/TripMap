@@ -45,7 +45,7 @@ class TripMapObserver < ActiveRecord::Observer
   def get_map( model )
     map = nil
     kls_name = model.class.class_name
-    poliable = get_poliable(kls_name)
+    poliable = POLIABLE_NAME_OPTIONS[ kls_name.to_sym ]
     nav_path = nil
     if poliable.nil?
       nav_path = NAV_PATH_OPTIONS[ kls_name.to_sym ]
@@ -68,10 +68,6 @@ class TripMapObserver < ActiveRecord::Observer
     navs.each{|curr_path| map = map.send curr_path }
 
     map
-  end
-
-  def get_poliable( model_kls_name )
-    POLIABLE_NAME_OPTIONS[ model_kls_name.to_sym ]
   end
   
 end

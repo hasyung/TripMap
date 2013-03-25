@@ -55,3 +55,7 @@
     </table>
   </div>
 </div>
+<div class="table-footer clearfix">
+  <div class="paginates-info"><%= page_entries_info @scenics %></div>
+  <%= paginate @scenics, :theme => "admin" %>
+</div>
