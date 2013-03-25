@@ -131,11 +131,11 @@ class Map < ActiveRecord::Base
   end
 
   def get_map_recommend_values recommend
+    records ||= []
     if recommend.recommend_records.present?
-      records ||= []
       recommend.recommend_records.order_asc.each do |record|
+        detaileds ||= []
         if record.recommend_detaileds.present?
-          detaileds ||= []
           record.recommend_detaileds.order_asc.each do |detailed|
             detail ||= []
             detail += detailed.images if detailed.images.present?
@@ -145,7 +145,11 @@ class Map < ActiveRecord::Base
             detail += detailed.image_lists if detailed.image_lists.present?
             detail = detail.sort {|a,b| a[:order] <=> b[:order]}
             content = {:name => detailed.name}
-            images = videos = audios = texts = image_lists = []
+            images ||= []
+            videos ||= []
+            audios ||= []
+            texts ||= []
+            image_lists ||= []
             detail.each do |d|
               case d.class.to_s
               when "Image"
@@ -157,7 +161,7 @@ class Map < ActiveRecord::Base
               when "Letter"
                  texts << {text: d.body, order: d.order}
               when "ImageList"
-                imgs = []
+                imgs ||= []
                 d.images.order_asc.each do |img|
                   imgs << {image: img.file.url}
                 end
