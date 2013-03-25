@@ -19,7 +19,12 @@ TripMap::Application.routes.draw do
     resources :provinces
     resources :places
     resources :scenics
-    resources :serialnumbers
+    resources :serialnumbers, :except => :show do
+      get  'search',    on: :collection
+      get  'export',    on: :collection
+      post 'ex_search', on: :collection
+    end
+    
     resources :recommends do
       resources :recommend_records,
                 path: 'records',:as => "records" do

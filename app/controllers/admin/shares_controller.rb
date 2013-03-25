@@ -11,7 +11,6 @@ class Admin::SharesController < Admin::ApplicationController
   
   def create
     @share = Share.new params[:share]
-    binding.pry
     if @share.save
       redirect_to admin_shares_path, :notice => t('messages.shares.success')
     else
@@ -39,7 +38,7 @@ class Admin::SharesController < Admin::ApplicationController
     @map = Map.find params[:map][:name]
     add_breadcrumb :index
     add_breadcrumb @map.name
-    @shares = @map.shares.page(params[:page]).per(Setting.page_size).created_desc
+    @shares = @map.shares.page(params[:page]).per(1).created_desc
     render :index
   end
 

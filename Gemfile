@@ -27,6 +27,7 @@ gem 'simple_form'
 gem 'friendly_id'
 gem 'devise'
 gem 'httpclient'
+gem "smart_tuple" #sql search
 
 group :test, :development do
   gem 'rspec-rails'

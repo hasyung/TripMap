@@ -1,0 +1,12 @@
+<div class="toolbar">
+  <div class="btn-toolbar">
+    <div class="btn-group">   
+    <% if %w(index search).include?(action_name) %>   
+        <%= link_to t("links.serialnumbers.export"), export_admin_serialnumbers_path, :class => 'btn btn-success' %>
+    <% end -%>
+    <% if %w(export).include?(action_name) %>   
+        <%= link_to t("links.serialnumbers.index"), admin_serialnumbers_path, :class => 'btn btn-success' %>
+    <% end -%>
+    </div>
+  </div>
+</div>

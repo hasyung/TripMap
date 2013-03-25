@@ -13,6 +13,7 @@ class Map < ActiveRecord::Base
     assoc.has_many :infos, :autosave => true
     assoc.has_many :logs
   end
+  has_many :map_serial_numbers
 
   with_options :as => :imageable, :class_name => 'Image', :dependent => :destroy do |assoc|
     assoc.has_one  :map_cover,   :conditions => { :image_type => Image.map_cover   }
