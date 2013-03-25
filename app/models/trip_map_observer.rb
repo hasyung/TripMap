@@ -37,6 +37,7 @@ class TripMapObserver < ActiveRecord::Observer
     map_instance = get_map(model)
     return nil if map_instance.nil?
     
+    Rails.cache.write("map_#{map_instance.id}", map_instance.get_map_values)
     map_instance.version = Time.now.to_i
     map_instance.save
   end
@@ -46,7 +47,6 @@ class TripMapObserver < ActiveRecord::Observer
     kls_name = model.class.class_name
     poliable = POLIABLE_NAME_OPTIONS[ kls_name.to_sym ]
     nav_path = nil
-    
     if poliable.nil?
       nav_path = NAV_PATH_OPTIONS[ kls_name.to_sym ]
       map = get_map_by_path(model, nav_path)

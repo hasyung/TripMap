@@ -32,5 +32,7 @@ module TripMap
     config.assets.enabled = true
 
     config.assets.version = '1.0'
+
+    config.cache_store = :memory_store
   end
 end
