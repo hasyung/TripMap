@@ -17,16 +17,19 @@ class Admin::SerialnumbersController < Admin::ApplicationController
                              params[:date]
 
     @serials = MapSerialNumber.where( conditions.compile ).all
-    @content =""
-    @serials.each do |s|
-      @content += "#{s.code}\n"
-      s.printed_cd = 1
-      s.save
+    if @serials.count>0
+      @content =""
+      @serials.each do |s|
+        @content += "#{s.code}\n"
+        s.printed_cd = 1
+        s.save
+      end
+      map = Map.find params[:map_serial_number][:map_id]
+      serial_type =  I18n.t("enums.mapserialnumber.type.#{MapSerialNumber.types.key(params[:map_serial_number][:type_cd].to_i)}")
+      send_data @content, :type => 'text', :disposition => "attachment; filename=#{map.name}_#{serial_type}_#{Time.now}.txt"
+    else
+      redirect_to export_admin_serialnumbers_path, notice: t('messages.serialnumbers.error')
     end
-    map = Map.find params[:map_serial_number][:map_id]
-    binding.pry
-    serial_type =  I18n.t("enums.mapserialnumber.type.#{MapSerialNumber.types.key(params[:map_serial_number][:type_cd].to_i)}")
-    send_data @content, :type => 'text', :disposition => "attachment; filename=#{map.name}_#{serial_type}_#{Time.now}.txt"
 
   end
 
@@ -60,8 +63,8 @@ class Admin::SerialnumbersController < Admin::ApplicationController
     
     str_date = get_datetime_by_string date
     if !str_date.blank?
-      conditions << ["created_at >= ?", str_date[0]]
-      conditions << ["created_at <= ?", str_date[1]]
+      conditions << ["created_at >= ?", str_date[0].to_time]
+      conditions << ["created_at <= ?", (str_date[1]+" 23:59:59").to_time]
     end
 
     conditions

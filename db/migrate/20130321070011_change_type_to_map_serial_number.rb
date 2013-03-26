@@ -5,5 +5,7 @@ class ChangeTypeToMapSerialNumber < ActiveRecord::Migration
   end
 
   def down
+    rename_column :map_serial_numbers, :type_cd, :type
+    rename_column :map_serial_numbers, :printed_cd, :printed
   end
 end

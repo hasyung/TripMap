@@ -4,5 +4,6 @@ class ChangeIpToShare < ActiveRecord::Migration
   end
 
   def down
+    rename_column :shares, :nickname, :ip
   end
 end

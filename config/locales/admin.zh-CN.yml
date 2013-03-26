@@ -220,6 +220,8 @@
     infos:
       success: "操作信息成功！"
       error: "操作信息失败！"
+    serialnumbers:
+      error: "没有任何数据！"
 
   activerecord:
     enums:
@@ -440,8 +442,8 @@
       slug: "简码必须为小写字母！"
       name: "名字长度不能超过15个汉字！"
       big_image_file: "亲，你上传的文件超过了5MB！"
-      big_audio_file: "亲，你上传的文件超过了10MB！"
-      big_video_file: "亲，你上传的文件超过了50MB！"
+      big_audio_file: "亲，你上传的文件超过了5MB！"
+      big_video_file: "亲，你上传的文件超过了15MB！"
       duration: "时长格式不对！"
   enums:
     share:
