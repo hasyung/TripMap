@@ -63,8 +63,8 @@ class Admin::SerialnumbersController < Admin::ApplicationController
     
     str_date = get_datetime_by_string date
     if !str_date.blank?
-      conditions << ["created_at >= ?", str_date[0]]
-      conditions << ["created_at <= ?", str_date[1]]
+      conditions << ["created_at >= ?", str_date[0].to_time]
+      conditions << ["created_at <= ?", (str_date[1]+" 23:59:59").to_time]
     end
 
     conditions
