@@ -24,3 +24,7 @@ config/database.yml
 public/uploads/*
 
 .idea/
+
+config/initializers/version.rb
+config/thin.yml.default
+config/database.yml.default
