@@ -19,9 +19,9 @@ class Scenic < ActiveRecord::Base
   end
   
   with_options :as => :imageable, :class_name => "Image", :dependent => :destroy do |assoc|
-    #assoc.has_one :scenic_icon,               :conditions => { :image_type => Image.scenic_icon}
-    #assoc.has_one :scenic_description_image,  :conditions => { :image_type => Image.scenic_description_image }
-    #assoc.has_one :scenic_image,              :conditions => { :image_type => Image.scenic_image }
+    assoc.has_one :scenic_icon,               :conditions => { :image_type => Image.scenic_icon}
+    assoc.has_one :scenic_description_image,  :conditions => { :image_type => Image.scenic_description_image }
+    assoc.has_one :scenic_image,              :conditions => { :image_type => Image.scenic_image }
   end
   
   has_one :scenic_description, :as => :textable, :class_name => "Letter",
@@ -33,10 +33,10 @@ class Scenic < ActiveRecord::Base
   #NestedAttributes
   accepts_nested_attributes_for :scenic_impression,    reject_if: lambda { |i| i[:file].blank? }, allow_destroy: true
   accepts_nested_attributes_for :scenic_route,         reject_if: lambda { |r| r[:file].blank? }, allow_destroy: true
-  #accepts_nested_attributes_for :scenic_icon,          reject_if: lambda { |icon| icon[:file].blank? }, allow_destroy: true
-  #accepts_nested_attributes_for :scenic_image,         reject_if: lambda { |image| image[:file].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :scenic_icon,          reject_if: lambda { |icon| icon[:file].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :scenic_image,         reject_if: lambda { |image| image[:file].blank? }, allow_destroy: true
   accepts_nested_attributes_for :scenic_description,   reject_if: lambda { |d| d[:body].blank? }, allow_destroy: true
-  #accepts_nested_attributes_for :scenic_description_image,   reject_if: lambda { |di| di[:file].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :scenic_description_image,   reject_if: lambda { |di| di[:file].blank? }, allow_destroy: true
   
   scope :created_desc, order("`created_at` DESC") 
 end
