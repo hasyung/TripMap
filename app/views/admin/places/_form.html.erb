@@ -1,0 +1,44 @@
+<%= simple_form_for [:admin,@place], html: { class: 'form-horizontal' } do |p| %>
+  <%= p.input :name %>
+  <%= p.input :slug %>
+  <%= p.input :subtitle %>
+  <%= p.association :map, collection: Map.all, prompt: t("helpers.links.select", :model_name => Map.model_name.human) %>
+  
+
+  <%= p.fields_for :place_audio, @place.place_audio ||= @place.build_place_audio do |pa|  %>  
+    <%= pa.input :file, :as => :file %>
+    <%= pa.input :duration %>
+    <%= pa.input :order %>
+     <% if @place.place_audio && @place.place_audio.file.present? %>
+      <div class="control-group">
+        <div class="controls">
+          <%= audio_tag(@place.place_video.file, :autoplay => false, :controls => true) %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+
+  <%= p.fields_for :place_video, @place.place_video ||= @place.build_place_video do |pv|  %>  
+    <%= pv.input :file,  :as => :file %>
+    <%= pv.input :cover, :as => :file %>
+    <%= pv.input :duration %>
+    <%= pv.input :order %>
+
+    <% if @place.place_video && @place.place_video.file.present? %>
+      <div class="control-group">
+        <div class="controls">
+          <%= video_tag(@place.place_video.file, :controls => true, :autobuffer => true, :width => 400, :height => 240, :poster => @place.place_video.cover ) %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+
+  <%= p.fields_for :place_description, 
+                   @place.place_description ||= @place.build_place_description do |pd|  %>  
+    <%= pd.input :body, :as => :text, input_html: { :class => "span-full"} %>
+  <% end %>
+  
+  <div class="form-actions">
+    <%= p.button :submit, :class => 'btn-primary' %>
+  </div>
+<% end %>

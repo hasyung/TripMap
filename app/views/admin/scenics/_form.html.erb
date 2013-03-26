@@ -1,0 +1,47 @@
+<%= simple_form_for [:admin, @scenic], html: { class: 'form-horizontal'} do |s| %>
+  <%= s.input :name %>
+  <%= s.input :slug %>
+  <%= s.input :subtitle %>
+  <%= s.association :map, collection: Map.all, 
+                          prompt: t("helpers.links.select", 
+                          :model_name => Map.model_name.human) %>
+
+  <%= s.fields_for :scenic_impression, 
+                   @scenic.scenic_impression ||=  @scenic.build_scenic_impression do |si| %>
+    <%= si.input :file, as: :file %>
+    <%= si.input :cover, as: :file %>
+    <%= si.input :duration %>
+    <%= si.input :order %>
+    <% if @scenic.scenic_impression && @scenic.scenic_impression.file.present? %>
+      <div class="control-group">
+        <div class="controls">
+          <%= video_tag(@scenic.scenic_impression.file, :controls => true, :autobuffer => true, :width => 400, :height => 240, :poster => @scenic.scenic_impression.cover ) %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+
+  <%= s.fields_for :scenic_route,
+                   @scenic.scenic_route ||= @scenic.build_scenic_route do |sr| %>
+    <%= sr.input :file, as: :file %>
+    <%= sr.input :cover, as: :file %>
+    <%= sr.input :duration %>
+    <%= sr.input :order %>
+    <% if @scenic.scenic_route && @scenic.scenic_route.file.present? %>
+      <div class="control-group">
+        <div class="controls">
+          <%= video_tag(@scenic.scenic_route.file, :controls => true, :autobuffer => true, :width => 400, :height => 240, :poster => @scenic.scenic_route.cover ) %>
+        </div>
+      </div>
+    <% end %>
+
+  <% end %>
+
+  <%= s.fields_for :scenic_description,
+                   @scenic.scenic_description ||= @scenic.build_scenic_description do |sd| %>
+    <%= sd.input :body, as: :text %>
+  <% end %>
+  <div class="form-actions">
+    <%= s.button :submit, :class => 'btn-primary' %>
+  </div>
+<% end %>

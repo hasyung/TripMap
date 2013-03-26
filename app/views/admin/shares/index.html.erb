@@ -1,0 +1,60 @@
+<%- model_class = Share -%>
+<%= render "base" %>
+<div class="box">
+  <div class="box-title">
+    <span class="icon"><i class="icon-th"></i></span>
+    <h5><%= t('links.shares.index') %></h5>
+  </div>
+  <div class="box-content">
+    <%= simple_form_for Map.new, :url => select_admin_shares_path, html: {id: "shares"} do |f| %>
+      <%= f.input :name, :collection => Map.all, input_html: {onchange: "submit()"}, :hint => false, required: false, :prompt => t("helpers.links.select") %>
+    <% end %>
+    <table class="table table-bordered table-striped with-check">
+      <thead>
+        <tr>
+          <th><input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" /></th>
+          <th><%= model_class.human_attribute_name(:title) %></th>
+          <th><%= model_class.human_attribute_name(:map) %></th>
+          <th><%= model_class.human_attribute_name(:state_cd) %></th>
+          <th><%= model_class.human_attribute_name(:created_at) %></th>
+          <th class="action"><%= t('links.commons.action') %></th>
+        </tr>
+      </thead>
+      </tbody>
+        <% @shares.each do |share| %>
+          <tr>
+            <td><%= check_box_tag "share_ids[]", share.id, false, :id => "share_#{share.id}" %></td>
+            <td><%= link_to share.title, admin_share_path(share) %></td>
+            <td><%= share.map.name %></td>
+            <td><%= t("enums.share.states.#{model_class.states.key(share.state_cd)}") %></td>
+            <td><%= l share.created_at.to_date, :format => :long %></td>
+            <td class="action">
+              <%= link_to raw("<i class=\"icon-eye-open\"></i>"), admin_share_path(share), 
+                          :title => t('links.shares.show') %>
+              <%= link_to raw("<i class=\"icon-edit\"></i>"), edit_admin_share_path(share), 
+                          :title => t('links.shares.edit') %>
+              <%= link_to raw("<i class=\"icon-trash\"></i>"),
+                          admin_share_path(share),
+                          :method => :delete,
+                          :data => { :confirm => t('links.commons.confirm') } %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="table-footer clearfix">
+  <div class="paginates-info"><%= page_entries_info @shares %></div>
+  <%= paginate @shares, :theme => "admin" %>
+</div>
+
+<%= content_for :scripts do -%>
+  <script type="text/javascript">
+    function submit() 
+    { 
+      $("form").submit();
+    }
+  </script>
+<% end -%>

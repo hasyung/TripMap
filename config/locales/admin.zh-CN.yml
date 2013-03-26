@@ -1,0 +1,469 @@
+'zh-CN':
+  admin:
+    menus:
+      api: "API"
+    apis:
+      v1: "第一版"
+      v2: "第二版"
+  navs:
+    home:
+      index: "首页"
+    maps:
+      index: "地图"
+    provinces:
+      index: "省市"
+    scenics:
+      index: "景区"
+    places:
+      index: "景点"
+    recommends:
+      index: "推荐"
+    shares:
+      index: "分享"
+    infos:
+      index: "信息"
+    apis:
+      index: "API"
+    logs:
+      index: "日志"
+    serialnumber:
+      index: "序列号管理"      
+  breadcrumbs:
+    admin:
+      application:
+        root: "TripMap"
+      home:
+        index: "首页"
+      maps:
+        index: "地图"
+        new: "添加地图"
+        edit: "修改地图"
+        new_image: "添加幻灯片"
+        edit_image: "编辑幻灯片"
+      provinces:
+        index: "省市"
+        new: "添加省市"
+        edit: "修改省市"
+      places:
+        index: "景点"
+        new: "添加景点"
+        edit: "修改景点"
+      scenics:
+        index: "景区"
+        new: "添加景区"
+        edit: "修改景区"
+      recommends:
+        index: "推荐"
+        new: "添加推荐"
+        edit: "修改推荐"
+      recommend_records:
+        index: "推荐记录"
+        new: "添加推荐记录"
+        edit: "修改推荐记录"
+      recommend_detaileds:
+        index: "推荐详细"
+        new: "添加推荐详细"
+        edit: "修改推荐详细"
+        show: "推荐详细记录"
+        new_video: "添加推荐视频"
+        edit_video: "修改推荐视频"
+        new_audio: "添加推荐音频"
+        edit_audio: "修改推荐音频"
+        new_image: "添加推荐图片"
+        edit_image: "修改推荐图片"
+        new_imagelist: "添加推荐图集"
+        edit_imagelist: "修改推荐图集"
+        images: "推荐图集图片"
+        new_images: "添加推荐图集图片"
+        edit_images: "修改推荐图集图片"
+        new_text: "添加推荐描述"
+        edit_text: "修改推荐描述"
+      shares:
+        index: "分享"
+        new: "添加分享"
+        edit: "修改分享"
+      infos:
+        index: "信息"
+        new: "添加信息"
+        edit: "修改信息"
+      logs:
+        index: "日志"
+      serialnumbers:
+        index: "序列号"
+  links:
+    home:
+      index: "返回首页"
+    maps:
+      index: "地图列表"
+      show: "查看地图"
+      new: "添加地图"
+      edit: "修改地图"
+      edit_image: "添加幻灯片"
+      images:
+        index: "幻灯片列表"
+        new: "添加图片"
+        edit: "修改图片"
+        back: "地图信息"
+    provinces:
+      index: "省市列表"
+      show: "查看省市"
+      new: "添加省市"
+      edit: "修改省市"
+    places:
+      index: "景点列表"
+      show: "查看景点"
+      new: "添加景点"
+      edit: "修改景点"
+    scenics:
+      index: "景区列表"
+      show: "查看景点"
+      new: "添加景区"
+      edit: "修改景区"
+    recommends:
+      index: "返回推荐列表"
+      show: "查看推荐"
+      new: "添加推荐"
+      edit: "修改推荐"
+    recommend_records:
+        index: "推荐记录列表"
+        back: "返回推荐记录列表"
+        new: "添加推荐记录"
+        edit: "修改推荐记录"
+    recommend_detaileds:
+        index: "推荐记录详细列表"
+        back: "返回推荐记录详细列表"
+        new: "添加推荐记录详细"
+        edit: "修改推荐记录详细"  
+        videos: "视频列表"
+        newvideo: "添加视频"
+        editvideo: "修改视频"
+        newaudio: "添加音频"
+        editaudio: "修改音频"
+        newimage: "添加图片"
+        editimage: "修改图片"
+        newimagelist: "添加图集"
+        editimagelist: "修改图集"
+        newtext: "添加描述"
+        edittext: "修改描述"
+        videolist: "视频列表"
+        audiolist: "音频列表"
+        imagelist: "图片列表"
+        imageslist: "图集列表"
+        newimages: "添加图集"
+        images: "图集详细列表"
+        textlist: "描述列表"
+    shares:
+      index: "分享列表"
+      show: "查看分享"
+      new: "添加分享"
+      edit: "修改分享"
+    logs:
+      index: "日志列表"
+    infos:
+      index: "信息"
+      new: "添加信息"
+      edit: "修改信息"
+    serialnumbers:
+      index: "序列号列表"
+      export: "导出序列号"
+    commons:
+      action: "操作"
+      confirm: "你确定删除吗？"
+      video: "查看视频"
+      audio: "查看音频"
+
+  messages:
+    maps:
+      success: "操作地图成功！"
+      error: "操作地图失败！"
+      images:
+        success: "操作幻灯片成功！"
+        error: "操作幻灯片失败！"
+    provinces:
+      success: "操作省市成功！"
+      error: "操作省市失败！"
+    places:
+      success: "操作景点成功！"
+      error: "操作景点失败！"
+    scenics:
+      success: "操作景区成功！"
+      error: "操作景区失败！"
+    recommends:
+      success: "操作推荐成功！"
+      error: "操作推荐失败！"
+    recommend_records:
+      success: "操作推荐记录成功！"
+      error: "操作推荐记录失败！"
+    recommend_detaileds:
+      success: "操作推荐记录成功！"
+      error: "操作推荐记录失败！"
+      video:        
+        success: "操作视频成功！"
+        error: "操作视频失败！"
+      audio:        
+        success: "操作音频成功！"
+        error: "操作音频失败！"
+      image:        
+        success: "操作图片成功！"
+        error: "操作图片失败！"
+      images:        
+        success: "操作图集成功！"
+        error: "操作图集失败！"
+      text:        
+        success: "操作描述成功！"
+        error: "操作描述失败！"
+    shares:
+      success: "操作分享成功！"
+      error: "操作分享失败！"
+      publish: "审核分享通过！"
+      draft: "审核分享不通过！"
+    infos:
+      success: "操作信息成功！"
+      error: "操作信息失败！"
+    serialnumbers:
+      error: "没有任何数据！"
+
+  activerecord:
+    enums:
+      map_serial_number:
+        types:
+          free: "免费版"
+          ordinary: "普通版"
+          favorite: "收藏版"
+        printeds:
+          yes_print: "已印刷"
+          no_print: "未印刷"
+    models:
+      place: "景点"
+      scenic: "景区"
+      province: "省市"
+      recommend: "推荐"
+      recommend_record: "推荐记录"
+      recommend_detailed: "推荐记录详细"
+      map: "地图"
+      image: "图片"
+      text: "文本"
+      share: "分享"
+      info: "信息"
+      video: "视频"
+      audio: "音频"
+      letter: "文本"
+      log: "日志"
+    attributes:
+      map:
+        province: "省市"
+        name: "名称"
+        slug: "简码"
+        scenics_count: "景区数"
+        places_count: "景点数"
+        recommends_count: "推荐数"
+      map_cover:
+        file: "封面"
+      province:
+        name: "名称"
+        slug: "简码"
+        maps_count: "地图数"
+      place:
+        name: "名称"
+        slug: "简码"
+        subtitle: "副标题"
+        map: "地图"
+        province: "省市"
+      scenic:
+        name: "名称"
+        slug: "简码"
+        subtitle: "副标题"
+        map: "地图"
+        province: "省市"
+      recommend:        
+        name: "名称"
+        slug: "简码"
+        map: "地图"
+        province: "省市"
+        recommend_records_count: "推荐记录"
+      recommend_record:  
+        name: "名称"      
+        recommend: "推荐名称"
+        recommend_detaileds_count: "推荐详细数"
+        order: "排序"
+      recommend_detailed:
+        name: "名称"
+        order: "排序"
+        video_file: "视频文件"
+        vodeo_file_type: "视频类型"
+        video_file_size: "视频大小"
+        audio_file: "音频文件"
+        audio_file_type: "音频类型"
+        audio_file_size: "音频大小"
+        image_file: "图片文件"
+        imageslist: "图集名称"
+        images_file: "图片文件"
+        text_body: "内容"
+        order: "排序"
+      share:
+        title: "标题"
+        nickname: "昵称"
+        device_id: "设备ID"
+        map: "地图"
+        state_cd: "审核状态"
+        created_at: "创建时间"
+      info:
+        map: "地图"
+        name: "名称"
+        slug: "简码"
+        order: "排序"
+      log: 
+        map: "地图"
+        activate_map: "设备"
+        slug: "简码"
+        message_cd: "状态"
+        created_at: "创建时间"
+      image:
+        file: "图片"
+        order: "排序"
+      map_serial_number:
+        map: "地图"
+        code: "序列号"
+        type: "序列号类型"
+        types: "序列号类型"
+        type_cd: "序列号类型"
+        used: "已使用次数"
+        printed: "打印"
+        printed_cd: "打印"
+        count: "默认使用次数"
+        created_at: "创建时间"
+        
+  simple_form:
+    labels:
+      map:
+        map_cover:
+          file: "封面"
+        map_plat:
+          file: "原图"
+        map_description:
+          body: "描述"
+      place:
+        place_icon:
+          file: "景点图标"
+        place_image:
+          file: "背景图"
+        place_description_image:
+          file: "景点描述"
+        place_video:
+          file: "视频文件"
+          cover: "封面"
+          duration: "时长"
+          order: "排序"
+        place_audio:
+          file: "音频文件"
+          duration: "时长"
+          order: "排序"
+        place_description:
+          body: "内容"
+      scenic:
+        scenic_impression:
+          file: "初识印象"
+          cover: "封面"
+          duration: "时长"
+          order: "排序"
+        scenic_route:
+          file: "游览线路"
+          cover: "封面"
+          duration: "时长"
+          order: "排序"
+        scenic_icon:
+          file: "景点图标"
+        scenic_image:
+          file: "背景图"
+        scenic_description_image:
+          file: "景点描述"
+        scenic_description:
+          body: "内容"
+      recommend:
+        recommend_cover:
+          file: "背景图"
+        recommend_video:
+          file: "推荐视频"
+          cover: "视频封面"
+          duration: "视频时长"
+      recommend_record:
+        order: "排序"
+        recommend_record_cover:
+          file: "推荐记录封面"
+        recommend_record_description:
+          body: "推荐记录描述"
+      recommend_detailed:
+      share:
+        share_image:
+          file: "分享图片"
+        share_text:
+          body: "分享内容"
+      image:
+        file: "图片文件"
+        order: "图片排序"
+      letter:
+        body: "内容"
+        order: "排序"    
+      video:          
+        file: "视频文件"
+        cover: "视频封面"
+        duration: "视频时长"
+        order: "视频排序"
+      audio:
+        file: "音频文件"
+        duration: "音频时长"
+        order: "音频排序"
+
+  helpers:
+    links:
+      login: "登录"
+      logout: "退出"
+      select: "请选择"
+      search: "查询"
+    submit:
+      select: "查看"
+    page_entries_info:
+      one_page:
+        display_entries:
+          zero: "没有任何数据"
+          one: "共 <b>1</b> 条数据"
+          other: "共 <b>%{count}</b> 条数据"
+      more_pages:
+        display_entries: " 显示数据<b>%{first}&nbsp;-&nbsp;%{last}</b> 共 <b>%{total}</b>条 "        
+  views:
+    pagination:
+      first: "第一页"
+      last: "末页"
+      previous: "上一页"
+      next: "下一页"
+      truncate: ""
+  errors:
+    type:
+      slug: "简码必须为小写字母！"
+      name: "名字长度不能超过15个汉字！"
+      big_image_file: "亲，你上传的文件超过了5MB！"
+      big_audio_file: "亲，你上传的文件超过了5MB！"
+      big_video_file: "亲，你上传的文件超过了15MB！"
+      duration: "时长格式不对！"
+  enums:
+    share:
+      states:
+        draft: "未通过"
+        publish: "通过"
+    mapserialnumber:
+      print:
+        no_print: "未印刷"
+        yes_print: "已印刷"
+      type:
+        free: "免费版"
+        ordinary: "普通版"
+        favorite: "收藏版"
+    log:
+      device_types:
+        iPhone: "iPhone"
+        android: "Android"
+      messages:
+        success: "成功"
+        time_out: "超时"
+        not_found: "没有找到"
+        error: "失败"

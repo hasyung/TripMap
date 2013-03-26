@@ -1,0 +1,31 @@
+<%= simple_form_for @record,
+      html: { class: 'form-horizontal' }, 
+      url: @record.new_record? ? 
+           admin_recommend_records_path(
+              params[:recommend_id]) : 
+           admin_recommend_record_path(
+              params[:recommend_id], @record) do |r| %>
+  <%= r.input :name %>
+  <%= r.input :order %>
+
+  
+  <%= r.fields_for :recommend_record_cover, 
+                   @record.recommend_record_cover ||= @record.build_recommend_record_cover  do |c|%>
+    <%= c.input :file, as: :file %>
+    <% if @record.recommend_record_cover && @record.recommend_record_cover.file.present? %>
+      <div class="control-group image">
+        <div class="controls">
+          <%= image_tag @record.recommend_record_cover.file %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+
+  <%= r.fields_for :recommend_record_description,
+                   @record.recommend_record_description ||= @record.build_recommend_record_description do |d| %>
+    <%= d.input :body, :as => :text, input_html: { :class => "span-full"} %>
+  <% end %>
+  <div class="form-actions">
+    <%= r.button :submit, :class => 'btn-primary' %>
+  </div>
+<% end %>

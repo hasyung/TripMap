@@ -1,0 +1,25 @@
+<%= simple_form_for  @image, 
+                     html: { class: 'form-horizontal' },
+                     url: @image.new_record? ? 
+                         admin_recommend_record_detailed_images_path(
+                            params[:recommend_id],
+                            params[:record_id],
+                            params[:detailed_id]) :
+                         admin_recommend_record_detailed_image_path(
+                            params[:recommend_id],
+                            params[:record_id],
+                            params[:detailed_id],
+                            @image)  do |i| %>
+  <%= i.input :file,  as: :file %>
+    <% if @image.file && @image.file.present? %>
+      <div class="control-group image">
+        <div class="controls">
+          <%= image_tag @image.file %>
+        </div>
+      </div>
+    <% end %>
+  <%= i.input :order %>
+  <div class="form-actions">
+    <%= i.button :submit, :class => 'btn-primary' %>
+  </div>
+<% end %>

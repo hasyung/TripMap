@@ -1,0 +1,223 @@
+/*
+ *= require admin/bootstrap_and_overrides
+ *= require admin/daterangepicker
+ *= require jquery/uniform.default
+ *= require_self
+ */
+
+* {
+  outline:none !important;
+	-moz-outline: none !important;
+}
+body {
+  margin-top: 60px;
+}
+
+.breadcrumb {
+  li a {
+    color: #666;
+    &:hover {
+      text-decoration: none;
+      color: #000;
+    }
+  }
+}
+
+.toolbar {
+  .btn-toolbar {
+    margin-top: 0;
+  }
+}
+
+.box .box-title, .table th, .frames .frame-title {
+  background-color: #efefef;
+	background-image: -webkit-gradient(linear, 0 0%, 0 100%, from(#fdfdfd), to(#eaeaea));
+	background-image: -webkit-linear-gradient(top, #fdfdfd 0%, #eaeaea 100%);
+  background-image: -moz-linear-gradient(top, #fdfdfd 0%, #eaeaea 100%);
+  background-image: -ms-linear-gradient(top, #fdfdfd 0%, #eaeaea 100%);
+  background-image: -o-linear-gradient(top, #fdfdfd 0%, #eaeaea 100%);
+  background-image: -linear-gradient(top, #fdfdfd 0%, #eaeaea 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fdfdfd', endColorstr='#eaeaea',GradientType=0);
+  border-bottom: 1px solid #CDCDCD;
+  height: 36px;
+}
+
+.box {
+  background: none repeat scroll 0 0 #F9F9F9;
+  border-top: 1px solid #CDCDCD;
+  border-left: 1px solid #CDCDCD;
+  border-right: 1px solid #CDCDCD;
+  clear: both;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  position: relative;
+  .box-title {
+    span.icon {
+      border-right: 1px solid #cdcdcd;
+    	padding: 9px 10px 7px 11px;
+    	float: left;
+    	opacity: 1;
+      i {
+        font-size: 14px;
+      }
+    }
+    h5 {
+      color: #666666;
+    	text-shadow: 0 1px 0 #ffffff;
+      float: left;
+      font-size: 12px;
+      font-weight: bold;
+      padding: 12px;
+      line-height: 12px;
+      margin: 0;
+    }
+  }
+  .box-content {
+    padding: 12px 15px;
+    border-bottom: 1px solid #cdcdcd;
+  }
+}
+.no-padding {
+  padding: 0 !important;
+}
+
+.simple_form {
+  margin-bottom: 0;
+  .control-group {
+  	border-top: 1px solid #ffffff;
+  	border-bottom: 1px solid #eeeeee;
+  	margin-bottom: 0;
+    &:last-child {
+    	border-bottom: 0;
+    }
+    &.image {
+      img {
+        max-width: 100px;
+        max-height: 100px;
+      }
+    }
+  }
+  .control-label {
+  	padding-top: 15px;
+  	width: 180px;
+    float:left;
+    text-align:right;
+    abbr {
+      color: #cc0000;
+    }
+  }
+  .controls {
+  	margin-left: 200px;
+  	padding: 10px 0;
+    input[type=text], input[type=password], textarea {
+    	width: 80%;
+    }
+    textarea {
+      height: 100px;
+      resize: none;
+    }
+    input[type=text].numeric {
+      width: 20%;
+    }
+  }
+  .form-actions {
+  	margin-top: 0;
+  	margin-bottom: 0;
+    padding-left: 200px;
+  }
+  .help-block, .help-inline {
+    color: #999999;
+  }
+  .help-inline {
+    padding-left: 0;
+    display: block;
+    padding-top: 3px;
+  }
+  .control-group.error {
+    .control-label {
+      color: #333;
+    }
+    .help-block {
+      color: #999999;
+      &.error {
+        color: #B94A48;
+      }
+    }
+  }
+}
+
+.form-horizontal input + a + .help-block {
+  margin-top: 10px;
+}
+
+.table {
+  margin-bottom: 0;
+  th {
+    height: auto;
+    font-size: 10px;
+    padding: 5px 8px 2px;
+    border-bottom: 0;
+    color: #666;
+  }
+  &.with-check tr th:first-child, &.with-check tr td:first-child {
+    width: 10px;
+    text-align: center;
+  }
+  &.with-check tr th:first-child i {
+  	margin-top: -2px;
+  	opacity: 0.6;
+  }
+  &.with-check tr th:first-child .checker {
+    margin-right: 0;
+  }
+  &.with-check tr td:first-child .checker {
+  	margin-right: 0;
+  }
+  & tr.checked td {
+  	background-color: #FFFFE3 !important;
+  }
+  .action {
+    text-align: center;
+    width: 90px;
+    a {
+      color: #666;
+      padding: 0 5px;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+    i {
+      font-size: 14px;
+      line-height: 14px;
+    }
+  }
+}
+
+/* 表格页脚 */
+.table-footer {
+  .paginates-info {
+    width: 29%;
+    float: left;
+    height:36px;
+    line-height:36px;
+    margin-top:-7px;
+  }
+  .pagination {
+    width: 60%;
+    float:right;
+    margin:0;
+    text-align:right;
+    vertical-align:middle;
+  }
+}
+
+/* shares */
+#shares .control-label {
+text-align:left;
+  width:40px;
+}
+#shares .controls {
+  margin-left:40px;
+}
+
+.backinfo{ float:right }

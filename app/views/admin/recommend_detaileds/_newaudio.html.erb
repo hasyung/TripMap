@@ -1,0 +1,27 @@
+<%= simple_form_for @audio, 
+                    html: { class: 'form-horizontal' },
+                    url: @audio.new_record? ? 
+                         admin_recommend_record_detailed_audios_path(
+                            params[:recommend_id],
+                            params[:record_id],
+                            params[:detailed_id]) :
+                         admin_recommend_record_detailed_audio_path(
+                            params[:recommend_id],
+                            params[:record_id],
+                            params[:detailed_id],
+                            @audio) do |a| %>
+	<%= a.input :file,  as: :file %>
+	<%= a.input :duration %>
+	<%= a.input :order %>
+  <% if @audio.file && @audio.file.present? %>
+    <div class="control-group">
+      <div class="controls">
+      <%= audio_tag(@audio.file, :autoplay => false, :controls => true) %>
+      </div>
+    </div>
+  <% end %>
+  <div class="form-actions">
+    <%= a.button :submit, :class => 'btn-primary' %>
+  </div>
+
+<% end %>

@@ -14,8 +14,13 @@
 /log/*.log
 /tmp
 
-# Database config file
+# Ignore aptana studio's .project file
+/.project
+
+# Ignore database.yml file
 config/database.yml
 
-# file uploads
-public/uploads
+# Ignore uploaded files.
+public/uploads/*
+
+.idea/
