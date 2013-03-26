@@ -30,8 +30,8 @@ class Map < ActiveRecord::Base
   # Validates
   with_options :presence=> true do |column|
     column.validates :province_id
-    column.validates :name, :length => { :within => 1..15,    :message => I18n.t("errors.type.name") }, :uniqueness => true
-    column.validates :slug, :format => { :with => /([a-z])+/, :message => I18n.t("errors.type.slug") }, :uniqueness => true
+    column.validates :name, :length => { :within => 1..20,    :message => I18n.t("errors.type.name") }, :uniqueness => true
+    column.validates :slug, :length => { :within => 1..20 },  :format => { :with => /([a-z])+/, :message => I18n.t("errors.type.slug") }, :uniqueness => true
   end
   
   #validate :require_map_cover_attributes
