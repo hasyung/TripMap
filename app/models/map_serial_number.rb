@@ -9,5 +9,14 @@ class MapSerialNumber < ActiveRecord::Base
   as_enum :printed, { :no_print => 0, :yes_print => 1 }
 
   scope :created_desc, order("created_at DESC")
+
+  def self.to_csv(options = {})
+    CSV.generate(options) do |csv|
+      csv << column_names
+      all.each do |serial|
+        csv << serial.attributes.values_at(*column_names)
+      end
+    end
+  end
   
 end
