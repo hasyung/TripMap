@@ -1,6 +1,6 @@
 source 'http://ruby.taobao.org/'
 
-gem 'rails', '3.2.10'
+gem 'rails', '3.2.12'
 gem 'mysql2'
 
 group :assets do
@@ -28,13 +28,13 @@ gem 'friendly_id'
 gem 'devise'
 gem 'httpclient'
 gem "smart_tuple" #sql search
+gem 'thin'
 
 group :test, :development do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'spork-rails'
   gem 'capybara'
-  gem 'thin'
   gem 'pry'
   gem 'pry-doc'
   gem 'pry-nav'

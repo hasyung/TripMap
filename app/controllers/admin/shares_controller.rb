@@ -48,7 +48,6 @@ class Admin::SharesController < Admin::ApplicationController
   end
 
   def publish
-    binding.pry
     @share = Share.find params[:id]
     @share.state = params[:status].to_s.to_sym
     if @share.save

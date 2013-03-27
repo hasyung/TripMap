@@ -3,6 +3,8 @@
 <script type="text/javascript">
   $(document).ready(function() {
     $('input[name="date"]').daterangepicker({
+      ranges: {
+        'Today': ['today', 'today']},
       format: 'yyyy-MM-dd'
     });
   });
