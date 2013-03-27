@@ -23,8 +23,9 @@ class MapSerialGenerator
     bit12 = self.get_random_password()         # generate random password
 
     return nil if  bit3.nil? or bit3.empty?
-    #binding.pry
-    code = options[:split].nil? ? (bit1 + bit3 + bit12) : self.format_serial_code( bit1 + bit3 + bit12 )
+
+    #code = options[:split] == false ? (bit1 + bit3 + bit12) : self.format_serial_code( bit1 + bit3 + bit12 )
+    code = (bit1 + bit3 + bit12)
 
   end
 
