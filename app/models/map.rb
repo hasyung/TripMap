@@ -39,7 +39,7 @@ class Map < ActiveRecord::Base
   # NestedAttributes
   accepts_nested_attributes_for :map_cover, reject_if: lambda { |img| img[:file].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :map_plat, reject_if: lambda { |img| img[:file].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :map_description, reject_if: lambda { |pd| pd[:body].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :map_description, :allow_destroy => true
   
   # Scopes
   scope :created_desc, order("created_at DESC")
