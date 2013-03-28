@@ -10,7 +10,7 @@ class ImageList < ActiveRecord::Base
 
   validates_numericality_of :order, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999, :if => :order?
   validates :name, length: { within: 1..20 }, presence: true
-  
+  validates :order, uniqueness: { scope: :recommend_detailed_id }
   # Scopes
   scope :order_asc, order("`order` ASC")
   scope :created_desc, order("`created_at` DESC")

@@ -43,10 +43,10 @@ class TripMapObserver < ActiveRecord::Observer
   end
 
   def get_map( model )
-    return nil if model.nil? or model.class.nil? or model.class.class_name.nil?
-
     map = nil
-    kls_name = model.class.class_name
+    #kls_name = model.class.class_name  # ruby-1.9.3-p286 [ i586 ]
+    kls_name = model.class.to_s         # ruby-1.9.3-p392 [ x86_64 ]
+
     poliable = POLIABLE_NAME_OPTIONS[ kls_name.to_sym ]
     nav_path = nil
     if poliable.nil?
