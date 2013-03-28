@@ -57,7 +57,7 @@ class Admin::MapsController < Admin::ApplicationController
     if @image.save
       redirect_to edit_admin_map_path(params[:map_id]), :notice => t('messages.maps.images.success')
     else
-      redirect_to edit_admin_map_path(params[:map_id]), :notice => t('messages.maps.images.error')
+      render :new_image
     end
   end
 
@@ -73,7 +73,7 @@ class Admin::MapsController < Admin::ApplicationController
     if @image.update_attributes params[:image]      
       redirect_to edit_admin_map_path(params[:map_id]), :notice => t('messages.maps.images.success')
     else
-      redirect_to edit_admin_map_path(params[:map_id]), :notice => t('messages.maps.images.error')
+      render :edit_image
     end
   end
 
