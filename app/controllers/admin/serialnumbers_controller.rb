@@ -18,15 +18,14 @@ class Admin::SerialnumbersController < Admin::ApplicationController
 
     @serials = MapSerialNumber.where( conditions.compile ).all
     if @serials.count>0
-      @content =""
-      @serials.each do |s|
-        @content += "#{s.code}\n"
-        s.printed_cd = 1
-        s.save
-      end
       map = Map.find params[:map_serial_number][:map_id]
       serial_type =  I18n.t("enums.mapserialnumber.type.#{MapSerialNumber.types.key(params[:map_serial_number][:type_cd].to_i)}")
-      send_data @content, :type => 'text', :disposition => "attachment; filename=#{map.name}_#{serial_type}_#{Time.now}.txt"
+      @serial_name = "#{map.name}_#{serial_type}"
+      MapSerialNumber.where( id:@serials ).update_all( printed_cd:1 )      
+
+      respond_to do |format|
+        format.xls
+      end
     else
       redirect_to export_admin_serialnumbers_path, notice: t('messages.serialnumbers.error')
     end
@@ -43,7 +42,6 @@ class Admin::SerialnumbersController < Admin::ApplicationController
                   per(Setting.page_size).
                   created_desc
     params[:commit], params[:utf8] = nil
-    #@serials = MapSerialNumber.where( :type_cd => params[:map_serial_number][:type_cd]).page(params[:page]).per(Setting.page_size).created_desc
     @serial  = MapSerialNumber.new params[:map_serial_number]
     add_breadcrumb :index
     render :index

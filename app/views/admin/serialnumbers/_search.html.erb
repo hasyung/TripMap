@@ -11,15 +11,14 @@
                 prompt: t("helpers.links.select") %>
 
   <label><%= MapSerialNumber.human_attribute_name(:type_cd) %></label>
-  <%=   select :map_serial_number,
-               :type_cd, 
+  <%= f.select :type_cd, 
                 MapSerialNumber.types_for_select(:value),
-                prompt: t("helpers.links.select") %>
+                include_blank: t("helpers.links.select")
+                 %>
   <label><%= MapSerialNumber.human_attribute_name(:printed_cd) %></label>
-  <%=   select :map_serial_number,
-               :printed_cd,
+  <%= f.select :printed_cd,
                 MapSerialNumber.printeds_for_select(:value),
-                prompt: t("helpers.links.select") %>
+                include_blank: t("helpers.links.select") %>
   <label><%= MapSerialNumber.human_attribute_name(:created_at) %></label>
   <input id="date_start" name="date" type="text">
 

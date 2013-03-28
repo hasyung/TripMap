@@ -3,7 +3,7 @@ class TripMapObserver < ActiveRecord::Observer
           :recommend_record, :recommend_detailed,         # Level 2.
           :image_list,
           :audio, :video, :image, :letter                 # Atom.
-  
+
   NAV_PATH_OPTIONS = {
     #model name        path to map
     :Scenic             => "map",
@@ -15,14 +15,14 @@ class TripMapObserver < ActiveRecord::Observer
 
     :ImageList          => "recommend_detailed.recommend_record.recommend.map",
   }
-  
+
   POLIABLE_NAME_OPTIONS = {
     :Video              => "videoable",
     :Audio              => "audioable",
     :Image              => "imageable",
     :Letter             => "textable"
   }
-  
+
   def after_save( model )
     update_map_version(model)
   end
@@ -36,15 +36,17 @@ class TripMapObserver < ActiveRecord::Observer
   def update_map_version ( model )
     map_instance = get_map(model)
     return nil if map_instance.nil?
-    
+
     Rails.cache.write("map_#{map_instance.id}", map_instance.get_map_values)
     map_instance.version = Time.now.to_i
     map_instance.save
   end
-  
+
   def get_map( model )
     map = nil
-    kls_name = model.class.class_name
+    #kls_name = model.class.class_name  # ruby-1.9.3-p286 [ i586 ]
+    kls_name = model.class.to_s         # ruby-1.9.3-p392 [ x86_64 ]
+
     poliable = POLIABLE_NAME_OPTIONS[ kls_name.to_sym ]
     nav_path = nil
     if poliable.nil?
@@ -61,7 +63,7 @@ class TripMapObserver < ActiveRecord::Observer
 
     map
   end
-  
+
   def get_map_by_path( ploy_object, path )
     return nil if path.nil?
 

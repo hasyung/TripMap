@@ -23,9 +23,9 @@ class Place < ActiveRecord::Base
   
   # Validates
   with_options :presence => true do |column|
-    column.validates :name, :length => { :within => 2..15 }
+    column.validates :name, :length => { :within => 2..20 }
     column.validates :map_id
-    column.validates :slug, :format => { :with => /([a-z])+/, :message => I18n.t("errors.type.slug") }
+    column.validates :slug, :length => { :within => 2..20 }, :format => { :with => /([a-z])+/, :message => I18n.t("errors.type.slug") }
     column.validates :subtitle, :length => { :within => 2..30 }
   end
 
@@ -35,7 +35,7 @@ class Place < ActiveRecord::Base
   accepts_nested_attributes_for :place_image,             reject_if: lambda { |img| img[:file].blank? }, allow_destroy: true
   accepts_nested_attributes_for :place_audio,             reject_if: lambda { |pa| pa[:file].blank? }, allow_destroy: true
   accepts_nested_attributes_for :place_video,             reject_if: lambda { |pv| pv[:file].blank? }, allow_destroy: true
-  accepts_nested_attributes_for :place_description,       reject_if: lambda { |pd| pd[:body].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :place_description, allow_destroy: true
 
 
   scope :created_desc, order("`created_at` DESC")
