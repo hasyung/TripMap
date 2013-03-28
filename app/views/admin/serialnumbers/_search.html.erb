@@ -20,7 +20,7 @@
                 MapSerialNumber.printeds_for_select(:value),
                 include_blank: t("helpers.links.select") %>
   <label><%= MapSerialNumber.human_attribute_name(:created_at) %></label>
-  <input id="date_start" name="date" type="text">
+  <input id="date_start" name="date" type="text" readonly="readonly">
 
   <%= f.button :submit, :value => t("helpers.links.search"), :class => 'btn-success' %>
 <% end -%>
