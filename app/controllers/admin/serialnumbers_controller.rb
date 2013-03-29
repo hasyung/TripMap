@@ -26,7 +26,6 @@ class Admin::SerialnumbersController < Admin::ApplicationController
       respond_to do |format|
         format.xls
       end
-
     elsif @serials.count < params[:sum].to_i
         redirect_to export_admin_serialnumbers_path, notice: t('messages.serialnumbers.sum', sum: @serials.count )
     else
