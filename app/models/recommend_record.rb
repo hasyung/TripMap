@@ -17,7 +17,7 @@ class RecommendRecord < ActiveRecord::Base
 
   with_options :presence => true do |column|
     column.validates :name, :length => { :within => 2..15,    :message => I18n.t("errors.type.name") }, :uniqueness => true
-    column.validates :order
+    column.validates :order, uniqueness: { scope: :recommend_id }
   end
   validates_numericality_of :order, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999, :if => :order?
   
@@ -25,7 +25,7 @@ class RecommendRecord < ActiveRecord::Base
 
 
   accepts_nested_attributes_for :recommend_record_cover,          reject_if: lambda { |c| c[:file].blank? }, allow_destroy: true
-  accepts_nested_attributes_for :recommend_record_description,    reject_if: lambda { |d| d[:body].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :recommend_record_description, allow_destroy: true
 
   scope :order_asc, order("`order` ASC")
   scope :created_desc, order("`created_at` DESC")

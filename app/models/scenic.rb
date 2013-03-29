@@ -7,8 +7,8 @@ class Scenic < ActiveRecord::Base
   
   # Validates
   with_options :presence => true do |column|
-    column.validates :name, :length => { :within => 2..15 }, :uniqueness => true
-    column.validates :slug, :format => { :with => /([a-z])+/, :message => I18n.t("errors.type.slug") }, :uniqueness => true
+    column.validates :name, :length => { :within => 2..20 }, :uniqueness => true
+    column.validates :slug, :length => { :within => 2..20 }, :format => { :with => /([a-z])+/, :message => I18n.t("errors.type.slug") }, :uniqueness => true
     column.validates :map_id
     column.validates :subtitle, :length => { :within => 2..30 }
   end
@@ -35,7 +35,7 @@ class Scenic < ActiveRecord::Base
   accepts_nested_attributes_for :scenic_route,         reject_if: lambda { |r| r[:file].blank? }, allow_destroy: true
   accepts_nested_attributes_for :scenic_icon,          reject_if: lambda { |icon| icon[:file].blank? }, allow_destroy: true
   accepts_nested_attributes_for :scenic_image,         reject_if: lambda { |image| image[:file].blank? }, allow_destroy: true
-  accepts_nested_attributes_for :scenic_description,   reject_if: lambda { |d| d[:body].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :scenic_description, allow_destroy: true
   accepts_nested_attributes_for :scenic_description_image,   reject_if: lambda { |di| di[:file].blank? }, allow_destroy: true
   
   scope :created_desc, order("`created_at` DESC") 

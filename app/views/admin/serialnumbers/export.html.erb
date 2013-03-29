@@ -7,7 +7,7 @@
   <div class="box-content">
     <%= simple_form_for [:admin, @serial], 
                            :html => { class: 'form-horizontal' },
-                            url: ex_search_admin_serialnumbers_path do |f| %>
+                            url: ex_search_admin_serialnumbers_path(format: :xls) do |f| %>
 
     <div class="control-group string required">
         <label class="string required control-label"><abbr title="required">*</abbr>
@@ -34,10 +34,10 @@
 
     <div class="control-group string required">
         <label class="string required control-label"><abbr title="required">*</abbr>
-          <%= MapSerialNumber.human_attribute_name(:created_at) %>
+          <%= MapSerialNumber.human_attribute_name(:sum) %>
         </label>
         <div class="controls">
-          <input id="date" name="date" type="text">
+          <input class="numeric integer optional" id="sum" name="sum" step="1" type="number" value="0">
         </div>
     </div>
 
@@ -56,6 +56,8 @@
 <script type="text/javascript">
   $(document).ready(function() {
     $('input[name="date"]').daterangepicker({
+      ranges: {
+        'Today': ['today', 'today']},
       format: 'yyyy-MM-dd'
     });
   });

@@ -52,19 +52,20 @@ class Api::V1::SharesController < Api::V1::ApplicationController
   end
 
   def create
-    @share = Share.new
-    @share.map_id = params[:map_id].to_i
-    @share.title = params[:title]
-    @share.nickname = params[:nickname]
-    @share.device_id = params[:device_id]
-    @share.build_share_image file: params[:image]
-    @share.build_share_text body: params[:text]
-    if @share.save
-          result = {result: true}
-        else
-          result = {result: false}
-        end
-        render :json => result
+    result = {result: false}
+    map = Map.find params[:map_id].to_i
+    if map.present?
+      @share = map.shares.new
+      @share.title = params[:title]
+      @share.nickname = params[:nickname]
+      @share.device_id = params[:device_id]
+      @share.build_share_image file: params[:image]
+      @share.build_share_text body: params[:text]
+      if @share.save
+        result = {result: true}
+      end
+    end
+    render :json => result
   end
 
   private

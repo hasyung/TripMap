@@ -22,3 +22,12 @@ config/database.yml
 
 # Ignore uploaded files.
 public/uploads/*
+
+# Ignore assets files.
+public/assets
+
+.idea/
+
+config/initializers/version.rb
+config/thin.yml.default
+config/database.yml.default

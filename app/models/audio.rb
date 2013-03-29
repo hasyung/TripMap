@@ -15,11 +15,8 @@ class Audio < ActiveRecord::Base
   end
   
   validates_numericality_of :order, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999, :if => :order?
+  validates :order, uniqueness: { scope: [:audioable_id, :audioable_type] }
 
-  with_options :if => :file? do |attachment|
-    attachment.validates :file, :file_size => { :maximum => 10.megabytes.to_i }
-  end
-  
   # SampleEnum. hash table is in growing.
   as_enum :type,
   {

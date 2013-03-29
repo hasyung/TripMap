@@ -1,0 +1,20 @@
+<%- headers["Content-Disposition"] = "attachment; filename=\"#{@serial_name}_#{Time.now}\".xls" -%>
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="<%= @serial_name %>">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String"><%= MapSerialNumber.human_attribute_name(:code) %></Data></Cell>
+      </Row>
+    <% @serials.each do |serial| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= serial.code %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

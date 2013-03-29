@@ -28,10 +28,10 @@ class Map < ActiveRecord::Base
   belongs_to :province, :counter_cache => true
 
   # Validates
-  with_options :presence=> true do |column|
+  with_options :presence => true do |column|
     column.validates :province_id
-    column.validates :name, :length => { :within => 1..15,    :message => I18n.t("errors.type.name") }, :uniqueness => true
-    column.validates :slug, :format => { :with => /([a-z])+/, :message => I18n.t("errors.type.slug") }, :uniqueness => true
+    column.validates :name, :length => { :within => 1..20,    :message => I18n.t("errors.type.name") }, :uniqueness => true
+    column.validates :slug, :length => { :within => 1..20 },  :format => { :with => /([a-z])+/, :message => I18n.t("errors.type.slug") }, :uniqueness => true
   end
   
   #validate :require_map_cover_attributes
@@ -39,7 +39,7 @@ class Map < ActiveRecord::Base
   # NestedAttributes
   accepts_nested_attributes_for :map_cover, reject_if: lambda { |img| img[:file].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :map_plat, reject_if: lambda { |img| img[:file].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :map_description, reject_if: lambda { |pd| pd[:body].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :map_description, :allow_destroy => true
   
   # Scopes
   scope :created_desc, order("created_at DESC")
@@ -207,5 +207,4 @@ class Map < ActiveRecord::Base
     end
     result
   end
-
 end

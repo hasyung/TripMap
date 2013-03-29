@@ -23,6 +23,7 @@ TripMap::Application.routes.draw do
       get  'search',    on: :collection
       get  'export',    on: :collection
       post 'ex_search', on: :collection
+
     end
     
     resources :recommends do
