@@ -14,18 +14,21 @@ class Admin::SerialnumbersController < Admin::ApplicationController
     conditions = data_search params[:map_serial_number][:map_id],
                              params[:map_serial_number][:type_cd],
                              0,
-                             params[:date]
+                             nil
 
-    @serials = MapSerialNumber.where( conditions.compile ).all
-    if @serials.count>0
+    @serials = MapSerialNumber.where( conditions.compile ).limit(params[:sum].to_i)
+    if @serials.count == params[:sum].to_i
       map = Map.find params[:map_serial_number][:map_id]
       serial_type =  I18n.t("enums.mapserialnumber.type.#{MapSerialNumber.types.key(params[:map_serial_number][:type_cd].to_i)}")
       @serial_name = "#{map.name}_#{serial_type}"
-      MapSerialNumber.where( id:@serials ).update_all( printed_cd:1 )      
+      MapSerialNumber.where(id: @serials.map(&:id)).update_all( printed_cd:1 )
 
       respond_to do |format|
         format.xls
       end
+
+    elsif @serials.count < params[:sum].to_i
+        redirect_to export_admin_serialnumbers_path, notice: t('messages.serialnumbers.sum', sum: @serials.count )
     else
       redirect_to export_admin_serialnumbers_path, notice: t('messages.serialnumbers.error')
     end
@@ -58,7 +61,6 @@ class Admin::SerialnumbersController < Admin::ApplicationController
     conditions << ["map_id = ?",  map_id ]      if map_id.present?
     conditions << ["type_cd = ?", type_cd]      if type_cd.present?
     conditions << ["printed_cd = ?",printed_cd] if printed_cd.present?
-    
     str_date = get_datetime_by_string date
     if !str_date.blank?
       conditions << ["created_at >= ?", str_date[0].to_time]

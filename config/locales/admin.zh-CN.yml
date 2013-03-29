@@ -222,6 +222,7 @@
       error: "操作信息失败！"
     serialnumbers:
       error: "没有任何数据！"
+      sum: "序列号总数[%{sum}]小于您导出的数量！"
 
   activerecord:
     enums:
@@ -333,6 +334,7 @@
         printed_cd: "打印"
         count: "默认使用次数"
         created_at: "创建时间"
+        sum: "导出数量"
         
   simple_form:
     labels:
