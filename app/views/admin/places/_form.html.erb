@@ -12,7 +12,7 @@
      <% if @place.place_audio && @place.place_audio.file.present? %>
       <div class="control-group">
         <div class="controls">
-          <%= audio_tag(@place.place_video.file, :autoplay => false, :controls => true) %>
+          <%= audio_tag(@place.place_audio.file, :autoplay => false, :controls => true) %>
         </div>
       </div>
     <% end %>
