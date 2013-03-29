@@ -47,7 +47,6 @@ class Map < ActiveRecord::Base
   # Methods
   
   def get_map_values
-    slides, places, scenics, recommends, records, detaileds, infos = [], [], [], [], [], [], []
     if self.map_slides.present?
       slides ||= []
       self.map_slides.order_asc.each do |slide|
@@ -67,11 +66,13 @@ class Map < ActiveRecord::Base
       end
     end
     if self.recommends_count > 0
+      recommends ||= []
       self.recommends.each do |recommend|
         recommends << get_map_recommend_values(recommend)
       end
     end
     if self.infos_count > 0
+      infos ||= []
       self.infos.order_asc.each do |info|
         infos << {
                     name: info.name,
