@@ -25,7 +25,11 @@
           <tr>
             <td><%= check_box_tag "share_ids[]", share.id, false, :id => "share_#{share.id}" %></td>
             <td><%= link_to share.title, admin_share_path(share) %></td>
-            <td><%= share.map.name %></td>
+            <td>
+              <% if share.map.present? %>
+                <%= share.map.name %>
+              <% end %>
+            </td>
             <td><%= t("enums.share.states.#{model_class.states.key(share.state_cd)}") %></td>
             <td><%= l share.created_at.to_date, :format => :long %></td>
             <td class="action">
