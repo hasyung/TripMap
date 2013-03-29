@@ -37,7 +37,7 @@
           <%= MapSerialNumber.human_attribute_name(:sum) %>
         </label>
         <div class="controls">
-          <input class="numeric integer optional" id="sum" name="sum" step="1" type="number" value="0">
+          <input class="string integer optional" id="sum" name="sum" step="1" type="text" maxlength="8" value="0">
         </div>
     </div>
 
@@ -68,8 +68,8 @@
       alert("请选择地图！");
     else if ($("#map_serial_number_type_cd").val() == "")
       alert("请选择类型！")
-    else if ($("#date").val()=="")
-      alert("请选择时间范围！")
+    else if (!(/(^[0-9]*[1-9][0-9]*$)/.test($(sum).val())))
+      alert("请输入正确的数值！")
     else result = true;
     return result;
   }
