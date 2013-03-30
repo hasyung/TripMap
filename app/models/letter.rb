@@ -23,7 +23,7 @@ class Letter < ActiveRecord::Base
   },
   :column => "text_type"
 
-  validates_numericality_of :order, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999, :if => :order?
+  validates_numericality_of :order, :greater_than_or_equal_to => 1, :less_than_or_equal_to => 999
   validates :order, uniqueness: { scope: [:textable_id, :textable_type] }
 
   # Scopes

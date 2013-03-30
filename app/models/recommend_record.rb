@@ -19,7 +19,7 @@ class RecommendRecord < ActiveRecord::Base
     column.validates :name, :length => { :within => 2..15,    :message => I18n.t("errors.type.name") }, :uniqueness => true
     column.validates :order, uniqueness: { scope: :recommend_id }
   end
-  validates_numericality_of :order, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999, :if => :order?
+  validates_numericality_of :order, :greater_than_or_equal_to => 1, :less_than_or_equal_to => 999
   
   belongs_to :recommend, :counter_cache => true
 
