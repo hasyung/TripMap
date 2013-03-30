@@ -347,9 +347,9 @@
           body: "描述"
       place:
         place_icon:
-          file: "景点图标"
+          file: "精彩介绍图片"
         place_image:
-          file: "背景图"
+          file: "实景图片"
         place_description_image:
           file: "景点描述"
         place_video:
@@ -375,9 +375,9 @@
           duration: "时长"
           order: "排序"
         scenic_icon:
-          file: "景点图标"
+          file: "精彩介绍图片"
         scenic_image:
-          file: "背景图"
+          file: "实景图片"
         scenic_description_image:
           file: "景点描述"
         scenic_description:

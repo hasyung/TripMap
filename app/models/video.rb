@@ -15,7 +15,7 @@ class Video < ActiveRecord::Base
     column.validates_numericality_of :duration, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999999
   end
   
-  validates_numericality_of :order, :greater_than_or_equal_to => 1, :less_than_or_equal_to => 999
+  validates_numericality_of :order, :greater_than_or_equal_to => 1, :less_than_or_equal_to => 999, :if => :order?
 
 
   # SampleEnum. hash table is in growing.

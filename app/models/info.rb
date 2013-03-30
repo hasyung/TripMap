@@ -15,7 +15,7 @@ class Info < ActiveRecord::Base
     column.validates :name, :length => { :within => 1..20,   :message => I18n.t("errors.type.name") }
     column.validates :slug, :length => { :within => 1..20 }, :format => { :with => /([a-z])+/, :message => I18n.t("errors.type.slug") }
   end
-  validates_numericality_of :order, :greater_than_or_equal_to => 1, :less_than_or_equal_to => 999
+  validates_numericality_of :order, :greater_than_or_equal_to => 1, :less_than_or_equal_to => 999, :if => :order?
   validates :order, uniqueness: { scope: :map_id }
    # Scopes
   scope :order_asc, order("`order` ASC")
