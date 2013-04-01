@@ -3,7 +3,28 @@
   <%= p.input :slug %>
   <%= p.input :subtitle %>
   <%= p.association :map, collection: Map.all, prompt: t("helpers.links.select", :model_name => Map.model_name.human) %>
-  
+
+  <%= p.fields_for :place_icon, @place.place_icon ||= @place.build_place_icon do |picon|  %>  
+    <%= picon.input :file, :as => :file %>
+    <% if @place.place_icon && @place.place_icon.file.present? %>
+        <div class="control-group image">
+          <div class="controls">
+            <%= image_tag @place.place_icon.file %>
+          </div>
+        </div>
+    <% end %>
+  <% end %>
+
+  <%= p.fields_for :place_image, @place.place_image ||= @place.build_place_image do |pimg|  %>  
+    <%= pimg.input :file, :as => :file %>
+    <% if @place.place_image && @place.place_image.file.present? %>
+      <div class="control-group image">
+        <div class="controls">
+          <%= image_tag @place.place_image.file %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
 
   <%= p.fields_for :place_audio, @place.place_audio ||= @place.build_place_audio do |pa|  %>  
     <%= pa.input :file, :as => :file %>
@@ -12,7 +33,7 @@
      <% if @place.place_audio && @place.place_audio.file.present? %>
       <div class="control-group">
         <div class="controls">
-          <%= audio_tag(@place.place_video.file, :autoplay => false, :controls => true) %>
+          <%= audio_tag(@place.place_audio.file, :autoplay => false, :controls => true) %>
         </div>
       </div>
     <% end %>

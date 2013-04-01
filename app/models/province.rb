@@ -4,7 +4,7 @@ class Province < ActiveRecord::Base
   attr_accessible :name, :slug
   
   # Associations
-  has_many :maps, :dependent => :destroy, :autosave => true
+  has_many :maps, :autosave => true
   
   # Validates
   with_options :presence => true do |column|
