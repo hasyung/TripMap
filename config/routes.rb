@@ -95,6 +95,10 @@ TripMap::Application.routes.draw do
         post 'logs' => 'logs#create', :on => :collection
         get 'version' => 'maps#version', :on => :member
       end
+      resources :nicknames, only: [] do
+        post '/create' => 'nicknames#create', on: :collection
+        get '/show' => 'nicknames#show', on: :collection
+      end
     end
   end
   
