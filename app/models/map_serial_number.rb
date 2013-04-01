@@ -4,6 +4,7 @@ class MapSerialNumber < ActiveRecord::Base
   self.inheritance_column = ""
 
   belongs_to :map
+  has_one :nickname, :dependent => :destroy
 
   as_enum :type, { :free => 0, :ordinary => 1, :favorite => 2 }
   as_enum :printed, { :no_print => 0, :yes_print => 1 }

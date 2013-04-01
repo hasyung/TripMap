@@ -251,6 +251,7 @@
       audio: "音频"
       letter: "文本"
       log: "日志"
+      nickname: "昵称"
     attributes:
       map:
         province: "省市"
@@ -304,7 +305,7 @@
         order: "排序"
       share:
         title: "标题"
-        nickname: "昵称"
+        nickname_id: "昵称"
         device_id: "设备ID"
         map: "地图"
         state_cd: "审核状态"

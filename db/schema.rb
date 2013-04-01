@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130322033633) do
+ActiveRecord::Schema.define(:version => 20130401070747) do
 
   create_table "activate_maps", :force => true do |t|
     t.integer  "map_id",               :null => false
@@ -105,6 +105,15 @@ ActiveRecord::Schema.define(:version => 20130322033633) do
   add_index "maps", ["name"], :name => "index_maps_on_name", :unique => true
   add_index "maps", ["slug"], :name => "index_maps_on_slug", :unique => true
 
+  create_table "nicknames", :force => true do |t|
+    t.integer  "map_serial_number_id",               :null => false
+    t.string   "nickname",             :limit => 30, :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+  end
+
+  add_index "nicknames", ["nickname"], :name => "index_nicknames_on_nickname", :unique => true
+
   create_table "places", :force => true do |t|
     t.integer  "map_id",                   :null => false
     t.string   "name",       :limit => 20, :null => false
@@ -170,13 +179,13 @@ ActiveRecord::Schema.define(:version => 20130322033633) do
   add_index "scenics", ["slug"], :name => "index_scenics_on_slug", :unique => true
 
   create_table "shares", :force => true do |t|
-    t.integer  "map_id",                                  :null => false
-    t.string   "nickname",   :limit => 30
-    t.string   "device_id",                               :null => false
-    t.string   "title",      :limit => 20,                :null => false
-    t.integer  "state_cd",                 :default => 0
-    t.datetime "created_at",                              :null => false
-    t.datetime "updated_at",                              :null => false
+    t.integer  "map_id",                                   :null => false
+    t.string   "device_id",                                :null => false
+    t.string   "title",       :limit => 20,                :null => false
+    t.integer  "state_cd",                  :default => 0
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+    t.integer  "nickname_id",                              :null => false
   end
 
   create_table "texts", :force => true do |t|
