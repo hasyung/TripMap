@@ -15,7 +15,7 @@ class Audio < ActiveRecord::Base
   end
   
   
-  validates :order, uniqueness: { scope: [:audioable_id, :audioable_type, :order] }, 
+  validates :order, uniqueness: { scope: [:audioable_id, :audioable_type, :audio_type] }, 
                     numericality: { :greater_than_or_equal_to => 1, :less_than_or_equal_to => 999 }
 
   # SampleEnum. hash table is in growing.

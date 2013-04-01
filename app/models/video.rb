@@ -16,7 +16,7 @@ class Video < ActiveRecord::Base
   end
   
   validates :order, numericality: { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999 }, 
-                    uniqueness: { scope: [:videoable_id, :videoable_type, :order] }
+                    uniqueness: { scope: [:videoable_id, :videoable_type, :video_type] }
 
 
   # SampleEnum. hash table is in growing.
