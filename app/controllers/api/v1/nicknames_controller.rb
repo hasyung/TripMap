@@ -3,7 +3,7 @@ class Api::V1::NicknamesController < Api::V1::ApplicationController
 		result = {}
 		serial = MapSerialNumber.find{|num| num.code == params[:serial]}
 		if serial.present? && serial.nickname.present?
-      		result << {nickname: serial.nickname.nickname}
+      		result = {id: serial.nickname.id, nickname: serial.nickname.nickname}
     		end
     		render :json => result
 	end
@@ -11,7 +11,7 @@ class Api::V1::NicknamesController < Api::V1::ApplicationController
 	def create
 		result = {result: false}
 		serial = MapSerialNumber.find{|num| num.code == params[:serial]}
-		if serial.present? && Nickname.find{|n| n.nickname == params[:nickname]}.blank?
+		if serial.present? && serial.nickname.blank? && Nickname.find{|n| n.nickname == params[:nickname]}.blank?
 			serial.build_nickname nickname: params[:nickname]
 			if serial.save
 				result = {result: true}
