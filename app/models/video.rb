@@ -15,7 +15,8 @@ class Video < ActiveRecord::Base
     column.validates_numericality_of :duration, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999999
   end
   
-  validates_numericality_of :order, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999, :if => :order?
+  validates :order, numericality: { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999 }, 
+                    uniqueness: { scope: [:videoable_id, :videoable_type, :video_type] }
 
 
   # SampleEnum. hash table is in growing.

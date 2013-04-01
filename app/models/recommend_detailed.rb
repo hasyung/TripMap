@@ -12,8 +12,8 @@ class RecommendDetailed < ActiveRecord::Base
 
   validates :name, :length => { :within => 1..15,    :message => I18n.t("errors.type.name") }, :uniqueness => true, :presence => true
   
-  validates_numericality_of :order, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999, :if => :order?
-  validates :order, uniqueness: { scope: :recommend_record_id }
+  validates :order, uniqueness: { scope: [:recommend_record_id, :order] }, 
+                    numericality: { :greater_than_or_equal_to => 1, :less_than_or_equal_to => 999 }
   scope :order_asc, order("`order` ASC")
   scope :created_desc, order("`created_at` DESC")
 end

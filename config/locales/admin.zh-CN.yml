@@ -251,6 +251,7 @@
       audio: "音频"
       letter: "文本"
       log: "日志"
+      nickname: "昵称"
     attributes:
       map:
         province: "省市"
@@ -304,7 +305,7 @@
         order: "排序"
       share:
         title: "标题"
-        nickname: "昵称"
+        nickname_id: "昵称"
         device_id: "设备ID"
         map: "地图"
         state_cd: "审核状态"
@@ -347,9 +348,9 @@
           body: "描述"
       place:
         place_icon:
-          file: "景点图标"
+          file: "精彩介绍图片"
         place_image:
-          file: "背景图"
+          file: "实景图片"
         place_description_image:
           file: "景点描述"
         place_video:
@@ -375,9 +376,9 @@
           duration: "时长"
           order: "排序"
         scenic_icon:
-          file: "景点图标"
+          file: "精彩介绍图片"
         scenic_image:
-          file: "背景图"
+          file: "实景图片"
         scenic_description_image:
           file: "景点描述"
         scenic_description:

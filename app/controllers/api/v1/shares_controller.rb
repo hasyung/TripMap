@@ -55,14 +55,17 @@ class Api::V1::SharesController < Api::V1::ApplicationController
     result = {result: false}
     map = Map.find params[:map_id].to_i
     if map.present?
-      @share = map.shares.new
-      @share.title = params[:title]
-      @share.nickname = params[:nickname]
-      @share.device_id = params[:device_id]
-      @share.build_share_image file: params[:image]
-      @share.build_share_text body: params[:text]
-      if @share.save
-        result = {result: true}
+      nickname = Nickname.find params[:nickname_id].to_i
+      if nickname.present?
+        @share = map.shares.new
+        @share.title = params[:title]
+        @share.nickname_id = nickname.id
+        @share.device_id = params[:device_id]
+        @share.build_share_image file: params[:image]
+        @share.build_share_text body: params[:text]
+        if @share.save
+          result = {result: true}
+        end
       end
     end
     render :json => result
