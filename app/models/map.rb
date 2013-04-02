@@ -198,6 +198,7 @@ class Map < ActiveRecord::Base
     { 
       name: recommend.name,
       slug: recommend.slug,
+      category: recommend.category_cd,
       video: get_file_value(recommend.recommend_video,"file",true),
       video_size: get_file_value(recommend.recommend_video,"file_size",false),
       video_duration: get_file_value(recommend.recommend_video,"duration",false),
