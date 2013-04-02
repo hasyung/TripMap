@@ -1,4 +1,6 @@
 class Map < ActiveRecord::Base
+  
+  include SerialNumber::Generate
 
   #White list
   attr_accessible :province, :province_id, :name, :slug, :version,
