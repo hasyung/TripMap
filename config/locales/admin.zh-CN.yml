@@ -283,6 +283,7 @@
         slug: "简码"
         map: "地图"
         province: "省市"
+        category_cd: "类型"
         recommend_records_count: "推荐记录"
       recommend_record:  
         name: "名称"      
@@ -305,7 +306,7 @@
         order: "排序"
       share:
         title: "标题"
-        nickname_id: "昵称"
+        nickname: "昵称"
         device_id: "设备ID"
         map: "地图"
         state_cd: "审核状态"
@@ -397,6 +398,8 @@
         recommend_record_description:
           body: "推荐记录描述"
       recommend_detailed:
+        recommend_detailed_cover:
+          file: "封面"
       share:
         share_image:
           file: "分享图片"
@@ -454,6 +457,11 @@
       states:
         draft: "未通过"
         publish: "通过"
+    recommend:
+      categories:
+        one: "类型一"
+        two: "类型二"
+        three: "类型三"
     mapserialnumber:
       print:
         no_print: "未印刷"

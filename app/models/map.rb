@@ -137,11 +137,15 @@ class Map < ActiveRecord::Base
         if record.recommend_detaileds.present?
           record.recommend_detaileds.order_asc.each do |detailed|
             detail ||= []
-            detail += detailed.images if detailed.images.present?
-            detail += detailed.videos if detailed.videos.present?
-            detail += detailed.audios if detailed.audios.present?
+            if recommend.category_cd == 1
+              detail += detailed.videos if detailed.videos.present?
+              detail += detailed.audios if detailed.audios.present?
+              detail += detailed.image_lists if detailed.image_lists.present?
+            end
+            if recommend.category_cd != 3
+              detail += detailed.detailed_images if detailed.detailed_images.present?
+            end
             detail += detailed.texts if detailed.texts.present?
-            detail += detailed.image_lists if detailed.image_lists.present?
             detail = detail.sort {|a,b| a[:order] <=> b[:order]}
             content = { :name => detailed.name }
             images ||= []
@@ -166,26 +170,35 @@ class Map < ActiveRecord::Base
                 image_lists << {images: imgs,  order: d.order}
               end
             end
-            content.merge!({images: images}) 
-            content.merge!({videos: videos})
-            content.merge!({audios: audios})
+            if recommend.category_cd != 3
+              content.merge!({images: images}) 
+            end
+            if recommend.category_cd == 1
+              content.merge!({videos: videos})
+              content.merge!({audios: audios})
+              content.merge!({image_lists: image_lists}) if image_lists.present?
+            end
             content.merge!({texts: texts})
-            content.merge!({image_lists: image_lists}) if image_lists.present?
+            if recommend.category_cd == 2
+              content.merge!({cover: get_file_value(detailed.recommend_detailed_cover,"file",true)})
+            end
             detaileds << content
           end
         end
         records << { name: record.name, cover: get_file_value(record.recommend_record_cover,"file", true), detaileds: detaileds }
       end
     end
-    {
-      name:             recommend.name,
-      slug:             recommend.slug,
-      video:            get_file_value(recommend.recommend_video, "file", true),
-      video_size:       get_file_value(recommend.recommend_video, "file_size"),
-      video_duration:   get_file_value(recommend.recommend_video, "duration"),
-      video_cover:      get_file_value(recommend.recommend_video, "cover", true),
-      cover:            get_file_value(recommend.recommend_cover, "file", true),
-      records:          records
+    
+    { 
+      name: recommend.name,
+      slug: recommend.slug,
+      category: recommend.category_cd,
+      video: get_file_value(recommend.recommend_video,"file",true),
+      video_size: get_file_value(recommend.recommend_video,"file_size",false),
+      video_duration: get_file_value(recommend.recommend_video,"duration",false),
+      video_cover: get_file_value(recommend.recommend_video,"cover",true),
+      cover: get_file_value(recommend.recommend_cover,"file",true),
+      records: records
     }
   end
 

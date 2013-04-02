@@ -1,7 +1,7 @@
 class Recommend < ActiveRecord::Base
   
   # White list
-  attr_accessible :map, :map_id, :name, :slug, :recommend_cover_attributes, :recommend_video_attributes
+  attr_accessible :map, :map_id, :name, :slug, :recommend_cover_attributes, :recommend_video_attributes, :category_cd
 
   # Associations
   has_one :recommend_video, :as => :videoable, :class_name => "Video",
@@ -15,12 +15,15 @@ class Recommend < ActiveRecord::Base
   has_many :recommend_records, :dependent => :destroy
 
   belongs_to :map, :counter_cache => true
+
+  as_enum :category, { one: 1, two: 2, three: 3 }
   
   # Validates
   with_options :presence => true do |column|
     column.validates :name, :length => { :within => 2..20,    :message => I18n.t("errors.type.name") }, :uniqueness => true
     column.validates :slug, :length => { :within => 2..20 }, :format => { :with => /([a-z])+/, :message => I18n.t("errors.type.slug") }, :uniqueness => true
     column.validates :map_id
+    column.validates :category_cd
   end
 
   # NestedAttributes

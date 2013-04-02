@@ -20,6 +20,9 @@
           <th>
             <%= model_class.human_attribute_name(:map) %>
           </th>
+          <th>
+            <%= model_class.human_attribute_name(:category_cd) %>
+          </th>
           <th><%= model_class.human_attribute_name(:recommend_records_count) %></th>
           <th class="action"><%= t('links.commons.action') %></th>
         </thead>
@@ -34,6 +37,7 @@
             <td><%= r.slug %></td>
             <td><%= r.map.province.name %></td>
             <td><%= r.map.name %></td>
+            <td><%= t("enums.recommend.categories.#{model_class.categories.key(r.category_cd)}") %></td>
             <td><%=r.recommend_records_count %></td>
             <td class="action">
               <%= link_to raw("<i class=\"icon-edit\"></i>"), edit_admin_recommend_path(r) %>
