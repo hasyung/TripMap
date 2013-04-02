@@ -45,7 +45,7 @@ module SerialNumber
     def generate_use_count serial_type
       case serial_type
       when MapSerialNumber.types[:free]
-        0
+        1
       when MapSerialNumber.types[:ordinary] || MapSerialNumber.types[:favorite]
         5
       else
