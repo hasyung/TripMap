@@ -75,7 +75,7 @@ class Api::V1::SharesController < Api::V1::ApplicationController
   def get_share_value(share)
     r = {id: share.id,
          title: share.title,
-         nickname: share.nickname,
+         nickname: Nickname.find(share.nickname_id).name,
          device_id: share.device_id,
          image: share.share_image.file.url,
          cover: share.share_image.file.thumbnail.url,
