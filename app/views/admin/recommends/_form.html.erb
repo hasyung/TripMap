@@ -4,7 +4,9 @@
   <%= r.association :map, collection: Map.all, 
                           prompt: t("helpers.links.select", 
                           :model_name => Map.model_name.human) %>
-
+  <%= r.input :category_cd do %>
+      <%= r.select :category_cd, Recommend.categories_for_select(:value) %>
+    <% end -%>
   <%= r.fields_for :recommend_cover, @recommend.recommend_cover ||= @recommend.build_recommend_cover do |c| %>
     <%= c.input :file, as: :file %>
     <% if @recommend.recommend_cover && @recommend.recommend_cover.file.present? %>

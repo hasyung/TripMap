@@ -29,6 +29,7 @@ gem 'devise'
 gem 'httpclient'
 gem "smart_tuple" #sql search
 gem 'thin'
+gem 'uuidtools'
 
 group :test, :development do
   gem 'rspec-rails'
