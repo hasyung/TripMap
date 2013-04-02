@@ -15,7 +15,7 @@
           <th><input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" /></th>
           <th><%= model_class.human_attribute_name(:title) %></th>
           <th><%= model_class.human_attribute_name(:map) %></th>
-          <th><%= model_class.human_attribute_name(:nickname_id) %></th>
+          <th><%= model_class.human_attribute_name(:nickname) %></th>
           <th><%= model_class.human_attribute_name(:state_cd) %></th>
           <th><%= model_class.human_attribute_name(:created_at) %></th>
           <th class="action"><%= t('links.commons.action') %></th>
@@ -32,7 +32,7 @@
               <% end %>
             </td>
             <td>
-              <%= Nickname.find(share.nickname_id).nickname %>
+              <%= Nickname.find(share.nickname_id).name %>
             </td>
             <td><%= t("enums.share.states.#{model_class.states.key(share.state_cd)}") %></td>
             <td><%= l share.created_at.to_date, :format => :long %></td>
