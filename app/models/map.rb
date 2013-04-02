@@ -1,4 +1,6 @@
 class Map < ActiveRecord::Base
+  
+  include SerialNumber::Generate
 
   #White list
   attr_accessible :province, :province_id, :name, :slug, :version,
@@ -24,8 +26,9 @@ class Map < ActiveRecord::Base
   has_one :map_description, :as => :textable, :class_name => 'Letter', 
           :conditions => { :text_type => Letter.map_description },
           :dependent => :destroy
-  
+
   belongs_to :province, :counter_cache => true
+  belongs_to :active_map
 
   # Validates
   with_options :presence => true do |column|
@@ -33,101 +36,96 @@ class Map < ActiveRecord::Base
     column.validates :name, :length => { :within => 1..20,    :message => I18n.t("errors.type.name") }, :uniqueness => true
     column.validates :slug, :length => { :within => 1..20 },  :format => { :with => /([a-z])+/, :message => I18n.t("errors.type.slug") }, :uniqueness => true
   end
-  
+
   #validate :require_map_cover_attributes
-  
+
   # NestedAttributes
   accepts_nested_attributes_for :map_cover, reject_if: lambda { |img| img[:file].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :map_plat, reject_if: lambda { |img| img[:file].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :map_description, :allow_destroy => true
-  
+
   # Scopes
   scope :created_desc, order("created_at DESC")
-  
+
   # Methods
-  
+
   def get_map_values
-    if self.map_slides.present?
-      slides ||= []
-      self.map_slides.order_asc.each do |slide|
-        slides << { image: slide.file.url}
-      end
-    end
-    if self.places_count > 0
-      places ||= []
-      self.places.each do |place|
-        places << get_map_place_values(place)
-      end
-    end
-    if self.scenics_count > 0
-      scenics ||= []
-      self.scenics.each do |scenic|
-        scenics << get_map_scenic_values(scenic)
-      end
-    end
-    if self.recommends_count > 0
-      recommends ||= []
-      self.recommends.each do |recommend|
-        recommends << get_map_recommend_values(recommend)
-      end
-    end
-    if self.infos_count > 0
-      infos ||= []
-      self.infos.order_asc.each do |info|
-        infos << {
-                    name: info.name,
-                    slug: info.slug,
-                    description: get_file_value(info.letter,"body",false)
-                  }
-      end
-    end
     {   
-      cover: get_file_value(self.map_cover,"file",true),
-      description: get_file_value(self.map_description,"body",false),
-      slides: slides,
-      scenics: scenics,
-      places: places,
-      recommends: recommends,
-      infos: infos
+      cover:            get_file_value(self.map_cover,"file",true),
+      description:      get_file_value(self.map_description,"body"),
+      slides:           get_map_slides(),
+      scenics:          get_scenics(),
+      places:           get_places(),
+      recommends:       get_recommends(),
+      infos:            get_infos()
     }
   end
-  
 
   private
-  
+
+  def get_map_slides()
+    slides = []
+    self.map_slides.order_asc.each{ |o| slides << { image: o.file.url} } if self.map_slides.present?
+    slides
+  end
+
+  def get_places()
+    places = []
+    self.places.each{ |o| places << get_map_place_values(o) } if self.places_count > 0
+    places
+  end
+
+  def get_scenics()
+    scenics = []
+    self.scenics.each{ |o| scenics << get_map_scenic_values(o) } if self.scenics_count > 0
+    scenics
+  end
+
+  def get_recommends()
+    recommends = []
+    self.recommends.each{ |o| recommends << get_map_recommend_values(o) } if self.recommends_count > 0
+    recommends
+  end
+
+  def get_infos()
+    infos = []
+    self.infos.order_asc.each{ |o| infos << { name: o.name, slug: o.slug, description: get_file_value(o.letter, "body")} }
+    infos
+  end
+
   def get_map_place_values place
     {
-      id: place.id,
-      name: place.name,
-      subtitle: place.subtitle,
-      slug: place.slug,
-      icon: get_file_value(place.place_icon,"file",true),
-      image: get_file_value(place.place_image,"file",true),
-      audio: get_file_value(place.place_audio,"file",true),
-      audio_size: get_file_value(place.place_audio,"file_size",false),
-      audio_duration: get_file_value(place.place_audio,"duration",false),
-      video: get_file_value(place.place_video,"file",true),
-      video_size: get_file_value(place.place_video,"file_size",false),
-      video_duration: get_file_value(place.place_video,"duration",false),
-      description: get_file_value(place.place_description,"body",false)
+      id:               place.id,
+      name:             place.name,
+      subtitle:         place.subtitle,
+      slug:             place.slug,
+      icon:             get_file_value(place.place_icon, "file", true),
+      image:            get_file_value(place.place_image, "file", true),
+      audio:            get_file_value(place.place_audio, "file", true),
+      audio_size:       get_file_value(place.place_audio, "file_size"),
+      audio_duration:   get_file_value(place.place_audio, "duration"),
+      video:            get_file_value(place.place_video, "file",true),
+      video_size:       get_file_value(place.place_video, "file_size"),
+      video_duration:   get_file_value(place.place_video, "duration"),
+      description:      get_file_value(place.place_description, "body")
     }
   end
 
   def get_map_scenic_values scenic
     {
-      id: scenic.id,
-      name: scenic.name,
-      subtitle: scenic.subtitle,
-      slug: scenic.slug,
-      icon: get_file_value(scenic.scenic_icon,"file",true),
-      image: get_file_value(scenic.scenic_image,"file",true),
-      impression: get_file_value(scenic.scenic_impression,"file",true),
-      impression_size: get_file_value(scenic.scenic_impression,"file_size",false),
-      impression_duration: get_file_value(scenic.scenic_impression,"duration",false),
-      route: get_file_value(scenic.scenic_route,"file",true),
-      route_size: get_file_value(scenic.scenic_route,"file_size",false),
-      route_duration: get_file_value(scenic.scenic_route,"duration",false),
-      description: get_file_value(scenic.scenic_description,"body",false)
+      id:               scenic.id,
+      name:             scenic.name,
+      subtitle:         scenic.subtitle,
+      slug:             scenic.slug,
+      icon:             get_file_value(scenic.scenic_icon, "file", true),
+      image:            get_file_value(scenic.scenic_image, "file", true),
+      impression:       get_file_value(scenic.scenic_impression, "file", true),
+      impression_size:  get_file_value(scenic.scenic_impression, "file_size"),
+      impression_duration: get_file_value(scenic.scenic_impression, "duration"),
+      route:            get_file_value(scenic.scenic_route, "file", true),
+      route_size:       get_file_value(scenic.scenic_route, "file_size"),
+      route_duration:   get_file_value(scenic.scenic_route, "duration"),
+      description:      get_file_value(scenic.scenic_description, "body")
     }
   end
 
@@ -149,12 +147,13 @@ class Map < ActiveRecord::Base
             end
             detail += detailed.texts if detailed.texts.present?
             detail = detail.sort {|a,b| a[:order] <=> b[:order]}
-            content = {:name => detailed.name}
+            content = { :name => detailed.name }
             images ||= []
             videos ||= []
             audios ||= []
             texts ||= []
             image_lists ||= []
+
             detail.each do |d|
               case d.class.to_s
               when "Image"
@@ -167,9 +166,7 @@ class Map < ActiveRecord::Base
                  texts << {text: d.body, order: d.order}
               when "ImageList"
                 imgs ||= []
-                d.images.order_asc.each do |img|
-                  imgs << {image: img.file.url}
-                end
+                d.images.order_asc.each{ |o| imgs << { image: o.file.url }}
                 image_lists << {images: imgs,  order: d.order}
               end
             end
@@ -188,13 +185,10 @@ class Map < ActiveRecord::Base
             detaileds << content
           end
         end
-        records << {
-                      name: record.name,
-                      cover: get_file_value(record.recommend_record_cover,"file",true),
-                      detaileds: detaileds
-                    }
+        records << { name: record.name, cover: get_file_value(record.recommend_record_cover,"file", true), detaileds: detaileds }
       end
     end
+    
     { 
       name: recommend.name,
       slug: recommend.slug,
@@ -208,16 +202,10 @@ class Map < ActiveRecord::Base
     }
   end
 
-  def get_file_value(file, meth_name,url)
-    if file.present?
-      if url
-        result = file.send(meth_name.to_sym).url
-      else
-        result = file.send(meth_name.to_sym)
-      end
-    else
-      result= ""
-    end
-    result
+  def get_file_value( file, meth_name, url = false )
+    return "" if not file.present?
+
+    result = url ? file.send(meth_name.to_sym).url : file.send(meth_name.to_sym)
   end
+
 end
