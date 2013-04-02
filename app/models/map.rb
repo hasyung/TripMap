@@ -26,7 +26,7 @@ class Map < ActiveRecord::Base
   has_one :map_description, :as => :textable, :class_name => 'Letter', 
           :conditions => { :text_type => Letter.map_description },
           :dependent => :destroy
-  
+
   belongs_to :province, :counter_cache => true
   belongs_to :active_map
 
