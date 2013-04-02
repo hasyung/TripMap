@@ -12,9 +12,10 @@ namespace :sn do
       puts "========地图未找到========"
     else
       puts "========开始创建序列号========"
-      1.upto(args.limit) do |i|
+      1.upto(args.limit.to_i) do |i|
         @map.create_single_sn args.type
         print " #{i} "
+        print "\n" if i == args.limit.to_i
       end
       puts "========序列号创建结束========"
     end
