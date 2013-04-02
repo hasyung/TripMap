@@ -31,7 +31,9 @@ class Image < ActiveRecord::Base
 
     :recommend_record_cover     => 10,
 
-    :share_image                => 11
+    :share_image                => 11,
+    :recommend_detailed_cover     => 12,
+    :detailed_images      => 13
   },
   :column => "image_type"
 
