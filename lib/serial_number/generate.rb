@@ -33,20 +33,20 @@ module SerialNumber
       result << uuid.first
       
       # model save
-      self.map_serial_numbers.build code: result, type_cd: serial_type, count: use_count, printed_cd: 0
+      self.map_serial_numbers.build code: format(result), type_cd: serial_type, count: use_count, printed_cd: 0
       self.save
     end
     
-    private
+    # private
     def generate_uuid
-      UUIDTools::UUID.timestamp_create.to_s.split(/-/).first.scan(/..../)
+      UUIDTools::UUID.timestamp_create.to_s.split(/-/).first.sub(/0/, 'o').sub(/1/, 'l').scan(/..../)
     end
     
     def generate_use_count serial_type
       case serial_type
       when MapSerialNumber.types[:free]
         1
-      when MapSerialNumber.types[:ordinary] || MapSerialNumber.types[:favorite]
+      when (MapSerialNumber.types[:ordinary]..MapSerialNumber.types[:favorite])
         5
       else
         0
@@ -54,20 +54,22 @@ module SerialNumber
     end
     
     def generate_map_id
+      chars = ('a'..'j').to_a
       case self.id
       when 1..9
-        [generate_random(:char), generate_random(:char), self.id.to_s]
+        [generate_random(:char), generate_random(:char), chars[self.id]]
       when 10..99
-        [generate_random, self.id.to_s.first, self.id.to_s.last]
+        [generate_random, chars[self.id.to_s.first.to_i], chars[self.id.to_s.last.to_i]]
       when 100..999
-        self.id.to_s.scan(/\d/)
+        result = self.id.to_s.scan(/\d/)
+        [chars[result.first.to_i], chars[result.at(1).to_i], chars[result.last.to_i]]
       else
-        '000'.scan(/\d/)
+        'ooo'.scan(/\w/)
       end
     end
     
     def generate_random type = :mix
-      nums = (0..9).to_a
+      nums = (2..9).to_a
       chars = ('a'..'z').to_a
       case type
       when :mix
@@ -78,6 +80,11 @@ module SerialNumber
         chars
       end
       chars[rand(chars.count)].to_s
+    end
+    
+    def format sn
+      result = sn.sub(/0/, 'o').sub(/1/, 'l')
+      result
     end
     
   end
