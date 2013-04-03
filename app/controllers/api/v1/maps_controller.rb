@@ -1,4 +1,5 @@
 class Api::V1::MapsController < Api::V1::ApplicationController
+
   def index
     result = []
     Map.all.each do |map|
@@ -10,7 +11,12 @@ class Api::V1::MapsController < Api::V1::ApplicationController
 
   def show
     result= {}
+
+    is_invalid_params = params[:device_id].nil? or params[:map_id].nil? or params[:serial].nil?
+    ( render :json => result; return ) if is_invalid_params
+
     ( render :json => result; return ) if !validate_client_state
+
     mid = params[:map_id].to_i
     map = Map.find{ |o| o.id == mid }
     ( render :json => result; return ) if map.nil?                # Check map
@@ -39,6 +45,8 @@ class Api::V1::MapsController < Api::V1::ApplicationController
 
   def version
     result = {}
+
+    (render :json => result; return) if params[:id].nil?
 
     map = Map.find{ |o| o.id = params[:id] }
     result = { version: map.version } if not map.nil?

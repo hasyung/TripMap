@@ -188,12 +188,12 @@ ActiveRecord::Schema.define(:version => 20130403061030) do
 
   create_table "shares", :force => true do |t|
     t.integer  "map_id",                                   :null => false
+    t.integer  "nickname_id",                              :null => false
     t.string   "device_id",                                :null => false
     t.string   "title",       :limit => 20,                :null => false
     t.integer  "state_cd",                  :default => 0
     t.datetime "created_at",                               :null => false
     t.datetime "updated_at",                               :null => false
-    t.integer  "nickname_id",                              :null => false
   end
 
   create_table "texts", :force => true do |t|

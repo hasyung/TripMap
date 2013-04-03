@@ -223,6 +223,7 @@
     serialnumbers:
       error: "没有任何数据！"
       sum: "序列号总数[%{sum}]小于您导出的数量！"
+      export: "序列号已生成，请联系系统开发部人员获取！"
 
   activerecord:
     enums:
