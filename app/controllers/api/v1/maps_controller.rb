@@ -10,7 +10,7 @@ class Api::V1::MapsController < Api::V1::ApplicationController
 
   def show
     result= {}
-
+    ( render :json => result; return ) if !validate_client_state
     mid = params[:map_id].to_i
     map = Map.find{ |o| o.id == mid }
     ( render :json => result; return ) if map.nil?                # Check map
@@ -46,4 +46,27 @@ class Api::V1::MapsController < Api::V1::ApplicationController
     render :json => result
   end
 
+  private
+
+  def validate_client_state
+    result = true
+    ip = request.remote_ip
+    result = false if ip.blank?
+    past_ip = IpAddress.find{|i| i.ip == ip}
+    if past_ip.blank?
+      IpAddress.create ip: ip
+    else
+      if Time.now() - past_ip.created_at > 3600
+        past_ip.destroy
+        IpAddress.create ip: ip
+      elsif past_ip.counter > 100
+        result = false
+      else
+        past_ip.counter += 1
+        past_ip.save
+      end
+    end
+    result
+  end
+  
 end
