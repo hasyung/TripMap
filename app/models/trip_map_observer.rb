@@ -1,4 +1,6 @@
 class TripMapObserver < ActiveRecord::Observer
+
+  # Observing models
   observe :scenic, :place, :recommend,                    # Level 1.
           :recommend_record, :recommend_detailed,         # Level 2.
           :image_list,
@@ -73,5 +75,5 @@ class TripMapObserver < ActiveRecord::Observer
 
     map
   end
-  
+
 end

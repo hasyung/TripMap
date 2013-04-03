@@ -1,6 +1,5 @@
 class Map < ActiveRecord::Base
-  
-  include SerialNumber::Generate
+ include SerialNumber::Generate
 
   #White list
   attr_accessible :province, :province_id, :name, :slug, :version,
@@ -188,8 +187,8 @@ class Map < ActiveRecord::Base
         records << { name: record.name, cover: get_file_value(record.recommend_record_cover,"file", true), detaileds: detaileds }
       end
     end
-    
-    { 
+
+    {
       name: recommend.name,
       slug: recommend.slug,
       category: recommend.category_cd,
