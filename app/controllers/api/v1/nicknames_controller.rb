@@ -1,6 +1,6 @@
 class Api::V1::NicknamesController < Api::V1::ApplicationController
 
-	def show
+  def show
     result = {}
     (render :json => result; return) if params[:serial].nil?
 
@@ -11,22 +11,22 @@ class Api::V1::NicknamesController < Api::V1::ApplicationController
     render :json => result
   end
 
-	def create
-		result = {result: false}
+  def create
+    result = {result: false}
 
-		nickname = params[:nickname]
+    nick_name = params[:nickname]
     is_invalid_params = params[:serial].nil? or nickname.nil?
     (render :json => result; return) if is_invalid_params
 
-		serial = MapSerialNumber.find{ |o| o.code == params[:serial] }
-    is_present = serial.present? and serial.nickname.blank? and Nickname.find{ |o| o.name == nickname }.blank?
+    serial = MapSerialNumber.find{ |o| o.code == params[:serial] }
+    is_present = serial.present? and serial.nickname.blank? and Nickname.find{ |o| o.name == nick_name }.blank?
 
-		if is_present
-			serial.build_nickname nickname: params[:nickname]
-			result = {result: true} if serial.save
-		end
+    if is_present
+      serial.build_nickname nickname: nick_name
+      result = {result: true} if serial.save
+    end
 
-		render :json => result
-	end
+    render :json => result
+  end
 
 end
