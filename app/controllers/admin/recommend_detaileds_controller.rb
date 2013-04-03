@@ -350,7 +350,7 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
   end
 
   def destroy_text
-    @text = Context.find params[:id]
+    @text = Letter.find params[:id]
     if @text.destroy
       redirect_to admin_recommend_record_detailed_path(
                   params[:recommend_id],

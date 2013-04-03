@@ -1,6 +1,16 @@
 module SerialNumber
   module Generate
     
+    def build_single_sn serial_type = 0
+      uuid = SecureRandom.uuid
+      use_count = generate_use_count serial_type
+      code = uuid << generate_random << serial_type.to_s << 'www.1trip.com'
+      code = format(Digest::MD5.hexdigest(code)[16..32])
+      # model save
+      self.map_serial_numbers.build code: code, type_cd: serial_type, count: use_count, printed_cd: 0
+      self.save
+    end
+    
     def create_sns serial_type = 0, options = {}
       options[:limit].times do
         create_single_sn serial_type
@@ -83,8 +93,11 @@ module SerialNumber
     end
     
     def format sn
-      result = sn.sub(/0/, 'o').sub(/1/, 'l')
-      result
+      chars = ('g'..'z').to_a
+      chars.delete('o')
+      sn.gsub(/0/, chars[rand(chars.count - 1)].to_s)
+        .gsub(/1/, chars[rand(chars.count - 1)].to_s)
+        .gsub(/i/, chars[rand(chars.count - 1)].to_s)
     end
     
   end
