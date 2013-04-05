@@ -224,6 +224,8 @@
       error: "没有任何数据！"
       sum: "序列号总数[%{sum}]小于您导出的数量！"
       export: "序列号已生成，请联系系统开发部人员获取！"
+      purview: "抱歉，您没有查看序列号管理模块的权限！"
+
 
   activerecord:
     enums:
@@ -258,6 +260,7 @@
         province: "省市"
         name: "名称"
         slug: "简码"
+        version: "版本"
         scenics_count: "景区数"
         places_count: "景点数"
         recommends_count: "推荐数"
