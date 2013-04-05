@@ -3,6 +3,7 @@ class Api::V1::SharesController < Api::V1::ApplicationController
   def current
     result = []
     @map = Map.find params[:map_id].to_i
+    (render :json => result; return) if @map.blank?
     size = params[:page_size].to_i
     index = params[:page_index].to_i
     first = (index-1)*size
@@ -28,6 +29,8 @@ class Api::V1::SharesController < Api::V1::ApplicationController
 
   def nearby
     result = []
+    @map = Map.find params[:map_id].to_i
+    (render :json => result; return) if @map.blank?
     @shares = Share.publish.reject {|lambda| lambda.map_id == params[:map_id].to_i}
     size = params[:page_size].to_i
     index = params[:page_index].to_i
