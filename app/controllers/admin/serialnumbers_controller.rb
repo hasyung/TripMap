@@ -1,6 +1,6 @@
-require 'stringio'
-
 class Admin::SerialnumbersController < Admin::ApplicationController
+  before_filter :is_admin
+
   def index
     @serials = MapSerialNumber.page(params[:page]).per(Setting.page_size).created_desc
     @serial = MapSerialNumber.new
@@ -76,5 +76,9 @@ class Admin::SerialnumbersController < Admin::ApplicationController
     end
 
     conditions
+  end
+
+  def is_admin
+    redirect_to admin_root_path, notice: t('messages.serialnumbers.purview') if current_user.email != "admin@1trip.com"
   end
 end
