@@ -18,7 +18,7 @@ class Api::V1::MapsController < Api::V1::ApplicationController
     ( render :json => result; return ) if !validate_client_state
 
     mid = params[:map_id].to_i
-    map = Map.find{ |o| o.id == mid }
+    map = Map.find mid
     ( render :json => result; return ) if map.nil?                # Check map
 
     serial = MapSerialNumber.find{|o| o.code == params[:serial] }

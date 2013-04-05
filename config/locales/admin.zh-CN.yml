@@ -258,6 +258,7 @@
         province: "省市"
         name: "名称"
         slug: "简码"
+        version: "版本"
         scenics_count: "景区数"
         places_count: "景点数"
         recommends_count: "推荐数"
