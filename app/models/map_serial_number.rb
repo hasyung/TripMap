@@ -8,7 +8,6 @@ class MapSerialNumber < ActiveRecord::Base
 
   # Associations
   has_many :activate_maps, :dependent => :destroy
-  has_one :nickname, :dependent => :destroy
   belongs_to :map
 
   # Enumerators, simple_enum plugin

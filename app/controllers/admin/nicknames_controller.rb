@@ -46,13 +46,6 @@ class Admin::NicknamesController < Admin::ApplicationController
    render :index
   end
 
-  def show
-    @nickname = Nickname.find params[:id]
-    @activate_maps = @nickname.map_serial_number.activate_maps
-    add_breadcrumb :show
-    add_breadcrumb @nickname.name
-  end
-
   def destroy
     @nickname = Nickname.find params[:id]
     if @nickname.destroy

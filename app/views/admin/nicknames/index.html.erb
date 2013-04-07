@@ -11,8 +11,7 @@
         <tr>
           <th><input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" /></th>
           <th><%= model_class.human_attribute_name(:name) %></th>
-          <th><%= model_class.human_attribute_name(:map_serial_number_id) %></th>
-          <th><%= model_class.human_attribute_name(:map) %></th>
+          <th><%= model_class.human_attribute_name(:activate_map_id) %></th>
           <th><%= model_class.human_attribute_name(:created_at) %></th>
           <th class="action"><%= t('links.commons.action') %></th>
         </tr>
@@ -21,13 +20,10 @@
         <% @nicknames.each do |nickname| %>
           <tr>
             <td><%= check_box_tag "nickname_ids[]", nickname.id, false, :id => "nickname_#{nickname.id}" %></td>
-            <td><%= link_to nickname.name, admin_nickname_path(nickname) %></td>
-            <td><%= nickname.map_serial_number.code %></td>
-            <td><%= nickname.map_serial_number.map.name %></td>
+            <td><%= nickname.name %></td>
+            <td><%= nickname.activate_map.device_id %></td>
             <td><%= l nickname.created_at.to_date, :format => :long %></td>
             <td class="action">
-              <%= link_to raw("<i class=\"icon-eye-open\"></i>"), admin_nickname_path(nickname), 
-                          :title => t('links.nicknames.show') %>
               <%= link_to raw("<i class=\"icon-edit\"></i>"), edit_admin_nickname_path(nickname), 
                           :title => t('links.nicknames.edit') %>
               <%= link_to raw("<i class=\"icon-trash\"></i>"),
