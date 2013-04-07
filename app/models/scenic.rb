@@ -29,6 +29,7 @@ class Scenic < ActiveRecord::Base
     assoc.has_one :scenic_icon,               :conditions => { :image_type => Image.scenic_icon}
     assoc.has_one :scenic_description_image,  :conditions => { :image_type => Image.scenic_description_image }
     assoc.has_one :scenic_image,              :conditions => { :image_type => Image.scenic_image }
+    assoc.has_many :scenic_slides,  :conditions => { :image_type => Image.scenic_slides  }
   end
 
   # NestedAttributes

@@ -14,6 +14,7 @@ class Place < ActiveRecord::Base
     assoc.has_one :place_icon,              :conditions => { :image_type => Image.place_icon }
     assoc.has_one :place_description_image, :conditions => { :image_type => Image.place_description_image }
     assoc.has_one :place_image,             :conditions => { :image_type => Image.place_image }
+    assoc.has_many :place_slides,  :conditions => { :image_type => Image.place_slides  }
   end
 
   has_one :place_description, :as => :textable, :class_name => "Letter", :conditions => { :text_type => Letter.place_description }, :dependent => :destroy

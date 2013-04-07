@@ -2,7 +2,7 @@
 <div class="box">
   <div class="box-title">
     <span class="icon"><i class="icon-th"></i></span>
-    <h5><%= t('links.maps.images.index') %></h5>
+    <h5><%= t('links.images.index') %></h5>
   </div>
   <div class="box-content">
     <table class="table table-bordered table-striped with-check">
@@ -18,15 +18,15 @@
         <% if !@images.blank? %>
         <% @images.each do |img| %>
           <tr>
-            <td><%= check_box_tag "map_ids[]", img.id, false, :id => "img_#{img.id}" %></td>
+            <td><%= check_box_tag "image_ids[]", img.id, false, :id => "image_#{img.id}" %></td>
             <td><%= img.file %></td>
             <td><%= img.order %></td>
             <td class="action">
               <%= link_to raw("<i class=\"icon-edit\"></i>"), 
-                          admin_map_image_edit_path(params[:id], img.id), 
-                          :title => t('links.maps.edit') %>
+                          get_edit_image_path(@model, img.id), 
+                          :title => t('links.images.edit') %>
               <%= link_to raw("<i class=\"icon-trash\"></i>"),
-                          admin_map_image_path(params[:id], img.id), 
+                          get_delete_image_path(@model, img.id), 
                           :method => :delete,
                           :data => { :confirm => t('links.commons.confirm') } %>
             </td>
