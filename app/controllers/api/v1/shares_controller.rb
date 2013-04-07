@@ -9,7 +9,7 @@ class Api::V1::SharesController < Api::V1::ApplicationController
     index = params[:page_index].to_i
     first = (index-1)*size
     last = index*size - 1
-    @shares = @map.shares.publish
+    @shares = @map.shares.publish.created_desc
     if !@shares.blank?
       if (@shares.count - 1) > first
         if (@shares.count - 1) >= last
@@ -33,7 +33,7 @@ class Api::V1::SharesController < Api::V1::ApplicationController
     (render :json => result; return) if params[:map_id].blank? || params[:page_size].blank? || params[:page_index].blank?
     @map = Map.find_by_id params[:map_id].to_i
     (render :json => result; return) if @map.blank?
-    @shares = Share.publish.reject {|lambda| lambda.map_id == params[:map_id].to_i}
+    @shares = Share.publish.reject{|lambda| lambda.map_id == params[:map_id].to_i}.created_desc
     size = params[:page_size].to_i
     index = params[:page_index].to_i
     first = (index-1)*size

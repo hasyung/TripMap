@@ -9,16 +9,16 @@ TripMap::Application.routes.draw do
   namespace :admin do
     root :to => 'home#index'
     resources :maps, :except => :show do
-      get 'image/new'    => 'maps#new_image'
-      post 'images'      => 'maps#create_image'
-      put 'image/:id'    => 'maps#update_image', :as => "image"
-      delete 'image/:id' => 'maps#destroy_image'
-      get 'images/:id/edit' => 'maps#edit_image', :as => "image_edit"
+      resources :images, except: :show
     end
 
-    resources :provinces
-    resources :places
-    resources :scenics
+    resources :provinces, :except => :show
+    resources :places, :except => :show do
+      resources :images, except: :show
+    end
+    resources :scenics, :except => :show do
+      resources :images, except: :show
+    end
     resources :serialnumbers, :except => :show do
       get  'search',    on: :collection
       get  'export',    on: :collection

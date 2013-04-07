@@ -40,8 +40,9 @@
         index: "地图"
         new: "添加地图"
         edit: "修改地图"
-        new_image: "添加幻灯片"
-        edit_image: "编辑幻灯片"
+      images:
+        new: "添加幻灯片"
+        edit: "修改幻灯片"
       provinces:
         index: "省市"
         new: "添加省市"
@@ -105,12 +106,11 @@
       show: "查看地图"
       new: "添加地图"
       edit: "修改地图"
-      edit_image: "添加幻灯片"
-      images:
-        index: "幻灯片列表"
-        new: "添加图片"
-        edit: "修改图片"
-        back: "地图信息"
+    images:
+      index: "幻灯片列表"
+      index_back: "返回%{model}"
+      new: "添加幻灯片"
+      edit: "修改幻灯片"
     provinces:
       index: "省市列表"
       show: "查看省市"
@@ -188,9 +188,9 @@
     maps:
       success: "操作地图成功！"
       error: "操作地图失败！"
-      images:
-        success: "操作幻灯片成功！"
-        error: "操作幻灯片失败！"
+    slides:
+      success: "操作%{model}幻灯片成功！"
+      error: "操作%{model}幻灯片失败！"
     provinces:
       success: "操作省市成功！"
       error: "操作省市失败！"
@@ -261,7 +261,7 @@
       recommend_record: "推荐记录"
       recommend_detailed: "推荐记录详细"
       map: "地图"
-      image: "图片"
+      image: "幻灯片"
       image_list: "图集"
       text: "文本"
       share: "分享"
@@ -280,8 +280,6 @@
         scenics_count: "景区数"
         places_count: "景点数"
         recommends_count: "推荐数"
-      map_cover:
-        file: "封面"
       province:
         name: "名称"
         slug: "简码"

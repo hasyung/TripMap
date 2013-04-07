@@ -33,7 +33,10 @@ class Image < ActiveRecord::Base
 
     :share_image                => 11,
     :recommend_detailed_cover     => 12,
-    :detailed_images      => 13
+    :detailed_images      => 13,
+
+    :place_slides                 => 14,
+    :scenic_slides                 => 15
   },
   :column => "image_type"
 

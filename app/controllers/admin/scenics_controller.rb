@@ -6,14 +6,14 @@ class Admin::ScenicsController < Admin::ApplicationController
   end
 
   def new
-    @scenic = Scenic.new
+    @model = Scenic.new
 
     add_breadcrumb :new
   end
 
   def create
-    @scenic = Scenic.new params[:scenic]
-    if @scenic.save
+    @model = Scenic.new params[:scenic]
+    if @model.save
       redirect_to admin_scenics_path, notice: t('messages.scenics.success')
     else
       render :new
@@ -21,14 +21,14 @@ class Admin::ScenicsController < Admin::ApplicationController
   end
 
   def edit
-    @scenic = Scenic.find params[:id]
-
+    @model = Scenic.find params[:id]
+    @images = @model.scenic_slides.order_asc
     add_breadcrumb :edit
   end
 
   def update
-    @scenic = Scenic.find params[:id]
-    if @scenic.update_attributes params[:scenic]
+    @model = Scenic.find params[:id]
+    if @model.update_attributes params[:scenic]
       redirect_to admin_scenics_path, notice: t('messages.scenics.success')
     else
       render :edit

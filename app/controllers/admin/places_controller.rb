@@ -6,29 +6,29 @@ class Admin::PlacesController < Admin::ApplicationController
   end
 
   def new
-    @place = Place.new
+    @model = Place.new
 
     add_breadcrumb :new
   end
 
-  def edit
-    @place = Place.find params[:id]
-
-    add_breadcrumb :edit
-  end
-
   def create
-    @place = Place.new params[:place]
-    if @place.save
+    @model = Place.new params[:place]
+    if @model.save
       redirect_to admin_places_path, notice: t('messages.places.success')
     else
       render :new
     end
   end
+  
+  def edit
+    @model = Place.find params[:id]
+    @images = @model.place_slides.order_asc
+    add_breadcrumb :edit
+  end
 
   def update
-    @place = Place.find params[:id]
-    if @place.update_attributes params[:place]
+    @model = Place.find params[:id]
+    if @model.update_attributes params[:place]
       redirect_to admin_places_path, notice: t('messages.places.success')
     else
       render :edit
