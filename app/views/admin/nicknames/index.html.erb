@@ -1,0 +1,48 @@
+<%- model_class = Nickname -%>
+<%= render "base" %>
+<div class="box">
+  <div class="box-title">
+    <span class="icon"><i class="icon-th"></i></span>
+    <h5><%= t('links.nicknames.index') %></h5>
+  </div>
+  <div class="box-content">
+    <table class="table table-bordered table-striped with-check">
+      <thead>
+        <tr>
+          <th><input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" /></th>
+          <th><%= model_class.human_attribute_name(:name) %></th>
+          <th><%= model_class.human_attribute_name(:map_serial_number_id) %></th>
+          <th><%= model_class.human_attribute_name(:map) %></th>
+          <th><%= model_class.human_attribute_name(:created_at) %></th>
+          <th class="action"><%= t('links.commons.action') %></th>
+        </tr>
+      </thead>
+      </tbody>
+        <% @nicknames.each do |nickname| %>
+          <tr>
+            <td><%= check_box_tag "nickname_ids[]", nickname.id, false, :id => "nickname_#{nickname.id}" %></td>
+            <td><%= link_to nickname.name, admin_nickname_path(nickname) %></td>
+            <td><%= nickname.map_serial_number.code %></td>
+            <td><%= nickname.map_serial_number.map.name %></td>
+            <td><%= l nickname.created_at.to_date, :format => :long %></td>
+            <td class="action">
+              <%= link_to raw("<i class=\"icon-eye-open\"></i>"), admin_nickname_path(nickname), 
+                          :title => t('links.nicknames.show') %>
+              <%= link_to raw("<i class=\"icon-edit\"></i>"), edit_admin_nickname_path(nickname), 
+                          :title => t('links.nicknames.edit') %>
+              <%= link_to raw("<i class=\"icon-trash\"></i>"),
+                          admin_nickname_path(nickname),
+                          :method => :delete,
+                          :data => { :confirm => t('links.commons.confirm') } %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="table-footer clearfix">
+  <div class="paginates-info"><%= page_entries_info @nicknames %></div>
+  <%= paginate @nicknames, :theme => "admin" %>
+</div>

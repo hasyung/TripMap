@@ -6,8 +6,12 @@ class ActivateMap < ActiveRecord::Base
   # Associations
   has_many :logs,   :dependent => :destroy
   has_many :maps
+  belongs_to :map_serial_number
 
   # Validates
   validates :device_id, :map_id, :map_serial_number_id, presence: true
 
+  # Scopes
+  scope :created_desc, order("created_at DESC")
+  
 end

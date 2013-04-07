@@ -78,6 +78,9 @@ TripMap::Application.routes.draw do
     resources :logs, :only => :index do
       match 'select', :on => :collection, :via => [:get, :post]
     end
+    resources :nicknames do
+      get 'search', :on => :collection
+    end
     
     resources :api, :only => [] do
       get 'v1', :on => :collection

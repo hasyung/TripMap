@@ -51,6 +51,9 @@
               <li<%= raw ' class="active"' if %w(serialnumbers).include?(controller_name) %>>
                 <%= link_to t("navs.serialnumber.index"), admin_serialnumbers_path %>
               </li>
+              <li<%= raw ' class="active"' if %w(nicknames).include?(controller_name) %>>
+                <%= link_to t("navs.nicknames.index"), admin_nicknames_path %>
+              </li>
             </ul>
 
             <ul class="nav pull-right">
