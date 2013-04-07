@@ -1,0 +1,30 @@
+<%- model_class = Nickname -%>
+<%= render "base" %>
+<div class="box">
+  <div class="box-title">
+    <span class="icon"><i class="icon-th"></i></span>
+    <h5><%= t('links.nicknames.show') %></h5>
+  </div>
+  <div class="box-content">
+    <table class="table table-bordered table-striped with-check">
+      <thead>
+        <tr>
+          <th><input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" /></th>
+          <th><%= model_class.human_attribute_name(:device_id) %></th>
+          <th><%= model_class.human_attribute_name(:map_serial_number_id) %></th>
+          <th><%= model_class.human_attribute_name(:created_at) %></th>
+        </tr>
+      </thead>
+      </tbody>
+        <% @activate_maps.each do |activate_map| %>
+          <tr>
+            <td><%= check_box_tag "activate_map_ids[]", activate_map.id, false, :id => "activate_map_#{activate_map.id}" %></td>
+            <td><%= activate_map.device_id %></td>
+            <td><%= activate_map.map_serial_number.code %></td>
+            <td><%= l activate_map.created_at.to_date, :format => :long %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

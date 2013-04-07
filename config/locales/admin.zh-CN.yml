@@ -26,6 +26,8 @@
       index: "API"
     logs:
       index: "日志"
+    nicknames:
+      index: "昵称"
     serialnumber:
       index: "序列号管理"      
   breadcrumbs:
@@ -82,6 +84,11 @@
         index: "分享"
         new: "添加分享"
         edit: "修改分享"
+      nicknames:
+        index: "昵称"
+        new: "添加昵称"
+        edit: "修改昵称"
+        show: "查看昵称"
       infos:
         index: "信息"
         new: "添加信息"
@@ -157,6 +164,11 @@
       show: "查看分享"
       new: "添加分享"
       edit: "修改分享"
+    nicknames:
+      index: "昵称列表"
+      show: "查看昵称"
+      new: "添加昵称"
+      edit: "修改昵称"
     logs:
       index: "日志列表"
     infos:
@@ -217,6 +229,9 @@
       error: "操作分享失败！"
       publish: "审核分享通过！"
       draft: "审核分享不通过！"
+    nicknames:
+      success: "操作昵称成功！"
+      error: "操作昵称失败！"
     infos:
       success: "操作信息成功！"
       error: "操作信息失败！"
@@ -341,6 +356,13 @@
         count: "默认使用次数"
         created_at: "创建时间"
         sum: "导出数量"
+      nickname:
+        name: "昵称"
+        map_serial_number_id: "序列号"
+        map_serial_number: "序列号"
+        map: "地图"
+        created_at: "创建时间"
+        device_id: "设备ID"
         
   simple_form:
     labels:
