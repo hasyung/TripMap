@@ -79,7 +79,7 @@ TripMap::Application.routes.draw do
       match 'select', :on => :collection, :via => [:get, :post]
     end
     resources :nicknames do
-      match 'select', :on => :collection, :via => [:get, :post]
+      get 'search', :on => :collection
     end
     
     resources :api, :only => [] do

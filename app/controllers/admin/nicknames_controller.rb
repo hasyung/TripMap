@@ -34,8 +34,16 @@ class Admin::NicknamesController < Admin::ApplicationController
     add_breadcrumb :edit
   end
 
-  def select
-    render :index
+  def search
+   add_breadcrumb :index
+   add_breadcrumb params[:nickname][:name]
+    if params[:nickname][:name].blank?
+      redirect_to :admin_nicknames, :alert => t("messages.nicknames.search_error")
+      return
+    else
+      @nicknames = Nickname.search_name(params[:nickname][:name]).page(params[:page]).per(Setting.page_size)
+    end
+   render :index
   end
 
   def show
