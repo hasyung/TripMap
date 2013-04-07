@@ -1,7 +1,7 @@
 class Share < ActiveRecord::Base
 
   # White list
-  attr_accessible :map, :map_id, :nickname, :nickname_id, :title, :state_cd, :device_id,
+  attr_accessible :map, :map_id, :nickname, :nickname_id, :title, :state_cd,
                   :share_text_attributes, :share_image_attributes
 
   # Associations
@@ -16,7 +16,6 @@ class Share < ActiveRecord::Base
 
   with_options :presence=> true do |column|
     column.validates :map_id
-    column.validates :device_id
     column.validates :nickname_id
     column.validates :title, :length => { :within => 1..20,    :message => I18n.t("errors.type.name") }
   end

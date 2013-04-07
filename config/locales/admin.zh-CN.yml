@@ -357,11 +357,9 @@
         sum: "导出数量"
       nickname:
         name: "昵称"
-        map_serial_number_id: "序列号"
-        map_serial_number: "序列号"
-        map: "地图"
+        activate_map: "设备ID"
+        activate_map_id: "设备ID"
         created_at: "创建时间"
-        device_id: "设备ID"
         
   simple_form:
     labels:

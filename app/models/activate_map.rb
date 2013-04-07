@@ -5,6 +5,7 @@ class ActivateMap < ActiveRecord::Base
 
   # Associations
   has_many :logs,   :dependent => :destroy
+  has_one :nickname, :dependent => :destroy
   has_many :maps
   belongs_to :map_serial_number
 

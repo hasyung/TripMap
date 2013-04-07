@@ -2,11 +2,11 @@ class Api::V1::NicknamesController < Api::V1::ApplicationController
 
   def show
     result = {}
-    (render :json => result; return) if params[:serial].nil?
+    (render :json => result; return) if params[:device_id].nil?
 
-    serial = MapSerialNumber.find{|num| num.code == params[:serial]}
-    is_present = serial.present? and serial.nickname.present?
-    result = {id: serial.nickname.id, nickname: serial.nickname.name} if is_present
+    device_id = ActivateMap.find{|a| a.device_id == params[:device_id]}
+    is_present = device_id.present? and device_id.nickname.present?
+    result = {id: device_id.nickname.id, nickname: device_id.nickname.name} if is_present
 
     render :json => result
   end
@@ -15,15 +15,18 @@ class Api::V1::NicknamesController < Api::V1::ApplicationController
     result = {result: false}
 
     nick_name = params[:nickname]
-    is_invalid_params = params[:serial].nil? or nickname.nil?
+    is_invalid_params = params[:device_id].nil? or nickname.nil?
     (render :json => result; return) if is_invalid_params
 
-    serial = MapSerialNumber.find{ |o| o.code == params[:serial] }
-    is_present = serial.present? and serial.nickname.blank? and Nickname.find{ |o| o.name == nick_name }.blank?
+    device_id = ActivateMap.find{ |a| a.device_id == params[:device_id] }
 
-    if is_present
-      serial.build_nickname nickname: nick_name
-      result = {result: true} if serial.save
+    if device_id.present? and Nickname.find{ |o| o.name == nick_name }.blank?
+      if device_id.nickname.blank?
+        device_id.build_nickname nickname: nick_name
+      else
+        device_id.nickname.name = nick_name
+      end
+      result = {result: true} if device_id.save
     end
 
     render :json => result
