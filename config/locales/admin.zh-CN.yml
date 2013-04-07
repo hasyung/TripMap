@@ -232,6 +232,7 @@
     nicknames:
       success: "操作昵称成功！"
       error: "操作昵称失败！"
+      search_error: "查询昵称出错！"
     infos:
       success: "操作信息成功！"
       error: "操作信息失败！"
@@ -453,6 +454,7 @@
       logout: "退出"
       select: "请选择"
       search: "查询"
+      search_some: "查询%{model}"
     submit:
       select: "查看"
     page_entries_info:
