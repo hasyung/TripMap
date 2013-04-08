@@ -241,27 +241,20 @@
             </tr>
             <tr>
               <td>3</td>
-              <td>nickname</td>
-              <td>字符串</td>
+              <td>nickname_id</td>
+              <td>整数</td>
               <td>必选参数</td>
-              <td>昵称</td>
+              <td>昵称id</td>
             </tr>
             <tr>
               <td>4</td>
-              <td>device_id</td>
-              <td>字符串</td>
-              <td>必选参数</td>
-              <td>用户设备id</td>
-            </tr>
-            <tr>
-              <td>5</td>
               <td>image</td>
               <td>文件</td>
               <td>必选参数</td>
               <td>拍的照片</td>
             </tr>
             <tr>
-              <td>6</td>
+              <td>5</td>
               <td>text</td>
               <td>字符串</td>
               <td>必选参数</td>
@@ -419,4 +412,87 @@
     </dl>
   </div>
   
+  <div id="versions" class="api well">
+    <h3 class="name">API9</h3>
+    <small class="desc">上传昵称</small>
+    <dl>
+      <dt>URL</dt>
+      <dd><pre class="docs-example"><%= create_api_v1_nicknames_url(:format => :json) %></pre></dd>
+      <dt>HTTP请求方式</dt>
+      <dd>POST<dd>
+      <dt>支持格式</dt>
+      <dd>json<dd>
+      <dt>是否需要登录</dt>
+      <dd>否<dd>
+      <dt>请求参数</dt>
+      <dd>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>名字</th>
+              <th>类型</th>
+              <th>类别</th>
+              <th>说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>device_id</td>
+              <td>字符串</td>
+              <td>必选参数</td>
+              <td>用户设备id</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>nickname</td>
+              <td>字符串</td>
+              <td>必选参数</td>
+              <td>昵称</td>
+            </tr>            
+          </tbody>
+        </table>
+        <dd>
+    </dl>
+  </div>
+
+  <div id="versions" class="api well">
+    <h3 class="name">API10</h3>
+    <small class="desc">获取昵称</small>
+    <dl>
+      <dt>URL</dt>
+      <dd><pre class="docs-example"><%= show_api_v1_nicknames_url(:format => :json) %></pre></dd>
+      <dt>HTTP请求方式</dt>
+      <dd>GET<dd>
+      <dt>支持格式</dt>
+      <dd>json<dd>
+      <dt>是否需要登录</dt>
+      <dd>否<dd>
+      <dt>请求参数</dt>
+      <dd>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>名字</th>
+              <th>类型</th>
+              <th>类别</th>
+              <th>说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>device_id</td>
+              <td>字符串</td>
+              <td>必选参数</td>
+              <td>用户设备id</td>
+            </tr>          
+          </tbody>
+        </table>
+        <dd>
+    </dl>
+  </div>
+
 </div>

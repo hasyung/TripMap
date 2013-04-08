@@ -39,3 +39,5 @@ module TripMap
     config.cache_store = :memory_store
   end
 end
+
+Dir[File.join(Rails.root, "lib", "core", "*.rb")].each {|l| require l }

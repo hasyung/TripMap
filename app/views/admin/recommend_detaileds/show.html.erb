@@ -1,6 +1,10 @@
 <%= render 'base' %>
-<%= render 'videos' %>
-<%= render 'audios' %>
-<%= render 'image' %>
-<%= render 'imagelists' %>
+<% if @recommend.category_cd == 1 %>
+	<%= render 'videos' %>
+	<%= render 'audios' %>
+	<%= render 'imagelists' %>
+<% end %>
+<% if @recommend.category_cd != 3 %>
+	<%= render 'image' %>
+<% end %>
 <%= render 'texts' %>

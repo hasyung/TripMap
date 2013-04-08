@@ -1,28 +1,28 @@
-<%= simple_form_for [:admin, @map], :html => { :class => 'form-horizontal' } do |f| %>
+<%= simple_form_for [:admin, @model], :html => { :class => 'form-horizontal' } do |f| %>
   <%= f.input :name %>
   <%= f.input :slug %>
   <%= f.association :province, :collection => Province.all, :prompt => t("helpers.links.select", :model_name => Province.model_name.human) %>
-  <%= f.fields_for :map_cover, @map.map_cover ||= @map.build_map_cover do |c| %>
+  <%= f.fields_for :map_cover, @model.map_cover ||= @model.build_map_cover do |c| %>
     <%= c.input :file, :as => :file %>
-    <% if @map.map_cover && @map.map_cover.file.present? %>
+    <% if @model.map_cover && @model.map_cover.file.present? %>
       <div class="control-group image">
         <div class="controls">
-          <%= image_tag @map.map_cover.file %>
+          <%= image_tag @model.map_cover.file %>
         </div>
       </div>
     <% end %>
   <% end %>
-  <%= f.fields_for :map_plat, @map.map_plat ||= @map.build_map_plat do |p| %>
+  <%= f.fields_for :map_plat, @model.map_plat ||= @model.build_map_plat do |p| %>
     <%= p.input :file, :as => :file %>
-    <% if @map.map_plat && @map.map_plat.file.present? %>
+    <% if @model.map_plat && @model.map_plat.file.present? %>
       <div class="control-group image">
         <div class="controls">
-          <%= image_tag @map.map_plat.file %>
+          <%= image_tag @model.map_plat.file %>
         </div>
       </div>
     <% end %>
   <% end %>
-  <%= f.fields_for :map_description, @map.map_description ||= @map.build_map_description do |d|  %>  
+  <%= f.fields_for :map_description, @model.map_description ||= @model.build_map_description do |d|  %>  
     <%= d.input :body, :as => :text, :input_html => { :class => "span-full" } %>
   <% end %>
   <div class="form-actions">
