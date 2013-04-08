@@ -13,13 +13,16 @@
   <h4>API列表</h4>
   <ol>
     <li><a href="#maps">获取所有地图简略信息</a></li>
-    <li><a href="#maps_active">激活地图</a></li>
+    <li><a href="#maps_active">获取单个地图详细信息</a></li>
+    <li><a href="#validate">验证序列号和设备号</a></li>
     <li><a href="#share_current">获取当前分享</a></li>
     <li><a href="#share_arround">获取周边分享</a></li>
     <li><a href="#share_upload">上传我的分享</a></li>
     <li><a href="#weathers">获取当前地图所在城市天气</a></li>
     <li><a href="#logs">上传当前地图使用日志</a></li>
     <li><a href="#versions">检测地图数据包是否更新</a></li>
+    <li><a href="#create_nickname">上传昵称</a></li>
+    <li><a href="#get_nickname">获取昵称</a></li>
   </ol>
 </div>
 <div class="api-content">
@@ -44,7 +47,7 @@
   
   <div id="maps_active" class="api well">
     <h3 class="name">API2</h3>
-    <small class="desc">验证地图序列号可用性并获取地图详细信息，结果为JSON数据格式。</small>
+    <small class="desc">获取单个地图详细信息，结果为JSON数据格式。</small>
     <dl>
       <dt>URL</dt>
       <dd><pre class="docs-example"><%= show_api_v1_maps_url %></pre></dd>
@@ -74,6 +77,46 @@
               <td>必选参数</td>
               <td>地图编号，以指定查找哪张地图的内容。</td>
             </tr>
+          </tbody>
+        </table>
+      <dd>
+      <dt>参数分组</dt>
+      <dd>［map_id, serial, device_id］<dd>
+    </dl>
+  </div>
+  
+  <div id="validate" class="api well">
+    <h3 class="name">API3</h3>
+    <small class="desc">验证序列号和设备号</small>
+    <dl>
+      <dt>URL</dt>
+      <dd><pre class="docs-example"><%= validate_api_v1_maps_url(:format => :json) %></pre></dd>
+      <dt>HTTP请求方式</dt>
+      <dd>GET<dd>
+      <dt>支持格式</dt>
+      <dd>json<dd>
+      <dt>是否需要登录</dt>
+      <dd>否<dd>
+      <dt>请求参数</dt>
+      <dd>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>名字</th>
+              <th>类型</th>
+              <th>类别</th>
+              <th>说明</th>
+            </tr>
+          </thead>
+          <tbody>
+           <tr>
+              <td>1</td>
+              <td>map_id</td>
+              <td>整数</td>
+              <td>必选参数</td>
+              <td>地图编号，以验证哪张地图所对应的序列号。</td>
+            </tr>
             <tr>
               <td>2</td>
               <td>serial</td>
@@ -87,17 +130,15 @@
               <td>字符串</td>
               <td>必选参数</td>
               <td>用户设备id</td>
-            </tr>
+            </tr>          
           </tbody>
         </table>
-      <dd>
-      <dt>参数分组</dt>
-      <dd>［map_id, serial, device_id］<dd>
+        <dd>
     </dl>
   </div>
-  
+
   <div id="share_current" class="api well">
-    <h3 class="name">API3</h3>
+    <h3 class="name">API4</h3>
     <small class="desc">获取当前分享，结果为JSON数据格式。</small>
     <dl>
       <dt>URL</dt>
@@ -149,7 +190,7 @@
   </div>
   
   <div id="share_arround" class="api well">
-    <h3 class="name">API4</h3>
+    <h3 class="name">API5</h3>
     <small class="desc">获取周边分享，结果为JSON数据格式。</small>
     <dl>
       <dt>URL</dt>
@@ -201,7 +242,7 @@
   </div>
   
   <div id="share_upload" class="api well">
-    <h3 class="name">API5</h3>
+    <h3 class="name">API6</h3>
     <small class="desc">上传我的分享，结果为JSON数据格式。</small>
     <dl>
       <dt>URL</dt>
@@ -267,7 +308,7 @@
   </div>
   
   <div id="weathers" class="api well">
-    <h3 class="name">API6</h3>
+    <h3 class="name">API7</h3>
     <small class="desc">获取当前地图所在城市天气</small>
     <dl>
       <dt>URL</dt>
@@ -307,7 +348,7 @@
   </div>
   
   <div id="logs" class="api well">
-    <h3 class="name">API7</h3>
+    <h3 class="name">API8</h3>
     <small class="desc">上传当前地图使用日志</small>
     <dl>
       <dt>URL</dt>
@@ -373,7 +414,7 @@
   </div>
   
   <div id="versions" class="api well">
-    <h3 class="name">API8</h3>
+    <h3 class="name">API9</h3>
     <small class="desc">检测地图数据包是否更新</small>
     <dl>
       <dt>URL</dt>
@@ -412,8 +453,8 @@
     </dl>
   </div>
   
-  <div id="versions" class="api well">
-    <h3 class="name">API9</h3>
+  <div id="create_nickname" class="api well">
+    <h3 class="name">API10</h3>
     <small class="desc">上传昵称</small>
     <dl>
       <dt>URL</dt>
@@ -457,8 +498,8 @@
     </dl>
   </div>
 
-  <div id="versions" class="api well">
-    <h3 class="name">API10</h3>
+  <div id="get_nickname" class="api well">
+    <h3 class="name">API11</h3>
     <small class="desc">获取昵称</small>
     <dl>
       <dt>URL</dt>

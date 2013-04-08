@@ -11,11 +11,33 @@ class Api::V1::MapsController < Api::V1::ApplicationController
 
   def show
     result= {}
+    ( render :json => result; return ) if params[:map_id].nil? || !validate_client_state
+    mid = params[:map_id].to_i
+    map = Map.find_by_id mid
+    ( render :json => result; return ) if map.nil?                # Check map
+    cache_key = "map_#{map.id}"
+    Rails.cache.write(cache_key, map.get_map_values) if !Rails.cache.exist?(cache_key)
 
+    render :json => Rails.cache.read(cache_key)
+  end
+
+  def version
+    result = {}
+
+    (render :json => result; return) if params[:id].nil?
+
+    map = Map.find{ |o| o.id = params[:id] }
+    result = { version: map.version } if not map.nil?
+
+    render :json => result
+  end
+
+  def validate
+    result = {result: false}
     is_invalid_params = params[:device_id].nil? or params[:map_id].nil? or params[:serial].nil?
-    ( render :json => result; return ) if is_invalid_params
+    
 
-    ( render :json => result; return ) if !validate_client_state
+    ( render :json => result; return ) if is_invalid_params
 
     mid = params[:map_id].to_i
     map = Map.find_by_id mid
@@ -36,20 +58,7 @@ class Api::V1::MapsController < Api::V1::ApplicationController
       active_entity =  { :device_id => device_id, :map_id => mid, :map_serial_number_id => serial.id }
       ActivateMap.create active_entity
     end
-
-    cache_key = "map_#{map.id}"
-    Rails.cache.write(cache_key, map.get_map_values) if !Rails.cache.exist?(cache_key)
-
-    render :json => Rails.cache.read(cache_key)
-  end
-
-  def version
-    result = {}
-
-    (render :json => result; return) if params[:id].nil?
-
-    map = Map.find{ |o| o.id = params[:id] }
-    result = { version: map.version } if not map.nil?
+    result = {result: true}
 
     render :json => result
   end
