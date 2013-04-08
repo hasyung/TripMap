@@ -14,19 +14,20 @@ class Api::V1::NicknamesController < Api::V1::ApplicationController
   def create
     result = {result: false}
 
-    nick_name = params[:nickname]
-    is_invalid_params = params[:device_id].nil? or nickname.nil?
+    nickname, device_id = params[:nickname], params[:device_id]
+
+    is_invalid_params = device_id.nil? or nickname.nil?
     (render :json => result; return) if is_invalid_params
 
-    device_id = ActivateMap.find{ |a| a.device_id == params[:device_id] }
+    activate_map = ActivateMap.find{ |o| o.device_id == device_id }
 
-    if device_id.present? and Nickname.find{ |o| o.name == nick_name }.blank?
-      if device_id.nickname.blank?
-        device_id.build_nickname nickname: nick_name
+    if activate_map.present? and Nickname.find{ |o| o.name == nickname }.blank?
+      if activate_map.nickname.blank?
+        activate_map.build_nickname name: nickname
       else
-        device_id.nickname.name = nick_name
+        activate_map.nickname.name = nickname
       end
-      result = {result: true} if device_id.save
+      result = {result: true} if activate_map.save
     end
 
     render :json => result
