@@ -92,6 +92,7 @@ TripMap::Application.routes.draw do
       resources :maps, :only => :index do
         resources :weathers, :only => :index
         get '/show', :on => :collection
+        get '/validate', :on => :collection
         get 'shares/nearby' => 'shares#nearby', :on => :collection
         get 'shares/current' => 'shares#current', :on => :collection
         post 'shares/create' => 'shares#create', :on => :collection
