@@ -1,55 +1,63 @@
 module SerialNumber
   module Generate
     
-    def build_single_sn serial_type = 0
-      uuid = SecureRandom.uuid
-      use_count = generate_use_count serial_type
-      code = uuid << generate_random << serial_type.to_s << 'www.1trip.com'
-      code = format(Digest::MD5.hexdigest(code)[16..32])
-      # model save
-      self.map_serial_numbers.build code: code, type_cd: serial_type, count: use_count, printed_cd: 0
-      self.save
-    end
-    
-    def create_sns serial_type = 0, options = {}
-      options[:limit].times do
-        create_single_sn serial_type
-      end
-    end
-    
     def create_single_sn serial_type = 0
-      result = ''
-      uuid = generate_uuid
-      map_id = generate_map_id
       use_count = generate_use_count serial_type
-      random = []
-      3.times { random << generate_random }
-      
-      # first
-      2.times { result << random.first }
-      result << map_id.first
-      result << random.at(1)
-      
-      # second
-      result << uuid.last
-      
-      # thirdly
-      result << map_id.at(1)
-      result << serial_type.to_i.to_s
-      result << random.last
-      result << map_id.last
-      
-      # fourthly
-      result << uuid.first
-      
+      result = generate_random_array
+      fill_serial_type result, serial_type
+      fill_map_province result, self.province_id
+      fill_map_id result, self.id
       # model save
-      self.map_serial_numbers.build code: format(result), type_cd: serial_type, count: use_count, printed_cd: 0
+      self.map_serial_numbers.build code: result.join, type_cd: serial_type, count: use_count, printed_cd: 0
       self.save
     end
     
-    # private
-    def generate_uuid
-      UUIDTools::UUID.timestamp_create.to_s.split(/-/).first.sub(/0/, 'o').sub(/1/, 'l').scan(/..../)
+    private
+    
+    def generate_random_array
+      result = Random.new_seed.to_s.split(//).shuffle!.sample(11).shuffle!
+      if result.first == '0'
+        result = generate_random_array
+      end
+      result
+    end
+    
+    def fill_serial_type result, serial_type
+      num = case serial_type
+      when MapSerialNumber.types[:free]
+        [1]
+      when MapSerialNumber.types[:ordinary]
+        (2..5).to_a
+      when MapSerialNumber.types[:favorite]
+        (6..9).to_a
+      else
+        [0]
+      end
+      result.insert(1, num.sample(1).first.to_s)
+    end
+    
+    def fill_map_id result, map_id
+      num = case map_id
+      when 1..9
+        ['0', self.id.to_s]
+      when 10..99
+        [map_id.to_s.first, map_id.to_s.last]
+      else
+        ['0', '0']
+      end
+      result.insert(8, num.first).insert(12, num.last)
+    end
+      
+    def fill_map_province result, province_id
+      num = case province_id
+      when 1..9
+        ['0', self.id.to_s]
+      when 10..99
+        [province_id.to_s.first, province_id.to_s.last]
+      else
+        ['0', '0']
+      end
+      result.insert(6, num.first).insert(3, num.last)
     end
     
     def generate_use_count serial_type
@@ -60,21 +68,6 @@ module SerialNumber
         5
       else
         0
-      end
-    end
-    
-    def generate_map_id
-      chars = ('a'..'j').to_a
-      case self.id
-      when 1..9
-        [generate_random(:char), generate_random(:char), chars[self.id]]
-      when 10..99
-        [generate_random, chars[self.id.to_s.first.to_i], chars[self.id.to_s.last.to_i]]
-      when 100..999
-        result = self.id.to_s.scan(/\d/)
-        [chars[result.first.to_i], chars[result.at(1).to_i], chars[result.last.to_i]]
-      else
-        'ooo'.scan(/\w/)
       end
     end
     
@@ -91,14 +84,6 @@ module SerialNumber
       end
       chars[rand(chars.count)].to_s
     end
-    
-    def format sn
-      chars = ('g'..'z').to_a
-      chars.delete('o')
-      sn.gsub(/0/, chars[rand(chars.count - 1)].to_s)
-        .gsub(/1/, chars[rand(chars.count - 1)].to_s)
-        .gsub(/i/, chars[rand(chars.count - 1)].to_s)
-    end
-    
+      
   end
 end
