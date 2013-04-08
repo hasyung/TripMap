@@ -175,7 +175,7 @@ class Map < ActiveRecord::Base
             if recommend.category_cd == 1
               content.merge!({videos: videos})
               content.merge!({audios: audios})
-              content.merge!({image_lists: image_lists}) if image_lists.present?
+              content.merge!({image_lists: image_lists}) 
             end
             content.merge!({texts: texts})
             if recommend.category_cd == 2
