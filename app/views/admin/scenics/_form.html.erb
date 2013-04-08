@@ -39,7 +39,9 @@
     <% if @model.scenic_impression && @model.scenic_impression.file.present? %>
       <div class="control-group">
         <div class="controls">
-          <%= video_tag(@model.scenic_impression.file, :controls => true, :autobuffer => true, :width => 400, :height => 240, :poster => @model.scenic_impression.cover ) %>
+          <% if @model.scenic_impression.present? && @model.scenic_impression.file.present? && @model.scenic_impression.cover.present? %>
+            <%= video_tag(@model.scenic_impression.file.url, :controls => true, :autobuffer => true, :width => 400, :height => 240, :poster => @model.scenic_impression.cover.url) %>
+          <% end %>
         </div>
       </div>
     <% end %>
