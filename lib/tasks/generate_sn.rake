@@ -13,7 +13,7 @@ namespace :sn do
     else
       puts "========开始创建序列号========"
       1.upto(args.limit.to_i) do |i|
-        @map.build_single_sn args.type.to_i
+        @map.create_single_sn args.type.to_i
         print " #{i} "
         print "\n" if i == args.limit.to_i
       end
