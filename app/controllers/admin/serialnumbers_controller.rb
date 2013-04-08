@@ -1,4 +1,6 @@
 class Admin::SerialnumbersController < Admin::ApplicationController
+  before_filter :is_admin
+
   def index
     @serials = MapSerialNumber.page(params[:page]).per(Setting.page_size).created_desc
     @serial = MapSerialNumber.new
@@ -17,15 +19,22 @@ class Admin::SerialnumbersController < Admin::ApplicationController
                              nil
 
     @serials = MapSerialNumber.where( conditions.compile ).limit(params[:sum].to_i)
-    if @serials.count == params[:sum].to_i
-      map = Map.find params[:map_serial_number][:map_id]
-      serial_type =  I18n.t("enums.mapserialnumber.type.#{MapSerialNumber.types.key(params[:map_serial_number][:type_cd].to_i)}")
-      @serial_name = "#{map.name}_#{serial_type}"
-      MapSerialNumber.where(id: @serials.map(&:id)).update_all( printed_cd:1 )
+    if @serials.count == params[:sum].to_i      
+      @serials.transaction do
+          map = Map.find params[:map_serial_number][:map_id]
+          serial_type =  I18n.t("enums.mapserialnumber.type.#{MapSerialNumber.types.key(params[:map_serial_number][:type_cd].to_i)}")
+          @serial_name = "#{map.name}_#{serial_type}_#{MapSerialNumber.human_attribute_name(:sum)}(#{params[:sum]})"
+          MapSerialNumber.where(id: @serials.map(&:id)).update_all( printed_cd:1 )
 
-      respond_to do |format|
-        format.xls
+          file_xls = render_to_string
+          path = "export/download/#{@serial_name}_#{Time.now}.xls"
+          if !File.exist?("export/download/")
+            Dir.mkdir("export")
+            Dir.mkdir("export/download")
+          end
+          File.open(path, "w"){ |f| f.write(file_xls) }
       end
+      redirect_to export_admin_serialnumbers_path, notice: t('messages.serialnumbers.export')
     elsif @serials.count < params[:sum].to_i
         redirect_to export_admin_serialnumbers_path, notice: t('messages.serialnumbers.sum', sum: @serials.count )
     else
@@ -67,5 +76,9 @@ class Admin::SerialnumbersController < Admin::ApplicationController
     end
 
     conditions
+  end
+
+  def is_admin
+    redirect_to admin_root_path, notice: t('messages.serialnumbers.purview') if current_user.email != "admin@1trip.com"
   end
 end

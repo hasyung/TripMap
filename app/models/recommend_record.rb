@@ -3,12 +3,12 @@ class RecommendRecord < ActiveRecord::Base
   # White list
   attr_accessible :recommend, :recommend_id, :name, :order, 
   :recommend_record_cover_attributes, :recommend_record_description_attributes
-  
+
   # Associations
   has_one :recommend_record_cover, :as => :imageable, :class_name => "Image",
           :conditions => { :image_type => Image.recommend_record_cover },
           :dependent => :destroy
-            
+
   has_one :recommend_record_description, :as => :textable, :class_name => "Letter",
           :conditions => { :text_type => Letter.recommend_record_description },
           :dependent => :destroy 
@@ -20,9 +20,8 @@ class RecommendRecord < ActiveRecord::Base
     column.validates :order, uniqueness: { scope: [:recommend_id, :order] }, 
                     numericality: { :greater_than_or_equal_to => 1, :less_than_or_equal_to => 999 }
   end
-  
-  belongs_to :recommend, :counter_cache => true
 
+  belongs_to :recommend, :counter_cache => true
 
   accepts_nested_attributes_for :recommend_record_cover,          reject_if: lambda { |c| c[:file].blank? }, allow_destroy: true
   accepts_nested_attributes_for :recommend_record_description, allow_destroy: true
@@ -32,5 +31,5 @@ class RecommendRecord < ActiveRecord::Base
 
   # Scopes
   scope :order_asc, order("`order` ASC")
-  
+
 end

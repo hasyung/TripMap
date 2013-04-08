@@ -2,12 +2,14 @@ class Api::V1::SharesController < Api::V1::ApplicationController
 
   def current
     result = []
-    @map = Map.find params[:map_id].to_i
+     (render :json => result; return) if params[:map_id].blank? || params[:page_size].blank? || params[:page_index].blank?
+    @map = Map.find_by_id params[:map_id].to_i
+    (render :json => result; return) if @map.blank?
     size = params[:page_size].to_i
     index = params[:page_index].to_i
     first = (index-1)*size
     last = index*size - 1
-    @shares = @map.shares.publish
+    @shares = @map.shares.publish.created_desc
     if !@shares.blank?
       if (@shares.count - 1) > first
         if (@shares.count - 1) >= last
@@ -28,7 +30,10 @@ class Api::V1::SharesController < Api::V1::ApplicationController
 
   def nearby
     result = []
-    @shares = Share.publish.reject {|lambda| lambda.map_id == params[:map_id].to_i}
+    (render :json => result; return) if params[:map_id].blank? || params[:page_size].blank? || params[:page_index].blank?
+    @map = Map.find_by_id params[:map_id].to_i
+    (render :json => result; return) if @map.blank?
+    @shares = Share.publish.reject{|lambda| lambda.map_id == params[:map_id].to_i}.created_desc
     size = params[:page_size].to_i
     index = params[:page_index].to_i
     first = (index-1)*size
@@ -53,9 +58,11 @@ class Api::V1::SharesController < Api::V1::ApplicationController
 
   def create
     result = {result: false}
-    map = Map.find params[:map_id].to_i
+     (render :json => result; return) if params[:map_id].blank? || params[:nickname_id].blank? || params[:title].blank? ||
+                                         params[:device_id].blank? || params[:image].blank? ||params[:text].blank?
+    map = Map.find_by_id params[:map_id].to_i
     if map.present?
-      nickname = Nickname.find params[:nickname_id].to_i
+      nickname = Nickname.find_by_id params[:nickname_id].to_i
       if nickname.present?
         @share = map.shares.new
         @share.title = params[:title]

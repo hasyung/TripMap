@@ -1,24 +1,29 @@
 # encoding:utf-8
 
+require 'httpclient'
+require 'nokogiri'
+
 module Weather
   class API
-    @@service = "http://www.webxml.com.cn/WebServices/WeatherWebService.asmx/getWeatherbyCityName"
+    WS_URL = "http://www.webxml.com.cn/WebServices/WeatherWebService.asmx/getWeatherbyCityName"
 
-    # 根据城市或地区名称查询获得现在的天气实况
-    def self.get_suit_weather(the_city_name)
-      the_city_name =  URI.escape(the_city_name)
-      param = "?theCityName=" + the_city_name
-      body = HTTPClient.new.get(@@service + param).body.split("string")
-      if body[1].delete("<,>,/") == "查询结果为空！" || body[1].delete("<,>,/") == "访问被限制！"
-        params = {}
-      else
-        params = {  :temp => body[11].delete("<,>,/"),
-                    :weath => body[13].delete("<,>,/").split(" ")[1],
-                    :picture => body[17].delete("<,>,/").delete(".gif"),
-                    :wind =>body[21].delete("<,>,/").split("；")[1].split("：")[1]
-                    }
-        end
+    def self.get_suit_weather( city_name )
+      ws_req_url = WS_URL + "?theCityName=" + URI.escape(city_name)
+      response = HTTPClient.new.get(ws_req_url).body
+
+      doc = Nokogiri.XML(response.gsub(/\n/, '').gsub(/\r/, ''))
+      return {} if doc.children.empty?
+
+      all = []
+      doc.children[0].children.each{ |e| all << e.text if not e.text.strip.empty? }
+      line10 = all[10].split('；')
+
+      results = {
+       tmp_current:   line10[0].split('：')[2],  tmp_today:  all[5],
+       tmp_desc:      all[6].split(' ')[1],     tmp_wind:   line10[1].split('：')[1],
+       tmp_pic_from:  all[8].delete('.gif'),    tmp_pic_to: all[9].delete('.gif'),
+       tmp_humidity:  line10[2].split('：')[1]
+      }
     end
-
   end
 end

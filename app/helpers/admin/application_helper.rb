@@ -20,4 +20,27 @@ module Admin::ApplicationHelper
     button_status = action_name == type ? "btn active" : "btn"
   end
   
+  def get_edit_image_path(model,image_id)
+    case model.class.name
+    when "Map"
+      path = edit_admin_map_image_path(model.id, image_id)
+    when "Place"
+      path = edit_admin_place_image_path(model.id, image_id)
+    when "Scenic"
+      path = edit_admin_scenic_image_path(model.id, image_id)
+    end
+    path
+  end
+
+  def get_delete_image_path(model,image_id)
+    case model.class.name
+    when "Map"
+      path = admin_map_image_path(model.id, image_id)
+    when "Place"
+      path = admin_place_image_path(model.id, image_id)
+    when "Scenic"
+      path = admin_scenic_image_path(model.id, image_id)
+    end
+    path
+  end
 end

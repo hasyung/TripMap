@@ -1,7 +1,6 @@
 <%= simple_form_for [:admin, @share], :html => { :class => 'form-horizontal' } do |f| %>
   <%= f.input :title %>
   <%= f.association :nickname, :collection => Nickname.all, :prompt => t("helpers.links.select", :model_name => Nickname.model_name.human) %>
-  <%= f.input :device_id %>
   <%= f.association :map, :collection => Map.all, :prompt => t("helpers.links.select", :model_name => Map.model_name.human) %>
   <%= f.fields_for :share_image, @share.share_image ||= @share.build_share_image do |s| %>
     <%= s.input :file, :as => :file %>

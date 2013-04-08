@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130402104829) do
+ActiveRecord::Schema.define(:version => 20130407103943) do
 
   create_table "activate_maps", :force => true do |t|
     t.integer  "map_id",               :null => false
@@ -65,6 +65,13 @@ ActiveRecord::Schema.define(:version => 20130402104829) do
     t.datetime "updated_at",                              :null => false
   end
 
+  create_table "ip_addresses", :force => true do |t|
+    t.string   "ip",                        :null => false
+    t.integer  "counter",    :default => 1
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
   create_table "logs", :force => true do |t|
     t.integer  "map_id",                                       :null => false
     t.integer  "activate_map_id",                              :null => false
@@ -106,10 +113,10 @@ ActiveRecord::Schema.define(:version => 20130402104829) do
   add_index "maps", ["slug"], :name => "index_maps_on_slug", :unique => true
 
   create_table "nicknames", :force => true do |t|
-    t.integer  "map_serial_number_id",               :null => false
-    t.string   "name",                 :limit => 30, :null => false
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
+    t.integer  "activate_map_id",               :null => false
+    t.string   "name",            :limit => 30, :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   add_index "nicknames", ["name"], :name => "index_nicknames_on_nickname", :unique => true
@@ -181,12 +188,11 @@ ActiveRecord::Schema.define(:version => 20130402104829) do
 
   create_table "shares", :force => true do |t|
     t.integer  "map_id",                                   :null => false
-    t.string   "device_id",                                :null => false
+    t.integer  "nickname_id",                              :null => false
     t.string   "title",       :limit => 20,                :null => false
     t.integer  "state_cd",                  :default => 0
     t.datetime "created_at",                               :null => false
     t.datetime "updated_at",                               :null => false
-    t.integer  "nickname_id",                              :null => false
   end
 
   create_table "texts", :force => true do |t|

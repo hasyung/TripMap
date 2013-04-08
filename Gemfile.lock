@@ -233,6 +233,7 @@ DEPENDENCIES
   mime-types
   mini_magick
   mysql2
+  nokogiri
   pry
   pry-doc
   pry-nav

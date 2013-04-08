@@ -32,7 +32,7 @@
               <% end %>
             </td>
             <td>
-              <%= Nickname.find(share.nickname_id).name %>
+              <%= share.nickname.name %>
             </td>
             <td><%= t("enums.share.states.#{model_class.states.key(share.state_cd)}") %></td>
             <td><%= l share.created_at.to_date, :format => :long %></td>

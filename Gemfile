@@ -30,6 +30,7 @@ gem 'httpclient'
 gem "smart_tuple" #sql search
 gem 'thin'
 gem 'uuidtools'
+gem 'nokogiri'    # XML analyzing
 
 group :test, :development do
   gem 'rspec-rails'
