@@ -79,6 +79,6 @@ class Admin::SerialnumbersController < Admin::ApplicationController
   end
 
   def is_admin
-    redirect_to admin_root_path, notice: t('messages.serialnumbers.purview') if current_user.email != "2891@qq.com"
+    redirect_to admin_root_path, notice: t('messages.serialnumbers.purview') if current_user.email != "admin@1trip.com"
   end
 end
