@@ -59,7 +59,7 @@ class Api::V1::SharesController < Api::V1::ApplicationController
   def create
     result = {result: false}
      (render :json => result; return) if params[:map_id].blank? || params[:nickname_id].blank? || params[:title].blank? ||
-                                         params[:device_id].blank? || params[:image].blank? ||params[:text].blank?
+                                         params[:image].blank? ||params[:text].blank?
     map = Map.find_by_id params[:map_id].to_i
     if map.present?
       nickname = Nickname.find_by_id params[:nickname_id].to_i
@@ -67,7 +67,6 @@ class Api::V1::SharesController < Api::V1::ApplicationController
         @share = map.shares.new
         @share.title = params[:title]
         @share.nickname_id = nickname.id
-        @share.device_id = params[:device_id]
         @share.build_share_image file: params[:image]
         @share.build_share_text body: params[:text]
         if @share.save
@@ -83,7 +82,6 @@ class Api::V1::SharesController < Api::V1::ApplicationController
     r = {id: share.id,
          title: share.title,
          nickname: Nickname.find(share.nickname_id).name,
-         device_id: share.device_id,
          image: share.share_image.file.url,
          cover: share.share_image.file.thumbnail.url,
          text: share.share_text.body
