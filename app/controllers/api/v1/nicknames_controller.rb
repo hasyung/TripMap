@@ -1,12 +1,14 @@
+# encoding:utf-8
+
 class Api::V1::NicknamesController < Api::V1::ApplicationController
 
   def show
-    result = {}
+    result = {nickname: "游客"}
     (render :json => result; return) if params[:device_id].nil?
-
+    
     device_id = ActivateMap.find{|a| a.device_id == params[:device_id]}
     is_present = device_id.present? and device_id.nickname.present?
-    result = {id: device_id.nickname.id, nickname: device_id.nickname.name} if is_present
+    result = {nickname: device_id.nickname.name} if is_present
 
     render :json => result
   end
