@@ -12,7 +12,7 @@ module SerialNumber
       self.save
     end
     
-    private
+    # private
     
     def generate_random_array
       result = Random.new_seed.to_s.split(//).shuffle!.sample(11).shuffle!
