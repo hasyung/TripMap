@@ -65,7 +65,7 @@ class Api::V1::MapsController < Api::V1::ApplicationController
       else
         activate_map.nickname.name = params[:nickname]
       end
-    result = {result: 0} if activate_map.save
+    result = {result: 0} if activate_map.nickname.save
 
     render :json => result
   end

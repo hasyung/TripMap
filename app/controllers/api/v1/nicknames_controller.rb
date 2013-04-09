@@ -29,7 +29,7 @@ class Api::V1::NicknamesController < Api::V1::ApplicationController
       else
         activate_map.nickname.name = nickname
       end
-      result = {result: true} if activate_map.save
+      result = {result: true} if activate_map.nickname.save
     end
 
     render :json => result
