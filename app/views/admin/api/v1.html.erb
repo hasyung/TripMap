@@ -50,7 +50,7 @@
     <small class="desc">获取单个地图详细信息，结果为JSON数据格式。</small>
     <dl>
       <dt>URL</dt>
-      <dd><pre class="docs-example"><%= show_api_v1_maps_url %></pre></dd>
+      <dd><pre class="docs-example"><%= show_api_v1_maps_url(:format => :json)  %></pre></dd>
       <dt>HTTP请求方式</dt>
       <dd>GET<dd>
       <dt>支持格式</dt>
@@ -130,7 +130,14 @@
               <td>字符串</td>
               <td>必选参数</td>
               <td>用户设备id</td>
-            </tr>          
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>nickname</td>
+              <td>字符串</td>
+              <td>必选参数</td>
+              <td>昵称</td>
+            </tr>                   
           </tbody>
         </table>
         <dd>
@@ -282,10 +289,10 @@
             </tr>
             <tr>
               <td>3</td>
-              <td>nickname_id</td>
+              <td>device_id</td>
               <td>整数</td>
               <td>必选参数</td>
-              <td>昵称id</td>
+              <td>用户设备id</td>
             </tr>
             <tr>
               <td>4</td>

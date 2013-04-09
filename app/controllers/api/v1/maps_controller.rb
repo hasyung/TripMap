@@ -34,7 +34,7 @@ class Api::V1::MapsController < Api::V1::ApplicationController
 
   def validate
     result = {result: false}
-    is_invalid_params = params[:device_id].nil? or params[:map_id].nil? or params[:serial].nil?
+    is_invalid_params = params[:device_id].nil? or params[:map_id].nil? or params[:serial].nil? or params[:nickname].nil?
     
 
     ( render :json => result; return ) if is_invalid_params
@@ -46,6 +46,7 @@ class Api::V1::MapsController < Api::V1::ApplicationController
     serial = MapSerialNumber.find{|o| o.code == params[:serial] }
     ( render :json => result; return ) if serial.nil?             # Check user's serial number
     ( render :json => result; return ) if serial.map_id != mid    # Check user's serial number match for map
+    ( render :json => result; return ) if Nickname.find{ |o| o.name == nickname }.present?
 
     device_id = params[:device_id]
     query_sql = "device_id=? AND map_id=? AND map_serial_number_id=?"
@@ -58,7 +59,13 @@ class Api::V1::MapsController < Api::V1::ApplicationController
       active_entity =  { :device_id => device_id, :map_id => mid, :map_serial_number_id => serial.id }
       ActivateMap.create active_entity
     end
-    result = {result: true}
+    activate_map = ActivateMap.find{ |o| o.device_id == device_id }
+    if activate_map.nickname.blank?
+        activate_map.build_nickname name: nickname
+      else
+        activate_map.nickname.name = nickname
+      end
+    result = {result: true} if activate_map.save
 
     render :json => result
   end
