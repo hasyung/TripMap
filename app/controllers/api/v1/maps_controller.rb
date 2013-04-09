@@ -46,7 +46,7 @@ class Api::V1::MapsController < Api::V1::ApplicationController
     serial = MapSerialNumber.find{|o| o.code == params[:serial] }
     ( result= {result: 3}; render :json => result; return ) if serial.nil?             # Check user's serial number
     ( result= {result: 3}; render :json => result; return ) if serial.map_id != mid    # Check user's serial number match for map
-    ( result= {result: 4}; render :json => result; return ) if Nickname.find{ |o| o.name == nickname }.present?
+    ( result= {result: 4}; render :json => result; return ) if Nickname.find{ |o| o.name == params[:nickname] }.present?
 
     device_id = params[:device_id]
     query_sql = "device_id=? AND map_id=? AND map_serial_number_id=?"
@@ -61,9 +61,9 @@ class Api::V1::MapsController < Api::V1::ApplicationController
     end
     activate_map = ActivateMap.find{ |o| o.device_id == device_id }
     if activate_map.nickname.blank?
-        activate_map.build_nickname name: nickname
+        activate_map.build_nickname name: params[:nickname]
       else
-        activate_map.nickname.name = nickname
+        activate_map.nickname.name = params[:nickname]
       end
     result = {result: 0} if activate_map.save
 
