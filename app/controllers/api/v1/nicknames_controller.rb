@@ -7,8 +7,8 @@ class Api::V1::NicknamesController < Api::V1::ApplicationController
     (render :json => result; return) if params[:device_id].nil?
     
     device_id = ActivateMap.find{|a| a.device_id == params[:device_id]}
-    result = {nickname: "游客", result: ture} if device_id.present?
-    result = {nickname: device_id.nickname.name, result: ture}if device_id.present? and device_id.nickname.present?
+    result = {nickname: "游客", result: true} if device_id.present?
+    result = {nickname: device_id.nickname.name, result: true}if device_id.present? and device_id.nickname.present?
 
     render :json => result
   end
