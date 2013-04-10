@@ -184,7 +184,7 @@ class Map < ActiveRecord::Base
             detaileds << content
           end
         end
-        records << { name: record.name, description: record.recommend_record_description, cover: get_file_value(record.recommend_record_cover,"file", true), detaileds: detaileds }
+        records << { name: record.name, description: record.recommend_record_description.body, cover: get_file_value(record.recommend_record_cover,"file", true), detaileds: detaileds }
       end
     end
 
