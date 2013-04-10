@@ -1,0 +1,14 @@
+<div class="box">
+  <div class="box-title">
+    <span class="icon"><i class="icon-edit"></i></span>
+    <h5><%= t('links.declarations.show') %></h5>
+  </div>
+  <div class="box-content no-padding">
+    <%= simple_form_for [:admin, @declaration], url: admin_declaration_path do |f| %>
+      <%= f.input :body, :as => :text, :input_html => { :class => "span-full"} %>
+      <div class="form-actions">
+        <%= f.button :submit, :class => 'btn-primary' %>
+      </div>
+    <% end %>
+  </div>
+</div>

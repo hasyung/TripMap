@@ -106,8 +106,15 @@ class Map < ActiveRecord::Base
       video:            get_file_value(place.place_video, "file",true),
       video_size:       get_file_value(place.place_video, "file_size"),
       video_duration:   get_file_value(place.place_video, "duration"),
-      description:      get_file_value(place.place_description, "body")
+      description:      get_file_value(place.place_description, "body"),
+      slides: get_place_slides(place)
     }
+  end
+
+  def get_place_slides place
+    slides = []
+    place.place_slides.order_asc.each{ |o| slides << { image: o.file.url} } if place.place_slides.present?
+    slides
   end
 
   def get_map_scenic_values scenic
@@ -124,8 +131,15 @@ class Map < ActiveRecord::Base
       route:            get_file_value(scenic.scenic_route, "file", true),
       route_size:       get_file_value(scenic.scenic_route, "file_size"),
       route_duration:   get_file_value(scenic.scenic_route, "duration"),
-      description:      get_file_value(scenic.scenic_description, "body")
+      description:      get_file_value(scenic.scenic_description, "body"),
+      slides: get_scenic_slides(scenic)
     }
+  end
+
+  def get_scenic_slides scenic
+    slides = []
+    scenic.scenic_slides.order_asc.each{ |o| slides << { image: o.file.url} } if scenic.scenic_slides.present?
+    slides
   end
 
   def get_map_recommend_values recommend

@@ -226,3 +226,36 @@ text-align:left;
 .btn-toolbar, .btn-group {
   display: inline-block;
 }
+
+/* 登录页面 */
+#sessions-new {
+  padding-top: 150px;
+  .page-header {
+    margin-bottom:0;
+  }
+  .simple_form .controls {
+    margin-left:0;
+  }
+  .form-inputs, .form-actions {
+    width: 90%;
+    margin: 0 auto;
+  }
+  .form-actions {
+    background-color: transparent;
+    padding: 20px 0 0 0;
+  }
+  .prepend_password {
+    //margin-bottom: 30px;
+  }
+  .control-group.bootstrap_check_box {
+    margin-bottom: 10px;
+  }
+  .input-prepend .add-on, .input-append .add-on {
+    height: 24px;
+    line-height: 24px;
+  }
+  input[type="text"], input[type="password"] {
+    height: 24px;
+    line-height: 20px;
+    }
+  }

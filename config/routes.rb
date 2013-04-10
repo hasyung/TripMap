@@ -85,6 +85,8 @@ TripMap::Application.routes.draw do
     resources :api, :only => [] do
       get 'v1', :on => :collection
     end
+
+    match 'declaration/show' => 'declarations#show', :as => 'declaration', :via => [:get, :post, :put]
   end
   
   namespace :api do

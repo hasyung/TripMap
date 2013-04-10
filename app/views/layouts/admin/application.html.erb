@@ -54,6 +54,9 @@
               <li<%= raw ' class="active"' if %w(nicknames).include?(controller_name) %>>
                 <%= link_to t("navs.nicknames.index"), admin_nicknames_path %>
               </li>
+              <li<%= raw ' class="active"' if %w(declarations).include?(controller_name) %>>
+                <%= link_to t("navs.declarations.show"), admin_declaration_path %>
+              </li>
             </ul>
 
             <ul class="nav pull-right">
