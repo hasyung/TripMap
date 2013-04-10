@@ -23,7 +23,6 @@ class Admin::PlacesController < Admin::ApplicationController
   def edit
     @model = Place.find params[:id]
     @images = @model.place_slides.order_asc
-    @model.build_place_description if @model.place_description.blank?
     add_breadcrumb :edit
   end
 
