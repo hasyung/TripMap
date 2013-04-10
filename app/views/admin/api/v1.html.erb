@@ -23,6 +23,7 @@
     <li><a href="#versions">检测地图数据包是否更新</a></li>
     <li><a href="#create_nickname">上传昵称</a></li>
     <li><a href="#get_nickname">获取昵称</a></li>
+    <li><a href="#declaration">获取免责声明</a></li>
   </ol>
 </div>
 <div class="api-content">
@@ -80,8 +81,6 @@
           </tbody>
         </table>
       <dd>
-      <dt>参数分组</dt>
-      <dd>［map_id, serial, device_id］<dd>
     </dl>
   </div>
   
@@ -547,6 +546,25 @@
             </tr>          
           </tbody>
         </table>
+        <dd>
+    </dl>
+  </div>
+
+<div id="declaration" class="api well">
+    <h3 class="name">API12</h3>
+    <small class="desc">获取免责声明</small>
+    <dl>
+      <dt>URL</dt>
+      <dd><pre class="docs-example"><%= show_api_v1_declarations_url(:format => :json) %></pre></dd>
+      <dt>HTTP请求方式</dt>
+      <dd>GET<dd>
+      <dt>支持格式</dt>
+      <dd>json<dd>
+      <dt>是否需要登录</dt>
+      <dd>否<dd>
+      <dt>请求参数</dt>
+      <dd>
+        无
         <dd>
     </dl>
   </div>

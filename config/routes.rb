@@ -105,6 +105,9 @@ TripMap::Application.routes.draw do
         post '/create' => 'nicknames#create', on: :collection
         get '/show' => 'nicknames#show', on: :collection
       end
+      resources :declarations, only: [] do
+        get '/show' => 'declarations#show', on: :collection
+      end
     end
   end
   
