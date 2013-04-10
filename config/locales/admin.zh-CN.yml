@@ -359,6 +359,7 @@
         name: "昵称"
         activate_map: "设备ID"
         activate_map_id: "设备ID"
+        map_serial_number: "序列号"
         created_at: "创建时间"
         
   simple_form:
