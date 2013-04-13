@@ -39,11 +39,13 @@ ActiveRecord::Schema.define(:version => 20130413044543) do
     t.datetime "updated_at", :null => false
   end
 
+  add_index "activate_maps", ["device_id"], :name => "index_activate_maps_on_device_id", :unique => true
+
   create_table "activate_with_accounts", :force => true do |t|
-    t.integer  "activate_maps_id", :null => false
-    t.integer  "accounts_id",      :null => false
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.integer  "activate_map_id", :null => false
+    t.integer  "account_id",      :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "audios", :force => true do |t|

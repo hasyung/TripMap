@@ -9,7 +9,7 @@ class ActivateMap < ActiveRecord::Base
   has_many :accounts, :through => :activate_with_accounts
 
   # Validates
-  validates :device_id, :map_id, :map_serial_number_id, presence: true
+  validates :device_id, presence: true, :uniqueness => true
 
   # Scopes
   scope :created_desc, order("created_at DESC")
