@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(:version => 20130412103806) do
     t.datetime "updated_at",                    :null => false
   end
 
-  add_index "audios", ["audioable_id", "audioable_type", "order", "audio_type"], :name => "aaoa_index", :unique => true
+  add_index "audios", ["audioable_id", "audioable_type", "order", "audio_type"], :name => "aiatatext_index", :unique => true
 
   create_table "declarations", :force => true do |t|
     t.text     "body",       :null => false
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(:version => 20130412103806) do
     t.datetime "updated_at",                    :null => false
   end
 
-  add_index "images", ["imageable_id", "imageable_type", "order", "image_type"], :name => "iioi_index", :unique => true
+  add_index "images", ["imageable_id", "imageable_type", "order", "image_type"], :name => "iiitoitext_index", :unique => true
 
   create_table "infos", :force => true do |t|
     t.integer  "map_id",                                  :null => false
@@ -215,7 +215,7 @@ ActiveRecord::Schema.define(:version => 20130412103806) do
     t.datetime "updated_at",                   :null => false
   end
 
-  add_index "texts", ["textable_id", "textable_type", "order", "text_type"], :name => "ttot_index", :unique => true
+  add_index "texts", ["textable_id", "textable_type", "order", "text_type"], :name => "tittottext_index", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -251,6 +251,6 @@ ActiveRecord::Schema.define(:version => 20130412103806) do
     t.datetime "updated_at",                    :null => false
   end
 
-  add_index "videos", ["videoable_id", "videoable_type", "order", "video_type"], :name => "vvov_index", :unique => true
+  add_index "videos", ["videoable_id", "videoable_type", "order", "video_type"], :name => "vivtovext_index", :unique => true
 
 end
