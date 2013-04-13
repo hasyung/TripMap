@@ -7,7 +7,7 @@ class MapSerialNumber < ActiveRecord::Base
   attr_accessible :map , :map_id, :code, :type_cd, :count, :activate_cd
 
   # Associations
-  has_many :activate_maps, :dependent => :destroy
+  belongs_to :account
   belongs_to :map
 
   # Enumerators, simple_enum plugin

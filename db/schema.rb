@@ -11,14 +11,39 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130412103806) do
+ActiveRecord::Schema.define(:version => 20130413044543) do
+
+  create_table "accounts", :force => true do |t|
+    t.string   "email",                                :default => "", :null => false
+    t.string   "encrypted_password",                   :default => "", :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",                        :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.string   "nickname",               :limit => 30
+    t.datetime "created_at",                                           :null => false
+    t.datetime "updated_at",                                           :null => false
+  end
+
+  add_index "accounts", ["email"], :name => "index_accounts_on_email", :unique => true
+  add_index "accounts", ["nickname"], :name => "index_accounts_on_nickname", :unique => true
+  add_index "accounts", ["reset_password_token"], :name => "index_accounts_on_reset_password_token", :unique => true
 
   create_table "activate_maps", :force => true do |t|
-    t.integer  "map_id",               :null => false
-    t.integer  "map_serial_number_id", :null => false
-    t.string   "device_id",            :null => false
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
+    t.string   "device_id",  :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "activate_with_accounts", :force => true do |t|
+    t.integer  "activate_maps_id", :null => false
+    t.integer  "accounts_id",      :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   create_table "audios", :force => true do |t|
@@ -34,7 +59,7 @@ ActiveRecord::Schema.define(:version => 20130412103806) do
     t.datetime "updated_at",                    :null => false
   end
 
-  add_index "audios", ["audioable_id", "audioable_type", "order", "audio_type"], :name => "aiatatext_index", :unique => true
+  add_index "audios", ["audioable_id", "audioable_type", "order", "audio_type"], :name => "aaoa_index", :unique => true
 
   create_table "declarations", :force => true do |t|
     t.text     "body",       :null => false
@@ -64,7 +89,7 @@ ActiveRecord::Schema.define(:version => 20130412103806) do
     t.datetime "updated_at",                    :null => false
   end
 
-  add_index "images", ["imageable_id", "imageable_type", "order", "image_type"], :name => "iiitoitext_index", :unique => true
+  add_index "images", ["imageable_id", "imageable_type", "order", "image_type"], :name => "iioi_index", :unique => true
 
   create_table "infos", :force => true do |t|
     t.integer  "map_id",                                  :null => false
@@ -101,6 +126,7 @@ ActiveRecord::Schema.define(:version => 20130412103806) do
     t.integer  "count",       :default => 0
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
+    t.integer  "account_id"
   end
 
   add_index "map_serial_numbers", ["code"], :name => "index_map_serial_numbers_on_code", :unique => true
@@ -121,15 +147,6 @@ ActiveRecord::Schema.define(:version => 20130412103806) do
 
   add_index "maps", ["name"], :name => "index_maps_on_name", :unique => true
   add_index "maps", ["slug"], :name => "index_maps_on_slug", :unique => true
-
-  create_table "nicknames", :force => true do |t|
-    t.integer  "activate_map_id",               :null => false
-    t.string   "name",            :limit => 30, :null => false
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-  end
-
-  add_index "nicknames", ["name"], :name => "index_nicknames_on_nickname", :unique => true
 
   create_table "places", :force => true do |t|
     t.integer  "map_id",                   :null => false
@@ -197,12 +214,12 @@ ActiveRecord::Schema.define(:version => 20130412103806) do
   add_index "scenics", ["slug"], :name => "index_scenics_on_slug", :unique => true
 
   create_table "shares", :force => true do |t|
-    t.integer  "map_id",                                   :null => false
-    t.integer  "nickname_id",                              :null => false
-    t.string   "title",       :limit => 20,                :null => false
-    t.integer  "state_cd",                  :default => 0
-    t.datetime "created_at",                               :null => false
-    t.datetime "updated_at",                               :null => false
+    t.integer  "map_id",                                  :null => false
+    t.string   "title",      :limit => 20,                :null => false
+    t.integer  "state_cd",                 :default => 0
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
+    t.integer  "account_id",                              :null => false
   end
 
   create_table "texts", :force => true do |t|
@@ -215,7 +232,7 @@ ActiveRecord::Schema.define(:version => 20130412103806) do
     t.datetime "updated_at",                   :null => false
   end
 
-  add_index "texts", ["textable_id", "textable_type", "order", "text_type"], :name => "tittottext_index", :unique => true
+  add_index "texts", ["textable_id", "textable_type", "order", "text_type"], :name => "ttot_index", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -251,6 +268,6 @@ ActiveRecord::Schema.define(:version => 20130412103806) do
     t.datetime "updated_at",                    :null => false
   end
 
-  add_index "videos", ["videoable_id", "videoable_type", "order", "video_type"], :name => "vivtovext_index", :unique => true
+  add_index "videos", ["videoable_id", "videoable_type", "order", "video_type"], :name => "vvov_index", :unique => true
 
 end
