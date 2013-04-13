@@ -33,40 +33,13 @@ class Api::V1::MapsController < Api::V1::ApplicationController
   end
 
   def validate
-    result= {result: 6}; 
-    is_invalid_params = params[:device_id].nil? or params[:map_id].nil? or params[:serial].nil? or params[:nickname].nil?
-    
+    result= {maps: []}
+    ( render :json => result; return ) if params[:device_id].blank?
 
-    ( result= {result: 1}; render :json => result; return ) if is_invalid_params
+    activate_map = ActivateMap.find{ |o| o.device_id == params[:device_id] }
+    ( render :json => result; return ) if activate_map.blank?
 
-    mid = params[:map_id].to_i
-    map = Map.find_by_id mid
-    ( result= {result: 2}; render :json => result; return ) if map.nil?                # Check map
-
-    serial = MapSerialNumber.find{|o| o.code == params[:serial] }
-    ( result= {result: 3}; render :json => result; return ) if serial.nil?             # Check user's serial number
-    ( result= {result: 3}; render :json => result; return ) if serial.map_id != mid    # Check user's serial number match for map
-    ( result= {result: 4}; render :json => result; return ) if Nickname.find{ |o| o.name == params[:nickname] }.present?
-
-    device_id = params[:device_id]
-    query_sql = "device_id=? AND map_id=? AND map_serial_number_id=?"
-    is_new_device = ActivateMap.where(query_sql, device_id, mid, serial.id).empty?
-
-    if is_new_device
-      ( result= {result: 5}; render :json => result; return ) if serial.count.zero?    # Check serial's count exhaust
-
-      serial.count -= 1; serial.save
-      active_entity =  { :device_id => device_id, :map_id => mid, :map_serial_number_id => serial.id }
-      ActivateMap.create active_entity
-    end
-    activate_map = ActivateMap.find{ |o| o.device_id == device_id }
-    if activate_map.nickname.blank?
-        activate_map.build_nickname name: params[:nickname]
-      else
-        activate_map.nickname.name = params[:nickname]
-      end
-    result = {result: 0} if activate_map.nickname.save
-
+    result = {maps: get_activate_maps(activate_map)}
     render :json => result
   end
 
@@ -92,5 +65,11 @@ class Api::V1::MapsController < Api::V1::ApplicationController
         return true
       end
     end
+  end
+
+  def get_activate_maps activate_map
+    maps = []
+    activate_map.accounts.each{|a| maps << a.map_serial_number.map_id if a.map_serial_number.present?}
+    maps = maps.uniq
   end
 end

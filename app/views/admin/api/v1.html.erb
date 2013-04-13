@@ -6,7 +6,7 @@
 <div class="api-description">
   <blockquote>
     <p class="text-info">此API参考文档专为旅图项目服务（服务器端名TripMap），当前版本号为0.1.0，该API参考文档是稳定的。</p>
-    <small>最后更新时间 2013-03-21 21:45</small>
+    <small>最后更新时间 2013-04-13 19:45</small>
   </blockquote>
 </div>
 <div class="api-list">
@@ -14,15 +14,17 @@
   <ol>
     <li><a href="#maps">获取所有地图简略信息</a></li>
     <li><a href="#maps_active">获取单个地图详细信息</a></li>
-    <li><a href="#validate">验证序列号和设备号</a></li>
+    <li><a href="#account_register">用户注册</a></li>
+    <li><a href="#account_loggin">用户登陆(授权设备)</a></li>
+    <li><a href="#account_validate">用户绑定序列号</a></li>
+    <li><a href="#account_nickname">用户获取昵称</a></li>
+    <li><a href="#activate_validate">通过设备ID查看地图使用权限</a></li>
     <li><a href="#share_current">获取当前分享</a></li>
     <li><a href="#share_arround">获取周边分享</a></li>
     <li><a href="#share_upload">上传我的分享</a></li>
     <li><a href="#weathers">获取当前地图所在城市天气</a></li>
     <li><a href="#logs">上传当前地图使用日志</a></li>
     <li><a href="#versions">检测地图数据包是否更新</a></li>
-    <li><a href="#create_nickname">上传昵称</a></li>
-    <li><a href="#get_nickname">获取昵称</a></li>
     <li><a href="#declaration">获取免责声明</a></li>
   </ol>
 </div>
@@ -84,9 +86,231 @@
     </dl>
   </div>
   
-  <div id="validate" class="api well">
+  <div id="account_register" class="api well">
     <h3 class="name">API3</h3>
-    <small class="desc">验证序列号和设备号</small>
+    <small class="desc">用户注册</small>
+    <dl>
+      <dt>URL</dt>
+      <dd><pre class="docs-example"><%= create_api_v1_accounts_url(:format => :json) %></pre></dd>
+      <dt>HTTP请求方式</dt>
+      <dd>POST<dd>
+      <dt>支持格式</dt>
+      <dd>json<dd>
+      <dt>是否需要登录</dt>
+      <dd>否<dd>
+      <dt>请求参数</dt>
+      <dd>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>名字</th>
+              <th>类型</th>
+              <th>类别</th>
+              <th>说明</th>
+            </tr>
+          </thead>
+          <tbody>
+           <tr>
+              <td>1</td>
+              <td>device_id</td>
+              <td>字符串</td>
+              <td>必选参数</td>
+              <td>用户设备ID</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>email</td>
+              <td>字符串</td>
+              <td>必选参数</td>
+              <td>email(用户帐号)</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>password</td>
+              <td>字符串</td>
+              <td>必选参数</td>
+              <td>密码</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>nickname</td>
+              <td>字符串</td>
+              <td>必选参数</td>
+              <td>昵称</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>serial</td>
+              <td>字符串</td>
+              <td>可选参数</td>
+              <td>序列号</td>
+            </tr>                   
+          </tbody>
+        </table>
+        <dd>
+    </dl>
+     <p>结果：</p>
+     <p>result: 0   =>   成功 </p>
+      <p>result: 1   =>   参数错误 </p>
+      <p> result: 2   =>   email已存在 </p>
+      <p> result: 3   =>   昵称已存在 </p>
+      <p> result: 4   =>   序列号错误或已使用 </p>
+      <p> result: 5   =>   未知错误 </p>
+  </div>
+
+  <div id="account_loggin" class="api well">
+    <h3 class="name">API4</h3>
+    <small class="desc">用户登陆(授权设备)</small>
+    <dl>
+      <dt>URL</dt>
+      <dd><pre class="docs-example"><%= login_api_v1_accounts_url(:format => :json) %></pre></dd>
+      <dt>HTTP请求方式</dt>
+      <dd>POST<dd>
+      <dt>支持格式</dt>
+      <dd>json<dd>
+      <dt>是否需要登录</dt>
+      <dd>否<dd>
+      <dt>请求参数</dt>
+      <dd>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>名字</th>
+              <th>类型</th>
+              <th>类别</th>
+              <th>说明</th>
+            </tr>
+          </thead>
+          <tbody>
+           <tr>
+              <td>1</td>
+              <td>device_id</td>
+              <td>字符串</td>
+              <td>必选参数</td>
+              <td>用户设备ID</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>email</td>
+              <td>字符串</td>
+              <td>必选参数</td>
+              <td>email(用户帐号)</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>password</td>
+              <td>字符串</td>
+              <td>必选参数</td>
+              <td>密码</td>
+            </tr>                   
+          </tbody>
+        </table>
+        <dd>
+    </dl>
+     <p>结果：</p>
+     <p>result: 0   =>   成功 </p>
+      <p>result: 1   =>   参数错误 </p>
+      <p> result: 2   =>   email不存在或密码错误 </p>
+      <p> result: 3   =>   该用户授权设备超过限制</p>
+      <p> result: 4   =>   未知错误 </p>
+  </div>
+
+  
+  <div id="account_validate" class="api well">
+    <h3 class="name">API5</h3>
+    <small class="desc">用户绑定序列号</small>
+    <dl>
+      <dt>URL</dt>
+      <dd><pre class="docs-example"><%= validate_api_v1_accounts_url(:format => :json) %></pre></dd>
+      <dt>HTTP请求方式</dt>
+      <dd>POST<dd>
+      <dt>支持格式</dt>
+      <dd>json<dd>
+      <dt>是否需要登录</dt>
+      <dd>否<dd>
+      <dt>请求参数</dt>
+      <dd>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>名字</th>
+              <th>类型</th>
+              <th>类别</th>
+              <th>说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>email</td>
+              <td>字符串</td>
+              <td>必选参数</td>
+              <td>email(用户帐号)</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>serial</td>
+              <td>字符串</td>
+              <td>必选参数</td>
+              <td>序列号</td>
+            </tr>                   
+          </tbody>
+        </table>
+        <dd>
+    </dl>
+     <p>结果：</p>
+     <p>result: 0   =>   成功 </p>
+      <p>result: 1   =>   参数错误 </p>
+      <p> result: 2   =>   email不存在 </p>
+      <p> result: 3   =>   序列号错误或已使用 </p>
+      <p> result: 4   =>   此序列号解锁地图重复 </p>
+      <p> result: 5   =>   未知错误 </p>
+  </div>
+
+<div id="account_nickname" class="api well">
+    <h3 class="name">API6</h3>
+    <small class="desc">用户获取昵称</small>
+    <dl>
+      <dt>URL</dt>
+      <dd><pre class="docs-example"><%= show_api_v1_accounts_url(:format => :json) %></pre></dd>
+      <dt>HTTP请求方式</dt>
+      <dd>GET<dd>
+      <dt>支持格式</dt>
+      <dd>json<dd>
+      <dt>是否需要登录</dt>
+      <dd>否<dd>
+      <dt>请求参数</dt>
+      <dd>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>名字</th>
+              <th>类型</th>
+              <th>类别</th>
+              <th>说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>email</td>
+              <td>字符串</td>
+              <td>必选参数</td>
+              <td>email(用户帐号)</td>
+            </tr>                  
+          </tbody>
+        </table>
+        <dd>
+    </dl>
+  </div>
+
+<div id="activate_validate" class="api well">
+    <h3 class="name">API7</h3>
+    <small class="desc">通过设备ID查看地图使用权限</small>
     <dl>
       <dt>URL</dt>
       <dd><pre class="docs-example"><%= validate_api_v1_maps_url(:format => :json) %></pre></dd>
@@ -111,48 +335,21 @@
           <tbody>
            <tr>
               <td>1</td>
-              <td>map_id</td>
-              <td>整数</td>
-              <td>必选参数</td>
-              <td>地图编号，以验证哪张地图所对应的序列号。</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>serial</td>
-              <td>字符串</td>
-              <td>必选参数</td>
-              <td>地图注册码</td>
-            </tr>
-            <tr>
-              <td>3</td>
               <td>device_id</td>
               <td>字符串</td>
               <td>必选参数</td>
-              <td>用户设备id</td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td>nickname</td>
-              <td>字符串</td>
-              <td>必选参数</td>
-              <td>昵称</td>
-            </tr>                   
+              <td>用户设备ID</td>
+            </tr>             
           </tbody>
         </table>
         <dd>
     </dl>
      <p>结果：</p>
-     <p>result: 0   =>   成功 </p>
-      <p>result: 1   =>   参数错误 </p>
-      <p> result: 2   =>   找不到该地图 </p>
-      <p> result: 3   =>   序列号错误 </p>
-      <p> result: 4   =>   昵称已存在 </p>
-      <p> result: 5   =>   此序列号使用次数超出限制 </p>
-      <p> result: 6   =>   未知错误 </p>
+     <p>maps: [map_ids] </p>
   </div>
 
-  <div id="share_current" class="api well">
-    <h3 class="name">API4</h3>
+<div id="share_current" class="api well">
+    <h3 class="name">API8</h3>
     <small class="desc">获取当前分享，结果为JSON数据格式。</small>
     <dl>
       <dt>URL</dt>
@@ -203,8 +400,9 @@
     </dl>
   </div>
   
+
   <div id="share_arround" class="api well">
-    <h3 class="name">API5</h3>
+    <h3 class="name">API9</h3>
     <small class="desc">获取周边分享，结果为JSON数据格式。</small>
     <dl>
       <dt>URL</dt>
@@ -256,7 +454,7 @@
   </div>
   
   <div id="share_upload" class="api well">
-    <h3 class="name">API6</h3>
+    <h3 class="name">API10</h3>
     <small class="desc">上传我的分享，结果为JSON数据格式。</small>
     <dl>
       <dt>URL</dt>
@@ -322,7 +520,7 @@
   </div>
   
   <div id="weathers" class="api well">
-    <h3 class="name">API7</h3>
+    <h3 class="name">API11</h3>
     <small class="desc">获取当前地图所在城市天气</small>
     <dl>
       <dt>URL</dt>
@@ -362,7 +560,7 @@
   </div>
   
   <div id="logs" class="api well">
-    <h3 class="name">API8</h3>
+    <h3 class="name">API12</h3>
     <small class="desc">上传当前地图使用日志</small>
     <dl>
       <dt>URL</dt>
@@ -428,7 +626,7 @@
   </div>
   
   <div id="versions" class="api well">
-    <h3 class="name">API9</h3>
+    <h3 class="name">API13</h3>
     <small class="desc">检测地图数据包是否更新</small>
     <dl>
       <dt>URL</dt>
@@ -466,92 +664,9 @@
       <dd><%= version_api_v1_map_url(:id => 1, :format => :json) %><dd>
     </dl>
   </div>
-  
-  <div id="create_nickname" class="api well">
-    <h3 class="name">API10</h3>
-    <small class="desc">上传昵称</small>
-    <dl>
-      <dt>URL</dt>
-      <dd><pre class="docs-example"><%= create_api_v1_nicknames_url(:format => :json) %></pre></dd>
-      <dt>HTTP请求方式</dt>
-      <dd>POST<dd>
-      <dt>支持格式</dt>
-      <dd>json<dd>
-      <dt>是否需要登录</dt>
-      <dd>否<dd>
-      <dt>请求参数</dt>
-      <dd>
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>名字</th>
-              <th>类型</th>
-              <th>类别</th>
-              <th>说明</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>device_id</td>
-              <td>字符串</td>
-              <td>必选参数</td>
-              <td>用户设备id</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>nickname</td>
-              <td>字符串</td>
-              <td>必选参数</td>
-              <td>昵称</td>
-            </tr>            
-          </tbody>
-        </table>
-        <dd>
-    </dl>
-  </div>
-
-  <div id="get_nickname" class="api well">
-    <h3 class="name">API11</h3>
-    <small class="desc">获取昵称</small>
-    <dl>
-      <dt>URL</dt>
-      <dd><pre class="docs-example"><%= show_api_v1_nicknames_url(:format => :json) %></pre></dd>
-      <dt>HTTP请求方式</dt>
-      <dd>GET<dd>
-      <dt>支持格式</dt>
-      <dd>json<dd>
-      <dt>是否需要登录</dt>
-      <dd>否<dd>
-      <dt>请求参数</dt>
-      <dd>
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>名字</th>
-              <th>类型</th>
-              <th>类别</th>
-              <th>说明</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>device_id</td>
-              <td>字符串</td>
-              <td>必选参数</td>
-              <td>用户设备id</td>
-            </tr>          
-          </tbody>
-        </table>
-        <dd>
-    </dl>
-  </div>
 
 <div id="declaration" class="api well">
-    <h3 class="name">API12</h3>
+    <h3 class="name">API14</h3>
     <small class="desc">获取免责声明</small>
     <dl>
       <dt>URL</dt>

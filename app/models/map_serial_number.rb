@@ -4,15 +4,15 @@ class MapSerialNumber < ActiveRecord::Base
   self.inheritance_column = ""
 
   # White list
-  attr_accessible :map , :map_id, :code, :type_cd, :count, :printed_cd
+  attr_accessible :map , :map_id, :code, :type_cd, :count, :activate_cd
 
   # Associations
-  has_many :activate_maps, :dependent => :destroy
+  belongs_to :account
   belongs_to :map
 
   # Enumerators, simple_enum plugin
   as_enum :type, { :free => 0, :ordinary => 1, :favorite => 2 }
-  as_enum :printed, { :no_print => 0, :yes_print => 1 }
+  as_enum :activate, { :no_activate => 0, :yes_activate => 1 }
 
   # Scopes
   scope :created_desc, order("created_at DESC")

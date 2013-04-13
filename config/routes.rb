@@ -1,5 +1,7 @@
 TripMap::Application.routes.draw do
 
+  devise_for :accounts
+
   devise_for :users,
              :path => "",
              :path_names => { :sign_in => 'login', :sign_out => 'logout' },
@@ -78,7 +80,7 @@ TripMap::Application.routes.draw do
     resources :logs, :only => :index do
       match 'select', :on => :collection, :via => [:get, :post]
     end
-    resources :nicknames do
+    resources :accounts, :except => :show do
       get 'search', :on => :collection
     end
     
@@ -101,9 +103,11 @@ TripMap::Application.routes.draw do
         post 'logs' => 'logs#create', :on => :collection
         get 'version' => 'maps#version', :on => :member
       end
-      resources :nicknames, only: [] do
-        post '/create' => 'nicknames#create', on: :collection
-        get '/show' => 'nicknames#show', on: :collection
+      resources :accounts, only: [] do
+        post '/create' => 'accounts#create', on: :collection
+        post '/login' => 'accounts#login', on: :collection
+        post '/validate' => 'accounts#validate', on: :collection
+        get '/show' => 'accounts#show', on: :collection
       end
       resources :declarations, only: [] do
         get '/show' => 'declarations#show', on: :collection
