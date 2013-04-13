@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130410111015) do
+ActiveRecord::Schema.define(:version => 20130412103806) do
 
   create_table "activate_maps", :force => true do |t|
     t.integer  "map_id",               :null => false
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(:version => 20130410111015) do
     t.datetime "updated_at",                    :null => false
   end
 
-  add_index "audios", ["audioable_id", "audioable_type", "order", "audio_type"], :name => "aiatatext_index", :unique => true
+  add_index "audios", ["audioable_id", "audioable_type", "order", "audio_type"], :name => "aaoa_index", :unique => true
 
   create_table "declarations", :force => true do |t|
     t.text     "body",       :null => false
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(:version => 20130410111015) do
     t.datetime "updated_at",                    :null => false
   end
 
-  add_index "images", ["imageable_id", "imageable_type", "order", "image_type"], :name => "iiitoitext_index", :unique => true
+  add_index "images", ["imageable_id", "imageable_type", "order", "image_type"], :name => "iioi_index", :unique => true
 
   create_table "infos", :force => true do |t|
     t.integer  "map_id",                                  :null => false
@@ -93,14 +93,14 @@ ActiveRecord::Schema.define(:version => 20130410111015) do
   end
 
   create_table "map_serial_numbers", :force => true do |t|
-    t.integer  "map_id",                    :null => false
-    t.string   "code",                      :null => false
-    t.integer  "type_cd",    :default => 0
-    t.integer  "used",       :default => 0
-    t.integer  "printed_cd", :default => 0
-    t.integer  "count",      :default => 0
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.integer  "map_id",                     :null => false
+    t.string   "code",                       :null => false
+    t.integer  "type_cd",     :default => 0
+    t.integer  "used",        :default => 0
+    t.integer  "activate_cd", :default => 0
+    t.integer  "count",       :default => 0
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
   end
 
   add_index "map_serial_numbers", ["code"], :name => "index_map_serial_numbers_on_code", :unique => true
@@ -215,7 +215,7 @@ ActiveRecord::Schema.define(:version => 20130410111015) do
     t.datetime "updated_at",                   :null => false
   end
 
-  add_index "texts", ["textable_id", "textable_type", "order", "text_type"], :name => "tittottext_index", :unique => true
+  add_index "texts", ["textable_id", "textable_type", "order", "text_type"], :name => "ttot_index", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -251,6 +251,6 @@ ActiveRecord::Schema.define(:version => 20130410111015) do
     t.datetime "updated_at",                    :null => false
   end
 
-  add_index "videos", ["videoable_id", "videoable_type", "order", "video_type"], :name => "vivtovext_index", :unique => true
+  add_index "videos", ["videoable_id", "videoable_type", "order", "video_type"], :name => "vvov_index", :unique => true
 
 end

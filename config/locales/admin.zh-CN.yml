@@ -259,9 +259,9 @@
           free: "免费版"
           ordinary: "普通版"
           favorite: "收藏版"
-        printeds:
-          yes_print: "已印刷"
-          no_print: "未印刷"
+        activates:
+          yes_activate: "已激活"
+          no_activate: "未激活"
     models:
       place: "景点"
       scenic: "景区"
@@ -360,8 +360,8 @@
         types: "序列号类型"
         type_cd: "序列号类型"
         used: "已使用次数"
-        printed: "打印"
-        printed_cd: "打印"
+        activate: "激活"
+        activate_cd: "激活"
         count: "默认使用次数"
         created_at: "创建时间"
         sum: "导出数量"
@@ -500,9 +500,9 @@
         two: "类型二"
         three: "类型三"
     mapserialnumber:
-      print:
-        no_print: "未印刷"
-        yes_print: "已印刷"
+      activate:
+        no_activate: "未激活"
+        yes_activate: "已激活"
       type:
         free: "免费版"
         ordinary: "普通版"

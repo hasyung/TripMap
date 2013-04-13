@@ -15,9 +15,9 @@
                 MapSerialNumber.types_for_select(:value),
                 include_blank: t("helpers.links.select")
                  %>
-  <label><%= MapSerialNumber.human_attribute_name(:printed_cd) %></label>
-  <%= f.select :printed_cd,
-                MapSerialNumber.printeds_for_select(:value),
+  <label><%= MapSerialNumber.human_attribute_name(:activate_cd) %></label>
+  <%= f.select :activate_cd,
+                MapSerialNumber.activates_for_select(:value),
                 include_blank: t("helpers.links.select") %>
   <label><%= MapSerialNumber.human_attribute_name(:created_at) %></label>
   <input id="date_start" name="date" type="text" readonly="readonly">
