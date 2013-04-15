@@ -239,6 +239,7 @@
       success: "操作用户成功！"
       error: "操作用户失败！"
       search_error: "查询用户出错！"
+      serial_error: "序列号错误或已使用！"
     infos:
       success: "操作信息成功！"
       error: "操作信息失败！"
@@ -366,8 +367,10 @@
         created_at: "创建时间"
         sum: "导出数量"
       account:
-        nickname: "昵称"
-        email: "Email"
+        nickname: "昵  称"
+        email: "邮  箱"
+        password: "密    码"
+        password_confirmation: "重复密码"
         map_serial_number: "序列号"
         created_at: "创建时间"
       declaration:

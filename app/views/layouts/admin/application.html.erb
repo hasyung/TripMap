@@ -15,81 +15,86 @@
     <%= stylesheet_link_tag "admin/application", :media => "all" %>
   </head>
   <body id="<%= "#{controller_name}-#{action_name}" %>">
-    
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="brand" href="#"><%= Setting.app_name %></a>
-          <div class="container nav-collapse">
-            <ul class="nav">
-              <li<%= raw ' class="active"' if %w(home).include?(controller_name) %>>
-                <%= link_to t("navs.home.index"), admin_root_path %>
-              </li>
-              <li<%= raw ' class="active"' if %w(provinces) .include?(controller_name) %>>
-                <%= link_to t("navs.provinces.index"), admin_provinces_path %>
-              </li>
-              <li<%= raw ' class="active"' if %w(maps).include?(controller_name) %>>
-                <%= link_to t("navs.maps.index"), admin_maps_path %>
-              </li>
-              <li<%= raw ' class="active"' if %w(scenics).include?(controller_name) %>>
-                <%= link_to t("navs.scenics.index"), admin_scenics_path %>
-              <li<%= raw ' class="active"' if %w(places).include?(controller_name) %>>
-                <%= link_to t("navs.places.index"), admin_places_path %>
-              <li<%= raw ' class="active"' if %w(recommends).include?(controller_name) %>>
-                <%= link_to t("navs.recommends.index"), admin_recommends_path %>
-              <li<%= raw ' class="active"' if %w(shares).include?(controller_name) %>>
-                <%= link_to t("navs.shares.index"), admin_shares_path %>
-              </li>
-              <li<%= raw ' class="active"' if %w(infos).include?(controller_name) %>>
-                <%= link_to t("navs.infos.index"), admin_infos_path %>
-              </li>
-              <li<%= raw ' class="active"' if %w(api).include?(controller_name) %>>
-                <%= link_to t("navs.apis.index"), v1_admin_api_index_path %>
-              <li<%= raw ' class="active"' if %w(logs).include?(controller_name) %>>
-                <%= link_to t("navs.logs.index"), admin_logs_path %>
-              </li>
-              <li<%= raw ' class="active"' if %w(serialnumbers).include?(controller_name) %>>
-                <%= link_to t("navs.serialnumber.index"), admin_serialnumbers_path %>
-              </li>
-              <li<%= raw ' class="active"' if %w(accounts).include?(controller_name) %>>
-                <%= link_to t("navs.accounts.index"), admin_accounts_path %>
-              </li>
-              <li<%= raw ' class="active"' if %w(declarations).include?(controller_name) %>>
-                <%= link_to t("navs.declarations.show"), admin_declaration_path %>
-              </li>
-            </ul>
-
-            <ul class="nav pull-right">
-                <% if user_signed_in? %>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="icon-user-md"></i><%= current_user.email %><b class="caret"></b>
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li class="divider"></li>
-                    <li><%= link_to(t("helpers.links.logout"), destroy_user_session_path, :method => :delete) %></li>
-                  </ul>
+    <% if %w(sessions).include?(controller_name) %>
+       <%= render "layouts/admin_login" %>
+       <div class="navbar navbar-fixed-top">
+      </div>
+    <% else %>
+      <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+          <div class="container">
+            <a class="brand" href="#"><%= Setting.app_name %></a>
+            <div class="container nav-collapse">
+              <ul class="nav">
+                <li<%= raw ' class="active"' if %w(home).include?(controller_name) %>>
+                  <%= link_to t("navs.home.index"), admin_root_path %>
                 </li>
-                <% end %>
+                <li<%= raw ' class="active"' if %w(provinces) .include?(controller_name) %>>
+                  <%= link_to t("navs.provinces.index"), admin_provinces_path %>
+                </li>
+                <li<%= raw ' class="active"' if %w(maps).include?(controller_name) %>>
+                  <%= link_to t("navs.maps.index"), admin_maps_path %>
+                </li>
+                <li<%= raw ' class="active"' if %w(scenics).include?(controller_name) %>>
+                  <%= link_to t("navs.scenics.index"), admin_scenics_path %>
+                <li<%= raw ' class="active"' if %w(places).include?(controller_name) %>>
+                  <%= link_to t("navs.places.index"), admin_places_path %>
+                <li<%= raw ' class="active"' if %w(recommends).include?(controller_name) %>>
+                  <%= link_to t("navs.recommends.index"), admin_recommends_path %>
+                <li<%= raw ' class="active"' if %w(shares).include?(controller_name) %>>
+                  <%= link_to t("navs.shares.index"), admin_shares_path %>
+                </li>
+                <li<%= raw ' class="active"' if %w(infos).include?(controller_name) %>>
+                  <%= link_to t("navs.infos.index"), admin_infos_path %>
+                </li>
+                <li<%= raw ' class="active"' if %w(api).include?(controller_name) %>>
+                  <%= link_to t("navs.apis.index"), v1_admin_api_index_path %>
+                <li<%= raw ' class="active"' if %w(logs).include?(controller_name) %>>
+                  <%= link_to t("navs.logs.index"), admin_logs_path %>
+                </li>
+                <li<%= raw ' class="active"' if %w(serialnumbers).include?(controller_name) %>>
+                  <%= link_to t("navs.serialnumber.index"), admin_serialnumbers_path %>
+                </li>
+                <li<%= raw ' class="active"' if %w(accounts).include?(controller_name) %>>
+                  <%= link_to t("navs.accounts.index"), admin_accounts_path %>
+                </li>
+                <li<%= raw ' class="active"' if %w(declarations).include?(controller_name) %>>
+                  <%= link_to t("navs.declarations.show"), admin_declaration_path %>
+                </li>
               </ul>
+
+              <ul class="nav pull-right">
+                  <% if user_signed_in? %>
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                      <i class="icon-user-md"></i><%= current_user.email %><b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li class="divider"></li>
+                      <li><%= link_to(t("helpers.links.logout"), destroy_user_session_path, :method => :delete) %></li>
+                    </ul>
+                  </li>
+                  <% end %>
+                </ul>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="container">
-        <div class="row">
-          <div class="span12"><%= render_breadcrumbs %></div>
-          <div class="span12"><%= bootstrap_flash %></div>
-          <%= render "layouts/sidebars/#{content_for?(:sidebar) ? 'two_column' : 'full_column' }" %>
-        </div>
+      <div class="container">
+          <div class="row">
+            <div class="span12"><%= render_breadcrumbs %></div>
+            <div class="span12"><%= bootstrap_flash %></div>
+            <%= render "layouts/sidebars/#{content_for?(:sidebar) ? 'two_column' : 'full_column' }" %>
+          </div>
 
-      <footer>
-        <p><%= Setting.company %> &copy; Company 2013</p>
-      </footer>
+        <footer>
+          <p><%= Setting.company %> &copy; Company 2013</p>
+        </footer>
 
-    
-    </div>
+      
+      </div>
+    <% end %>
     <!-- Javascripts
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
