@@ -3,7 +3,7 @@ class Api::V1::MapsController < Api::V1::ApplicationController
   def index
     Rails.cache.write("maps", Map.get_all_maps) if !Rails.cache.exist?("maps")
 
-    render :json => Rails.cache.read(("maps")
+    render :json => Rails.cache.read("maps")
   end
 
   def show
