@@ -60,14 +60,14 @@ class Api::V1::SharesController < Api::V1::ApplicationController
 
   def create
     result = {result: false}
-     (render :json => result; return) if params[:map_id].blank? || params[:device_id].blank? || params[:title].blank? ||
+     (render :json => result; return) if params[:map_id].blank? || params[:title].blank? ||
                                          params[:image].blank? ||params[:text].blank?
     map = Map.find_by_id params[:map_id].to_i
-    device_id = ActivateMap.find{|a| a.device_id == params[:device_id]}
+    account = Account.find{|a| a.email == params[:email]}
     if map.present?
       @share = map.shares.new
       @share.title = params[:title]
-      @share.nickname_id = (device_id.present? && device_id.nickname.present? ) ? device_id.nickname.id : 0  
+      @share.account_id = account.present?? account.id : 0  
       @share.build_share_image file: params[:image]
       @share.build_share_text body: params[:text]
       if @share.save
@@ -81,7 +81,7 @@ class Api::V1::SharesController < Api::V1::ApplicationController
   def get_share_value(share)
     r = {id: share.id,
          title: share.title,
-         nickname: Nickname.find_by_id(share.nickname_id).present? ? Nickname.find(share.nickname_id).name : "游客",
+         nickname: share.account.present?? share.account.nickname : "游客",
          image: share.share_image.file.url,
          cover: share.share_image.file.thumbnail.url,
          text: share.share_text.body
