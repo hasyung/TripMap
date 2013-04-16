@@ -6,7 +6,9 @@ TripMap::Application.routes.draw do
              :skip => [:passwords, :registrations],
              :controllers => { :sessions => 'admin/sessions' }
 
-  resources :accounts, only: [:new, :create] do
+  resources :accounts, only: [] do
+    get 'new/:device_id' => 'accounts#new', as: 'new', on: :collection
+    post ':device_id' => 'accounts#create', as: '', on: :collection
     get 'success' => 'accounts#success', on: :collection
   end
   
