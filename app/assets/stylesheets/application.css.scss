@@ -11,9 +11,8 @@ body {
   text-align:center;
 }
 .control-group {
-  padding-right: 30px;
+  padding-right:8%;
 }
-
 .logo_style {
   margin-top:20px;
   margin-bottom:30px;
@@ -73,4 +72,7 @@ input[type="text"], input[type="password"] {
   }
   #submit:hover {
     background-image:url(/assets/account/button_down.png);
+  }
+  .reg {
+    width:180px;
   }
