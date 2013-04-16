@@ -11,7 +11,7 @@ class Api::V1::MapsController < Api::V1::ApplicationController
     ( render :json => result; return ) if params[:map_id].nil? || !validate_client_state
     mid = params[:map_id].to_i
     if Rails.cache.exist?("maps")
-      map = Rails.cache.read(("maps").find{|a| a[:id] == mid }
+      map = Rails.cache.read("maps").find{|a| a[:id] == mid }
     else
       map = Map.find_by_id mid
     end
