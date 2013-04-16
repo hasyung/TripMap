@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130413044543) do
+ActiveRecord::Schema.define(:version => 20130415101439) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",                                :default => "", :null => false
@@ -93,13 +93,25 @@ ActiveRecord::Schema.define(:version => 20130413044543) do
 
   add_index "images", ["imageable_id", "imageable_type", "order", "image_type"], :name => "iioi_index", :unique => true
 
+  create_table "info_lists", :force => true do |t|
+    t.integer  "map_id",                                   :null => false
+    t.string   "name",        :limit => 20,                :null => false
+    t.string   "slug",        :limit => 20,                :null => false
+    t.integer  "order",                     :default => 0
+    t.integer  "infos_count",               :default => 0
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+  end
+
+  add_index "info_lists", ["map_id", "order"], :name => "index_info_lists_on_map_id_and_order", :unique => true
+
   create_table "infos", :force => true do |t|
-    t.integer  "map_id",                                  :null => false
-    t.string   "name",       :limit => 20,                :null => false
-    t.string   "slug",       :limit => 20,                :null => false
-    t.integer  "order",                    :default => 0
-    t.datetime "created_at",                              :null => false
-    t.datetime "updated_at",                              :null => false
+    t.integer  "info_list_id",                              :null => false
+    t.string   "name",         :limit => 20,                :null => false
+    t.string   "slug",         :limit => 20,                :null => false
+    t.integer  "order",                      :default => 0
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
   end
 
   create_table "ip_addresses", :force => true do |t|
@@ -141,10 +153,10 @@ ActiveRecord::Schema.define(:version => 20130413044543) do
     t.integer  "scenics_count",                  :default => 0
     t.integer  "places_count",                   :default => 0
     t.integer  "recommends_count",               :default => 0
+    t.integer  "info_lists_count",               :default => 0
     t.datetime "created_at",                                    :null => false
     t.datetime "updated_at",                                    :null => false
     t.integer  "shares_count",                   :default => 0
-    t.integer  "infos_count",                    :default => 0
   end
 
   add_index "maps", ["name"], :name => "index_maps_on_name", :unique => true
@@ -217,11 +229,11 @@ ActiveRecord::Schema.define(:version => 20130413044543) do
 
   create_table "shares", :force => true do |t|
     t.integer  "map_id",                                  :null => false
+    t.integer  "account_id",                              :null => false
     t.string   "title",      :limit => 20,                :null => false
     t.integer  "state_cd",                 :default => 0
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
-    t.integer  "account_id",                              :null => false
   end
 
   create_table "texts", :force => true do |t|

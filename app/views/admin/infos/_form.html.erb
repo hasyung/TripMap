@@ -1,12 +1,16 @@
-<%= simple_form_for [:admin, @info] do |f| %>
+<%= simple_form_for [:admin, :info_list, @info] do |f| %>
+
   <%= f.input :name %>
   <%= f.input :slug %>
   <%= f.input :order %>
-  <%= f.association :map, :collection => Map.all, :prompt => t("helpers.links.select", :model_name => Map.model_name.human) %>
+  <%= f.association :info_list, :collection => InfoList.all, :prompt => t("helpers.links.select", :model_name => InfoList.model_name.human) %>
+
   <%= f.fields_for :letter, @info.letter ||= @info.build_letter do |l|  %>  
     <%= l.input :body, :as => :text, :input_html => { :class => "span-full" } %>
   <% end %>
+
   <div class="form-actions">
     <%= f.button :submit, :class => 'btn-primary' %>
   </div>
+
 <% end %>

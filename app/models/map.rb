@@ -11,7 +11,7 @@ class Map < ActiveRecord::Base
     assoc.has_many :places, :autosave => true
     assoc.has_many :recommends, :autosave => true
     assoc.has_many :shares, :autosave => true
-    assoc.has_many :infos, :autosave => true
+    assoc.has_many :info_lists, :autosave => true
     assoc.has_many :logs
   end
   has_many :map_serial_numbers

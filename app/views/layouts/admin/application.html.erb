@@ -40,8 +40,8 @@
               <li<%= raw ' class="active"' if %w(shares).include?(controller_name) %>>
                 <%= link_to t("navs.shares.index"), admin_shares_path %>
               </li>
-              <li<%= raw ' class="active"' if %w(infos).include?(controller_name) %>>
-                <%= link_to t("navs.infos.index"), admin_infos_path %>
+              <li<%= raw ' class="active"' if %w(info_lists).include?(controller_name) %>>
+                <%= link_to t("navs.info_lists.index"), admin_info_lists_path %>
               </li>
               <li<%= raw ' class="active"' if %w(api).include?(controller_name) %>>
                 <%= link_to t("navs.apis.index"), v1_admin_api_index_path %>

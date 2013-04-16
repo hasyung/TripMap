@@ -10,24 +10,28 @@ TripMap::Application.routes.draw do
 
   namespace :admin do
     root :to => 'home#index'
+
     resources :maps, :except => :show do
       resources :images, except: :show
     end
 
     resources :provinces, :except => :show
+
     resources :places, :except => :show do
       resources :images, except: :show
     end
+
     resources :scenics, :except => :show do
       resources :images, except: :show
     end
+
     resources :serialnumbers, :except => :show do
       get  'search',    on: :collection
       get  'export',    on: :collection
       post 'ex_search', on: :collection
 
     end
-    
+
     resources :recommends do
       resources :recommend_records,
                 path: 'records',:as => "records" do
@@ -72,27 +76,34 @@ TripMap::Application.routes.draw do
         end
       end
     end
-    resources :infos, :except => :show
+
+    resources :info_lists do
+      resources :infos
+    end
+
     resources :shares do
       get 'publish/:status', :action => :publish, :on => :member, :as => :publish
       match 'select', :on => :collection, :via => [:get, :post]
     end
+
     resources :logs, :only => :index do
       match 'select', :on => :collection, :via => [:get, :post]
     end
+
     resources :accounts, :except => :show do
       get 'search', :on => :collection
     end
-    
+
     resources :api, :only => [] do
       get 'v1', :on => :collection
     end
 
     match 'declaration/show' => 'declarations#show', :as => 'declaration', :via => [:get, :post, :put]
   end
-  
+
   namespace :api do
     namespace :v1 do
+
       resources :maps, :only => :index do
         resources :weathers, :only => :index
         get '/show', :on => :collection
@@ -103,17 +114,20 @@ TripMap::Application.routes.draw do
         post 'logs' => 'logs#create', :on => :collection
         get 'version' => 'maps#version', :on => :member
       end
+
       resources :accounts, only: [] do
         post '/create' => 'accounts#create', on: :collection
         post '/login' => 'accounts#login', on: :collection
         post '/validate' => 'accounts#validate', on: :collection
         get '/show' => 'accounts#show', on: :collection
       end
+
       resources :declarations, only: [] do
         get '/show' => 'declarations#show', on: :collection
       end
+
     end
   end
-  
+
   root :to => 'home#index'
 end

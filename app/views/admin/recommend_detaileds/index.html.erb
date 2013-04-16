@@ -30,7 +30,7 @@
                     edit_admin_recommend_record_detailed_path(params[:recommend_id], d.recommend_record_id, d.id) %>
                 <%= link_to raw("<i class=\"icon-trash\"></i>"), 
                     admin_recommend_record_detailed_path(params[:recommend_id], d.recommend_record_id, d.id), 
-                    method: :delete, 
+                    method: :delete,
                     data: { confirm: t('links.commons.confirm')} %>
               </td>
             </tr>
