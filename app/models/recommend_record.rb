@@ -29,7 +29,4 @@ class RecommendRecord < ActiveRecord::Base
   scope :order_asc, order("`order` ASC")
   scope :created_desc, order("`created_at` DESC")
 
-  # Scopes
-  scope :order_asc, order("`order` ASC")
-
 end
