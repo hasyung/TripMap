@@ -15,9 +15,11 @@ class AccountsController < ApplicationController
     activate_map = ActivateMap.create(device_id: params[:device_id]) if activate_map.blank?
     @account = activate_map.accounts.new params[:account]
     if @account.save
-      serial.account_id = @account.id
-      serial.activate_cd = 1
-      serial.save
+      if serial.present?
+        serial.account_id = @account.id
+        serial.activate_cd = 1
+        serial.save
+      end
       redirect_to success_accounts_path
     else
       render :new

@@ -31,9 +31,11 @@ class Api::V1::AccountsController < Api::V1::ApplicationController
 
     account = activate_map.accounts.new email: params[:email], password: params[:password], nickname: params[:nickname]
     if account.save
-      serial.account_id = account.id
-      serial.activate_cd = 1
-      serial.save
+      if serial.present?
+        serial.account_id = account.id
+        serial.activate_cd = 1
+        serial.save
+      end
       result = {result: 0}
     end
 
