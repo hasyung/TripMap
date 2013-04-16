@@ -1,0 +1,33 @@
+<%= content_for :title do -%>
+  用户注册
+<% end %>
+
+<img src="/assets/account/title.png"/>
+<img src="/assets/account/logo.png" class="logo_style"/>
+<div id="main" class="span7 offset4">
+  <%= bootstrap_flash %>
+  <div class="well-inner">
+    <%= simple_form_for @account do |f| %>
+      <div class="form-inputs">
+        <%= f.input :email, :autofocus => true, :as => :prepend,
+                    :input_html => { :class => "span4" }, :placeholder => true %>
+        <%= f.input :password, :as => :prepend_password,
+                    :input_html => { :class => :span4 }, :placeholder => true %>
+        <%= f.input :password_confirmation, :as => :prepend_password,
+                    :input_html => { :class => :span4 }, :placeholder => true %>
+        <%= f.input :nickname, :autofocus => true, :as => :prepend,
+                    :input_html => { :class => "span4" }, :placeholder => true %>
+        <%= f.fields_for :map_serial_number, @account.map_serial_number ||= @account.build_map_serial_number do |s|  %> 
+          <%= s.input :code, :autofocus => true, :as => :prepend,
+                      :input_html => { :class => "span4" }, :placeholder => true %>
+        <% end -%>
+      </div>
+
+      <div class="submit">
+        <a hidefocus="true"  id="submit">
+          <%= f.button :submit, :value => "", :class => 'btn-primary'  %>
+        </a>
+      </div>
+    <% end %>
+  </div>
+</div>
