@@ -46,7 +46,20 @@ class Map < ActiveRecord::Base
   # Scopes
   scope :created_desc, order("created_at DESC")
 
+
+   # Callbacks
+  after_save :after_save
+  after_destroy :after_destroy
+  
   # Methods
+
+  def self.get_all_maps
+    result = []
+    Map.all.each do |map|
+      result << { :id => map.id, :name => map.name, :slug => map.slug, :version => map.version }
+    end
+    result
+  end
 
   def get_map_values
     {   
@@ -61,6 +74,15 @@ class Map < ActiveRecord::Base
   end
 
   private
+
+  def after_save
+    Rails.cache.write("maps", Map.get_all_maps)
+    Rails.cache.write("map_#{self.id}", self.get_map_values)
+  end
+
+  def after_destroy
+    Rails.cache.write("maps", Map.get_all_maps)
+  end
 
   def get_map_slides()
     slides = []
