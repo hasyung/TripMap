@@ -14,9 +14,8 @@ class AccountsController < ApplicationController
     activate_map = ActivateMap.find{ |o| o.device_id == params[:device_id] }
     activate_map = ActivateMap.create(device_id: params[:device_id]) if activate_map.blank?
 
-    account = activate_map.accounts.new email: params[:email], password: params[:password], nickname: params[:nickname]
     if @account.save
-      serial.account_id = account.id
+      serial.account_id = @account.id
       serial.activate_cd = 1
       serial.save
       redirect_to success_accounts_path
