@@ -76,11 +76,14 @@ class Map < ActiveRecord::Base
   private
 
   def after_save
+    Rails.cache.delete("maps") if !Rails.cache.exist?("maps")
+    Rails.cache.delete("map_#{self.id}") if !Rails.cache.exist?("map_#{self.id}")
     Rails.cache.write("maps", Map.get_all_maps)
     Rails.cache.write("map_#{self.id}", self.get_map_values)
   end
 
   def after_destroy
+    Rails.cache.delete("maps") if !Rails.cache.exist?("maps")
     Rails.cache.write("maps", Map.get_all_maps)
     Rails.cache.delete("map_#{self.id}")
   end
