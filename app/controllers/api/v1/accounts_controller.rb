@@ -22,7 +22,7 @@ class Api::V1::AccountsController < Api::V1::ApplicationController
     (result = {result: 3}; render :json => result; return) if Account.find{ |o| o.nickname == params[:nickname] }.present?
 
     if params[:serial].present?
-      serial = MapSerialNumber.where("code = params[:serial]").first
+      serial = MapSerialNumber.where("code = #{params[:serial]}").first
       (result = {result: 4}; render :json => result; return) if serial.blank? || serial.activate_cd == 1
     end
 
@@ -83,7 +83,7 @@ class Api::V1::AccountsController < Api::V1::ApplicationController
     account = Account.find{ |o| o.email == params[:email] }
     (result = {result: 2}; render :json => result; return) if account.blank?
 
-    serial = MapSerialNumber.where("code = params[:serial]").first
+    serial = MapSerialNumber.where("code = #{params[:serial]}").first
     (result = {result: 3}; render :json => result; return) if serial.blank? || serial.activate_cd == 1
 
     (result = {result: 4}; render :json => result; return) if account.map_serial_number.present?
