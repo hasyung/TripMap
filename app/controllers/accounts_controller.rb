@@ -6,7 +6,8 @@ class AccountsController < ApplicationController
   def create
     serial_num = params[:account][:map_serial_number_attributes][:code]
     if serial_num.present?
-      serial = MapSerialNumber.where("code = serial_num").first
+      binding.pry
+      serial = MapSerialNumber.where("code = #{serial_num}").first
       (redirect_to new_accounts_path(params[:device_id]), :alert => t("messages.accounts.serial_error"); return) if serial.blank? ||
                                                                                             serial.activate_cd == 1
     end
