@@ -1,23 +1,23 @@
 class Api::V1::MapsController < Api::V1::ApplicationController
 
   def index
-    result = []
-    Map.all.each do |map|
-      result << { :id => map.id, :name => map.name, :slug => map.slug, :version => map.version }
-    end
+    Rails.cache.write("maps", Map.get_all_maps) if !Rails.cache.exist?("maps")
 
-    render :json => result
+    render :json => Rails.cache.read("maps")
   end
 
   def show
     result= {}
     ( render :json => result; return ) if params[:map_id].nil? || !validate_client_state
     mid = params[:map_id].to_i
-    map = Map.find_by_id mid
+    Rails.cache.write("maps", Map.get_all_maps) if !Rails.cache.exist?("maps")
+    map = Rails.cache.read("maps").find{|a| a[:id] == mid }
+    cache_key = "map_#{map[:id]}"
     ( render :json => result; return ) if map.nil?                # Check map
-    cache_key = "map_#{map.id}"
-    Rails.cache.write(cache_key, map.get_map_values) if !Rails.cache.exist?(cache_key)
-
+    if !Rails.cache.exist?(cache_key)
+      map = Map.find_by_id(mid)
+      Rails.cache.write(cache_key, map.get_map_values) 
+    end
     render :json => Rails.cache.read(cache_key)
   end
 

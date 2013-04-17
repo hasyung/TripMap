@@ -29,11 +29,13 @@ class Api::V1::AccountsController < Api::V1::ApplicationController
     activate_map = ActivateMap.find{ |o| o.device_id == params[:device_id] }
     activate_map = ActivateMap.create(device_id: params[:device_id]) if activate_map.blank?
 
-    account = activate_map.accounts.new email: params[:email], password: params[:password], nickname: params[:nickname]
+    account = activate_map.accounts.new email: params[:email], password: params[:password], password_confirmation: params[:password], nickname: params[:nickname]
     if account.save
-      serial.account_id = account.id
-      serial.activate_cd = 1
-      serial.save
+      if serial.present?
+        serial.account_id = account.id
+        serial.activate_cd = 1
+        serial.save
+      end
       result = {result: 0}
     end
 
@@ -53,7 +55,7 @@ class Api::V1::AccountsController < Api::V1::ApplicationController
     activate_map = ActivateMap.find{ |o| o.device_id == params[:device_id] }
     activate_map = ActivateMap.create(device_id: params[:device_id]) if activate_map.blank?
     activate_map.accounts << account
-    result = {result: 0}
+    result = {result: 0, nickname: account.nickname}
     
     render :json => result
   end

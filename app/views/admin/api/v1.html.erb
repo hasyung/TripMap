@@ -157,6 +157,7 @@
       <p> result: 3   =>   昵称已存在 </p>
       <p> result: 4   =>   序列号错误或已使用 </p>
       <p> result: 5   =>   未知错误 </p>
+      <p>登录页面URL地址：/accounts/new/device_id</p>
   </div>
 
   <div id="account_loggin" class="api well">
@@ -210,7 +211,7 @@
         <dd>
     </dl>
      <p>结果：</p>
-     <p>result: 0   =>   成功 </p>
+     <p>result: 0, nickname: *   =>   成功 </p>
       <p>result: 1   =>   参数错误 </p>
       <p> result: 2   =>   email不存在或密码错误 </p>
       <p> result: 3   =>   该用户授权设备超过限制</p>
@@ -494,10 +495,10 @@
             </tr>
             <tr>
               <td>3</td>
-              <td>device_id</td>
-              <td>整数</td>
+              <td>email</td>
+              <td>字符串</td>
               <td>必选参数</td>
-              <td>用户设备id</td>
+              <td>邮件（用户帐号）</td>
             </tr>
             <tr>
               <td>4</td>
