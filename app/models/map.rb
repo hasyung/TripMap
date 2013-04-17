@@ -82,6 +82,7 @@ class Map < ActiveRecord::Base
 
   def after_destroy
     Rails.cache.write("maps", Map.get_all_maps)
+    Rails.cache.delete("map_#{self.id}")
   end
 
   def get_map_slides()
