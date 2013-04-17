@@ -68,7 +68,7 @@ class Api::V1::AccountsController < Api::V1::ApplicationController
 
     activate_map = ActivateMap.find{ |o| o.device_id == params[:device_id] }
     activate_map = ActivateMap.create(device_id: params[:device_id]) if activate_map.blank?
-    activate_map.accounts << account
+    activate_map.accounts << account if !activate_map.accounts.include?(account)
     result = {result: 0, nickname: account.nickname}
     
     render :json => result
