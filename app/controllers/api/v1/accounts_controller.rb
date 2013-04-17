@@ -42,6 +42,21 @@ class Api::V1::AccountsController < Api::V1::ApplicationController
     render :json => result
   end
 
+  def update
+    result = {result: 4}
+
+    (result = {result: 1}; render :json => result; return) if params[:email].blank? || params[:password].blank? ||
+                                                              params[:nickname].blank?
+    account = Account.find{|a| a.email == params[:email]}
+    binding.pry
+    (result = {result: 2}; render :json => result; return) if account.blank? || !account.valid_password?(params[:password])
+    (result = {result: 3}; render :json => result; return) if Account.find{ |o| o.nickname == params[:nickname] }.present?
+    account.nickname = params[:nickname]
+    account.password = account.password_confirmation = params[:password]
+    result = {result: 0} if account.save
+    render :json => result
+  end
+
   def login
     result = {result: 4}
 
