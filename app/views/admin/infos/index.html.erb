@@ -18,6 +18,7 @@
           <th><%= model_class.human_attribute_name(:slug) %></th>
           <th><%= model_class.human_attribute_name(:letter) %></th>
           <th><%= model_class.human_attribute_name(:info_list) %></th>
+          <th><%= model_class.human_attribute_name(:order) %></th>
           <th class="action"><%= t('links.commons.action') %></th>
         </tr>
       </thead>
@@ -29,6 +30,7 @@
             <td><%= info.slug %></td>
             <td><%= info.letter.nil? ? "NULL": info.letter.body %></td>
             <td><%= info.info_list.name %></td>
+            <td><%= info.order %></td>
             <td class="action">
               <%= link_to raw("<i class=\"icon-edit\"></i>"), edit_admin_info_list_info_path(info.info_list_id, info.id), :title => t('links.infos.edit') %>
               <%= link_to raw("<i class=\"icon-trash\"></i>"), admin_info_list_info_path(info.info_list_id, info.id), :method => :delete, :data => { :confirm => t('links.commons.confirm') } %>

@@ -104,6 +104,8 @@ ActiveRecord::Schema.define(:version => 20130415101439) do
   end
 
   add_index "info_lists", ["map_id", "order"], :name => "index_info_lists_on_map_id_and_order", :unique => true
+  add_index "info_lists", ["name"], :name => "index_info_lists_on_name", :unique => true
+  add_index "info_lists", ["slug"], :name => "index_info_lists_on_slug", :unique => true
 
   create_table "infos", :force => true do |t|
     t.integer  "info_list_id",                              :null => false
@@ -113,6 +115,10 @@ ActiveRecord::Schema.define(:version => 20130415101439) do
     t.datetime "created_at",                                :null => false
     t.datetime "updated_at",                                :null => false
   end
+
+  add_index "infos", ["info_list_id", "order"], :name => "index_infos_on_info_list_id_and_order", :unique => true
+  add_index "infos", ["name"], :name => "index_infos_on_name", :unique => true
+  add_index "infos", ["slug"], :name => "index_infos_on_slug", :unique => true
 
   create_table "ip_addresses", :force => true do |t|
     t.string   "ip",                        :null => false
