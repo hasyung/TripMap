@@ -447,6 +447,9 @@
       image:
         file: "图片文件"
         order: "图片排序"
+      image_list:
+        name: "名称"
+        order: "排序"
       letter:
         body: "内容"
         order: "排序"    

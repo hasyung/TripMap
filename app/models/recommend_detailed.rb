@@ -17,13 +17,24 @@ class RecommendDetailed < ActiveRecord::Base
   belongs_to :recommend_record, :counter_cache => true
 
   # Validates
+  validate :order_increment
+
   accepts_nested_attributes_for :recommend_detailed_cover,          reject_if: lambda { |c| c[:file].blank? }, allow_destroy: true
   validates :name, :length => { :within => 1..15,    :message => I18n.t("errors.type.name") }, :uniqueness => true, :presence => true
   validates :order, uniqueness: { scope: [:recommend_record_id, :order] },
-                    numericality: { :greater_than_or_equal_to => 1, :less_than_or_equal_to => 999 }
+                    numericality: { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999 }
 
   # Scopes
   scope :order_asc, order("`order` ASC")
   scope :created_desc, order("`created_at` DESC")
+  
+  private
 
+  def order_increment
+    if self.new_record? && self.order == 0 && !self.recommend_record_id.nil?
+      self.order = RecommendDetailed.where( recommend_record_id: self.recommend_record_id ).maximum(:order).to_i + 1
+    elsif self.recommend_record_id.nil?       
+      self.order = 1
+    end
+  end
 end
