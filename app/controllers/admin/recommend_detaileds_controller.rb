@@ -450,7 +450,6 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
   def new_images
     @imageslist = ImageList.find params[:image_id]
     @image = @imageslist.images.new
-
     add_breadcrumb :new_images
   end
 

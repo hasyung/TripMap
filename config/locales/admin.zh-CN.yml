@@ -265,6 +265,8 @@
       success: "操作信息成功！"
       error: "操作信息失败！"
       serial_error: "序列号错误或已使用！"
+      password_error: "用户名已存在或密码错误！"
+      re_serial_error: "序列号解锁地图重复！"
       activate_error: "设备获取失败！"
     infos:
       success: "操作信息成功！"
@@ -484,6 +486,9 @@
       image:
         file: "图片文件"
         order: "图片排序"
+      image_list:
+        name: "名称"
+        order: "排序"
       letter:
         body: "内容"
         order: "排序"
@@ -536,6 +541,7 @@
       duration: "时长格式不对！"
       text_empty: "内容不能为空！"
       order: "数字范围为1-999"
+      duplicate_value: "该值已被使用！"
   enums:
     share:
       states:

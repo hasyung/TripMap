@@ -20,6 +20,7 @@
     <li><a href="#account_loggin">用户登陆(授权设备)</a></li>
     <li><a href="#account_validate">用户绑定序列号</a></li>
     <li><a href="#account_nickname">用户获取昵称</a></li>
+    <li><a href="#account_update">用户修改昵称</a></li>
     <li><a href="#activate_validate">通过设备ID查看地图使用权限</a></li>
     <li><a href="#share_current">获取当前分享</a></li>
     <li><a href="#share_arround">获取周边分享</a></li>
@@ -309,8 +310,70 @@
     </dl>
   </div>
 
+<<<<<<< HEAD
 	<div id="activate_validate" class="api well">
+=======
+  <div id="account_update" class="api well">
+>>>>>>> 7187807801e2fa8f72860840ed9c9939df0cffc4
     <h3 class="name">API7</h3>
+    <small class="desc">用户修改昵称</small>
+    <dl>
+      <dt>URL</dt>
+      <dd><pre class="docs-example"><%= update_api_v1_accounts_url(:format => :json) %></pre></dd>
+      <dt>HTTP请求方式</dt>
+      <dd>POST<dd>
+      <dt>支持格式</dt>
+      <dd>json<dd>
+      <dt>是否需要登录</dt>
+      <dd>否<dd>
+      <dt>请求参数</dt>
+      <dd>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>名字</th>
+              <th>类型</th>
+              <th>类别</th>
+              <th>说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>email</td>
+              <td>字符串</td>
+              <td>必选参数</td>
+              <td>email(用户帐号)</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>password</td>
+              <td>字符串</td>
+              <td>必选参数</td>
+              <td>密码</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>nickname</td>
+              <td>字符串</td>
+              <td>必选参数</td>
+              <td>昵称</td>
+            </tr>               
+          </tbody>
+        </table>
+        <dd>
+    </dl>
+    <p>结果：</p>
+     <p>result: 0   =>   成功 </p>
+      <p>result: 1   =>   参数错误 </p>
+      <p> result: 2   =>   email不存在或密码错误 </p>
+      <p> result: 3   =>   昵称已存在</p>
+      <p> result: 4   =>   未知错误 </p>
+  </div>
+
+<div id="activate_validate" class="api well">
+    <h3 class="name">API8</h3>
     <small class="desc">通过设备ID查看地图使用权限</small>
     <dl>
       <dt>URL</dt>
@@ -350,7 +413,7 @@
   </div>
 
 <div id="share_current" class="api well">
-    <h3 class="name">API8</h3>
+    <h3 class="name">API9</h3>
     <small class="desc">获取当前分享，结果为JSON数据格式。</small>
     <dl>
       <dt>URL</dt>
@@ -403,7 +466,7 @@
   
 
   <div id="share_arround" class="api well">
-    <h3 class="name">API9</h3>
+    <h3 class="name">API10</h3>
     <small class="desc">获取周边分享，结果为JSON数据格式。</small>
     <dl>
       <dt>URL</dt>
@@ -455,7 +518,7 @@
   </div>
   
   <div id="share_upload" class="api well">
-    <h3 class="name">API10</h3>
+    <h3 class="name">API11</h3>
     <small class="desc">上传我的分享，结果为JSON数据格式。</small>
     <dl>
       <dt>URL</dt>
@@ -521,7 +584,7 @@
   </div>
   
   <div id="weathers" class="api well">
-    <h3 class="name">API11</h3>
+    <h3 class="name">API12</h3>
     <small class="desc">获取当前地图所在城市天气</small>
     <dl>
       <dt>URL</dt>
@@ -561,7 +624,7 @@
   </div>
   
   <div id="logs" class="api well">
-    <h3 class="name">API12</h3>
+    <h3 class="name">API13</h3>
     <small class="desc">上传当前地图使用日志</small>
     <dl>
       <dt>URL</dt>
@@ -627,7 +690,7 @@
   </div>
   
   <div id="versions" class="api well">
-    <h3 class="name">API13</h3>
+    <h3 class="name">API14</h3>
     <small class="desc">检测地图数据包是否更新</small>
     <dl>
       <dt>URL</dt>
@@ -667,7 +730,7 @@
   </div>
 
 <div id="declaration" class="api well">
-    <h3 class="name">API14</h3>
+    <h3 class="name">API15</h3>
     <small class="desc">获取免责声明</small>
     <dl>
       <dt>URL</dt>

@@ -2,14 +2,12 @@ class Api::V1::VersionsController < Api::V1::ApplicationController
 
   def check
     pf = params[:platform]
-    ( render :json => {}; return ) if pf.nil?
+    ( render :json => {}; return ) if pf.nil? or pf.match(/^\d+$/).nil?
 
-    versions = Version.where("platform=?", pf.to_i)
+    versions = Version.where( platform: pf.to_i ).map(&:value)
     ( render :json => {}; return ) if versions.empty?
 
-    versions.sort_by!{ |o| o.value }.reverse!
-
-    render :json => { version: versions.first.value }
+    render :json => { version: versions.max }
   end
 
 end

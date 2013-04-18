@@ -17,7 +17,8 @@ class Video < ActiveRecord::Base
   end
 
   validates :order, numericality: { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999 },
-                    uniqueness: { scope: [:videoable_id, :videoable_type, :video_type] }
+                    uniqueness: { scope: [:videoable_id, :videoable_type, :video_type] },
+                    :if => :order_increment
 
   # SampleEnum. hash table is in growing.
   as_enum :type,
@@ -53,6 +54,16 @@ class Video < ActiveRecord::Base
     if cover.present? and cover_changed?
       self.cover_size = cover.file.size
       self.cover_type = cover.file.content_type
+    end
+  end
+
+  def order_increment
+    if self.new_record? && self.order == 0 && !self.videoable_id.nil?
+      self.order = Video.where( videoable_id: self.videoable_id, 
+                                videoable_type: self.videoable_type, 
+                                video_type: self.video_type ).maximum(:order).to_i + 1
+    elsif self.videoable_id.nil?
+      self.order = 1
     end
   end
 

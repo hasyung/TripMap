@@ -1,4 +1,5 @@
 class Info < ActiveRecord::Base
+  include ActiveModel::Validations
 
   # White list
   attr_accessible :info_list_id, :name, :slug, :order, :letter_attributes
@@ -19,8 +20,8 @@ class Info < ActiveRecord::Base
                             format: { with: /^[a-z]+$/, message: I18n.t("errors.type.slug") }
   end
 
-  validates :order, uniqueness: { scope: [:info_list_id, :order] },
-                    format:     { with: /^[1-9][0-9]{0,2}$/, message: I18n.t("errors.type.order") }
+  validates :order, numericality: { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999 }
+  validates_with OrderValidator
 
   # Scopes
   scope :order_asc,     order("`order` ASC")
