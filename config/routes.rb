@@ -110,6 +110,7 @@ TripMap::Application.routes.draw do
       resources :accounts, only: [] do
         post '/create' => 'accounts#create', on: :collection
         post '/login' => 'accounts#login', on: :collection
+        post '/update' => 'accounts#update', on: :collection
         post '/validate' => 'accounts#validate', on: :collection
         get '/show' => 'accounts#show', on: :collection
       end

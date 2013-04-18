@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130413044543) do
+ActiveRecord::Schema.define(:version => 20130417102626) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",                                :default => "", :null => false
@@ -47,6 +47,8 @@ ActiveRecord::Schema.define(:version => 20130413044543) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end
+
+  add_index "activate_with_accounts", ["activate_map_id", "account_id"], :name => "index_activate_with_accounts_on_activate_map_id_and_account_id", :unique => true
 
   create_table "audios", :force => true do |t|
     t.integer  "audioable_id"
@@ -217,11 +219,11 @@ ActiveRecord::Schema.define(:version => 20130413044543) do
 
   create_table "shares", :force => true do |t|
     t.integer  "map_id",                                  :null => false
+    t.integer  "account_id",                              :null => false
     t.string   "title",      :limit => 20,                :null => false
     t.integer  "state_cd",                 :default => 0
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
-    t.integer  "account_id",                              :null => false
   end
 
   create_table "texts", :force => true do |t|
