@@ -1,17 +1,19 @@
 class TripMapObserver < ActiveRecord::Observer
 
-  # Observing models
-  observe :scenic, :place, :recommend,                    # Level 1.
-          :recommend_record, :recommend_detailed,         # Level 2.
+  # Observing models.
+  observe :scenic, :place, :recommend, :info_list,                    # Level 1.
+          :recommend_record, :recommend_detailed, :info,              # Level 2.
           :image_list,
-          :audio, :video, :image, :letter                 # Atom.
+          :audio, :video, :image, :letter                             # Atom.
 
   NAV_PATH_OPTIONS = {
-    #model name        path to map
+    # class name           path to map
     :Scenic             => "map",
     :Place              => "map",
     :Recommend          => "map",
+    :InfoList           => "map",
 
+    :Info               => "info_list.map",
     :RecommendRecord    => "recommend.map",
     :RecommendDetailed  => "recommend_record.recommend.map",
 
