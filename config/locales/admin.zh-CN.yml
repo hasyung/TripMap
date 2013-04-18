@@ -34,6 +34,8 @@
       index: "序列号管理"
     declarations:
       show: "声明"
+    versions:
+      index: "版本"
   breadcrumbs:
     admin:
       application:
@@ -107,7 +109,12 @@
       serialnumbers:
         index: "序列号"
       declarations:
-        index: "声明" 
+        index: "声明"
+      versions:
+        index: "版本管理"
+        new: "新建版本"
+        edit: "编辑版本信息"
+
   links:
     home:
       index: "返回首页"
@@ -200,6 +207,10 @@
       confirm: "你确定删除吗？"
       video: "查看视频"
       audio: "查看音频"
+    versions:
+      new: "添加版本"
+      edit: "修改版本"
+      index: "版本"
 
   messages:
     maps:
@@ -297,6 +308,7 @@
       log: "日志"
       account: "用户"
       declaration: "声明"
+      version: "版本"
     attributes:
       map:
         province: "省市"
@@ -398,6 +410,9 @@
         created_at: "创建时间"
       declaration:
         body: "内容"
+      version:
+        platform: "平台"
+        value: "版本号"
 
   simple_form:
     labels:

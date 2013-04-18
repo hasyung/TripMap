@@ -1,0 +1,44 @@
+<%- model_class = Version -%>
+
+<%= render "base" %>
+
+<div class="box">
+
+  <div class="box-title">
+    <span class="icon"><i class="icon-th"></i></span>
+    <h5><%= t('links.versions.index') %></h5>
+  </div>
+
+  <div class="box-content">
+    <table class="table table-bordered table-striped with-check">
+      <thead>
+        <tr>
+          <th><input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" /></th>
+          <th><%= model_class.human_attribute_name(:platform) %></th>
+          <th><%= model_class.human_attribute_name(:value) %></th>
+          <th class="action"><%= t('links.commons.action') %></th>
+        </tr>
+      </thead>
+      </tbody>
+
+        <% @versions.each do |v| %>
+          <tr>
+            <td><%= check_box_tag "version_ids[]", v.id, false, :id => "version_#{v.id}" %></td>
+            <td><%= v.platform.zero? ? "iOS" : "Android" %></td>
+            <td><%= v.value %></td>
+            <td class="action">
+              <%= link_to raw("<i class=\"icon-edit\"></i>"), edit_admin_version_path(v), :title => t('links.versions.edit') %>
+              <%= link_to raw("<i class=\"icon-trash\"></i>"), admin_version_path(v), :method => :delete, :data => { :confirm => t('links.commons.confirm') } %>
+            </td>
+          </tr>
+        <% end %>
+ 
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="table-footer clearfix">
+  <div class="paginates-info"><%= page_entries_info @versions %></div>
+  <%= paginate @versions, :theme => "admin" %>
+</div>

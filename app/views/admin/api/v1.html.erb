@@ -3,12 +3,14 @@
 <div class="page-header">
   <h1><%= t("admin.apis.v1") %>API</h1>
 </div>
+
 <div class="api-description">
   <blockquote>
     <p class="text-info">此API参考文档专为旅图项目服务（服务器端名TripMap），当前版本号为0.1.0，该API参考文档是稳定的。</p>
     <small>最后更新时间 2013-04-13 19:45</small>
   </blockquote>
 </div>
+
 <div class="api-list">
   <h4>API列表</h4>
   <ol>
@@ -26,6 +28,7 @@
     <li><a href="#logs">上传当前地图使用日志</a></li>
     <li><a href="#versions">检测地图数据包是否更新</a></li>
     <li><a href="#declaration">获取免责声明</a></li>
+    <li><a href="#version">检测是否有最新版本</a></li>
   </ol>
 </div>
 <div class="api-content">
@@ -42,9 +45,7 @@
       <dt>是否需要登录</dt>
       <dd>否<dd>
       <dt>请求参数</dt>
-      <dd>
-        无
-      <dd>
+      <dd>无<dd>
     </dl>
   </div>
   
@@ -145,7 +146,7 @@
               <td>字符串</td>
               <td>可选参数</td>
               <td>序列号</td>
-            </tr>                   
+            </tr>
           </tbody>
         </table>
         <dd>
@@ -205,7 +206,7 @@
               <td>字符串</td>
               <td>必选参数</td>
               <td>密码</td>
-            </tr>                   
+            </tr>
           </tbody>
         </table>
         <dd>
@@ -218,7 +219,6 @@
       <p> result: 4   =>   未知错误 </p>
   </div>
 
-  
   <div id="account_validate" class="api well">
     <h3 class="name">API5</h3>
     <small class="desc">用户绑定序列号</small>
@@ -257,7 +257,7 @@
               <td>字符串</td>
               <td>必选参数</td>
               <td>序列号</td>
-            </tr>                   
+            </tr>
           </tbody>
         </table>
         <dd>
@@ -271,7 +271,7 @@
       <p> result: 5   =>   未知错误 </p>
   </div>
 
-<div id="account_nickname" class="api well">
+	<div id="account_nickname" class="api well">
     <h3 class="name">API6</h3>
     <small class="desc">用户获取昵称</small>
     <dl>
@@ -302,14 +302,14 @@
               <td>字符串</td>
               <td>必选参数</td>
               <td>email(用户帐号)</td>
-            </tr>                  
+            </tr>
           </tbody>
         </table>
         <dd>
     </dl>
   </div>
 
-<div id="activate_validate" class="api well">
+	<div id="activate_validate" class="api well">
     <h3 class="name">API7</h3>
     <small class="desc">通过设备ID查看地图使用权限</small>
     <dl>
@@ -340,7 +340,7 @@
               <td>字符串</td>
               <td>必选参数</td>
               <td>用户设备ID</td>
-            </tr>             
+            </tr>
           </tbody>
         </table>
         <dd>
@@ -551,7 +551,7 @@
               <td>整数</td>
               <td>必选参数</td>
               <td>地图编号</td>
-            </tr>            
+            </tr>
           </tbody>
         </table>
       <dd>
@@ -685,4 +685,41 @@
     </dl>
   </div>
 
+	<div id="version" class="api well">
+    <h3 class="name">API15</h3>
+    <small class="desc">检测是否有最新版本</small>
+    <dl>
+      <dt>URL</dt>
+      <dd><pre class="docs-example"><%= check_api_v1_versions_url(:format => :json) %></pre></dd>
+      <dt>HTTP请求方式</dt>
+      <dd>GET<dd>
+      <dt>支持格式</dt>
+      <dd>json<dd>
+      <dt>是否需要登录</dt>
+      <dd>否<dd>
+      <dt>请求参数</dt>
+      <dd>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>名字</th>
+              <th>类型</th>
+              <th>类别</th>
+              <th>说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>plantform</td>
+              <td>整数</td>
+              <td>必选参数</td>
+              <td>平台类型（0：iOS, 1: Android）</td>
+            </tr>
+          </tbody>
+        </table>
+      <dd>
+    </dl>
+  </div>
 </div>

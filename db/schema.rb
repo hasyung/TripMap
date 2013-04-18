@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130415101439) do
+ActiveRecord::Schema.define(:version => 20130417090401) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",                                :default => "", :null => false
@@ -271,6 +271,17 @@ ActiveRecord::Schema.define(:version => 20130415101439) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "versions", :force => true do |t|
+    t.integer  "platform",    :default => 0
+    t.string   "value",                      :null => false
+    t.string   "description"
+    t.string   "app"
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+  end
+
+  add_index "versions", ["platform", "value"], :name => "index_versions_on_platform_and_value", :unique => true
 
   create_table "videos", :force => true do |t|
     t.integer  "videoable_id"

@@ -103,6 +103,8 @@ TripMap::Application.routes.draw do
     end
 
     match 'declaration/show' => 'declarations#show', :as => 'declaration', :via => [:get, :post, :put]
+
+    resources :versions
   end
 
   namespace :api do
@@ -128,6 +130,10 @@ TripMap::Application.routes.draw do
 
       resources :declarations, only: [] do
         get '/show' => 'declarations#show', on: :collection
+      end
+
+      resources :versions, only: [] do
+        get '/check' => 'versions#check', :on => :collection
       end
 
     end

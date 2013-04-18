@@ -61,6 +61,9 @@
                 <li<%= raw ' class="active"' if %w(declarations).include?(controller_name) %>>
                   <%= link_to t("navs.declarations.show"), admin_declaration_path %>
                 </li>
+                <li<%= raw ' class="active"' if %w(versions).include?(controller_name) %>>
+                  <%= link_to t("navs.versions.index"), admin_versions_path %>
+                </li>
               </ul>
 
               <ul class="nav pull-right">
@@ -91,9 +94,8 @@
         <footer>
           <p><%= Setting.company %> &copy; Company 2013</p>
         </footer>
-
-      
       </div>
+
     <% end %>
     <!-- Javascripts
     ================================================== -->
