@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130417102626) do
+ActiveRecord::Schema.define(:version => 20130419064048) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",                                :default => "", :null => false
@@ -259,7 +259,7 @@ ActiveRecord::Schema.define(:version => 20130417102626) do
   create_table "videos", :force => true do |t|
     t.integer  "videoable_id"
     t.string   "videoable_type"
-    t.string   "file",                          :null => false
+    t.string   "file"
     t.string   "file_type"
     t.integer  "file_size",      :default => 0
     t.string   "cover",                         :null => false

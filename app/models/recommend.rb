@@ -29,7 +29,7 @@ class Recommend < ActiveRecord::Base
 
   # NestedAttributes
   accepts_nested_attributes_for :recommend_cover,       reject_if: lambda { |c| c[:file].blank? }, allow_destroy: true
-  accepts_nested_attributes_for :recommend_video,       reject_if: lambda { |v| v[:file].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :recommend_video,       reject_if: lambda { |v| v[:cover].blank? }, allow_destroy: true
 
   # Scopes
   scope :created_desc, order("`created_at` DESC")
