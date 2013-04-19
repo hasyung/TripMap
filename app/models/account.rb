@@ -21,5 +21,5 @@ class Account < ActiveRecord::Base
   scope :search_name, lambda { |name| where("ucase(`accounts`.`nickname`) like concat('%',ucase(?),'%')", name) }
 
   # NestedAttributes
-  accepts_nested_attributes_for :map_serial_number,              reject_if: lambda { |i| i[:file].blank? }
+  accepts_nested_attributes_for :map_serial_number,              reject_if: lambda { |i| i[:code].blank? }
 end

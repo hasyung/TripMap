@@ -228,10 +228,9 @@ class Map < ActiveRecord::Base
   end
 
   def get_file_value( file, meth_name, url = false )
-    if file.blank?
+    if file.blank? || file.send(meth_name.to_sym).blank?
       return (meth_name == "file_size" || meth_name == "duration") ? 0 : ""
-    end 
-
+    end
     result = url ? file.send(meth_name.to_sym).url : file.send(meth_name.to_sym)
   end
 

@@ -10,11 +10,9 @@ class Video < ActiveRecord::Base
   before_save :update_video_attributes, :update_video_cover_attributes
 
   # Validates
-  with_options :presence => true do |column|
-    column.validates :file, :file_size => { :maximum => 40.megabytes.to_i, :message => I18n.t("errors.type.big_video_file") }
-    column.validates :cover, :file_size => { :maximum => 10.megabytes.to_i, :message => I18n.t("errors.type.big_image_file") }
-    column.validates_numericality_of :duration, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999999
-  end
+   validates :file, :file_size => { :maximum => 40.megabytes.to_i, :message => I18n.t("errors.type.big_video_file") }
+   validates :cover, :presence => true, :file_size => { :maximum => 10.megabytes.to_i, :message => I18n.t("errors.type.big_image_file") }
+   validates_numericality_of :duration, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999999
 
   validates :order, numericality: { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999 },
                     uniqueness: { scope: [:videoable_id, :videoable_type, :video_type] },
