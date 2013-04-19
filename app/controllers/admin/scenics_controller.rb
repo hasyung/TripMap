@@ -1,4 +1,5 @@
 class Admin::ScenicsController < Admin::ApplicationController
+
   def index
     @scenics = Scenic.page(params[:page]).per(Setting.page_size).created_desc
 
@@ -43,4 +44,5 @@ class Admin::ScenicsController < Admin::ApplicationController
       redirect_to admin_scenics_path, notice: t('messages.scenics.error')
     end
   end
+
 end

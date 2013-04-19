@@ -504,8 +504,10 @@
       info_list:
         name: "信息列表名"
         slug: "信息列表名简码（小写）"
-        order: "列表之间的顺序"
+        order: "信息列表顺序值（<b>选填</b>）"
         map: "地图"
+      info:
+        order: "信息记录顺序值（<b>选填</b>）"
 
   helpers:
     links:

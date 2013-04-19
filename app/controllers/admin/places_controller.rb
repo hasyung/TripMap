@@ -1,4 +1,5 @@
 class Admin::PlacesController < Admin::ApplicationController
+
   def index
     @places = Place.page(params[:page]).per(Setting.page_size).created_desc
 
@@ -19,7 +20,7 @@ class Admin::PlacesController < Admin::ApplicationController
       render :new
     end
   end
-  
+
   def edit
     @model = Place.find params[:id]
     @images = @model.place_slides.order_asc
@@ -43,7 +44,5 @@ class Admin::PlacesController < Admin::ApplicationController
       redirect_to admin_places_path, notice: t('messages.places.error')
     end
   end
-
-  
 
 end

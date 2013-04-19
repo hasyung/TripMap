@@ -78,7 +78,6 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
       @images = @detailed.detailed_images.order_asc
     end
     @texts  = @detailed.texts.order_asc
-    
 
     add_breadcrumb :show
   end
@@ -105,7 +104,7 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
                   params[:recommend_id],
                   params[:record_id],
                   params[:detailed_id])
-    end    
+    end
     @detailed = RecommendDetailed.find params[:detailed_id]
     @video = @detailed.videos.new params[:video]
     if @video.save
@@ -253,7 +252,7 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
                   params[:recommend_id],
                   params[:record_id],
                   params[:detailed_id])
-    end  
+    end
     @detailed = RecommendDetailed.find params[:detailed_id]
     @image = @detailed.detailed_images.new params[:image]
     if @image.save
@@ -314,7 +313,7 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
     add_breadcrumb :new_text
   end
 
-  def create_text    
+  def create_text
     @detailed = RecommendDetailed.find params[:detailed_id]
     @text = @detailed.texts.new params[:letter]
     if @text.save
@@ -506,4 +505,5 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
                   notice: t('messages.recommend_detaileds.images.error')
     end
   end
+
 end

@@ -42,6 +42,4 @@ class Admin::RecommendsController < Admin::ApplicationController
 		end
 	end
 
-
-
 end

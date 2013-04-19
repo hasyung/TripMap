@@ -87,4 +87,5 @@ class Api::V1::SharesController < Api::V1::ApplicationController
          text: share.share_text.body
          }
   end
+
 end

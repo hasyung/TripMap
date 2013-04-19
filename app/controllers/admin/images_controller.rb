@@ -5,7 +5,7 @@ class Admin::ImagesController < Admin::ApplicationController
     @image = Image.new
     add_breadcrumb :new
   end
-  
+
   def create
     if @image.save
       redirect_to @path, :notice => t('messages.slides.success', :model => @model.class.model_name.human)
@@ -19,7 +19,7 @@ class Admin::ImagesController < Admin::ApplicationController
     @image = Image.find params[:id]
     add_breadcrumb :edit
   end
-  
+
   def update
     @image = Image.find params[:id]
     if @image.update_attributes params[:image]
@@ -29,7 +29,7 @@ class Admin::ImagesController < Admin::ApplicationController
     end
     add_breadcrumb :edit
   end
-  
+
   def destroy
     @image = Image.find params[:id]
     if @image.destroy

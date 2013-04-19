@@ -1,4 +1,5 @@
 class Admin::LogsController < Admin::ApplicationController
+
   def index
     @logs = Log.page(params[:page]).per(Setting.page_size).created_desc
     add_breadcrumb :index
@@ -11,4 +12,5 @@ class Admin::LogsController < Admin::ApplicationController
     @logs = @map.logs.page(params[:page]).per(Setting.page_size).created_desc
     render :index
   end
+
 end

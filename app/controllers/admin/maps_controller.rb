@@ -1,5 +1,5 @@
 class Admin::MapsController < Admin::ApplicationController
-  
+
   def index
     @maps = Map.page(params[:page]).per(Setting.page_size).created_desc
     add_breadcrumb :index
@@ -9,7 +9,7 @@ class Admin::MapsController < Admin::ApplicationController
     @model = Map.new
     add_breadcrumb :new
   end
-  
+
   def create
     @model = Map.new params[:map]
     if @model.save
@@ -25,7 +25,7 @@ class Admin::MapsController < Admin::ApplicationController
     @images = @model.map_slides.order_asc
     add_breadcrumb :edit
   end
-  
+
   def update
     @model = Map.find params[:id]
     if @model.update_attributes params[:map]
@@ -35,7 +35,7 @@ class Admin::MapsController < Admin::ApplicationController
     end
     add_breadcrumb :edit
   end
-  
+
   def destroy
     @map = Map.find params[:id]
     if @map.destroy
@@ -44,4 +44,5 @@ class Admin::MapsController < Admin::ApplicationController
       redirect_to admin_maps_path, :notice => t('messages.maps.error')
     end
   end
+
 end

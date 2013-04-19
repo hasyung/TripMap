@@ -5,7 +5,7 @@ class Api::V1::AccountsController < Api::V1::ApplicationController
   def show
     result = {nickname: "游客", result: false}
     (render :json => result; return) if params[:email].blank?
-    
+
     account = Account.find{|a| a.email == params[:email]}
     result = {nickname: account.nickname, result: true} if account.present?
 
@@ -70,7 +70,7 @@ class Api::V1::AccountsController < Api::V1::ApplicationController
     activate_map = ActivateMap.create(device_id: params[:device_id]) if activate_map.blank?
     activate_map.accounts << account if !activate_map.accounts.include?(account)
     result = {result: 0, nickname: account.nickname}
-    
+
     render :json => result
   end
 

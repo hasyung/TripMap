@@ -1,4 +1,5 @@
 class Admin::ProvincesController < Admin::ApplicationController
+
   def index
     @provinces = Province.page(params[:page]).per(Setting.page_size).created_desc
     add_breadcrumb :index
@@ -40,4 +41,5 @@ class Admin::ProvincesController < Admin::ApplicationController
       redirect_to admin_provinces_path , notice: t('messages.provinces.error')
     end
   end
+
 end

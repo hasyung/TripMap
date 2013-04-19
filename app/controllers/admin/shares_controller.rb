@@ -1,4 +1,5 @@
 class Admin::SharesController < Admin::ApplicationController
+
   def index
     @shares = Share.page(params[:page]).per(Setting.page_size).created_desc
     add_breadcrumb :index
@@ -8,7 +9,7 @@ class Admin::SharesController < Admin::ApplicationController
     @share = Share.new
     add_breadcrumb :new
   end
-  
+
   def create
     @share = Share.new params[:share]
     if @share.save
@@ -23,7 +24,7 @@ class Admin::SharesController < Admin::ApplicationController
     @share = Share.find params[:id]
     add_breadcrumb :edit
   end
-  
+
   def update
     @share = Share.find params[:id]
     if @share.update_attributes params[:share]
@@ -69,4 +70,5 @@ class Admin::SharesController < Admin::ApplicationController
       redirect_to admin_shares_path , alert: t('messages.shares.error')
     end
   end
+
 end
