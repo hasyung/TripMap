@@ -10,6 +10,8 @@ class MapSerialNumber < ActiveRecord::Base
   belongs_to :account
   belongs_to :map
 
+validates :code, :length => {:is => 16}, :format => { :with => /([0-9])+/}
+
   # Enumerators, simple_enum plugin
   as_enum :type, { :free => 0, :ordinary => 1, :favorite => 2 }
   as_enum :activate, { :no_activate => 0, :yes_activate => 1 }

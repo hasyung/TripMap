@@ -490,6 +490,8 @@
       next: "下一页"
       truncate: ""
   errors:
+    account:
+      presence: "必填"
     type:
       slug: "简码必须为小写字母！"
       name: "名字长度不能超过15个汉字！"

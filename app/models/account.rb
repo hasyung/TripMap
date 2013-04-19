@@ -12,7 +12,7 @@ class Account < ActiveRecord::Base
   has_many :activate_maps, :through => :activate_with_accounts
 
   # Validates
-  validates :nickname, :email, :password, :password_confirmation, :presence => true
+  validates_presence_of :nickname, :email, :password, :password_confirmation
   validates :nickname, :length => { :within => 1..30, :message => I18n.t("errors.type.name")  }, :uniqueness => true
   validates :email, :uniqueness => true
 
