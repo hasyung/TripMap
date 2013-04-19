@@ -257,13 +257,13 @@
       error: "操作分享失败！"
       publish: "审核分享通过！"
       draft: "审核分享不通过！"
+    info_lists:
+      success: "操作信息成功！"
+      error: "操作信息失败！"
     accounts:
       success: "操作用户成功！"
       error: "操作用户失败！"
       search_error: "查询用户出错！"
-    info_lists:
-      success: "操作信息成功！"
-      error: "操作信息失败！"
       serial_error: "序列号错误或已使用！"
       password_error: "用户名已存在或密码错误！"
       re_serial_error: "序列号解锁地图重复！"
