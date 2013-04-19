@@ -11,7 +11,7 @@ class Map < ActiveRecord::Base
     assoc.has_many :places, :autosave => true
     assoc.has_many :recommends, :autosave => true
     assoc.has_many :shares, :autosave => true
-    assoc.has_many :infos, :autosave => true
+    assoc.has_many :info_lists, :autosave => true
     assoc.has_many :logs
   end
   has_many :map_serial_numbers
@@ -33,7 +33,7 @@ class Map < ActiveRecord::Base
   with_options :presence => true do |column|
     column.validates :province_id
     column.validates :name, :length => { :within => 1..20,    :message => I18n.t("errors.type.name") }, :uniqueness => true
-    column.validates :slug, :length => { :within => 1..20 },  :format => { :with => /([a-z])+/, :message => I18n.t("errors.type.slug") }, :uniqueness => true
+    column.validates :slug, :length => { :within => 1..20 },  :format => { :with => /^[a-z]+$/, :message => I18n.t("errors.type.slug") }, :uniqueness => true
   end
 
   #validate :require_map_cover_attributes
@@ -46,21 +46,20 @@ class Map < ActiveRecord::Base
   # Scopes
   scope :created_desc, order("created_at DESC")
 
-
    # Callbacks
   after_destroy :after_destroy
-  
+
   # Methods
 
   def get_map_values
-    {   
+    {
       cover:            get_file_value(self.map_cover,"file",true),
       description:      get_file_value(self.map_description,"body"),
       slides:           get_map_slides(),
       scenics:          get_scenics(),
       places:           get_places(),
       recommends:       get_recommends(),
-      infos:            get_infos()
+      info_lists:       get_info_lists()
     }
   end
 
@@ -94,10 +93,15 @@ class Map < ActiveRecord::Base
     recommends
   end
 
-  def get_infos()
-    infos = []
-    self.infos.order_asc.each{ |o| infos << { name: o.name, slug: o.slug, description: get_file_value(o.letter, "body")} }
-    infos
+  def get_info_lists()
+    ret = []
+    self.info_lists.order_asc.each do |info_list|
+      r, tmp_infos = { info_list_slug: info_list.slug }, []
+      info_list.infos.order_asc.each{ |o| tmp_infos << { name: o.name, slug: o.slug, description: get_file_value(o.letter, "body")} }
+      r["infos"] = tmp_infos
+      ret << r
+    end
+    ret
   end
 
   def get_map_place_values place

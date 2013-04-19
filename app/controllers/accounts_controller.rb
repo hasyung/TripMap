@@ -1,4 +1,5 @@
 class AccountsController < ApplicationController
+
   def new
     @account = Account.new
   end
@@ -40,6 +41,6 @@ class AccountsController < ApplicationController
   end
 
   def success
-
   end
+
 end

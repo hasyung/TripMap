@@ -1,7 +1,7 @@
 class RecommendRecord < ActiveRecord::Base
   # White list
   attr_accessible :recommend, :recommend_id, :name, :order, 
-  :recommend_record_cover_attributes, :recommend_record_description_attributes
+                  :recommend_record_cover_attributes, :recommend_record_description_attributes
 
   # Associations
   has_one :recommend_record_cover, :as => :imageable, :class_name => "Image",
@@ -18,7 +18,7 @@ class RecommendRecord < ActiveRecord::Base
   with_options :presence => true do |column|
     column.validates :name, :length => { :within => 2..15,    :message => I18n.t("errors.type.name") }, :uniqueness => true
     column.validates :order, uniqueness: { scope: [:recommend_id, :order] }, 
-                             numericality: { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999 }                             
+                             numericality: { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999 }
   end
 
   belongs_to :recommend, :counter_cache => true
@@ -34,7 +34,7 @@ class RecommendRecord < ActiveRecord::Base
   def order_increment
     if self.new_record? && self.order == 0 && !self.recommend_id.nil?
       self.order = RecommendRecord.where( recommend_id: self.recommend_id ).maximum(:order).to_i + 1
-    elsif self.recommend_id.nil?      
+    elsif self.recommend_id.nil?
       self.order = 1
     end
   end

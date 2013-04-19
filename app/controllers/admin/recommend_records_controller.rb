@@ -1,8 +1,9 @@
 class Admin::RecommendRecordsController < Admin::ApplicationController
+
   def index
     recommend = Recommend.find params[:recommend_id] 
     @records = recommend.recommend_records.page(params[:page]).per(Setting.page_size).order_asc
-    
+
     add_breadcrumb :index
   end
 
@@ -26,7 +27,7 @@ class Admin::RecommendRecordsController < Admin::ApplicationController
   def edit
     #@recommend = Recommend.find params[:recommend_id]
     @record = RecommendRecord.find params[:id]
-    
+
     add_breadcrumb :edit
   end
 
@@ -49,6 +50,6 @@ class Admin::RecommendRecordsController < Admin::ApplicationController
       redirect_to admin_recommend_records_path,
                   notice: t('messages.recommend_records.error')
     end
-
   end
+
 end

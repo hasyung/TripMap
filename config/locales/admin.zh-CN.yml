@@ -20,6 +20,8 @@
       index: "推荐"
     shares:
       index: "分享"
+    info_lists:
+      index: "信息列表"
     infos:
       index: "信息"
     apis:
@@ -31,7 +33,9 @@
     serialnumber:
       index: "序列号管理"
     declarations:
-      show: "声明"      
+      show: "声明"
+    versions:
+      index: "版本"
   breadcrumbs:
     admin:
       application:
@@ -92,6 +96,10 @@
         new: "添加用户"
         edit: "修改用户"
         show: "查看用户"
+      info_lists:
+        index: "信息列表"
+        new: "添加信息列表"
+        edit: "修改信息列表"
       infos:
         index: "信息"
         new: "添加信息"
@@ -101,7 +109,12 @@
       serialnumbers:
         index: "序列号"
       declarations:
-        index: "声明" 
+        index: "声明"
+      versions:
+        index: "版本管理"
+        new: "新建版本"
+        edit: "编辑版本信息"
+
   links:
     home:
       index: "返回首页"
@@ -175,10 +188,15 @@
       edit: "修改用户"
     logs:
       index: "日志列表"
+    info_lists:
+      index: "信息列表"
+      new: "添加信息列表"
+      edit: "修改信息列表"
     infos:
       index: "信息"
       new: "添加信息"
       edit: "修改信息"
+      info_list: "返回信息列表"
     serialnumbers:
       index: "序列号列表"
       export: "导出序列号"
@@ -189,6 +207,10 @@
       confirm: "你确定删除吗？"
       video: "查看视频"
       audio: "查看音频"
+    versions:
+      new: "添加版本"
+      edit: "修改版本"
+      index: "版本"
 
   messages:
     maps:
@@ -239,6 +261,9 @@
       success: "操作用户成功！"
       error: "操作用户失败！"
       search_error: "查询用户出错！"
+    info_lists:
+      success: "操作信息成功！"
+      error: "操作信息失败！"
       serial_error: "序列号错误或已使用！"
       password_error: "用户名已存在或密码错误！"
       re_serial_error: "序列号解锁地图重复！"
@@ -254,7 +279,6 @@
       sum: "序列号总数[%{sum}]小于您导出的数量！"
       export: "序列号已生成，请联系系统开发部人员获取！"
       purview: "抱歉，您没有查看序列号管理模块的权限！"
-
 
   activerecord:
     enums:
@@ -278,6 +302,7 @@
       image_list: "图集"
       text: "文本"
       share: "分享"
+      info_list: "信息表列"
       info: "信息"
       video: "视频"
       audio: "音频"
@@ -285,6 +310,7 @@
       log: "日志"
       account: "用户"
       declaration: "声明"
+      version: "版本"
     attributes:
       map:
         province: "省市"
@@ -294,6 +320,7 @@
         scenics_count: "景区数"
         places_count: "景点数"
         recommends_count: "推荐数"
+        info_lists_count: "信息列表数"
       province:
         name: "名称"
         slug: "简码"
@@ -343,11 +370,18 @@
         map: "地图"
         state_cd: "审核状态"
         created_at: "创建时间"
-      info:
+      info_list:
         map: "地图"
         name: "名称"
         slug: "简码"
         order: "排序"
+        infos_count: "子信息条数"
+      info:
+        info_list: "信息列表"
+        name: "名称"
+        slug: "简码"
+        order: "排序"
+        letter: "内容"
       log: 
         map: "地图"
         activate_map: "设备"
@@ -378,7 +412,10 @@
         created_at: "创建时间"
       declaration:
         body: "内容"
-        
+      version:
+        platform: "平台"
+        value: "版本号"
+
   simple_form:
     labels:
       map:
@@ -454,8 +491,8 @@
         order: "排序"
       letter:
         body: "内容"
-        order: "排序"    
-      video:          
+        order: "排序"
+      video:
         file: "视频文件"
         cover: "视频封面"
         duration: "视频时长"
@@ -464,6 +501,13 @@
         file: "音频文件"
         duration: "音频时长"
         order: "音频排序"
+      info_list:
+        name: "信息列表名"
+        slug: "信息列表名简码（小写）"
+        order: "信息列表顺序值（<b>选填</b>）"
+        map: "地图"
+      info:
+        order: "信息记录顺序值（<b>选填</b>）"
 
   helpers:
     links:
@@ -499,6 +543,9 @@
       big_audio_file: "亲，你上传的文件超过了5MB！"
       big_video_file: "亲，你上传的文件超过了15MB！"
       duration: "时长格式不对！"
+      text_empty: "内容不能为空！"
+      order: "数字范围为1-999"
+      duplicate_value: "该值已被使用！"
   enums:
     share:
       states:

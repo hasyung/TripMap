@@ -70,4 +70,5 @@ class Api::V1::MapsController < Api::V1::ApplicationController
     activate_map.accounts.each{|a| maps << a.map_serial_number.map_id if a.map_serial_number.present?}
     maps = maps.uniq
   end
+
 end

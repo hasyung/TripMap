@@ -79,8 +79,6 @@ class Admin::SerialnumbersController < Admin::ApplicationController
     conditions
   end
 
-  
-
   def is_admin
     redirect_to admin_root_path, notice: t('messages.serialnumbers.purview') if current_user.email != "admin@1trip.com"
   end
@@ -88,4 +86,5 @@ class Admin::SerialnumbersController < Admin::ApplicationController
   def off_export
     redirect_to admin_root_path, notice: t('messages.serialnumbers.purview')
   end
+
 end

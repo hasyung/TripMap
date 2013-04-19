@@ -95,14 +95,32 @@ ActiveRecord::Schema.define(:version => 20130419064048) do
 
   add_index "images", ["imageable_id", "imageable_type", "order", "image_type"], :name => "iioi_index", :unique => true
 
-  create_table "infos", :force => true do |t|
-    t.integer  "map_id",                                  :null => false
-    t.string   "name",       :limit => 20,                :null => false
-    t.string   "slug",       :limit => 20,                :null => false
-    t.integer  "order",                    :default => 0
-    t.datetime "created_at",                              :null => false
-    t.datetime "updated_at",                              :null => false
+  create_table "info_lists", :force => true do |t|
+    t.integer  "map_id",                                   :null => false
+    t.string   "name",        :limit => 20,                :null => false
+    t.string   "slug",        :limit => 20,                :null => false
+    t.integer  "order",                     :default => 0
+    t.integer  "infos_count",               :default => 0
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
   end
+
+  add_index "info_lists", ["map_id", "order"], :name => "index_info_lists_on_map_id_and_order", :unique => true
+  add_index "info_lists", ["name"], :name => "index_info_lists_on_name", :unique => true
+  add_index "info_lists", ["slug"], :name => "index_info_lists_on_slug", :unique => true
+
+  create_table "infos", :force => true do |t|
+    t.integer  "info_list_id",                              :null => false
+    t.string   "name",         :limit => 20,                :null => false
+    t.string   "slug",         :limit => 20,                :null => false
+    t.integer  "order",                      :default => 0
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
+  end
+
+  add_index "infos", ["info_list_id", "order"], :name => "index_infos_on_info_list_id_and_order", :unique => true
+  add_index "infos", ["name"], :name => "index_infos_on_name", :unique => true
+  add_index "infos", ["slug"], :name => "index_infos_on_slug", :unique => true
 
   create_table "ip_addresses", :force => true do |t|
     t.string   "ip",                        :null => false
@@ -143,10 +161,10 @@ ActiveRecord::Schema.define(:version => 20130419064048) do
     t.integer  "scenics_count",                  :default => 0
     t.integer  "places_count",                   :default => 0
     t.integer  "recommends_count",               :default => 0
+    t.integer  "info_lists_count",               :default => 0
     t.datetime "created_at",                                    :null => false
     t.datetime "updated_at",                                    :null => false
     t.integer  "shares_count",                   :default => 0
-    t.integer  "infos_count",                    :default => 0
   end
 
   add_index "maps", ["name"], :name => "index_maps_on_name", :unique => true
@@ -255,6 +273,17 @@ ActiveRecord::Schema.define(:version => 20130419064048) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "versions", :force => true do |t|
+    t.integer  "platform",    :default => 0
+    t.string   "value",                      :null => false
+    t.string   "description"
+    t.string   "app"
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+  end
+
+  add_index "versions", ["platform", "value"], :name => "index_versions_on_platform_and_value", :unique => true
 
   create_table "videos", :force => true do |t|
     t.integer  "videoable_id"

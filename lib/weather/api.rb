@@ -4,6 +4,7 @@ require 'httpclient'
 require 'nokogiri'
 
 module Weather
+
   class API
     WS_URL = "http://www.webxml.com.cn/WebServices/WeatherWebService.asmx/getWeatherbyCityName"
 
@@ -26,4 +27,5 @@ module Weather
       }
     end
   end
+
 end

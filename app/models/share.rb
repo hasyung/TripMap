@@ -10,8 +10,8 @@ class Share < ActiveRecord::Base
 
   # Validates
   with_options :dependent => :destroy do |assoc|
-    assoc.has_one :share_image, :as => :imageable, :class_name => 'Image', :conditions => { :image_type => Image.share_image }
-    assoc.has_one :share_text, :as => :textable, :class_name => 'Letter', :conditions => { :text_type => Letter.share_text }
+    assoc.has_one :share_image, :as => :imageable, :class_name => 'Image',  :conditions => { :image_type => Image.share_image }
+    assoc.has_one :share_text,  :as => :textable,  :class_name => 'Letter', :conditions => { :text_type => Letter.share_text }
   end
 
   with_options :presence=> true do |column|
@@ -25,7 +25,7 @@ class Share < ActiveRecord::Base
 
   # NestedAttributes
   accepts_nested_attributes_for :share_image, reject_if: lambda { |img| img[:file].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :share_text, reject_if: lambda { |pd| pd[:body].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :share_text,  reject_if: lambda { |pd| pd[:body].blank? }, :allow_destroy => true
 
   # Scopes
   scope :created_desc, order("created_at DESC")
