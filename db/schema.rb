@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130419064048) do
+ActiveRecord::Schema.define(:version => 20130422031944) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",                                :default => "", :null => false
@@ -302,5 +302,18 @@ ActiveRecord::Schema.define(:version => 20130419064048) do
   end
 
   add_index "videos", ["videoable_id", "videoable_type", "order", "video_type"], :name => "vvov_index", :unique => true
+
+  create_table "weathers", :force => true do |t|
+    t.integer  "map_id",       :null => false
+    t.string   "tmp_current"
+    t.string   "tmp_today"
+    t.string   "tmp_desc"
+    t.string   "tmp_wind"
+    t.string   "tmp_pic_from"
+    t.string   "tmp_pic_to"
+    t.string   "tmp_humidity"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
 
 end

@@ -3,14 +3,19 @@
 require 'httpclient'
 require 'nokogiri'
 
-module Weather
+module WeatherWrapper
 
   class API
     WS_URL = "http://www.webxml.com.cn/WebServices/WeatherWebService.asmx/getWeatherbyCityName"
 
-    def self.get_suit_weather( city_name )
+    def self.get_weather_by( city_name )
       ws_req_url = WS_URL + "?theCityName=" + URI.escape(city_name)
-      response = HTTPClient.new.get(ws_req_url).body
+
+      begin
+        response = HTTPClient.new.get(ws_req_url).body
+      rescue
+        nil
+      end
 
       doc = Nokogiri.XML(response.gsub(/\n/, '').gsub(/\r/, ''))
       return {} if doc.children.empty?
@@ -26,6 +31,7 @@ module Weather
        tmp_humidity:  line10[2].split('：')[1]
       }
     end
+
   end
 
 end
