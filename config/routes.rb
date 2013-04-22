@@ -104,6 +104,8 @@ TripMap::Application.routes.draw do
 
     match 'declaration/show' => 'declarations#show', :as => 'declaration', :via => [:get, :post, :put]
 
+    resources :feedbacks, only: [:index, :show]
+
     resources :versions
   end
 
@@ -131,6 +133,10 @@ TripMap::Application.routes.draw do
 
       resources :declarations, only: [] do
         get '/show' => 'declarations#show', on: :collection
+      end
+
+      resources :feedbacks, only: [] do
+        post '/create' => 'feedbacks#create', on: :collection
       end
 
       resources :versions, only: [] do

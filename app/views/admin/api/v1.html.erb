@@ -29,6 +29,7 @@
     <li><a href="#logs">上传当前地图使用日志</a></li>
     <li><a href="#versions">检测地图数据包是否更新</a></li>
     <li><a href="#declaration">获取免责声明</a></li>
+    <li><a href="#feedback">提交意见反馈</a></li>
     <li><a href="#version">检测是否有最新版本</a></li>
   </ol>
 </div>
@@ -744,8 +745,53 @@
     </dl>
   </div>
 
+  <div id="feedback" class="api well">
+    <h3 class="name">API16</h3>
+    <small class="desc">提交意见反馈</small>
+    <dl>
+      <dt>URL</dt>
+      <dd><pre class="docs-example"><%= create_api_v1_feedbacks_url(:format => :json) %></pre></dd>
+      <dt>HTTP请求方式</dt>
+      <dd>POST<dd>
+      <dt>支持格式</dt>
+      <dd>json<dd>
+      <dt>是否需要登录</dt>
+      <dd>否<dd>
+      <dt>请求参数</dt>
+      <dd>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>名字</th>
+              <th>类型</th>
+              <th>类别</th>
+              <th>说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>email</td>
+              <td>字符串</td>
+              <td>可选参数</td>
+              <td>email(用户帐号)</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>feedback</td>
+              <td>字符串</td>
+              <td>必选参数</td>
+              <td>内容(限1000个字符以内)</td>
+            </tr>
+          </tbody>
+        </table>  
+      <dd>
+    </dl>
+  </div>
+
 	<div id="version" class="api well">
-    <h3 class="name">API15</h3>
+    <h3 class="name">API17</h3>
     <small class="desc">检测是否有最新版本</small>
     <dl>
       <dt>URL</dt>

@@ -114,6 +114,8 @@
         index: "版本管理"
         new: "新建版本"
         edit: "编辑版本信息"
+      feedbacks:
+        index: "意见反馈"
 
   links:
     home:
@@ -211,6 +213,9 @@
       new: "添加版本"
       edit: "修改版本"
       index: "版本"
+    feedbacks:
+      index: "意见反馈列表"
+      show: "查看意见反馈"
 
   messages:
     maps:
@@ -311,6 +316,7 @@
       account: "用户"
       declaration: "声明"
       version: "版本"
+      feedback: "意见反馈"
     attributes:
       map:
         province: "省市"
@@ -415,6 +421,10 @@
       version:
         platform: "平台"
         value: "版本号"
+      feedback: 
+        body: "内容"
+        account: "用户"
+        created_at: "创建时间"
 
   simple_form:
     labels:

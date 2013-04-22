@@ -1,0 +1,35 @@
+<%- model_class = Feedback -%>
+<%= render "base" %>
+<div class="box">
+  <div class="box-title">
+    <span class="icon"><i class="icon-th"></i></span>
+    <h5><%= t('links.feedbacks.index') %></h5>
+  </div>
+  <div class="box-content">
+    <table class="table table-bordered table-striped with-check">
+      <thead>
+        <tr>
+          <th><input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" /></th>
+          <th><%= model_class.human_attribute_name(:body) %></th>
+          <th><%= model_class.human_attribute_name(:account) %></th>
+          <th><%= model_class.human_attribute_name(:created_at) %></th>
+        </tr>
+      </thead>
+      </tbody>
+        <% @feedbacks.each do |feedback| %>
+          <tr>
+            <td><%= check_box_tag "feedback_ids[]", feedback.id, false, :id => "feedback_#{feedback.id}" %></td>
+             <td><%= link_to truncate(feedback.body, :length => 25, :separator => '...'), admin_feedback_path(feedback) %></td>
+            <td><%= feedback.account.present?? feedback.account.email : "游客"  %></td>
+            <td><%= l feedback.created_at, :format => :long %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="table-footer clearfix">
+  <div class="paginates-info"><%= page_entries_info @feedbacks %></div>
+  <%= paginate @feedbacks, :theme => "admin" %>
+</div>

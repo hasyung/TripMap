@@ -7,6 +7,7 @@ class Account < ActiveRecord::Base
 
   # Associations
   has_many :shares,   :dependent => :destroy
+  has_many :feedbacks, :dependent => :destroy
   has_one :map_serial_number
   has_many :activate_with_accounts
   has_many :activate_maps, :through => :activate_with_accounts
