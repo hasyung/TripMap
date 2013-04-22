@@ -310,4 +310,17 @@ ActiveRecord::Schema.define(:version => 20130422061009) do
 
   add_index "videos", ["videoable_id", "videoable_type", "order", "video_type"], :name => "vvov_index", :unique => true
 
+  create_table "weathers", :force => true do |t|
+    t.integer  "map_id",       :null => false
+    t.string   "tmp_current"
+    t.string   "tmp_today"
+    t.string   "tmp_desc"
+    t.string   "tmp_wind"
+    t.string   "tmp_pic_from"
+    t.string   "tmp_pic_to"
+    t.string   "tmp_humidity"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
 end

@@ -1,4 +1,5 @@
 class Image < ActiveRecord::Base
+
   # White list
   attr_accessible  :file, :file_size, :order
 
@@ -68,6 +69,5 @@ class Image < ActiveRecord::Base
       self.order = 1
     end
   end
-
 
 end

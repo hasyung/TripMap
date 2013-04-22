@@ -1,12 +1,37 @@
+require 'weather/api'
+
 class Api::V1::WeathersController < Api::V1::ApplicationController
 
+  DAY_SECONDS = 24 * 60 * 60
+
   def index
-  	weathers = []
-  	(render :json => result; return) if params[:map_id].blank?
-    @map = Map.find_by_id params[:map_id]
-    (render :json => weathers; return) if @map.blank?
-    weathers = Weather::API.get_suit_weather(@map.name)
-    render :json => weathers
+    weather = {}
+
+    mid = params[:map_id]
+    ( render :json => weather; return ) if mid.nil?
+
+    map = Map.find_by_id mid.to_i
+    ( render :json => weather; return ) if map.nil?
+
+    all = Weather.where(map_id: mid.to_i).each{ |e| e.created_at.to_i < DAY_SECONDS }
+
+    if all.empty?
+      weather = WeatherWrapper::API.get_weather_by(map.name)
+      ( render :json => weather; return ) if weather.nil?
+
+      entity = weather.merge({ map_id: 1 })
+      Weather.create entity
+    else
+      w = all.first
+      weather = {
+        tmp_current:  w.tmp_current,  tmp_today:  w.tmp_today,
+        tmp_desc:     w.tmp_desc,     tmp_wind:   w.tmp_wind,
+        tmp_pic_from: w.tmp_pic_from, tmp_pic_to: w.tmp_pic_to,
+        tmp_humidity: w.tmp_humidity
+      }
+    end
+
+    render :json => weather
   end
 
 end
