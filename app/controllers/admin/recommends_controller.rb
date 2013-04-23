@@ -1,6 +1,6 @@
 class Admin::RecommendsController < Admin::ApplicationController
 	def index
-		@recommends = Recommend.page(params[:page]).per(Setting.page_size).created_desc
+		@recommends = Recommend.includes(:map).page(params[:page]).per(Setting.page_size).created_desc
 
 		add_breadcrumb :index
 	end

@@ -2,7 +2,7 @@ class Admin::RecommendRecordsController < Admin::ApplicationController
 
   def index
     recommend = Recommend.find params[:recommend_id] 
-    @records = recommend.recommend_records.page(params[:page]).per(Setting.page_size).order_asc
+    @records = recommend.recommend_records.includes(:recommend).page(params[:page]).per(Setting.page_size).order_asc
 
     add_breadcrumb :index
   end

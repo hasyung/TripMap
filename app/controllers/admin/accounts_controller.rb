@@ -1,6 +1,6 @@
 class Admin::AccountsController < Admin::ApplicationController
   def index
-    @accounts = Account.page(params[:page]).per(Setting.page_size).created_desc
+    @accounts = Account.includes(:map_serial_number).page(params[:page]).per(Setting.page_size).created_desc
     add_breadcrumb :index
   end
 

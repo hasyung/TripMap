@@ -1,6 +1,6 @@
 class Admin::FeedbacksController < Admin::ApplicationController
   def index
-    @feedbacks = Feedback.page(params[:page]).per(Setting.page_size).created_desc
+    @feedbacks = Feedback.includes(:account).page(params[:page]).per(Setting.page_size).created_desc
     add_breadcrumb :index
   end
 

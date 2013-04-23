@@ -1,7 +1,7 @@
 class Admin::PlacesController < Admin::ApplicationController
 
   def index
-    @places = Place.page(params[:page]).per(Setting.page_size).created_desc
+    @places = Place.includes(:map).page(params[:page]).per(Setting.page_size).created_desc
 
     add_breadcrumb :index
   end

@@ -1,7 +1,7 @@
 class Admin::ScenicsController < Admin::ApplicationController
 
   def index
-    @scenics = Scenic.page(params[:page]).per(Setting.page_size).created_desc
+    @scenics = Scenic.includes(:map).page(params[:page]).per(Setting.page_size).created_desc
 
     add_breadcrumb :index
   end

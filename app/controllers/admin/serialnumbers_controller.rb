@@ -3,7 +3,7 @@ class Admin::SerialnumbersController < Admin::ApplicationController
   before_filter :off_export, only: [:ex_search, :export]
 
   def index
-    @serials = MapSerialNumber.page(params[:page]).per(Setting.page_size).created_desc
+    @serials = MapSerialNumber.includes(:map).page(params[:page]).per(Setting.page_size).created_desc
     @serial = MapSerialNumber.new
     add_breadcrumb :index
   end

@@ -1,7 +1,7 @@
 class Admin::SharesController < Admin::ApplicationController
 
   def index
-    @shares = Share.page(params[:page]).per(Setting.page_size).created_desc
+    @shares = Share.includes(:map, :account).page(params[:page]).per(Setting.page_size).created_desc
     add_breadcrumb :index
   end
 
