@@ -5,7 +5,7 @@ class Api::V1::SharesController < Api::V1::ApplicationController
   def current
     result = []
      (render :json => result; return) if params[:map_id].blank? || params[:page_size].blank? || params[:page_index].blank?
-    @map = Map.find_by_id params[:map_id].to_i
+    @map = Map.find_by_id(params[:map_id].to_i, include: [:shares])
     (render :json => result; return) if @map.blank?
     size = params[:page_size].to_i
     index = params[:page_index].to_i

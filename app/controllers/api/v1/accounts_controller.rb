@@ -62,11 +62,11 @@ class Api::V1::AccountsController < Api::V1::ApplicationController
     (result = {result: 1}; render :json => result; return) if params[:device_id].blank? || params[:email].blank? || 
                                                               params[:password].blank?
 
-    account = Account.find{ |o| o.email == params[:email] }
+    account = Account.find_by_email(params[:email], include: [:activate_maps]) 
     (result = {result: 2}; render :json => result; return) if account.blank? ||!account.valid_password?(params[:password])
     (result = {result: 3}; render :json => result; return) if account.activate_maps.count >= 10
 
-    activate_map = ActivateMap.find{ |o| o.device_id == params[:device_id] }
+    activate_map = ActivateMap.find_by_device_id(params[:device_id], include: [:accounts])
     activate_map = ActivateMap.create(device_id: params[:device_id]) if activate_map.blank?
     activate_map.accounts << account if !activate_map.accounts.include?(account)
     result = {result: 0, nickname: account.nickname}
@@ -79,7 +79,7 @@ class Api::V1::AccountsController < Api::V1::ApplicationController
 
     (result = {result: 1}; render :json => result; return) if params[:email].blank? || params[:serial].blank?
 
-    account = Account.find{ |o| o.email == params[:email] }
+    account = Account.find_by_email(params[:email], include: [:map_serial_number]) 
     (result = {result: 2}; render :json => result; return) if account.blank?
 
     serial = MapSerialNumber.where("code = '#{params[:serial]}'").first
