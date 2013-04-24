@@ -96,9 +96,9 @@ class Map < ActiveRecord::Base
   def get_info_lists()
     ret = []
     self.info_lists.order_asc.each do |info_list|
-      r, tmp_infos = { info_list_slug: info_list.slug, info_list_is_free: info_list.is_free }, []
+      r, tmp_infos = { info_list_slug: info_list.slug, info_list_is_free: info_list.is_free.to_s }, []
       info_list.infos.order_asc.each do |o|
-        tmp_infos << { name: o.name, slug: o.slug, is_free: o.is_free, description: get_file_value(o.letter, "body")}
+        tmp_infos << { name: o.name, slug: o.slug, is_free: o.is_free.to_s, description: get_file_value(o.letter, "body")}
       end
       r["infos"] = tmp_infos
       ret << r
@@ -110,7 +110,7 @@ class Map < ActiveRecord::Base
     {
       id:                     place.id,
       name:                   place.name,
-      is_free:                place.is_free,
+      is_free:                place.is_free.to_s,
       subtitle:               place.subtitle,
       slug:                   place.slug,
       icon:                   get_file_value(place.place_icon, "file", true),
@@ -136,7 +136,7 @@ class Map < ActiveRecord::Base
     {
       id:                     scenic.id,
       name:                   scenic.name,
-      is_free:                scenic.is_free,
+      is_free:                scenic.is_free.to_s,
       subtitle:               scenic.subtitle,
       slug:                   scenic.slug,
       icon:                   get_file_value(scenic.scenic_icon, "file", true),
@@ -180,7 +180,7 @@ class Map < ActiveRecord::Base
             images ||= []
             videos ||= []
             audios ||= []
-            texts ||= []
+            texts  ||= []
             image_lists ||= []
 
             detail.each do |d|
@@ -221,7 +221,7 @@ class Map < ActiveRecord::Base
     {
       name:                   recommend.name,
       slug:                   recommend.slug,
-      is_free:                recommend.is_free,
+      is_free:                recommend.is_free.to_s,
       category:               recommend.category_cd,
       video:                  get_file_value(recommend.recommend_video,"file",true),
       video_size:             get_file_value(recommend.recommend_video,"file_size",false),
