@@ -13,7 +13,8 @@ class Api::V1::WeathersController < Api::V1::ApplicationController
     map = Map.find_by_id mid.to_i
     ( render :json => weather; return ) if map.nil?
 
-    all = Weather.where(map_id: mid.to_i).each{ |e| e.created_at.to_i < DAY_SECONDS }
+    all = []
+    Weather.where(map_id: mid.to_i).each{|e| all << e if Time.now.to_i - e.created_at.to_i < DAY_SECONDS }
 
     if all.empty?
       weather = WeatherWrapper::API.get_weather_by(map.name)
