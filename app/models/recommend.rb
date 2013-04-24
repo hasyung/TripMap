@@ -1,7 +1,8 @@
 class Recommend < ActiveRecord::Base
 
   # White list
-  attr_accessible :map, :map_id, :name, :slug, :recommend_cover_attributes, :recommend_video_attributes, :category_cd
+  attr_accessible :map, :map_id, :name, :slug, :is_free, :category_cd,
+                  :recommend_cover_attributes, :recommend_video_attributes
 
   # Associations
   has_one :recommend_video, :as => :videoable, :class_name => "Video",

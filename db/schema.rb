@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130422061009) do
+ActiveRecord::Schema.define(:version => 20130423111526) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",                                :default => "", :null => false
@@ -103,13 +103,14 @@ ActiveRecord::Schema.define(:version => 20130422061009) do
   add_index "images", ["imageable_id", "imageable_type", "order", "image_type"], :name => "iioi_index", :unique => true
 
   create_table "info_lists", :force => true do |t|
-    t.integer  "map_id",                                   :null => false
-    t.string   "name",        :limit => 20,                :null => false
-    t.string   "slug",        :limit => 20,                :null => false
+    t.integer  "map_id",                                       :null => false
+    t.string   "name",        :limit => 20,                    :null => false
+    t.string   "slug",        :limit => 20,                    :null => false
     t.integer  "order",                     :default => 0
+    t.boolean  "is_free",                   :default => false
     t.integer  "infos_count",               :default => 0
-    t.datetime "created_at",                               :null => false
-    t.datetime "updated_at",                               :null => false
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
   end
 
   add_index "info_lists", ["map_id", "order"], :name => "index_info_lists_on_map_id_and_order", :unique => true
@@ -117,12 +118,13 @@ ActiveRecord::Schema.define(:version => 20130422061009) do
   add_index "info_lists", ["slug"], :name => "index_info_lists_on_slug", :unique => true
 
   create_table "infos", :force => true do |t|
-    t.integer  "info_list_id",                              :null => false
-    t.string   "name",         :limit => 20,                :null => false
-    t.string   "slug",         :limit => 20,                :null => false
+    t.integer  "info_list_id",                                  :null => false
+    t.string   "name",         :limit => 20,                    :null => false
+    t.string   "slug",         :limit => 20,                    :null => false
     t.integer  "order",                      :default => 0
-    t.datetime "created_at",                                :null => false
-    t.datetime "updated_at",                                :null => false
+    t.boolean  "is_free",                    :default => false
+    t.datetime "created_at",                                    :null => false
+    t.datetime "updated_at",                                    :null => false
   end
 
   add_index "infos", ["info_list_id", "order"], :name => "index_infos_on_info_list_id_and_order", :unique => true
@@ -178,12 +180,13 @@ ActiveRecord::Schema.define(:version => 20130422061009) do
   add_index "maps", ["slug"], :name => "index_maps_on_slug", :unique => true
 
   create_table "places", :force => true do |t|
-    t.integer  "map_id",                   :null => false
-    t.string   "name",       :limit => 20, :null => false
-    t.string   "slug",       :limit => 20, :null => false
+    t.integer  "map_id",                                      :null => false
+    t.string   "name",       :limit => 20,                    :null => false
+    t.string   "slug",       :limit => 20,                    :null => false
     t.string   "subtitle",   :limit => 30
-    t.datetime "created_at",               :null => false
-    t.datetime "updated_at",               :null => false
+    t.boolean  "is_free",                  :default => false
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
   end
 
   add_index "places", ["name"], :name => "index_places_on_name", :unique => true
@@ -218,12 +221,13 @@ ActiveRecord::Schema.define(:version => 20130422061009) do
   end
 
   create_table "recommends", :force => true do |t|
-    t.integer  "map_id",                                               :null => false
-    t.string   "name",                    :limit => 20,                :null => false
-    t.string   "slug",                    :limit => 20,                :null => false
+    t.integer  "map_id",                                                   :null => false
+    t.string   "name",                    :limit => 20,                    :null => false
+    t.string   "slug",                    :limit => 20,                    :null => false
     t.integer  "recommend_records_count",               :default => 0
-    t.datetime "created_at",                                           :null => false
-    t.datetime "updated_at",                                           :null => false
+    t.boolean  "is_free",                               :default => false
+    t.datetime "created_at",                                               :null => false
+    t.datetime "updated_at",                                               :null => false
     t.integer  "category_cd",                           :default => 1
   end
 
@@ -231,12 +235,13 @@ ActiveRecord::Schema.define(:version => 20130422061009) do
   add_index "recommends", ["slug"], :name => "index_recommends_on_slug", :unique => true
 
   create_table "scenics", :force => true do |t|
-    t.integer  "map_id",                   :null => false
-    t.string   "name",       :limit => 20, :null => false
-    t.string   "slug",       :limit => 20, :null => false
+    t.integer  "map_id",                                      :null => false
+    t.string   "name",       :limit => 20,                    :null => false
+    t.string   "slug",       :limit => 20,                    :null => false
     t.string   "subtitle",   :limit => 30
-    t.datetime "created_at",               :null => false
-    t.datetime "updated_at",               :null => false
+    t.boolean  "is_free",                  :default => false
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
   end
 
   add_index "scenics", ["name"], :name => "index_scenics_on_name", :unique => true

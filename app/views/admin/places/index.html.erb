@@ -18,6 +18,9 @@
           <th>
             <%= model_class.human_attribute_name(:map) %>
           </th>
+          <th>
+            <%= model_class.human_attribute_name(:is_free) %>
+          </th>
           <th class="action"><%= t('links.commons.action') %></th>
         </tr>
       </thead>
@@ -30,6 +33,7 @@
           <td><%= p.slug %></td>
           <td><%= p.map.province.name %></td>
           <td><%= p.map.name %></td>
+          <td><%= p.is_free %></td>
           <td class="action">
             <%= link_to raw("<i class=\"icon-edit\"></i>"), edit_admin_place_path(p), 
                                                             title: t('links.places.edit') %>

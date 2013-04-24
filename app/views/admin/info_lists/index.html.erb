@@ -19,6 +19,7 @@
           <th><%= model_class.human_attribute_name(:map) %></th>
           <th><%= model_class.human_attribute_name(:infos_count) %></th>
           <th><%= model_class.human_attribute_name(:order) %></th>
+          <th><%= model_class.human_attribute_name(:is_free) %></th>
           <th class="action"><%= t('links.commons.action') %></th>
         </tr>
       </thead>
@@ -32,6 +33,7 @@
             <td><%= e.map.name %></td>
             <td><%= e.infos_count %></td>
             <td><%= e.order %></td>
+            <td><%= e.is_free %></td>
             <td class="action">
               <%= link_to raw("<i class=\"icon-edit\"></i>"), edit_admin_info_list_path(e), 
                           :title => t('links.info_lists.edit') %>
