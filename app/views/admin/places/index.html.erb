@@ -1,5 +1,7 @@
 <%- model_class = Place -%>
+
 <%= render 'base' %>
+
 <div class="box">
   <div class="box-title">
     <span class="icon"><i class="icon-th"></i></span>
@@ -12,15 +14,10 @@
           <th><input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" /></th>
           <th><%= model_class.human_attribute_name(:name) %></th>
           <th><%= model_class.human_attribute_name(:slug) %></th>
-          <th>
-            <%= model_class.human_attribute_name(:province) %>
-          </th>
-          <th>
-            <%= model_class.human_attribute_name(:map) %>
-          </th>
-          <th>
-            <%= model_class.human_attribute_name(:is_free) %>
-          </th>
+          <th><%= model_class.human_attribute_name(:province) %></th>
+          <th><%= model_class.human_attribute_name(:map) %></th>
+          <th><%= model_class.human_attribute_name(:is_free) %></th>
+          <th><%= model_class.human_attribute_name(:menu_type) %></th>
           <th class="action"><%= t('links.commons.action') %></th>
         </tr>
       </thead>
@@ -34,6 +31,7 @@
           <td><%= p.map.province.name %></td>
           <td><%= p.map.name %></td>
           <td><%= p.is_free %></td>
+          <td><%= p.menu_type %></td>
           <td class="action">
             <%= link_to raw("<i class=\"icon-edit\"></i>"), edit_admin_place_path(p), 
                                                             title: t('links.places.edit') %>

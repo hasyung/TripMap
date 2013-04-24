@@ -1,5 +1,7 @@
 <%- model_class = Scenic-%>
+
 <%= render 'base' %>
+
 <div class='box'>
   <div class='box-title'>
     <span class="icon"><i class="icon-th"></i></span>
@@ -9,24 +11,13 @@
     <table class="table table-bordered table-striped with-check">
       <thead>
         <tr>
-          <th>
-            <input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" />
-          </th>
-          <th>
-            <%= model_class.human_attribute_name(:name) %>
-          </th>
-          <th>
-            <%= model_class.human_attribute_name(:slug) %>
-          </th>
-          <th>
-            <%= model_class.human_attribute_name(:province) %>
-          </th>
-          <th>
-            <%= model_class.human_attribute_name(:map) %>
-          </th>
-          <th>
-            <%= model_class.human_attribute_name(:is_free) %>
-          </th>
+          <th><input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" /></th>
+          <th><%= model_class.human_attribute_name(:name) %></th>
+          <th><%= model_class.human_attribute_name(:slug) %></th>
+          <th><%= model_class.human_attribute_name(:province) %></th>
+          <th><%= model_class.human_attribute_name(:map) %></th>
+          <th><%= model_class.human_attribute_name(:is_free) %></th>
+          <th><%= model_class.human_attribute_name(:menu_type) %></th>
           <th class="action">
             <%= t('links.commons.action') %>
           </th>
@@ -44,6 +35,7 @@
           <td><%= s.map.province.name %></td>
           <td><%= s.map.name %></td>
           <td><%= s.is_free %></td>
+          <td><%= s.menu_type %></td>
           <td class="action">
             <%= link_to raw("<i class=\"icon-edit\"></i>"), 
                         edit_admin_scenic_path(s),

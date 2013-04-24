@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130423111526) do
+ActiveRecord::Schema.define(:version => 20130424062103) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",                                :default => "", :null => false
@@ -185,6 +185,7 @@ ActiveRecord::Schema.define(:version => 20130423111526) do
     t.string   "slug",       :limit => 20,                    :null => false
     t.string   "subtitle",   :limit => 30
     t.boolean  "is_free",                  :default => false
+    t.string   "menu_type"
     t.datetime "created_at",                                  :null => false
     t.datetime "updated_at",                                  :null => false
   end
@@ -226,6 +227,7 @@ ActiveRecord::Schema.define(:version => 20130423111526) do
     t.string   "slug",                    :limit => 20,                    :null => false
     t.integer  "recommend_records_count",               :default => 0
     t.boolean  "is_free",                               :default => false
+    t.string   "menu_type"
     t.datetime "created_at",                                               :null => false
     t.datetime "updated_at",                                               :null => false
     t.integer  "category_cd",                           :default => 1
@@ -240,6 +242,7 @@ ActiveRecord::Schema.define(:version => 20130423111526) do
     t.string   "slug",       :limit => 20,                    :null => false
     t.string   "subtitle",   :limit => 30
     t.boolean  "is_free",                  :default => false
+    t.string   "menu_type"
     t.datetime "created_at",                                  :null => false
     t.datetime "updated_at",                                  :null => false
   end

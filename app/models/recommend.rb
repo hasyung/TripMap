@@ -1,7 +1,7 @@
 class Recommend < ActiveRecord::Base
 
   # White list
-  attr_accessible :map, :map_id, :name, :slug, :is_free, :category_cd,
+  attr_accessible :map, :map_id, :name, :slug, :is_free, :category_cd, :menu_type,
                   :recommend_cover_attributes, :recommend_video_attributes
 
   # Associations

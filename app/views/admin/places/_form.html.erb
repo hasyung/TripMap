@@ -2,6 +2,7 @@
   <%= p.input :name %>
   <%= p.input :slug %>
   <%= p.input :is_free %>
+  <%= p.input :menu_type %>
   <%= p.input :subtitle %>
   <%= p.association :map, collection: Map.all, prompt: t("helpers.links.select", :model_name => Map.model_name.human) %>
 
