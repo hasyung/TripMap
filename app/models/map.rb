@@ -53,13 +53,13 @@ class Map < ActiveRecord::Base
 
   def get_map_values
     {
-      cover:            get_file_value(self.map_cover,"file",true),
-      description:      get_file_value(self.map_description,"body"),
-      slides:           get_map_slides(),
-      scenics:          get_scenics(),
-      places:           get_places(),
-      recommends:       get_recommends(),
-      info_lists:       get_info_lists()
+      cover:                  get_file_value(self.map_cover,"file",true),
+      description:            get_file_value(self.map_description,"body"),
+      slides:                 get_map_slides(),
+      scenics:                get_scenics(),
+      places:                 get_places(),
+      recommends:             get_recommends(),
+      info_lists:             get_info_lists()
     }
   end
 
@@ -96,8 +96,10 @@ class Map < ActiveRecord::Base
   def get_info_lists()
     ret = []
     self.info_lists.order_asc.each do |info_list|
-      r, tmp_infos = { info_list_slug: info_list.slug }, []
-      info_list.infos.order_asc.each{ |o| tmp_infos << { name: o.name, slug: o.slug, description: get_file_value(o.letter, "body")} }
+      r, tmp_infos = { info_list_slug: info_list.slug, info_list_is_free: info_list.is_free.to_s }, []
+      info_list.infos.order_asc.each do |o|
+        tmp_infos << { name: o.name, slug: o.slug, is_free: o.is_free.to_s, description: get_file_value(o.letter, "body")}
+      end
       r["infos"] = tmp_infos
       ret << r
     end
@@ -106,20 +108,22 @@ class Map < ActiveRecord::Base
 
   def get_map_place_values place
     {
-      id:               place.id,
-      name:             place.name,
-      subtitle:         place.subtitle,
-      slug:             place.slug,
-      icon:             get_file_value(place.place_icon, "file", true),
-      image:            get_file_value(place.place_image, "file", true),
-      audio:            get_file_value(place.place_audio, "file", true),
-      audio_size:       get_file_value(place.place_audio, "file_size"),
-      audio_duration:   get_file_value(place.place_audio, "duration"),
-      video:            get_file_value(place.place_video, "file",true),
-      video_size:       get_file_value(place.place_video, "file_size"),
-      video_duration:   get_file_value(place.place_video, "duration"),
-      description:      get_file_value(place.place_description, "body"),
-      slides: get_place_slides(place)
+      id:                     place.id,
+      name:                   place.name,
+      is_free:                place.is_free.to_s,
+      menu_type:              place.menu_type,
+      subtitle:               place.subtitle,
+      slug:                   place.slug,
+      icon:                   get_file_value(place.place_icon, "file", true),
+      image:                  get_file_value(place.place_image, "file", true),
+      audio:                  get_file_value(place.place_audio, "file", true),
+      audio_size:             get_file_value(place.place_audio, "file_size"),
+      audio_duration:         get_file_value(place.place_audio, "duration"),
+      video:                  get_file_value(place.place_video, "file",true),
+      video_size:             get_file_value(place.place_video, "file_size"),
+      video_duration:         get_file_value(place.place_video, "duration"),
+      description:            get_file_value(place.place_description, "body"),
+      slides:                 get_place_slides(place)
     }
   end
 
@@ -131,20 +135,22 @@ class Map < ActiveRecord::Base
 
   def get_map_scenic_values scenic
     {
-      id:               scenic.id,
-      name:             scenic.name,
-      subtitle:         scenic.subtitle,
-      slug:             scenic.slug,
-      icon:             get_file_value(scenic.scenic_icon, "file", true),
-      image:            get_file_value(scenic.scenic_image, "file", true),
-      impression:       get_file_value(scenic.scenic_impression, "file", true),
-      impression_size:  get_file_value(scenic.scenic_impression, "file_size"),
-      impression_duration: get_file_value(scenic.scenic_impression, "duration"),
-      route:            get_file_value(scenic.scenic_route, "file", true),
-      route_size:       get_file_value(scenic.scenic_route, "file_size"),
-      route_duration:   get_file_value(scenic.scenic_route, "duration"),
-      description:      get_file_value(scenic.scenic_description, "body"),
-      slides: get_scenic_slides(scenic)
+      id:                     scenic.id,
+      name:                   scenic.name,
+      is_free:                scenic.is_free.to_s,
+      menu_type:              scenic.menu_type,
+      subtitle:               scenic.subtitle,
+      slug:                   scenic.slug,
+      icon:                   get_file_value(scenic.scenic_icon, "file", true),
+      image:                  get_file_value(scenic.scenic_image, "file", true),
+      impression:             get_file_value(scenic.scenic_impression, "file", true),
+      impression_size:        get_file_value(scenic.scenic_impression, "file_size"),
+      impression_duration:    get_file_value(scenic.scenic_impression, "duration"),
+      route:                  get_file_value(scenic.scenic_route, "file", true),
+      route_size:             get_file_value(scenic.scenic_route, "file_size"),
+      route_duration:         get_file_value(scenic.scenic_route, "duration"),
+      description:            get_file_value(scenic.scenic_description, "body"),
+      slides:                 get_scenic_slides(scenic)
     }
   end
 
@@ -176,7 +182,7 @@ class Map < ActiveRecord::Base
             images ||= []
             videos ||= []
             audios ||= []
-            texts ||= []
+            texts  ||= []
             image_lists ||= []
 
             detail.each do |d|
@@ -215,22 +221,26 @@ class Map < ActiveRecord::Base
     end
 
     {
-      name: recommend.name,
-      slug: recommend.slug,
-      category: recommend.category_cd,
-      video: get_file_value(recommend.recommend_video,"file",true),
-      video_size: get_file_value(recommend.recommend_video,"file_size",false),
-      video_duration: get_file_value(recommend.recommend_video,"duration",false),
-      video_cover: get_file_value(recommend.recommend_video,"cover",true),
-      cover: get_file_value(recommend.recommend_cover,"file",true),
-      records: records
+      name:                   recommend.name,
+      slug:                   recommend.slug,
+      is_free:                recommend.is_free.to_s,
+      menu_type:              recommend.menu_type,
+      category:               recommend.category_cd,
+      video:                  get_file_value(recommend.recommend_video,"file",true),
+      video_size:             get_file_value(recommend.recommend_video,"file_size",false),
+      video_duration:         get_file_value(recommend.recommend_video,"duration",false),
+      video_cover:            get_file_value(recommend.recommend_video,"cover",true),
+      cover:                  get_file_value(recommend.recommend_cover,"file",true),
+      records:                records
     }
   end
 
   def get_file_value( file, meth_name, url = false )
-    if file.blank? || file.send(meth_name.to_sym).blank?
-      return (meth_name == "file_size" || meth_name == "duration") ? 0 : ""
-    end
+    is_file_blank = file.blank? || file.send(meth_name.to_sym).blank?
+    is_zero_type = (meth_name == "file_size" || meth_name == "duration")
+
+    ( return is_zero_type ? 0 : "" ) if is_file_blank
+
     result = url ? file.send(meth_name.to_sym).url : file.send(meth_name.to_sym)
   end
 
