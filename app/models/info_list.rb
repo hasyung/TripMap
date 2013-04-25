@@ -2,7 +2,7 @@ class InfoList < ActiveRecord::Base
   include ActiveModel::Validations
 
   # White list
-  attr_accessible :map_id, :name, :slug, :order
+  attr_accessible :map_id, :name, :slug, :order, :is_free
 
   # Associations
   has_many :infos, :dependent => :destroy

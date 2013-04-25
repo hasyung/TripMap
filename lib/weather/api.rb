@@ -22,6 +22,8 @@ module WeatherWrapper
 
       all = []
       doc.children[0].children.each{ |e| all << e.text if not e.text.strip.empty? }
+      return {} if all.length < 10
+
       line10 = all[10].split('；')
 
       results = {

@@ -2,7 +2,8 @@ class Info < ActiveRecord::Base
   include ActiveModel::Validations
 
   # White list
-  attr_accessible :info_list_id, :name, :slug, :order, :letter_attributes
+  attr_accessible :info_list_id, :name, :slug, :order, :is_free,
+                  :letter_attributes
 
   has_one :letter,  :as => :textable,   :dependent => :destroy
 

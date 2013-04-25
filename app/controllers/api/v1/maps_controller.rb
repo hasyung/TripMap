@@ -9,7 +9,7 @@ class Api::V1::MapsController < Api::V1::ApplicationController
   end
 
   def show
-    result= {}
+    result = {}
     ( render :json => result; return ) if params[:map_id].nil? || !validate_client_state
     mid = params[:map_id].to_i
     map = Map.find_by_id(mid)
