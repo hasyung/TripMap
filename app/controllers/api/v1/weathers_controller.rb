@@ -30,7 +30,7 @@ class Api::V1::WeathersController < Api::V1::ApplicationController
         tmp_pic_from: w.tmp_pic_from, tmp_pic_to: w.tmp_pic_to,
         tmp_humidity: w.tmp_humidity
       }
-    end
+    # end
 
     render :json => weather
   end
