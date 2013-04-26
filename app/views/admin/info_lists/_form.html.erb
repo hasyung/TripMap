@@ -1,6 +1,7 @@
 <%= simple_form_for [:admin, @info_list] do |f| %>
   <%= f.input :name %>
   <%= f.input :slug %>
+  <%= f.input :is_free %>
   <%= f.input :order %>
   <%= f.association :map, :collection => Map.all, :prompt => t("helpers.links.select", :model_name => Map.model_name.human) %>
   <div class="form-actions">

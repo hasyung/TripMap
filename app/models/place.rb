@@ -1,7 +1,8 @@
 class Place < ActiveRecord::Base
 
   # White list
-  attr_accessible :map, :map_id, :name, :slug, :subtitle, :place_icon_attributes, :place_image_attributes, :place_description_image_attributes,
+  attr_accessible :map, :map_id, :name, :slug, :subtitle, :is_free, :menu_type,
+                  :place_icon_attributes, :place_image_attributes, :place_description_image_attributes,
                   :place_video_attributes, :place_audio_attributes, :place_description_attributes
 
   # Associations

@@ -87,7 +87,9 @@ class Api::V1::AccountsController < Api::V1::ApplicationController
 
     (result = {result: 4}; render :json => result; return) if account.map_serial_number.present?
 
-    account.map_serial_number = serial
+    serial.account_id = account.id
+    serial.activate_cd = 1
+    serial.save
     result = {result: 0}
 
     render :json => result
