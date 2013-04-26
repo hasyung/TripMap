@@ -33,8 +33,8 @@ class Place < ActiveRecord::Base
   accepts_nested_attributes_for :place_icon,              reject_if: lambda { |i| i[:file].blank? }, allow_destroy: true
   accepts_nested_attributes_for :place_description_image, reject_if: lambda { |d| d[:file].blank? }, allow_destroy: true
   accepts_nested_attributes_for :place_image,             reject_if: lambda { |img| img[:file].blank? }, allow_destroy: true
-  accepts_nested_attributes_for :place_audio,             reject_if: lambda { |pa| pa[:file].blank? }, allow_destroy: true
-  accepts_nested_attributes_for :place_video,             reject_if: lambda { |pv| pv[:file].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :place_audio,             reject_if: lambda { |pa| (pa[:file].blank? && pa[:id].blank?) }, allow_destroy: true
+  accepts_nested_attributes_for :place_video,             reject_if: lambda { |pv| (pv[:file].blank? && pv[:id].blank?) }, allow_destroy: true
   accepts_nested_attributes_for :place_description, allow_destroy: true
 
   scope :created_desc, order("`created_at` DESC")
