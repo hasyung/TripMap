@@ -337,7 +337,7 @@
         subtitle: "副标题"
         map: "地图"
         province: "省市"
-        is_free: "是否免费"
+        is_free: "免费"
         menu_type: "菜单标注"
       scenic:
         name: "名称"
@@ -345,7 +345,7 @@
         subtitle: "副标题"
         map: "地图"
         province: "省市"
-        is_free: "是否免费"
+        is_free: "免费"
         menu_type: "菜单标注"
       recommend:
         name: "名称"
@@ -354,7 +354,7 @@
         province: "省市"
         category_cd: "类型"
         recommend_records_count: "推荐记录"
-        is_free: "是否免费"
+        is_free: "免费"
         menu_type: "菜单标注"
       recommend_record:  
         name: "名称"      
@@ -388,14 +388,14 @@
         slug: "简码"
         order: "排序"
         infos_count: "子信息条数"
-        is_free: "是否免费"
+        is_free: "免费"
       info:
         info_list: "信息列表"
         name: "名称"
         slug: "简码"
         order: "排序"
         letter: "内容"
-        is_free: "是否免费"
+        is_free: "免费"
       log: 
         map: "地图"
         activate_map: "设备"
