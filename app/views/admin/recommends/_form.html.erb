@@ -30,6 +30,12 @@
           <%= video_tag(@recommend.recommend_video.file, :controls => true, :autobuffer => true, :width => 400, :height => 240, :poster => @recommend.recommend_video.cover ) %>
         </div>
       </div>
+    <%elsif @recommend.recommend_video && @recommend.recommend_video.cover.present? %>    
+      <div class="control-group">
+        <div class="controls">
+          <%= image_tag(@recommend.recommend_video.cover) %>
+        </div>
+      </div>
     <% end %>
   <% end %>  
   <div class="form-actions">
