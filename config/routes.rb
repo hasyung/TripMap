@@ -11,7 +11,7 @@ TripMap::Application.routes.draw do
     post ':device_id' => 'accounts#create', as: '', on: :collection
     get 'success' => 'accounts#success', on: :collection
   end
-  
+
   namespace :admin do
     root :to => 'home#index'
 
@@ -141,6 +141,10 @@ TripMap::Application.routes.draw do
 
       resources :versions, only: [] do
         get '/check' => 'versions#check', :on => :collection
+      end
+
+      resources :downloads, only: [] do
+        get '/count' => 'downloads#count', :on => :collection
       end
 
     end
