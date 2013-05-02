@@ -4,8 +4,8 @@ class Api::V1::DownloadsController < Api::V1::ApplicationController
     d = Download.first
 
     if d.nil?
-      entity = Download.new :count => 1
-      entity.save
+      d = Download.new :count => 1
+      d.save
     else
       d.count = d.count + 1
       d.save
