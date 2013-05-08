@@ -29,7 +29,7 @@ module TripMap
     config.active_support.escape_html_entities_in_json = true
 
     config.active_record.whitelist_attributes = true
-    
+
     config.active_record.observers = :trip_map_observer
 
     config.assets.enabled = true
