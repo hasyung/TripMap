@@ -16,7 +16,8 @@ class AccountsController < ApplicationController
     activate_map = ActivateMap.create(device_id: params[:device_id]) if activate_map.blank?
     @account = Account.find_by_email params[:account][:email]
     if @account.blank?
-      @account = activate_map.accounts.new params[:account]
+      @account = activate_map.accounts.new email: params[:account][:email], password: params[:account][:password], 
+                                           password_confirmation: params[:account][:password], nickname: params[:account][:nickname]
       result = activate_map.save
     else
        (redirect_to new_accounts_path(params[:device_id]), :alert => t("messages.accounts.password_error"); return) if 

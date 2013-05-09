@@ -4,8 +4,8 @@ require "base_uploader"
 
 class ImageUploader  < BaseUploader
 
-  version :thumbnail, :if => :is_share? do
-    process :resize_to_fit => [480, 480]
+  version :thumbnail do
+    process :resize_to_limit => [480, 480]
   end
 
   protected 
