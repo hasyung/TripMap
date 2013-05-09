@@ -1,8 +1,7 @@
 class AccountsController < ApplicationController
 
   def new
-    redirect_to 'http://3g.1trip.com/about'; return
-    #@account = Account.new
+    @account = Account.new
   end
 
   def create
