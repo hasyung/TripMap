@@ -18,7 +18,7 @@ class Api::V1::AccountsController < Api::V1::ApplicationController
     (result = {result: 1}; render :json => result; return) if params[:device_id].blank? || params[:email].blank? || 
                                                               params[:password].blank? || params[:nickname].blank?
 
-    (result = {result: 2}; render :json => result; return) if Account.find{ |o| o.email == params[:email] }.present?
+    (result = {result: 2}; render :json => result; return) if Account.find{ |o| o.email == params[:email].downcase }.present?
     (result = {result: 3}; render :json => result; return) if Account.find{ |o| o.nickname == params[:nickname] }.present?
 
     if params[:serial].present?
