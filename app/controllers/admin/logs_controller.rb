@@ -13,4 +13,9 @@ class Admin::LogsController < Admin::ApplicationController
     render :index
   end
 
+  def show
+    @log = Log.find params[:id]
+    add_breadcrumb :index
+  end
+
 end

@@ -9,12 +9,12 @@ class AccountsController < ApplicationController
     serial_num = params[:account][:map_serial_number_attributes][:code]
     if serial_num.present?
       serial = MapSerialNumber.where("code = '#{serial_num}'").first
-      (redirect_to new_accounts_path(params[:device_id]), :alert => t("messages.accounts.serial_error"); return) if serial.blank? ||
-                                                                                            serial.activate_cd == 1
+      (redirect_to new_accounts_path(params[:device_id]), :alert => t("messages.accounts.serial_no_exists"); return) if serial.blank?
+      (redirect_to new_accounts_path(params[:device_id]), :alert => t("messages.accounts.serial_error"); return) if serial.activate_cd == 1
     end
     activate_map = ActivateMap.find{ |o| o.device_id == params[:device_id] }
     activate_map = ActivateMap.create(device_id: params[:device_id]) if activate_map.blank?
-    @account = Account.find_by_email params[:account][:email]
+    @account = Account.find_by_email params[:account][:email].downcase
     if @account.blank?
       @account = activate_map.accounts.new email: params[:account][:email], password: params[:account][:password], 
                                            password_confirmation: params[:account][:password], nickname: params[:account][:nickname]

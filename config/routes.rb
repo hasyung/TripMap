@@ -90,7 +90,7 @@ TripMap::Application.routes.draw do
       match 'select', :on => :collection, :via => [:get, :post]
     end
 
-    resources :logs, :only => :index do
+    resources :logs, :only => [:index, :show] do
       match 'select', :on => :collection, :via => [:get, :post]
     end
 

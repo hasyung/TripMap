@@ -17,6 +17,7 @@
           <th><%= model_class.human_attribute_name(:map) %></th>
           <th><%= model_class.human_attribute_name(:activate_map) %></th>
           <th><%= model_class.human_attribute_name(:message_cd) %></th>
+          <th><%= model_class.human_attribute_name(:info) %></th>
           <th><%= model_class.human_attribute_name(:created_at) %></th>
         </tr>
       </thead>
@@ -28,6 +29,7 @@
             <td><%= log.map.name %></td>
             <td><%= log.activate_map.device_id %></td>
             <td><%= t("enums.log.messages.#{model_class.messages.key(log.message_cd)}") %></td>
+            <td><%= link_to truncate(log.info, :length => 25, :separator => '...'), admin_log_path(log) %></td>
             <td><%= l log.created_at.to_date, :format => :long %></td>
           </tr>
         <% end %>

@@ -1,7 +1,7 @@
 class Log < ActiveRecord::Base
 
   # White llist
-  attr_accessible :map_id, :activate_map_id, :device_type_cd, :slug, :message_cd
+  attr_accessible :map_id, :activate_map_id, :device_type_cd, :slug, :message_cd, :info
 
   # Associations
   belongs_to :map
@@ -19,6 +19,7 @@ class Log < ActiveRecord::Base
     column.validates :map_id
     column.validates :activate_map_id
     column.validates :slug, :format => { :with => /^[a-z]+$/ }, :length => { :within => 1..20 }
+    column.validates :info, :length => { :within => 1..200 }
   end
 
 end
