@@ -76,7 +76,7 @@ class Api::V1::AccountsController < Api::V1::ApplicationController
   end
 
   def validate
-    result = {result: 5}
+    result = {result: 6}
 
     (result = {result: 1}; render :json => result; return) if params[:email].blank? || params[:serial].blank?
 
@@ -84,9 +84,10 @@ class Api::V1::AccountsController < Api::V1::ApplicationController
     (result = {result: 2}; render :json => result; return) if account.blank?
 
     serial = MapSerialNumber.where("code = '#{params[:serial]}'").first
-    (result = {result: 3}; render :json => result; return) if serial.blank? || serial.activate_cd == 1
+    (result = {result: 3}; render :json => result; return) if serial.blank?
+    (result = {result: 4}; render :json => result; return) if serial.activate_cd == 1
 
-    (result = {result: 4}; render :json => result; return) if account.map_serial_number.present?
+    (result = {result: 5}; render :json => result; return) if account.map_serial_number.present?
 
     serial.account_id = account.id
     serial.activate_cd = 1

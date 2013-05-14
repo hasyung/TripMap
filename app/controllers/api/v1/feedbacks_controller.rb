@@ -5,7 +5,7 @@ class Api::V1::FeedbacksController < Api::V1::ApplicationController
 
     (render :json => ret; return) if params[:feedback].blank?
 
-    account = Account.find_by_email(params[:email]) if params[:email].present?
+    account = Account.find_by_email(params[:email].downcase) if params[:email].present?
     if account.present?
       feedback = account.feedbacks.new body: params[:feedback]
     else
