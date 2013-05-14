@@ -29,7 +29,7 @@
             <td><%= log.map.name %></td>
             <td><%= log.activate_map.device_id %></td>
             <td><%= t("enums.log.messages.#{model_class.messages.key(log.message_cd)}") %></td>
-            <td><%= link_to truncate(log.info, :length => 25, :separator => '...'), admin_log_path(log) %></td>
+            <td><%= link_to truncate(log.info, :length => 55, :separator => '...'), admin_log_path(log) %></td>
             <td><%= l log.created_at.to_date, :format => :long %></td>
           </tr>
         <% end %>
