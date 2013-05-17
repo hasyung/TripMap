@@ -1,0 +1,48 @@
+<html>
+	<head>
+		<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<title><%=t("admin.labels.weather_page_title")%></title>
+		<style type="text/css">
+			body { text-align: center; background: url(<%=@map_bg_image %>) no-repeat center; font-family: "微软雅黑"; color: white; width: 100%; margin: 0; }
+		</style>
+		<%= stylesheet_link_tag "admin/weather" %>
+		<%= csrf_meta_tags %>
+	</head>
+
+	<body>
+		<div class="city-name">
+			<%= image_tag "weather/images/icon_city.png" %>
+			<span class="fs28"><%=@map.name%></span>
+			<span><br /><%= Time.now.strftime("%Y/%m/%d") %></span>
+		</div>
+		<div class="tmp">
+			<%= image_tag "weather/01/a_#{@weather[:tmp_pic_to]}.png", :class => "wh80"%>
+			<span class="tmp_value"><%= @weather[:tmp_current]%></span>
+		</div>
+		<div class="tmp_info">
+			<div class="tmp_info_detail">
+				<%= image_tag 'weather/images/icon_l.png', :class => "wh14" %>
+				<span class="fs14"><%= @weather[:tmp_today_low]%></span>&deg;C&nbsp;&nbsp;
+				<%= image_tag 'weather/images/icon_h.png', :class => "wh14" %>
+				<span class="fs14"><%= @weather[:tmp_today_high]%></span>&deg;C&nbsp;
+				<span class="fs14"><%= @weather[:tmp_desc]%></span><br />
+				<span><%= @weather[:tmp_wind]%></span><br />
+				<span><%= t("admin.labels.humidity") %> <%= @weather[:tmp_humidity]%></span>
+			</div>
+		</div>
+		<div id="other_cities">
+			<ul>
+				<% @surr_w.each do |e| %>
+					<li>
+					<%= image_tag "weather/02/a_#{e[:tmp_pic_to]}.png", :class => "wh40"%>
+					<div>
+						<p class="fs14 grey"><%=e[:city_name] %></p>
+						<p class="fs14 grey"><%=e[:tmp_today_low] %>-<%=e[:tmp_today_high] %></p>
+					</div>
+				</li>
+				<% end %>
+			</ul>
+		</div>
+	</body>
+
+</html>

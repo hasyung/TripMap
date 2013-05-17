@@ -8,7 +8,7 @@ class Admin::AccountsController < Admin::ApplicationController
     @account = Account.new
     add_breadcrumb :new
   end
-  
+
   def create
     @account = Account.new params[:account]
     if @account.save
@@ -23,7 +23,7 @@ class Admin::AccountsController < Admin::ApplicationController
     @account = Account.find params[:id]
     add_breadcrumb :edit
   end
-  
+
   def update
     @account = Account.find params[:id]
     if @account.update_attributes params[:account]

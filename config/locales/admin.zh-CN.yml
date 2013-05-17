@@ -1,10 +1,15 @@
 'zh-CN':
+
   admin:
     menus:
       api: "API"
     apis:
       v1: "第一版"
       v2: "第二版"
+    labels:
+      humidity: "湿度:"
+      weather_page_title: "《壹旅图》天气展示页面"
+
   navs:
     home:
       index: "首页"
@@ -44,6 +49,11 @@
       show: "声明"
     versions:
       index: "版本"
+    settings:
+      index: "设置"
+    surround_city:
+      index: "周边城市天气"
+
   breadcrumbs:
     admin:
       application:
@@ -136,6 +146,10 @@
         edit: "编辑版本信息"
       feedbacks:
         index: "意见反馈"
+      surround_cities:
+        index: "周边城市天气"
+        new: "添加周边城市"
+        edit: "编辑周边城市"
 
   links:
     home:
@@ -249,6 +263,10 @@
     feedbacks:
       index: "意见反馈列表"
       show: "查看意见反馈"
+    surround_cities:
+      index: "周边城市"
+      new: "添加周边城市"
+      edit: "编辑周边城市"
 
   messages:
     maps:
@@ -363,6 +381,7 @@
       declaration: "声明"
       version: "版本"
       feedback: "意见反馈"
+      surround_city: "周边城市"
     attributes:
       map:
         province: "省市"
@@ -499,6 +518,9 @@
         body: "内容"
         account: "用户"
         created_at: "创建时间"
+      surround_city:
+        map: "所属地图"
+        city_name: "城市名称"
 
   simple_form:
     labels:
@@ -507,6 +529,8 @@
           file: "封面"
         map_plat:
           file: "原图"
+        map_weather_bg_image:
+          file: "天气背景图片"
         map_description:
           body: "描述"
       place:
@@ -592,6 +616,8 @@
         map: "地图"
       info:
         order: "信息记录顺序值（<b>选填</b>）"
+      surround_city:
+        city_name: "城市名称"
 
   helpers:
     links:
@@ -610,6 +636,7 @@
           other: "共 <b>%{count}</b> 条数据"
       more_pages:
         display_entries: " 显示数据<b>%{first}&nbsp;-&nbsp;%{last}</b> 共 <b>%{total}</b>条 "        
+
   views:
     pagination:
       first: "第一页"
@@ -617,6 +644,7 @@
       previous: "上一页"
       next: "下一页"
       truncate: ""
+
   errors:
     account:
       presence: "必填"
@@ -631,6 +659,7 @@
       text_empty: "内容不能为空！"
       order: "数字范围为1-999"
       duplicate_value: "该值已被使用！"
+
   enums:
     share:
       states:

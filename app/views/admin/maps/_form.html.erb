@@ -22,6 +22,16 @@
       </div>
     <% end %>
   <% end %>
+  <%= f.fields_for :map_weather_bg_image, @model.map_weather_bg_image ||= @model.build_map_weather_bg_image do |w| %>
+    <%= w.input :file, :as => :file %>
+    <% if @model.map_weather_bg_image && @model.map_weather_bg_image.file.present? %>
+      <div class="control-group image">
+        <div class="controls">
+          <%= image_tag @model.map_weather_bg_image.file %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
   <%= f.fields_for :map_description, @model.map_description ||= @model.build_map_description do |d|  %>  
     <%= d.input :body, :as => :text, :input_html => { :class => "span-full" } %>
   <% end %>
