@@ -12,7 +12,7 @@ class InfoList < ActiveRecord::Base
   # Validates
   with_options :presence => true do |column|
     column.validates :map_id
-    column.validates :name, uniqueness: true, length: { within: 1..20 , message: I18n.t("errors.type.name") }
+    column.validates :name, uniqueness: true, length: { within: 1..20 }
     column.validates :slug, uniqueness: true,
                             length: { within: 1..20 ,   message: I18n.t("errors.type.name") },
                             format: { with: /^[a-z]+$/, message: I18n.t("errors.type.slug") }

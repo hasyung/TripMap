@@ -38,7 +38,7 @@ class Admin::RecommendsController < Admin::ApplicationController
 		if recommend.destroy
 			redirect_to admin_recommends_path, notice: t('messages.recommends.success')
 		else
-			redirect_to admin_recommends_path, notice: t('messages.recommends.error')
+			redirect_to admin_recommends_path, alert: t('messages.recommends.error')
 		end
 	end
 

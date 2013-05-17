@@ -40,7 +40,7 @@ class Admin::InfoListsController < Admin::ApplicationController
     if @info_list.destroy
       redirect_to admin_info_lists_path, :notice => t('messages.info_lists.success')
     else
-      redirect_to admin_info_lists_path, :notice => t('messages.info_lists.error')
+      redirect_to admin_info_lists_path, :alert => t('messages.info_lists.error')
     end
   end
 

@@ -1,0 +1,42 @@
+<%- model_class = County -%>
+<%= render 'base' %>
+<div class="box">
+  <div class="box-title">
+    <span class="icon"><i class="icon-th"></i></span>
+    <h5><%= t('links.counties.index') %></h5>
+  </div>
+  <div class="box-content">
+    <table class="table table-bordered table-striped with-check">
+      <thead>
+        <tr>
+          <th><input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" /></th>
+          <th><%= model_class.human_attribute_name(:name) %></th>
+          <th><%= model_class.human_attribute_name(:slug) %></th>
+          <th><%= model_class.human_attribute_name(:city) %></th>
+          <th><%= model_class.human_attribute_name(:merchants_count) %></th>
+          <th class="action"><%= t('links.commons.action') %></th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @counties.each do |p| %>
+        <tr>
+          <td><%= check_box_tag "county_ids[]", p.id, false, id: "county_#{p.id}" %></td>
+          <td><%= p.name %></td>
+          <td><%= p.slug %></td>
+          <td><%= p.city.name %></td>
+          <td><%= p.merchants_count %></td>
+          <td class="action">
+              <%= link_to raw("<i class=\"icon-edit\"></i>"), edit_admin_county_path(p) %>
+              <%= link_to raw("<i class=\"icon-trash\"></i>"), admin_county_path(p), method: :delete, data: { confirm: t('links.commons.confirm')} %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="table-footer clearfix">
+  <div class="paginates-info"><%= page_entries_info @counties %></div>
+  <%= paginate @counties, :theme => "admin" %>
+</div>

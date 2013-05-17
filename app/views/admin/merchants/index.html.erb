@@ -1,0 +1,48 @@
+<%- model_class = Merchant -%>
+
+<%= render 'base' %>
+
+<div class="box">
+  <div class="box-title">
+    <span class="icon"><i class="icon-th"></i></span>
+    <h5><%= t('links.merchants.index') %></h5>
+  </div>
+  <div class="box-content">
+    <table class="table table-bordered table-striped with-check">
+      <thead>
+        <tr>
+          <th><input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" /></th>
+          <th><%= model_class.human_attribute_name(:name) %></th>
+          <th><%= model_class.human_attribute_name(:title) %></th>
+          <th><%= model_class.human_attribute_name(:city) %></th>
+          <th><%= model_class.human_attribute_name(:county) %></th>
+          <th><%= model_class.human_attribute_name(:phone) %></th>
+          <th class="action"><%= t('links.commons.action') %></th>
+        </tr>
+      </thead>
+      <tbody>
+      <% if !@merchants.blank? %>
+      <% @merchants.each do |p| %>
+        <tr>
+          <td><%= check_box_tag "merchant_ids[]", p.id, false, id: "merchant_#{p.id}" %></td>
+          <td><%= p.name %></td>
+          <td><%= p.title %></td>
+          <td><%= p.county.city.name %></td>
+          <td><%= p.county.name %></td>
+          <td><%= p.phone %></td>
+          <td class="action">
+            <%= link_to raw("<i class=\"icon-edit\"></i>"), edit_admin_merchant_path(p), 
+                                                            title: t('links.merchants.edit') %>
+            <%= link_to raw("<i class=\"icon-trash\"></i>"), admin_merchant_path(p), method: :delete, data: {confirm: t('links.commons.confirm')} %>
+          </td>
+        </tr>
+      <% end %>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="table-footer clearfix">
+  <div class="paginates-info"><%= page_entries_info @merchants %></div>
+  <%= paginate @merchants, :theme => "admin" %>
+</div>

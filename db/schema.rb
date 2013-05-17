@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130513063129) do
+ActiveRecord::Schema.define(:version => 20130516072647) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",                                :default => "", :null => false
@@ -63,6 +63,29 @@ ActiveRecord::Schema.define(:version => 20130513063129) do
   end
 
   add_index "audios", ["audioable_id", "audioable_type", "order", "audio_type"], :name => "aaoa_index", :unique => true
+
+  create_table "cities", :force => true do |t|
+    t.string   "name",           :limit => 20,                :null => false
+    t.string   "slug",           :limit => 20,                :null => false
+    t.integer  "counties_count",               :default => 0
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
+  end
+
+  add_index "cities", ["name"], :name => "index_cities_on_name", :unique => true
+  add_index "cities", ["slug"], :name => "index_cities_on_slug", :unique => true
+
+  create_table "counties", :force => true do |t|
+    t.integer  "city_id",                                      :null => false
+    t.string   "name",            :limit => 20,                :null => false
+    t.string   "slug",            :limit => 20,                :null => false
+    t.integer  "merchants_count",               :default => 0
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
+  end
+
+  add_index "counties", ["name"], :name => "index_counties_on_name", :unique => true
+  add_index "counties", ["slug"], :name => "index_counties_on_slug", :unique => true
 
   create_table "declarations", :force => true do |t|
     t.text     "body",       :null => false
@@ -185,6 +208,20 @@ ActiveRecord::Schema.define(:version => 20130513063129) do
 
   add_index "maps", ["name"], :name => "index_maps_on_name", :unique => true
   add_index "maps", ["slug"], :name => "index_maps_on_slug", :unique => true
+
+  create_table "merchants", :force => true do |t|
+    t.integer  "county_id",                 :null => false
+    t.string   "title",       :limit => 20, :null => false
+    t.string   "name",        :limit => 50, :null => false
+    t.string   "tag",         :limit => 50
+    t.string   "address",     :limit => 50, :null => false
+    t.string   "phone",       :limit => 12, :null => false
+    t.text     "description"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "merchants", ["county_id", "name", "address"], :name => "index_merchants_on_county_id_and_name_and_address", :unique => true
 
   create_table "places", :force => true do |t|
     t.integer  "map_id",                                      :null => false

@@ -1,0 +1,24 @@
+<%= simple_form_for [:admin, @model] do |p| %>
+  <%= p.input :name %>
+  <%= p.input :title %>
+  <%= p.input :tag %>
+  <%= p.input :city, collection: City.all, input_html: {onchange: "getcity()"}, prompt: t("helpers.links.select", :model_name => City.model_name.human) %>
+  <%= p.association :county, collection: (@city.present?? @city.counties : (@model.county_id.present?? [@model.county] : [])), prompt: t("helpers.links.select", :model_name => County.model_name.human) %>
+  <%= p.input :phone, :input_html => { :class => "span3" } %>
+  <%= p.input :address %>
+  <%= p.input :description, :as => :text, as: :text%>
+
+  <div class="form-actions">
+    <%= p.button :submit, :class => 'btn-primary' %>
+  </div>
+<% end %>
+
+<%= content_for :scripts do -%>
+  <script type="text/javascript">
+    function getcity() 
+    { 
+      $("form").attr("action", $("form").attr("action") + "?type=true" );
+      $("form").submit();
+    }
+  </script>
+<% end -%>

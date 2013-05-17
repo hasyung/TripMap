@@ -25,7 +25,7 @@
       <% if !@places.blank? %>
       <% @places.each do |p| %>
         <tr>
-          <td><%= check_box_tag "places_ids[]", p.id, false, id: "place_#{p.id}" %></td>
+          <td><%= check_box_tag "place_ids[]", p.id, false, id: "place_#{p.id}" %></td>
           <td><%= p.name %></td>
           <td><%= p.slug %></td>
           <td><%= p.map.province.name %></td>

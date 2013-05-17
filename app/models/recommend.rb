@@ -22,7 +22,7 @@ class Recommend < ActiveRecord::Base
 
   # Validates
   with_options :presence => true do |column|
-    column.validates :name, :length => { :within => 2..20,    :message => I18n.t("errors.type.name") }, :uniqueness => true
+    column.validates :name, :length => { :within => 2..20}, :uniqueness => true
     column.validates :slug, :length => { :within => 2..20 }, :format => { :with => /^[a-z]+$/, :message => I18n.t("errors.type.slug") }, :uniqueness => true
     column.validates :map_id
     column.validates :category_cd

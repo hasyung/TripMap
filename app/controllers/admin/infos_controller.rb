@@ -42,7 +42,7 @@ class Admin::InfosController < Admin::ApplicationController
     if @info.destroy
       redirect_to admin_info_list_infos_path, :notice => t('messages.infos.success')
     else
-      redirect_to admin_info_list_infos_path, :notice => t('messages.infos.error')
+      redirect_to admin_info_list_infos_path, :alert => t('messages.infos.error')
     end
   end
 

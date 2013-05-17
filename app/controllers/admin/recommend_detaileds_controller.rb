@@ -62,7 +62,7 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
       redirect_to admin_recommend_record_detaileds_path(
                   params[:recommend_id],                  
                   params[:record_id]),
-                  notice: t('messages.recommend_detaileds.error')
+                  alert: t('messages.recommend_detaileds.error')
     end
   end
 
@@ -152,7 +152,7 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
                   params[:recommend_id],
                   params[:record_id],
                   params[:detailed_id]),
-                  notice: t('messages.recommend_detaileds.video.error')
+                  alert: t('messages.recommend_detaileds.video.error')
     end
   end
 
@@ -220,13 +220,13 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
                   params[:recommend_id],
                   params[:record_id],
                   params[:detailed_id]),
-                  notice: t('messages.recommend_detaileds.success')
+                  notice: t('messages.recommend_detaileds.image.success')
     else
       redirect_to admin_recommend_record_detailed_path(
                   params[:recommend_id],
                   params[:record_id],
                   params[:detailed_id]),
-                  notice: t('messages.recommend_detaileds.image.success')
+                  alert: t('messages.recommend_detaileds.image.error')
     end
   end
 
@@ -300,7 +300,7 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
                   params[:recommend_id],
                   params[:record_id],
                   params[:detailed_id]),
-                  notice: t('messages.recommend_detaileds.image.error')
+                  alert: t('messages.recommend_detaileds.image.error')
     end
   end
 
@@ -361,7 +361,7 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
                   params[:recommend_id],
                   params[:record_id],
                   params[:detailed_id]),
-                  notice: t('messages.recommend_detaileds.text.error')
+                  alert: t('messages.recommend_detaileds.text.error')
     end
   end
 
@@ -435,7 +435,7 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
                   params[:recommend_id],
                   params[:record_id],
                   params[:detailed_id]),
-                  notice: t('messages.recommend_detaileds.images.success')
+                  alert: t('messages.recommend_detaileds.images.error')
     end
   end
 
@@ -502,7 +502,7 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
                   params[:record_id],
                   params[:detailed_id],
                   params[:image_id]),
-                  notice: t('messages.recommend_detaileds.images.error')
+                  alert: t('messages.recommend_detaileds.images.error')
     end
   end
 

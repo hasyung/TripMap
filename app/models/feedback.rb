@@ -3,7 +3,7 @@ class Feedback < ActiveRecord::Base
 
   belongs_to :account
 
-  validates :body, presence: true, length: { within: 1..1000 ,   message: I18n.t("errors.type.name") }
+  validates :body, presence: true, length: { within: 1..1000 }
 
   scope :created_desc, order("`created_at` DESC")
 end

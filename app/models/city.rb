@@ -1,10 +1,9 @@
-class Province < ActiveRecord::Base
-
+class City < ActiveRecord::Base
   # White list
   attr_accessible :name, :slug
 
   # Associations
-  has_many :maps, :autosave => true
+  has_many :counties, :autosave => true
 
   # Validates
   with_options :presence => true do |column|
@@ -13,5 +12,4 @@ class Province < ActiveRecord::Base
   end
 
   scope :created_desc, order("`created_at` DESC")
-
 end

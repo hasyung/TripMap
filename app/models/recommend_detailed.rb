@@ -20,7 +20,7 @@ class RecommendDetailed < ActiveRecord::Base
   validate :order_increment
 
   accepts_nested_attributes_for :recommend_detailed_cover,          reject_if: lambda { |c| c[:file].blank? }, allow_destroy: true
-  validates :name, :length => { :within => 1..15,    :message => I18n.t("errors.type.name") }, :uniqueness => true, :presence => true
+  validates :name, :length => { :within => 1..15 }, :uniqueness => true, :presence => true
   validates :order, uniqueness: { scope: [:recommend_record_id, :order] },
                     numericality: { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999 }
 

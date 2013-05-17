@@ -90,6 +90,12 @@ TripMap::Application.routes.draw do
       match 'select', :on => :collection, :via => [:get, :post]
     end
 
+    resources :cities, :except => :show
+    resources :counties, :except => :show
+    resources :merchants, :except => :show do
+      resources :images, except: :show
+    end
+
     resources :logs, :only => [:index, :show] do
       match 'select', :on => :collection, :via => [:get, :post]
     end

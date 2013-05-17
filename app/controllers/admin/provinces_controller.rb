@@ -11,6 +11,7 @@ class Admin::ProvincesController < Admin::ApplicationController
   end
 
   def create
+    add_breadcrumb :new
     @province = Province.new params[:province]
     if @province.save
       redirect_to admin_provinces_path, notice: t('messages.provinces.success')
@@ -25,6 +26,7 @@ class Admin::ProvincesController < Admin::ApplicationController
   end
 
   def update
+    add_breadcrumb :edit
     @province = Province.find params[:id]
     if @province.update_attributes params[:province]
       redirect_to admin_provinces_path , notice: t('messages.provinces.success')
@@ -38,7 +40,7 @@ class Admin::ProvincesController < Admin::ApplicationController
     if @province.destroy
       redirect_to admin_provinces_path , notice: t('messages.provinces.success')
     else
-      redirect_to admin_provinces_path , notice: t('messages.provinces.error')
+      redirect_to admin_provinces_path , alert: t('messages.provinces.error')
     end
   end
 

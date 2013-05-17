@@ -39,7 +39,7 @@ class Admin::SerialnumbersController < Admin::ApplicationController
     elsif @serials.count < params[:sum].to_i
         redirect_to export_admin_serialnumbers_path, notice: t('messages.serialnumbers.sum', sum: @serials.count )
     else
-      redirect_to export_admin_serialnumbers_path, notice: t('messages.serialnumbers.error')
+      redirect_to export_admin_serialnumbers_path, alert: t('messages.serialnumbers.error')
     end
 
   end

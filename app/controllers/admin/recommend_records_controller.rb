@@ -48,7 +48,7 @@ class Admin::RecommendRecordsController < Admin::ApplicationController
                   notice: t('messages.recommend_records.success')
     else
       redirect_to admin_recommend_records_path,
-                  notice: t('messages.recommend_records.error')
+                  alert: t('messages.recommend_records.error')
     end
   end
 

@@ -37,7 +37,8 @@ class Image < ActiveRecord::Base
     :detailed_images            => 13,
 
     :place_slides               => 14,
-    :scenic_slides              => 15
+    :scenic_slides              => 15,
+    :merchant_slides         => 16
   },
   :column => "image_type"
 
