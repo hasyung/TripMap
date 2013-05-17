@@ -8,4 +8,10 @@ class ApplicationController < ActionController::Base
     add_breadcrumb(title)
   end
 
+  def has_nil_value_in( keys = [] )
+    has_nil = false
+    keys.each{|k| break if has_nil ||= params[k.to_sym].nil? }
+    has_nil
+  end
+
 end

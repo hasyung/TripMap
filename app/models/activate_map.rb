@@ -13,5 +13,5 @@ class ActivateMap < ActiveRecord::Base
 
   # Scopes
   scope :created_desc, order("created_at DESC")
-  
+
 end

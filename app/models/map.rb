@@ -3,7 +3,7 @@ class Map < ActiveRecord::Base
 
   #White list
   attr_accessible :province, :province_id, :name, :slug, :version,
-                  :map_description_attributes, :map_cover_attributes, :map_plat_attributes
+                  :map_description_attributes, :map_cover_attributes, :map_plat_attributes, :map_weather_bg_image_attributes
 
   # Associations
   with_options :dependent => :destroy do |assoc|
@@ -13,13 +13,15 @@ class Map < ActiveRecord::Base
     assoc.has_many :shares, :autosave => true
     assoc.has_many :info_lists, :autosave => true
     assoc.has_many :logs
+    assoc.has_many :surround_cities
   end
   has_many :map_serial_numbers
 
   with_options :as => :imageable, :class_name => 'Image', :dependent => :destroy do |assoc|
-    assoc.has_one  :map_cover,   :conditions => { :image_type => Image.map_cover   }
-    assoc.has_one  :map_plat,    :conditions => { :image_type => Image.map_plat    }
-    assoc.has_many :map_slides,  :conditions => { :image_type => Image.map_slides  }
+    assoc.has_one  :map_cover,            :conditions => { :image_type => Image.map_cover   }
+    assoc.has_one  :map_plat,             :conditions => { :image_type => Image.map_plat    }
+    assoc.has_one  :map_weather_bg_image, :conditions => { :image_type => Image.map_weather_bg_image }
+    assoc.has_many :map_slides,           :conditions => { :image_type => Image.map_slides  }
   end
 
   has_one :map_description, :as => :textable, :class_name => 'Letter', 
@@ -41,6 +43,7 @@ class Map < ActiveRecord::Base
   # NestedAttributes
   accepts_nested_attributes_for :map_cover, reject_if: lambda { |img| img[:file].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :map_plat, reject_if: lambda { |img| img[:file].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :map_weather_bg_image, reject_if: lambda { |img| img[:file].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :map_description, :allow_destroy => true
 
   # Scopes
