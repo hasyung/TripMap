@@ -25,6 +25,12 @@
       index: "推荐"
     shares:
       index: "分享"
+    cities:
+      index: "省市"
+    counties:
+      index: "区县"
+    merchants:
+      index: "商家"
     info_lists:
       index: "信息列表"
     infos:
@@ -35,6 +41,8 @@
       index: "日志"
     accounts:
       index: "用户"
+    feedbacks:
+      index: "意见反馈"
     serialnumber:
       index: "序列号管理"
     declarations:
@@ -101,6 +109,18 @@
         index: "分享"
         new: "添加分享"
         edit: "修改分享"
+      cities:
+        index: "省市"
+        new: "添加省市"
+        edit: "修改省市"
+      counties:
+        index: "区县"
+        new: "添加区县"
+        edit: "修改区县"
+      merchants:
+        index: "商家"
+        new: "添加商家"
+        edit: "修改商家"
       accounts:
         index: "用户"
         new: "添加用户"
@@ -197,6 +217,18 @@
       show: "查看分享"
       new: "添加分享"
       edit: "修改分享"
+    cities:
+      index: "省市列表"
+      new: "添加省市"
+      edit: "修改省市"
+    counties:
+      index: "区县列表"
+      new: "添加区县"
+      edit: "修改区县"
+    merchants:
+      index: "商家列表"
+      new: "添加商家"
+      edit: "修改商家"
     accounts:
       index: "用户列表"
       show: "查看用户"
@@ -281,6 +313,15 @@
       error: "操作分享失败！"
       publish: "审核分享通过！"
       draft: "审核分享不通过！"
+    cities:
+      success: "操作省市成功！"
+      error: "操作省市失败！"
+    counties:
+      success: "操作区县成功！"
+      error: "操作区县失败！"
+    merchants:
+      success: "操作商家成功！"
+      error: "操作商家失败！"
     info_lists:
       success: "操作信息成功！"
       error: "操作信息失败！"
@@ -291,7 +332,7 @@
       serial_error: "序列号已使用！"
       serial_no_exists: "序列号错误，请核对！"
       password_error: "用户名已存在或密码错误！"
-      re_serial_error: "序列号解锁地图重复！"
+      re_serial_error: "您已激活该地图啦！"
       activate_error: "设备获取失败！"
     infos:
       success: "操作信息成功！"
@@ -327,6 +368,9 @@
       image_list: "图集"
       text: "文本"
       share: "分享"
+      city: "省市"
+      county: "区县"
+      merchant: "商家"
       info_list: "信息表列"
       info: "信息"
       video: "视频"
@@ -403,6 +447,25 @@
         map: "地图"
         state_cd: "审核状态"
         created_at: "创建时间"
+      city:
+        name: "名称"
+        slug: "简码"
+        counties_count: "区县数"
+      county:
+        name: "名称"
+        slug: "简码"
+        city: "省市"
+        merchants_count: "商家数"
+      merchant:
+        name: "名称"
+        slug: "简码"
+        title: "标题"
+        tag: "简介"
+        description: "描述"
+        address: "地址"
+        phone: "电话"
+        county: "区县"
+        city: "省市"
       info_list:
         map: "地图"
         name: "名称"
@@ -586,6 +649,7 @@
     account:
       presence: "必填"
     type:
+      phone: "类型错误，只能为数字！"
       slug: "简码必须为小写字母！"
       name: "名字长度不能超过15个汉字！"
       big_image_file: "亲，你上传的文件超过了5MB！"

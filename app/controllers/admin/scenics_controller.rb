@@ -41,7 +41,7 @@ class Admin::ScenicsController < Admin::ApplicationController
     if @scenic.destroy
       redirect_to admin_scenics_path, notice: t('messages.scenics.success')
     else
-      redirect_to admin_scenics_path, notice: t('messages.scenics.error')
+      redirect_to admin_scenics_path, alert: t('messages.scenics.error')
     end
   end
 

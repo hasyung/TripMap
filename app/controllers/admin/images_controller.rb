@@ -35,7 +35,7 @@ class Admin::ImagesController < Admin::ApplicationController
     if @image.destroy
       redirect_to @path, :notice => t('messages.slides.success', :model => @model.class.model_name.human)
     else
-      redirect_to @path, :notice => t('messages.slides.error', :model => @model.class.model_name.human)
+      redirect_to @path, :alert => t('messages.slides.error', :model => @model.class.model_name.human)
     end
   end
 
@@ -53,6 +53,10 @@ class Admin::ImagesController < Admin::ApplicationController
       @model = Scenic.find params[:scenic_id]
       @image = @model.scenic_slides.new params[:image]
       @path = edit_admin_scenic_path(@model.id)
+    elsif params[:merchant_id].present?
+      @model = Merchant.find params[:merchant_id]
+      @image = @model.merchant_slides.new params[:image]
+      @path = edit_admin_merchant_path(@model.id)
     end
   end
 

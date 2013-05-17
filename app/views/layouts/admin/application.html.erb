@@ -32,31 +32,51 @@
                 <li<%= raw ' class="active"' if %w(provinces) .include?(controller_name) %>>
                   <%= link_to t("navs.provinces.index"), admin_provinces_path %>
                 </li>
-                <li<%= raw ' class="active"' if %w(maps).include?(controller_name) %>>
-                  <%= link_to t("navs.maps.index"), admin_maps_path %>
-                </li>
-                <li<%= raw ' class="active"' if %w(scenics).include?(controller_name) %>>
-                  <%= link_to t("navs.scenics.index"), admin_scenics_path %>
-                <li<%= raw ' class="active"' if %w(places).include?(controller_name) %>>
-                  <%= link_to t("navs.places.index"), admin_places_path %>
-                <li<%= raw ' class="active"' if %w(recommends).include?(controller_name) %>>
-                  <%= link_to t("navs.recommends.index"), admin_recommends_path %>
+                <li class="dropdown <%= raw 'active' if %w(maps scenics places recommends info_lists).include?(controller_name) %>">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                      <%= t("navs.maps.index")%><b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><%= link_to t("navs.maps.index"), admin_maps_path %></li>
+                      <li class="divider"></li>
+                      <li><%= link_to t("navs.scenics.index"), admin_scenics_path %></li>
+                      <li><%= link_to t("navs.places.index"), admin_places_path %></li>
+                      <li><%= link_to t("navs.recommends.index"), admin_recommends_path %></li>
+                      <li><%= link_to t("navs.info_lists.index"), admin_info_lists_path %></li>
+                    </ul>
+                  </li>
                 <li<%= raw ' class="active"' if %w(shares).include?(controller_name) %>>
                   <%= link_to t("navs.shares.index"), admin_shares_path %>
                 </li>
-                <li<%= raw ' class="active"' if %w(info_lists).include?(controller_name) %>>
-                	<%= link_to t("navs.info_lists.index"), admin_info_lists_path %>
-              	</li>
-                <li<%= raw ' class="active"' if %w(api).include?(controller_name) %>>
-                  <%= link_to t("navs.apis.index"), v1_admin_api_index_path %>
+                <li class="dropdown <%= raw 'active' if %w(cities counties merchants).include?(controller_name) %>">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <%= t("navs.merchants.index")%><b class="caret"></b>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li> <%= link_to t("navs.merchants.index"), admin_merchants_path %></li>
+                    <li class="divider"></li>
+                    <li><%= link_to t("navs.cities.index"), admin_cities_path %></li>
+                    <li><%= link_to t("navs.counties.index"), admin_counties_path %></li>
+                  </ul>
+                </li>
+                <li class="dropdown <%= raw 'active' if %w(accounts feedbacks).include?(controller_name) %>">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <%= t("navs.accounts.index")%><b class="caret"></b>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li> <%= link_to t("navs.accounts.index"), admin_accounts_path %></li>
+                    <li class="divider"></li>
+                    <li><%= link_to t("navs.feedbacks.index"), admin_feedbacks_path %></li>
+                  </ul>
+                </li>
                 <li<%= raw ' class="active"' if %w(logs).include?(controller_name) %>>
                   <%= link_to t("navs.logs.index"), admin_logs_path %>
                 </li>
+                <li<%= raw ' class="active"' if %w(api).include?(controller_name) %>>
+                  <%= link_to t("navs.apis.index"), v1_admin_api_index_path %>
+                </li>
                 <li<%= raw ' class="active"' if %w(serialnumbers).include?(controller_name) %>>
                   <%= link_to t("navs.serialnumber.index"), admin_serialnumbers_path %>
-                </li>
-                <li<%= raw ' class="active"' if %w(accounts feedbacks).include?(controller_name) %>>
-                  <%= link_to t("navs.accounts.index"), admin_accounts_path %>
                 </li>
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=t("navs.settings.index")%><b class="caret"></b></a>

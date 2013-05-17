@@ -13,6 +13,7 @@ class Admin::PlacesController < Admin::ApplicationController
   end
 
   def create
+    add_breadcrumb :new
     @model = Place.new params[:place]
     if @model.save
       redirect_to admin_places_path, notice: t('messages.places.success')
@@ -28,6 +29,7 @@ class Admin::PlacesController < Admin::ApplicationController
   end
 
   def update
+    add_breadcrumb :edit
     @model = Place.find params[:id]
     if @model.update_attributes params[:place]
       redirect_to admin_places_path, notice: t('messages.places.success')
@@ -41,7 +43,7 @@ class Admin::PlacesController < Admin::ApplicationController
     if @place.destroy
       redirect_to admin_places_path, notice: t('messages.places.success')
     else
-      redirect_to admin_places_path, notice: t('messages.places.error')
+      redirect_to admin_places_path, alert: t('messages.places.error')
     end
   end
 

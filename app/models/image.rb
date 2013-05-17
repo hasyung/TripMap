@@ -40,6 +40,8 @@ class Image < ActiveRecord::Base
     :scenic_slides              => 15,
 
     :map_weather_bg_image       => 16,
+
+    :merchant_slides            => 17,
   },
   :column => "image_type"
 

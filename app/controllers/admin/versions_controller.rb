@@ -41,7 +41,7 @@ class Admin::VersionsController < Admin::ApplicationController
     if @version.destroy
       redirect_to admin_versions_path, :notice => t('messages.infos.success')
     else
-      redirect_to admin_versions_path, :notice => t('messages.infos.error')
+      redirect_to admin_versions_path, :alert => t('messages.infos.error')
     end
   end
 

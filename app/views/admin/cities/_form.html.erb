@@ -1,0 +1,7 @@
+<%= simple_form_for([:admin,@city]) do |f| %>
+	<%= f.input :name %>
+	<%= f.input :slug %>
+	<div class="form-actions">
+		<%= f.button :submit, class: 'btn-primary' %>
+	</div>
+<% end %>

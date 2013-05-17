@@ -28,6 +28,8 @@ module Admin::ApplicationHelper
       path = edit_admin_place_image_path(model.id, image_id)
     when "Scenic"
       path = edit_admin_scenic_image_path(model.id, image_id)
+    when "Merchant"
+      path = edit_admin_merchant_image_path(model.id, image_id)
     end
     path
   end
@@ -40,6 +42,8 @@ module Admin::ApplicationHelper
       path = admin_place_image_path(model.id, image_id)
     when "Scenic"
       path = admin_scenic_image_path(model.id, image_id)
+    when "Merchant"
+      path = admin_merchant_image_path(model.id, image_id)
     end
     path
   end

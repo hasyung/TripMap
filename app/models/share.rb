@@ -17,7 +17,7 @@ class Share < ActiveRecord::Base
   with_options :presence=> true do |column|
     column.validates :map_id
     column.validates :account_id
-    column.validates :title, :length => { :within => 1..20,    :message => I18n.t("errors.type.name") }
+    column.validates :title, :length => { :within => 1..20}
   end
 
   # simple_enum plugin

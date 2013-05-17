@@ -41,7 +41,7 @@ class Admin::MapsController < Admin::ApplicationController
     if @map.destroy
       redirect_to admin_maps_path, :notice => t('messages.maps.success')
     else
-      redirect_to admin_maps_path, :notice => t('messages.maps.error')
+      redirect_to admin_maps_path, :alert => t('messages.maps.error')
     end
   end
 

@@ -63,7 +63,7 @@ class Api::V1::SharesController < Api::V1::ApplicationController
      (render :json => result; return) if params[:map_id].blank? || params[:title].blank? ||
                                          params[:image].blank? ||params[:text].blank?
     map = Map.find_by_id params[:map_id].to_i
-    account = Account.find{|a| a.email == params[:email]}
+    account = Account.find{|a| a.email == params[:email].downcase}
     if map.present?
       @share = map.shares.new
       @share.title = params[:title]
