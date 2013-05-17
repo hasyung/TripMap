@@ -1,5 +1,6 @@
 <%= simple_form_for [:admin, @model] do |p| %>
   <%= p.input :name %>
+  <%= p.input :slug %>
   <%= p.input :title %>
   <%= p.input :tag %>
   <%= p.input :city, collection: City.all, input_html: {onchange: "getcity()"}, prompt: t("helpers.links.select", :model_name => City.model_name.human) %>

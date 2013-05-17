@@ -13,6 +13,7 @@
         <tr>
           <th><input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" /></th>
           <th><%= model_class.human_attribute_name(:name) %></th>
+          <th><%= model_class.human_attribute_name(:slug) %></th>
           <th><%= model_class.human_attribute_name(:title) %></th>
           <th><%= model_class.human_attribute_name(:city) %></th>
           <th><%= model_class.human_attribute_name(:county) %></th>
@@ -26,6 +27,7 @@
         <tr>
           <td><%= check_box_tag "merchant_ids[]", p.id, false, id: "merchant_#{p.id}" %></td>
           <td><%= p.name %></td>
+          <td><%= p.slug %></td>
           <td><%= p.title %></td>
           <td><%= p.county.city.name %></td>
           <td><%= p.county.name %></td>

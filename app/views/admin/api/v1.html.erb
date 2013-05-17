@@ -7,7 +7,7 @@
 <div class="api-description">
   <blockquote>
     <p class="text-info">此API参考文档专为旅图项目服务（服务器端名TripMap），当前版本号为0.1.0，该API参考文档是稳定的。</p>
-    <small>最后更新时间 2013-04-13 19:45</small>
+    <small>最后更新时间 2013-05-17 16:15</small>
   </blockquote>
 </div>
 
@@ -32,6 +32,8 @@
     <li><a href="#feedback">提交意见反馈</a></li>
     <li><a href="#version">检测是否有最新版本</a></li>
     <li><a href="#download">统计下载次数</a></li>
+    <li><a href="#merchants">获取所有商家简略信息</a></li>
+    <li><a href="#merchant">获取单个商家详细信息</a></li>
   </ol>
 </div>
 <div class="api-content">
@@ -839,7 +841,7 @@
   </div>
 
   <div id="download" class="api well">
-    <h3 class="name">API17</h3>
+    <h3 class="name">API18</h3>
     <small class="desc">统计下载次数</small>
     <dl>
       <dt>URL</dt>
@@ -875,4 +877,63 @@
       <dd>
     </dl>
   </div>
+
+  <div class="api-content">
+  <div id="merchants" class="api well">
+    <h3 class="name">API19</h3>
+    <small class="desc">获取所有的商家信息，结果为JSON数据格式。</small>
+    <dl>
+      <dt>URL</dt>
+      <dd><pre class="docs-example"><%= api_v1_merchants_url(:format => :json) %></pre></dd>
+      <dt>HTTP请求方式</dt>
+      <dd>GET<dd>
+      <dt>支持格式</dt>
+      <dd>json<dd>
+      <dt>是否需要登录</dt>
+      <dd>否<dd>
+      <dt>请求参数</dt>
+      <dd>无<dd>
+    </dl>
+  </div>
+
+  <div id="merchant" class="api well">
+    <h3 class="name">API20</h3>
+    <small class="desc">获取单个商家详细信息</small>
+    <dl>
+      <dt>URL</dt>
+      <dd><pre class="docs-example"><%= api_v1_merchant_url(:merchant_id, :format => :json) %></pre></dd>
+      <dt>HTTP请求方式</dt>
+      <dd>GET<dd>
+      <dt>支持格式</dt>
+      <dd>json<dd>
+      <dt>是否需要登录</dt>
+      <dd>否<dd>
+      <dt>请求参数</dt>
+      <dd>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>名字</th>
+              <th>类型</th>
+              <th>类别</th>
+              <th>说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>merchant_id</td>
+              <td>整数</td>
+              <td>必选参数</td>
+              <td>商家编号</td>
+            </tr>
+          </tbody>
+        </table>
+      <dd>
+      <dt>例子</dt>
+      <dd><%= api_v1_merchant_url(:id => 1, :format => :json) %><dd>
+    </dl>
+  </div>
+
 </div>

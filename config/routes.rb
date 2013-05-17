@@ -153,6 +153,8 @@ TripMap::Application.routes.draw do
         get '/count' => 'downloads#count', :on => :collection
       end
 
+      resources :merchants, only: [:index, :show]
+
     end
   end
 

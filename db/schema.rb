@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130516072647) do
+ActiveRecord::Schema.define(:version => 20130517070637) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",                                :default => "", :null => false
@@ -213,6 +213,7 @@ ActiveRecord::Schema.define(:version => 20130516072647) do
     t.integer  "county_id",                 :null => false
     t.string   "title",       :limit => 20, :null => false
     t.string   "name",        :limit => 50, :null => false
+    t.string   "slug",        :limit => 20, :null => false
     t.string   "tag",         :limit => 50
     t.string   "address",     :limit => 50, :null => false
     t.string   "phone",       :limit => 12, :null => false
@@ -221,7 +222,7 @@ ActiveRecord::Schema.define(:version => 20130516072647) do
     t.datetime "updated_at",                :null => false
   end
 
-  add_index "merchants", ["county_id", "name", "address"], :name => "index_merchants_on_county_id_and_name_and_address", :unique => true
+  add_index "merchants", ["name"], :name => "index_merchants_on_name", :unique => true
 
   create_table "places", :force => true do |t|
     t.integer  "map_id",                                      :null => false

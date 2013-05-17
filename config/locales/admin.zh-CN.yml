@@ -439,6 +439,7 @@
         merchants_count: "商家数"
       merchant:
         name: "名称"
+        slug: "简码"
         title: "标题"
         tag: "简介"
         description: "描述"
@@ -620,6 +621,7 @@
     account:
       presence: "必填"
     type:
+      phone: "类型错误，只能为数字！"
       slug: "简码必须为小写字母！"
       name: "名字长度不能超过15个汉字！"
       big_image_file: "亲，你上传的文件超过了5MB！"
