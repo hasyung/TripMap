@@ -4,9 +4,24 @@
 		<title><%=t("admin.labels.weather_page_title")%></title>
 		<style type="text/css">
 			body { text-align: center; background: url(<%=@map_bg_image %>) no-repeat center; font-family: "微软雅黑"; color: white; width: 100%; margin: 0; }
+			.city-name { font-size: 26px; top: 0; display: inline-block; margin: 8px 0; }
+			.tmp { padding: 0; margin: 0; }
+			.tmp_value { font-size: 100px; }
+			.tmp_info { margin: -15px 0 20px 0; }
+			.tmp_info_detail { display:inline-block; width:200px; text-align:right; }
+			.fs28 { font-size: 28px; }
+			.fs14 { font-size: 14px; }
+			.wh80 { width: 80px; height: 80px; }
+			.wh40 { width: 40px; height: 40px; }
+			.wh14 { width: 14px; height: 14px; }
+			.grey { color: black; }
+			ul { padding: 0; margin: 0; width: 100%; }
+			ul > li { display: inline-block; background-color: rgba(242,242,242, 0.6); width: 24%; }
+			ul > li:first-child { border-radius: 8px 0 0 8px; }
+			ul > li:last-child { border-radius: 0 8px 8px 0; }
+			ul > li:only-child { border-radius: 8px; }
+			ul > li > div { text-align: right; }
 		</style>
-		<%= stylesheet_link_tag "admin/weather" %>
-		<%= csrf_meta_tags %>
 	</head>
 
 	<body>
