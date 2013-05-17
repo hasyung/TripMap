@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130513063129) do
+ActiveRecord::Schema.define(:version => 20130516022225) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",                                :default => "", :null => false
@@ -266,6 +266,15 @@ ActiveRecord::Schema.define(:version => 20130513063129) do
     t.datetime "updated_at",                              :null => false
   end
 
+  create_table "surround_cities", :force => true do |t|
+    t.integer  "map_id",                  :null => false
+    t.string   "city_name",  :limit => 5, :null => false
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+  end
+
+  add_index "surround_cities", ["city_name"], :name => "index_surround_cities_on_city_name", :unique => true
+
   create_table "texts", :force => true do |t|
     t.integer  "textable_id"
     t.string   "textable_type"
@@ -326,7 +335,8 @@ ActiveRecord::Schema.define(:version => 20130513063129) do
   add_index "videos", ["videoable_id", "videoable_type", "order", "video_type"], :name => "vvov_index", :unique => true
 
   create_table "weathers", :force => true do |t|
-    t.integer  "map_id",       :null => false
+    t.string   "weatherable_type"
+    t.integer  "weatherable_id"
     t.string   "tmp_current"
     t.string   "tmp_today"
     t.string   "tmp_desc"
@@ -334,8 +344,10 @@ ActiveRecord::Schema.define(:version => 20130513063129) do
     t.string   "tmp_pic_from"
     t.string   "tmp_pic_to"
     t.string   "tmp_humidity"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
+
+  add_index "weathers", ["weatherable_type", "weatherable_id"], :name => "index_weathers_on_weatherable_type_and_weatherable_id", :unique => true
 
 end

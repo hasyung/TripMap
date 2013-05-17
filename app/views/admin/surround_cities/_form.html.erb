@@ -1,0 +1,10 @@
+<%= simple_form_for [:admin, @surround_city] do |f| %>
+
+	<%= f.association :map, :collection => Map.all, :prompt => t("helpers.links.select", :model_name => Map.model_name.human) %>
+  <%= f.input :city_name %>
+
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn-primary' %>
+  </div>
+
+<% end %>

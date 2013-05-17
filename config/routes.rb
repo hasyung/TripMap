@@ -107,6 +107,9 @@ TripMap::Application.routes.draw do
     resources :feedbacks, only: [:index, :show]
 
     resources :versions
+
+    resources :weathers, only: [:index]
+    resources :surround_cities
   end
 
   namespace :api do
