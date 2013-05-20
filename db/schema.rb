@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130517070637) do
+ActiveRecord::Schema.define(:version => 20130520033905) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",                                :default => "", :null => false
@@ -91,6 +91,21 @@ ActiveRecord::Schema.define(:version => 20130517070637) do
     t.text     "body",       :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "devices", :force => true do |t|
+    t.string   "device_id",  :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "devices", ["device_id"], :name => "index_devices_on_device_id", :unique => true
+
+  create_table "devices_map_serial_numbers", :force => true do |t|
+    t.integer  "map_serial_number_id", :null => false
+    t.integer  "device_id",            :null => false
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
   end
 
   create_table "downloads", :force => true do |t|
