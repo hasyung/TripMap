@@ -34,6 +34,8 @@
     <li><a href="#download">统计下载次数</a></li>
     <li><a href="#merchants">获取所有商家简略信息</a></li>
     <li><a href="#merchant">获取单个商家详细信息</a></li>
+    <li><a href="#device">通过设备查看地图使用权限</a></li>
+    <li><a href="#device_validate">设备绑定序列号</a></li>
   </ol>
 </div>
 <div class="api-content">
@@ -934,6 +936,97 @@
       <dt>例子</dt>
       <dd><%= api_v1_merchant_url(:id => 1, :format => :json) %><dd>
     </dl>
+  </div>
+
+  <div id="device" class="api well">
+    <h3 class="name">API21</h3>
+    <small class="desc">通过设备查看地图使用权限</small>
+    <dl>
+      <dt>URL</dt>
+      <dd><pre class="docs-example"><%= api_v1_devices_url(:format => :json) %></pre></dd>
+      <dt>HTTP请求方式</dt>
+      <dd>GET<dd>
+      <dt>支持格式</dt>
+      <dd>json<dd>
+      <dt>是否需要登录</dt>
+      <dd>否<dd>
+      <dt>请求参数</dt>
+      <dd>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>名字</th>
+              <th>类型</th>
+              <th>类别</th>
+              <th>说明</th>
+            </tr>
+          </thead>
+          <tbody>
+           <tr>
+              <td>1</td>
+              <td>device_id</td>
+              <td>字符串</td>
+              <td>必选参数</td>
+              <td>用户设备ID</td>
+            </tr>
+          </tbody>
+        </table>
+        <dd>
+    </dl>
+     <p>结果：</p>
+     <p>maps: [map_ids] </p>
+  </div>
+
+  <div id="device_validate" class="api well">
+    <h3 class="name">API22</h3>
+    <small class="desc">设备绑定序列号</small>
+    <dl>
+      <dt>URL</dt>
+      <dd><pre class="docs-example"><%= validate_api_v1_devices_url(:format => :json) %></pre></dd>
+      <dt>HTTP请求方式</dt>
+      <dd>POST<dd>
+      <dt>支持格式</dt>
+      <dd>json<dd>
+      <dt>是否需要登录</dt>
+      <dd>否<dd>
+      <dt>请求参数</dt>
+      <dd>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>名字</th>
+              <th>类型</th>
+              <th>类别</th>
+              <th>说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>device_id</td>
+              <td>字符串</td>
+              <td>必选参数</td>
+              <td>用户设备ID</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>serial</td>
+              <td>字符串</td>
+              <td>必选参数</td>
+              <td>序列号</td>
+            </tr>
+          </tbody>
+        </table>
+        <dd>
+    </dl>
+     <p>结果：</p>
+     <p>result: "成功！" </p>
+      <p>result: "参数错误,请核对！" </p>
+      <p> result: "序列号错误,请核对！" </p>
+      <p> result: "序列号使用次数超过限制！" </p>
+      <p> result: "此地图已激活,无需重复激活！" </p>
   </div>
 
 </div>

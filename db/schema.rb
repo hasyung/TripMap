@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130520033905) do
+ActiveRecord::Schema.define(:version => 20130520104151) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",                                :default => "", :null => false
@@ -309,6 +309,17 @@ ActiveRecord::Schema.define(:version => 20130520033905) do
 
   add_index "scenics", ["name"], :name => "index_scenics_on_name", :unique => true
   add_index "scenics", ["slug"], :name => "index_scenics_on_slug", :unique => true
+
+  create_table "settings", :force => true do |t|
+    t.string   "var",                      :null => false
+    t.text     "value"
+    t.integer  "thing_id"
+    t.string   "thing_type", :limit => 30
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+  end
+
+  add_index "settings", ["thing_type", "thing_id", "var"], :name => "index_settings_on_thing_type_and_thing_id_and_var", :unique => true
 
   create_table "shares", :force => true do |t|
     t.integer  "map_id",                                  :null => false

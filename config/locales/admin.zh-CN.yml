@@ -53,6 +53,8 @@
       index: "设置"
     surround_city:
       index: "周边城市天气"
+    settings:
+      index: "设置"
 
   breadcrumbs:
     admin:
@@ -150,6 +152,8 @@
         index: "周边城市天气"
         new: "添加周边城市"
         edit: "编辑周边城市"
+      settings:
+        index: "设置"
 
   links:
     home:
@@ -267,6 +271,8 @@
       index: "周边城市"
       new: "添加周边城市"
       edit: "编辑周边城市"
+    settings:
+      index: "保存设置"
 
   messages:
     maps:
@@ -345,6 +351,8 @@
       sum: "序列号总数[%{sum}]小于您导出的数量！"
       export: "序列号已生成，请联系系统开发部人员获取！"
       purview: "抱歉，您没有查看序列号管理模块的权限！"
+    settings:
+      success: "设置成功！"
 
   activerecord:
     enums:
@@ -382,6 +390,7 @@
       version: "版本"
       feedback: "意见反馈"
       surround_city: "周边城市"
+      setting: "设置"
     attributes:
       map:
         province: "省市"
@@ -521,6 +530,9 @@
       surround_city:
         map: "所属地图"
         city_name: "城市名称"
+      setting:
+        page_size: "分页数"
+        serial_devices_size: "序列号绑定设备数"
 
   simple_form:
     labels:
