@@ -10,7 +10,10 @@ class ApplicationController < ActionController::Base
 
   def has_nil_value_in( keys = [] )
     has_nil = false
-    keys.each{|k| break if has_nil ||= params[k.to_sym].nil? }
+    keys.each do |k|
+      p = params[k.to_sym]
+      break if has_nil = p.nil? || p.blank?
+    end
     has_nil
   end
 

@@ -8,7 +8,8 @@ class Weather < ActiveRecord::Base
 
   # Validates
   with_options :presence => true do |column|
-    column.validates :weatherable_type, uniqueness: { scope: [:weatherable_type, :weatherable_id] }
+    column.validates :weatherable_type
+    column.validates :weatherable_id
   end
 
 end
