@@ -412,6 +412,4 @@ ActiveRecord::Schema.define(:version => 20130520104151) do
     t.datetime "updated_at",       :null => false
   end
 
-  add_index "weathers", ["weatherable_type", "weatherable_id"], :name => "index_weathers_on_weatherable_type_and_weatherable_id", :unique => true
-
 end

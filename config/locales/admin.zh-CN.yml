@@ -671,6 +671,9 @@
       text_empty: "内容不能为空！"
       order: "数字范围为1-999"
       duplicate_value: "该值已被使用！"
+    weather:
+      map_id: "参数错误！"
+      disabled: "当前天气不可用，请稍后再试！"
 
   enums:
     share:
