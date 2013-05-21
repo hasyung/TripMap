@@ -2,7 +2,7 @@ class Scenic < ActiveRecord::Base
 
   # White list
   attr_accessible :map, :map_id, :name, :slug, :subtitle, :is_free, :menu_type,
-                  :scenic_impression_attributes, :scenic_route_attributes, :scenic_icon_attributes,
+                  :scenic_impression_attributes, :scenic_route_attributes, :scenic_icon_attributes, :scenic_slug_icon_attributes,
                   :scenic_image_attributes, :scenic_description_attributes, :scenic_description_image_attributes
 
   # Associations
@@ -21,23 +21,25 @@ class Scenic < ActiveRecord::Base
   end
 
   with_options :as => :videoable, :class_name => "Video", :dependent => :destroy do |assoc|
-    assoc.has_one :scenic_impression, :conditions => { :video_type => Video.scenic_impression }
-    assoc.has_one :scenic_route,      :conditions => { :video_type => Video.scenic_route }
+    assoc.has_one :scenic_impression,         :conditions => { :video_type => Video.scenic_impression }
+    assoc.has_one :scenic_route,              :conditions => { :video_type => Video.scenic_route }
   end
 
   with_options :as => :imageable, :class_name => "Image", :dependent => :destroy do |assoc|
     assoc.has_one :scenic_icon,               :conditions => { :image_type => Image.scenic_icon}
+    assoc.has_one :scenic_slug_icon,          :conditions => { :image_type => Image.scenic_slug_icon }
     assoc.has_one :scenic_description_image,  :conditions => { :image_type => Image.scenic_description_image }
     assoc.has_one :scenic_image,              :conditions => { :image_type => Image.scenic_image }
-    assoc.has_many :scenic_slides,  :conditions => { :image_type => Image.scenic_slides  }
+    assoc.has_many :scenic_slides,            :conditions => { :image_type => Image.scenic_slides  }
   end
 
   # NestedAttributes
-  accepts_nested_attributes_for :scenic_impression,    reject_if: lambda { |i| (i[:file].blank? && i[:id].blank?) }, allow_destroy: true
-  accepts_nested_attributes_for :scenic_route,         reject_if: lambda { |r| (r[:file].blank? && r[:id].blank?) }, allow_destroy: true
-  accepts_nested_attributes_for :scenic_icon,          reject_if: lambda { |icon| icon[:file].blank? }, allow_destroy: true
-  accepts_nested_attributes_for :scenic_image,         reject_if: lambda { |image| image[:file].blank? }, allow_destroy: true
-  accepts_nested_attributes_for :scenic_description, allow_destroy: true
+  accepts_nested_attributes_for :scenic_impression,          reject_if: lambda { |i| (i[:file].blank? && i[:id].blank?) }, allow_destroy: true
+  accepts_nested_attributes_for :scenic_route,               reject_if: lambda { |r| (r[:file].blank? && r[:id].blank?) }, allow_destroy: true
+  accepts_nested_attributes_for :scenic_icon,                reject_if: lambda { |icon| icon[:file].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :scenic_slug_icon,           reject_if: lambda { |icon| icon[:file].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :scenic_image,               reject_if: lambda { |image| image[:file].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :scenic_description,         allow_destroy: true
   accepts_nested_attributes_for :scenic_description_image,   reject_if: lambda { |di| di[:file].blank? }, allow_destroy: true
 
   # Scopes

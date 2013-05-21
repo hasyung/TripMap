@@ -99,7 +99,12 @@ class Map < ActiveRecord::Base
   def get_info_lists()
     ret = []
     self.info_lists.order_asc.each do |info_list|
-      r, tmp_infos = { info_list_slug: info_list.slug, info_list_is_free: info_list.is_free.to_s }, []
+      r = {
+        info_list_slug:       info_list.slug,
+        info_list_is_free:    info_list.is_free.to_s,
+        slug_icon:            get_file_value(info_list.infolist_slug_icon, "file", true),
+      }
+      tmp_infos = []
       info_list.infos.order_asc.each do |o|
         tmp_infos << { name: o.name, slug: o.slug, is_free: o.is_free.to_s, description: get_file_value(o.letter, "body")}
       end
@@ -118,6 +123,7 @@ class Map < ActiveRecord::Base
       subtitle:               place.subtitle,
       slug:                   place.slug,
       icon:                   get_file_value(place.place_icon, "file", true),
+      slug_icon:              get_file_value(place.place_slug_icon, "file", true),
       image:                  get_file_value(place.place_image, "file", true),
       audio:                  get_file_value(place.place_audio, "file", true),
       audio_size:             get_file_value(place.place_audio, "file_size"),
@@ -145,6 +151,7 @@ class Map < ActiveRecord::Base
       subtitle:               scenic.subtitle,
       slug:                   scenic.slug,
       icon:                   get_file_value(scenic.scenic_icon, "file", true),
+      slug_icon:              get_file_value(scenic.scenic_slug_icon, "file", true),
       image:                  get_file_value(scenic.scenic_image, "file", true),
       impression:             get_file_value(scenic.scenic_impression, "file", true),
       impression_size:        get_file_value(scenic.scenic_impression, "file_size"),
@@ -229,6 +236,7 @@ class Map < ActiveRecord::Base
       is_free:                recommend.is_free.to_s,
       menu_type:              recommend.menu_type,
       category:               recommend.category_cd,
+      slug_icon:              get_file_value(recommend.recommend_slug_icon, "file", true),
       video:                  get_file_value(recommend.recommend_video,"file",true),
       video_size:             get_file_value(recommend.recommend_video,"file_size",false),
       video_duration:         get_file_value(recommend.recommend_video,"duration",false),

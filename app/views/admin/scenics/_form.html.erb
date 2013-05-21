@@ -20,6 +20,18 @@
     <% end %>
   <% end %>
 
+  <%= s.fields_for :scenic_slug_icon,
+                 @model.scenic_slug_icon ||= @model.build_scenic_slug_icon do |sicon| %>
+  <%= sicon.input :file, as: :file %>
+    <% if @model.scenic_slug_icon && @model.scenic_slug_icon.file.present? %>
+      <div class="control-group image">
+        <div class="controls">
+          <%= image_tag @model.scenic_slug_icon.file %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+
   <%= s.fields_for :scenic_image,
                    @model.scenic_image ||= @model.build_scenic_image do |simage| %>
     <%= simage.input :file, as: :file %>
