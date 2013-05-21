@@ -37,9 +37,8 @@ class Admin::MerchantsController < Admin::ApplicationController
     @model = Merchant.find params[:id]
     if params[:type] == "true"
       @city = City.find params[:merchant][:city].to_i if params[:merchant][:city].to_i != 0
-      @images = Merchant.find(params[:id]).merchant_slides.order_asc
+      @images = @model.merchant_slides.order_asc
       render :edit
-      @model = Merchant.new params[:merchant]
     else
       if @model.update_attributes params[:merchant]
         redirect_to admin_merchants_path, notice: t('messages.merchants.success')
