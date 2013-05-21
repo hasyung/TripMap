@@ -1,4 +1,2 @@
-class Setting < Settingslogic
-  source "#{Rails.root}/config/config.yml"
-  namespace Rails.env
+class Setting < RailsSettings::CachedSettings
 end

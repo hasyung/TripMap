@@ -36,6 +36,10 @@ TripMap::Application.routes.draw do
 
     end
 
+    resources :settings, :only => [] do
+      match "/" => "settings#index", on: :collection, via: [:get, :post]
+    end
+
     resources :recommends do
       resources :recommend_records,
                 path: 'records',:as => "records" do
@@ -157,6 +161,10 @@ TripMap::Application.routes.draw do
       end
 
       resources :merchants, only: [:index, :show]
+
+      resources :devices, only: [:index] do
+        post '/validate' => 'devices#validate', :on => :collection
+      end
 
     end
   end
