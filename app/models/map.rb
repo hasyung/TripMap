@@ -2,7 +2,7 @@ class Map < ActiveRecord::Base
  include SerialNumber::Generate
 
   #White list
-  attr_accessible :province, :province_id, :name, :slug, :version,
+  attr_accessible :province, :province_id, :name, :map_slug_attributes, :version,
                   :map_description_attributes, :map_cover_attributes, :map_plat_attributes, :map_weather_bg_image_attributes
 
   # Associations
@@ -24,9 +24,13 @@ class Map < ActiveRecord::Base
     assoc.has_many :map_slides,           :conditions => { :image_type => Image.map_slides  }
   end
 
-  has_one :map_description, :as => :textable, :class_name => 'Letter', 
-          :conditions => { :text_type => Letter.map_description },
-          :dependent => :destroy
+  with_options :as => :textable, :class_name => "Letter", :dependent => :destroy do |assoc|
+    assoc.has_one :map_description,       :conditions => { :text_type => Letter.map_description }
+  end
+
+  with_options :as => :keywordable, :class_name => "Keyword", :dependent => :destroy do |assoc|
+    assoc.has_one :map_slug,              :conditions => { :keyword_type => Keyword.map_slug }
+  end
 
   belongs_to :province, :counter_cache => true
   belongs_to :active_map
@@ -35,16 +39,16 @@ class Map < ActiveRecord::Base
   with_options :presence => true do |column|
     column.validates :province_id
     column.validates :name, :length => { :within => 1..20,    :message => I18n.t("errors.type.name") }, :uniqueness => true
-    column.validates :slug, :length => { :within => 1..20 },  :format => { :with => /^[a-z]+$/, :message => I18n.t("errors.type.slug") }, :uniqueness => true
   end
 
   #validate :require_map_cover_attributes
 
   # NestedAttributes
-  accepts_nested_attributes_for :map_cover, reject_if: lambda { |img| img[:file].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :map_plat, reject_if: lambda { |img| img[:file].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :map_weather_bg_image, reject_if: lambda { |img| img[:file].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :map_description, :allow_destroy => true
+  accepts_nested_attributes_for :map_cover,             reject_if: lambda { |img| img[:file].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :map_plat,              reject_if: lambda { |img| img[:file].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :map_weather_bg_image,  reject_if: lambda { |img| img[:file].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :map_description,       :allow_destroy => true
+  accepts_nested_attributes_for :map_slug,              :allow_destroy => true
 
   # Scopes
   scope :created_desc, order("created_at DESC")
@@ -106,7 +110,7 @@ class Map < ActiveRecord::Base
       }
       tmp_infos = []
       info_list.infos.order_asc.each do |o|
-        tmp_infos << { name: o.name, slug: o.slug, is_free: o.is_free.to_s, description: get_file_value(o.letter, "body")}
+        tmp_infos << { name: o.name, slug: o.info_slug.slug, is_free: o.is_free.to_s, description: get_file_value(o.letter, "body")}
       end
       r["infos"] = tmp_infos
       ret << r
@@ -121,7 +125,7 @@ class Map < ActiveRecord::Base
       is_free:                place.is_free.to_s,
       menu_type:              place.menu_type,
       subtitle:               place.subtitle,
-      slug:                   place.slug,
+      slug:                   place.place_slug.slug,
       icon:                   get_file_value(place.place_icon, "file", true),
       slug_icon:              get_file_value(place.place_slug_icon, "file", true),
       image:                  get_file_value(place.place_image, "file", true),
@@ -149,7 +153,7 @@ class Map < ActiveRecord::Base
       is_free:                scenic.is_free.to_s,
       menu_type:              scenic.menu_type,
       subtitle:               scenic.subtitle,
-      slug:                   scenic.slug,
+      slug:                   scenic.scenic_slug.slug,
       icon:                   get_file_value(scenic.scenic_icon, "file", true),
       slug_icon:              get_file_value(scenic.scenic_slug_icon, "file", true),
       image:                  get_file_value(scenic.scenic_image, "file", true),
@@ -232,7 +236,7 @@ class Map < ActiveRecord::Base
 
     {
       name:                   recommend.name,
-      slug:                   recommend.slug,
+      slug:                   recommend.recommend_slug.slug,
       is_free:                recommend.is_free.to_s,
       menu_type:              recommend.menu_type,
       category:               recommend.category_cd,

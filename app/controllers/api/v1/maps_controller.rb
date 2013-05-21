@@ -12,7 +12,7 @@ class Api::V1::MapsController < Api::V1::ApplicationController
     result = []
     Map.all.each do |map|
       result << {
-        :id => map.id, :name => map.name, :slug => map.slug, 
+        :id => map.id, :name => map.name, :slug => map.map_slug.slug,
         :version => map.version, :cover => map.map_cover.file.url,
         :serial => serials
       }

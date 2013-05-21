@@ -395,7 +395,7 @@
       map:
         province: "省市"
         name: "名称"
-        slug: "简码"
+        map_slug: "简码"
         version: "版本"
         scenics_count: "景区数"
         places_count: "景点数"
@@ -407,7 +407,7 @@
         maps_count: "地图数"
       place:
         name: "名称"
-        slug: "简码"
+        place_slug: "简码"
         subtitle: "副标题"
         map: "地图"
         province: "省市"
@@ -415,7 +415,7 @@
         menu_type: "菜单标注"
       scenic:
         name: "名称"
-        slug: "简码"
+        scenic_slug: "简码"
         subtitle: "副标题"
         map: "地图"
         province: "省市"
@@ -423,7 +423,7 @@
         menu_type: "菜单标注"
       recommend:
         name: "名称"
-        slug: "简码"
+        recommend_slug: "简码"
         map: "地图"
         province: "省市"
         category_cd: "类型"
@@ -467,7 +467,7 @@
         merchants_count: "商家数"
       merchant:
         name: "名称"
-        slug: "简码"
+        merchant_slug: "简码"
         title: "标题"
         tag: "简介"
         description: "描述"
@@ -478,14 +478,14 @@
       info_list:
         map: "地图"
         name: "名称"
-        slug: "简码"
+        info_list_slug: "简码"
         order: "排序"
         infos_count: "子信息条数"
         is_free: "免费"
       info:
         info_list: "信息列表"
         name: "名称"
-        slug: "简码"
+        info_slug: "简码"
         order: "排序"
         letter: "内容"
         is_free: "免费"
@@ -533,6 +533,8 @@
       setting:
         page_size: "分页数"
         serial_devices_size: "序列号绑定设备数"
+      keyword:
+        slug: "简码"
 
   simple_form:
     labels:
@@ -632,6 +634,8 @@
         slug: "信息列表名简码（小写）"
         order: "信息列表顺序值（<b>选填</b>）"
         map: "地图"
+        infolist_slug_icon:
+          file: "带简码小图"
       info:
         order: "信息记录顺序值（<b>选填</b>）"
       surround_city:

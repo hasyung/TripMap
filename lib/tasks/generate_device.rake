@@ -9,12 +9,13 @@ namespace :device do
     ActivateMap.all.each do |activate|
       d = Device.new device_id: activate.device_id, created_at: activate.created_at
       activate.accounts.each do |a|
-        break if d.map_serial_numbers.count > 0
-        d.map_serial_numbers << a.map_serial_number if a.map_serial_number.present?
+        d.map_serial_numbers << a.map_serial_number if a.map_serial_number.present? &&
+                                                      d.map_serial_numbers.count = 0
       end
       d.save
     end
     puts "========迁移结束========"
-    
+
   end
+
 end
