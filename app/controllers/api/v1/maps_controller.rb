@@ -1,10 +1,18 @@
 class Api::V1::MapsController < Api::V1::ApplicationController
 
   def index
+    fields = ['device_id']
+    ( render :json => set_error_msg("errors.api.maps.device_id"); return ) if has_nil_value_in fields
+
     result = []
     Map.all.each do |map|
-      result << { :id => map.id, :name => map.name, :slug => map.slug, :version => map.version }
+      result << {
+        :id => map.id, :name => map.name, :slug => map.slug, 
+        :version => map.version, :cover => map.map_cover.file.url,
+        :serial => ""
+      }
     end
+
     render :json => result
   end
 

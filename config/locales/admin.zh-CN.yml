@@ -646,6 +646,9 @@
       truncate: ""
 
   errors:
+    api:
+      maps:
+        device_id: "设备ID错误！"
     account:
       presence: "必填"
     type:
