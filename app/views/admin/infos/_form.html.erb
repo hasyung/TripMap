@@ -1,7 +1,9 @@
 <%= simple_form_for [:admin, :info_list, @info] do |f| %>
 
   <%= f.input :name %>
-  <%= f.input :slug %>
+  <%= f.fields_for :info_slug, @info.info_slug ||= @info.build_info_slug do |s|  %>  
+    <%= s.input :slug, :input_html => { :class => "span-full" } %>
+  <% end %>
   <%= f.input :is_free %>
   <%= f.input :order %>
   <%= f.association :info_list, :collection => InfoList.all, :prompt => t("helpers.links.select", :model_name => InfoList.model_name.human) %>

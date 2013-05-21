@@ -133,6 +133,8 @@ GEM
       railties (= 3.2.12)
     rails-i18n (0.7.1)
       i18n (~> 0.5)
+    rails-settings-cached (0.2.2)
+      rails (>= 3.0.0)
     railties (3.2.12)
       actionpack (= 3.2.12)
       activesupport (= 3.2.12)
@@ -166,7 +168,6 @@ GEM
       multi_json (~> 1.0)
       rubyzip
       websocket (~> 1.0.4)
-    settingslogic (2.0.8)
     simple_enum (1.6.4)
       activesupport (>= 3.0.0)
     simple_form (2.0.4)
@@ -242,9 +243,9 @@ DEPENDENCIES
   quiet_assets
   rails (= 3.2.12)
   rails-i18n
+  rails-settings-cached
   rspec-rails
   sass-rails (~> 3.2.3)
-  settingslogic
   simple_enum
   simple_form
   simplecov

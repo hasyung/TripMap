@@ -15,7 +15,7 @@
         <tr>
           <th><input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" /></th>
           <th><%= model_class.human_attribute_name(:name) %></th>
-          <th><%= model_class.human_attribute_name(:slug) %></th>
+          <th><%= model_class.human_attribute_name(:info_list_slug) %></th>
           <th><%= model_class.human_attribute_name(:map) %></th>
           <th><%= model_class.human_attribute_name(:infos_count) %></th>
           <th><%= model_class.human_attribute_name(:order) %></th>
@@ -29,7 +29,7 @@
           <tr>
             <td><%= check_box_tag "info_list_ids[]", e.id, false, :id => "info_list_#{e.id}" %></td>
             <td><%= link_to e.name, admin_info_list_infos_path(e) %></td>
-            <td><%= e.slug %></td>
+            <td><%= e.info_list_slug.slug %></td>
             <td><%= e.map.name %></td>
             <td><%= e.infos_count %></td>
             <td><%= e.order %></td>

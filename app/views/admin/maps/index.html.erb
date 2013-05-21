@@ -12,7 +12,7 @@
           <th><input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" /></th>
           <th><%= model_class.human_attribute_name(:name) %></th>
           <th><%= model_class.human_attribute_name(:province) %></th>
-          <th><%= model_class.human_attribute_name(:slug) %></th>
+          <th><%= model_class.human_attribute_name(:map_slug) %></th>
           <th><%= model_class.human_attribute_name(:version) %></th>
           <th><%= model_class.human_attribute_name(:scenics_count) %></th>
           <th><%= model_class.human_attribute_name(:places_count) %></th>
@@ -28,7 +28,7 @@
             <td><%= check_box_tag "map_ids[]", map.id, false, :id => "map_#{map.id}" %></td>
             <td><%= map.name %></td>
             <td><%= map.province.name %></td>
-            <td><%= map.slug %></td>
+            <td><%= map.map_slug.slug %></td>
             <td><%= map.version %></td>
             <td><%= map.scenics_count %></td>
             <td><%= map.places_count %></td>

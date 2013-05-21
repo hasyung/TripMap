@@ -1,6 +1,8 @@
 <%= simple_form_for [:admin, @recommend], html: { class: 'form-horizontal' } do |r| %>
   <%= r.input :name %>
-  <%= r.input :slug %>
+ <%= r.fields_for :recommend_slug, @recommend.recommend_slug ||= @recommend.build_recommend_slug do |s|  %>  
+    <%= s.input :slug, :input_html => { :class => "span-full" } %>
+  <% end %>
   <%= r.input :is_free %>
   <%= r.input :menu_type %>
   <%= r.association :map, collection: Map.all, 
@@ -15,6 +17,17 @@
       <div class="control-group image">
         <div class="controls">
           <%= image_tag @recommend.recommend_cover.file %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+
+	<%= r.fields_for :recommend_slug_icon, @recommend.recommend_slug_icon ||= @recommend.build_recommend_slug_icon do |ricon| %>
+  	<%= ricon.input :file, as: :file %>
+    <% if @recommend.recommend_slug_icon && @recommend.recommend_slug_icon.file.present? %>
+      <div class="control-group image">
+        <div class="controls">
+          <%= image_tag @recommend.recommend_slug_icon.file %>
         </div>
       </div>
     <% end %>

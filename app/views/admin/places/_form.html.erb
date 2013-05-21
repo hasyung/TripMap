@@ -1,6 +1,8 @@
 <%= simple_form_for [:admin,@model], html: { class: 'form-horizontal' } do |p| %>
   <%= p.input :name %>
-  <%= p.input :slug %>
+ <%= p.fields_for :place_slug, @model.place_slug ||= @model.build_place_slug do |s|  %>  
+    <%= s.input :slug, :input_html => { :class => "span-full" } %>
+  <% end %>
   <%= p.input :is_free %>
   <%= p.input :menu_type %>
   <%= p.input :subtitle %>
@@ -14,6 +16,17 @@
             <%= image_tag @model.place_icon.file %>
           </div>
         </div>
+    <% end %>
+  <% end %>
+
+  <%= p.fields_for :place_slug_icon, @model.place_slug_icon ||= @model.build_place_slug_icon do |picon| %>
+  <%= picon.input :file, as: :file %>
+    <% if @model.place_slug_icon && @model.place_slug_icon.file.present? %>
+      <div class="control-group image">
+        <div class="controls">
+          <%= image_tag @model.place_slug_icon.file %>
+        </div>
+      </div>
     <% end %>
   <% end %>
 

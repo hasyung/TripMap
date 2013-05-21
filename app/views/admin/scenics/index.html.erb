@@ -13,7 +13,7 @@
         <tr>
           <th><input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" /></th>
           <th><%= model_class.human_attribute_name(:name) %></th>
-          <th><%= model_class.human_attribute_name(:slug) %></th>
+          <th><%= model_class.human_attribute_name(:scenic_slug) %></th>
           <th><%= model_class.human_attribute_name(:province) %></th>
           <th><%= model_class.human_attribute_name(:map) %></th>
           <th><%= model_class.human_attribute_name(:is_free) %></th>
@@ -31,7 +31,7 @@
             <%= check_box_tag "scenics_ids[]", s.id, false, id: "scenics_#{s.id}" %>
           </td>
           <td><%= s.name %></td>
-          <td><%= s.slug %></td>
+          <td><%= s.scenic_slug.slug %></td>
           <td><%= s.map.province.name %></td>
           <td><%= s.map.name %></td>
           <td><%= s.is_free %></td>

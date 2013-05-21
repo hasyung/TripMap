@@ -1,6 +1,8 @@
 <%= simple_form_for [:admin, @model] do |p| %>
   <%= p.input :name %>
-  <%= p.input :slug %>
+  <%= p.fields_for :merchant_slug, @model.merchant_slug ||= @model.build_merchant_slug do |s|  %>  
+    <%= s.input :slug, :input_html => { :class => "span-full" } %>
+  <% end %>
   <%= p.input :title %>
   <%= p.input :tag %>
   <%= p.input :city, collection: City.all, input_html: {onchange: "getcity()"}, prompt: t("helpers.links.select", :model_name => City.model_name.human) %>
