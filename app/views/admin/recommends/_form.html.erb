@@ -1,6 +1,8 @@
 <%= simple_form_for [:admin, @recommend], html: { class: 'form-horizontal' } do |r| %>
   <%= r.input :name %>
-  <%= r.input :slug %>
+ <%= r.fields_for :recommend_slug, @recommend.recommend_slug ||= @recommend.build_recommend_slug do |s|  %>  
+    <%= s.input :slug, :input_html => { :class => "span-full" } %>
+  <% end %>
   <%= r.input :is_free %>
   <%= r.input :menu_type %>
   <%= r.association :map, collection: Map.all, 

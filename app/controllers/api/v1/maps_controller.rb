@@ -3,7 +3,7 @@ class Api::V1::MapsController < Api::V1::ApplicationController
   def index
     result = []
     Map.all.each do |map|
-      result << { :id => map.id, :name => map.name, :slug => map.slug, :version => map.version }
+      result << { :id => map.id, :name => map.name, :slug => map.map_slug.slug, :version => map.version }
     end
     render :json => result
   end

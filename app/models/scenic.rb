@@ -1,7 +1,7 @@
 class Scenic < ActiveRecord::Base
 
   # White list
-  attr_accessible :map, :map_id, :name, :slug, :subtitle, :is_free, :menu_type,
+  attr_accessible :map, :map_id, :name, :scenic_slug_attributes, :subtitle, :is_free, :menu_type,
                   :scenic_impression_attributes, :scenic_route_attributes, :scenic_icon_attributes,
                   :scenic_image_attributes, :scenic_description_attributes, :scenic_description_image_attributes
 
@@ -9,13 +9,15 @@ class Scenic < ActiveRecord::Base
   has_one :scenic_description, :as => :textable, :class_name => "Letter",
           :conditions => { :text_type => Letter.scenic_description },
           :dependent => :destroy
+has_one :scenic_slug, :as => :keywordable, :class_name => 'Keyword', 
+          :conditions => { :keyword_type => Keyword.scenic_slug },
+          :dependent => :destroy
 
   belongs_to :map, :counter_cache => true
 
   # Validates
   with_options :presence => true do |column|
     column.validates :name, :length => { :within => 2..20 }, :uniqueness => true
-    column.validates :slug, :length => { :within => 2..20 }, :format => { :with => /^[a-z]+$/, :message => I18n.t("errors.type.slug") }, :uniqueness => true
     column.validates :map_id
     column.validates :subtitle, :length => { :within => 2..30 }
   end
@@ -39,6 +41,7 @@ class Scenic < ActiveRecord::Base
   accepts_nested_attributes_for :scenic_image,         reject_if: lambda { |image| image[:file].blank? }, allow_destroy: true
   accepts_nested_attributes_for :scenic_description, allow_destroy: true
   accepts_nested_attributes_for :scenic_description_image,   reject_if: lambda { |di| di[:file].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :scenic_slug, allow_destroy: true
 
   # Scopes
   scope :created_desc, order("`created_at` DESC")

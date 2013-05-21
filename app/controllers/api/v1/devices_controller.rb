@@ -39,6 +39,6 @@ class Api::V1::DevicesController < Api::V1::ApplicationController
     serials.each do |serial|
       maps << serial.map_id
     end
-    maps
+    maps.uniq
   end
 end

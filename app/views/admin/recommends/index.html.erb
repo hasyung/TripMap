@@ -13,7 +13,7 @@
             <input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" />
           </th>
           <th><%= model_class.human_attribute_name(:name) %></th>
-          <th><%= model_class.human_attribute_name(:slug) %></th>
+          <th><%= model_class.human_attribute_name(:recommend_slug) %></th>
           <th><%= model_class.human_attribute_name(:province) %></th>
           <th><%= model_class.human_attribute_name(:map) %></th>
           <th><%= model_class.human_attribute_name(:category_cd) %></th>
@@ -30,7 +30,7 @@
             <td>
               <%= link_to r.name, admin_recommend_records_path(r) %>
             </td>
-            <td><%= r.slug %></td>
+            <td><%= r.recommend_slug.slug %></td>
             <td><%= r.map.province.name %></td>
             <td><%= r.map.name %></td>
             <td><%= t("enums.recommend.categories.#{model_class.categories.key(r.category_cd)}") %></td>
