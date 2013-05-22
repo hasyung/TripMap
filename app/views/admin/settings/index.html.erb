@@ -5,7 +5,7 @@
     <h5><%= t('activerecord.models.setting') %></h5>
   </div>
   <div class="box-content no-padding">
-    <form accept-charset="UTF-8" action="/admin/settings" class="simple_form settings" id="settings" method="post" novalidate="novalidate"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="hvlzaH41ImgXOHkpdA9uBt78+oMaHixHLQjuEUxkvyI=" /></div>
+    <form accept-charset="UTF-8" action="/admin/settings" class="simple_form settings" id="settings" method="post" novalidate="novalidate"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" /></div>
       <div class="control-group string required"><label class="string required control-label" for="page_size"><abbr title="required">*</abbr> <%= t("activerecord.attributes.setting.page_size") %></label><div class="controls"><input class="string required" id="page_size" name="page_size" size="20" type="text" value="<%= Setting.page_size %>"/></div></div>
       <div class="control-group string required"><label class="string required control-label" for="serial_devices_size"><abbr title="required">*</abbr> <%= t("activerecord.attributes.setting.serial_devices_size") %></label><div class="controls"><input class="string required" id="serial_devices_size" name="serial_devices_size" size="20" type="text" value="<%= Setting.serial_devices_size %>"/></div></div>
       <div class="form-actions">
