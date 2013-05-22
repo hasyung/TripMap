@@ -4,7 +4,6 @@ require "action_controller/railtie"
 require "action_mailer/railtie"
 require "active_resource/railtie"
 require "sprockets/railtie"
-#exporting cvs
 require 'csv'
 require 'rails/all'
 
@@ -37,6 +36,8 @@ module TripMap
     config.assets.version = '1.0'
 
     config.cache_store = :memory_store
+
+    config.middleware.use Rack::ContentLength
   end
 end
 
