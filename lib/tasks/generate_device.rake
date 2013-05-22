@@ -15,6 +15,7 @@ namespace :device do
       d.save
     end
     puts "========迁移结束========"
-    
+
   end
+
 end

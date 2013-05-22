@@ -1,8 +1,21 @@
 <%= simple_form_for [:admin, @info_list] do |f| %>
   <%= f.input :name %>
+
+	<%= f.fields_for :infolist_slug_icon, @info_list.infolist_slug_icon ||= @info_list.build_infolist_slug_icon do |slug_icon| %>
+	<%= slug_icon.input :file, as: :file %>
+  <% if @info_list.infolist_slug_icon && @info_list.infolist_slug_icon.file.present? %>
+    <div class="control-group image">
+      <div class="controls">
+        <%= image_tag @info_list.infolist_slug_icon.file %>
+      </div>
+    </div>
+  <% end %>
+	<% end %>
+
   <%= f.fields_for :info_list_slug, @info_list.info_list_slug ||= @info_list.build_info_list_slug do |s|  %>  
     <%= s.input :slug, :input_html => { :class => "span-full" } %>
   <% end %>
+
   <%= f.input :is_free %>
   <%= f.input :order %>
   <%= f.association :map, :collection => Map.all, :prompt => t("helpers.links.select", :model_name => Map.model_name.human) %>

@@ -24,12 +24,13 @@ class Map < ActiveRecord::Base
     assoc.has_many :map_slides,           :conditions => { :image_type => Image.map_slides  }
   end
 
-  has_one :map_description, :as => :textable, :class_name => 'Letter', 
-          :conditions => { :text_type => Letter.map_description },
-          :dependent => :destroy
-  has_one :map_slug, :as => :keywordable, :class_name => 'Keyword', 
-          :conditions => { :keyword_type => Keyword.map_slug },
-          :dependent => :destroy
+  with_options :as => :textable, :class_name => "Letter", :dependent => :destroy do |assoc|
+    assoc.has_one :map_description,       :conditions => { :text_type => Letter.map_description }
+  end
+
+  with_options :as => :keywordable, :class_name => "Keyword", :dependent => :destroy do |assoc|
+    assoc.has_one :map_slug,              :conditions => { :keyword_type => Keyword.map_slug }
+  end
 
   belongs_to :province, :counter_cache => true
   belongs_to :active_map
@@ -43,11 +44,11 @@ class Map < ActiveRecord::Base
   #validate :require_map_cover_attributes
 
   # NestedAttributes
-  accepts_nested_attributes_for :map_cover, reject_if: lambda { |img| img[:file].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :map_plat, reject_if: lambda { |img| img[:file].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :map_weather_bg_image, reject_if: lambda { |img| img[:file].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :map_description, :allow_destroy => true
-  accepts_nested_attributes_for :map_slug, :allow_destroy => true
+  accepts_nested_attributes_for :map_cover,             reject_if: lambda { |img| img[:file].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :map_plat,              reject_if: lambda { |img| img[:file].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :map_weather_bg_image,  reject_if: lambda { |img| img[:file].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :map_description,       :allow_destroy => true
+  accepts_nested_attributes_for :map_slug,              :allow_destroy => true
 
   # Scopes
   scope :created_desc, order("created_at DESC")
@@ -102,7 +103,12 @@ class Map < ActiveRecord::Base
   def get_info_lists()
     ret = []
     self.info_lists.order_asc.each do |info_list|
-      r, tmp_infos = { info_list_slug: info_list.info_list_slug.slug, info_list_is_free: info_list.is_free.to_s }, []
+      r = {
+        info_list_slug:       info_list.slug,
+        info_list_is_free:    info_list.is_free.to_s,
+        slug_icon:            get_file_value(info_list.infolist_slug_icon, "file", true),
+      }
+      tmp_infos = []
       info_list.infos.order_asc.each do |o|
         tmp_infos << { name: o.name, slug: o.info_slug.slug, is_free: o.is_free.to_s, description: get_file_value(o.letter, "body")}
       end
@@ -121,6 +127,7 @@ class Map < ActiveRecord::Base
       subtitle:               place.subtitle,
       slug:                   place.place_slug.slug,
       icon:                   get_file_value(place.place_icon, "file", true),
+      slug_icon:              get_file_value(place.place_slug_icon, "file", true),
       image:                  get_file_value(place.place_image, "file", true),
       audio:                  get_file_value(place.place_audio, "file", true),
       audio_size:             get_file_value(place.place_audio, "file_size"),
@@ -148,6 +155,7 @@ class Map < ActiveRecord::Base
       subtitle:               scenic.subtitle,
       slug:                   scenic.scenic_slug.slug,
       icon:                   get_file_value(scenic.scenic_icon, "file", true),
+      slug_icon:              get_file_value(scenic.scenic_slug_icon, "file", true),
       image:                  get_file_value(scenic.scenic_image, "file", true),
       impression:             get_file_value(scenic.scenic_impression, "file", true),
       impression_size:        get_file_value(scenic.scenic_impression, "file_size"),
@@ -232,6 +240,7 @@ class Map < ActiveRecord::Base
       is_free:                recommend.is_free.to_s,
       menu_type:              recommend.menu_type,
       category:               recommend.category_cd,
+      slug_icon:              get_file_value(recommend.recommend_slug_icon, "file", true),
       video:                  get_file_value(recommend.recommend_video,"file",true),
       video_size:             get_file_value(recommend.recommend_video,"file_size",false),
       video_duration:         get_file_value(recommend.recommend_video,"duration",false),

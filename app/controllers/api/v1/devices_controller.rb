@@ -40,5 +40,6 @@ class Api::V1::DevicesController < Api::V1::ApplicationController
       maps << serial.map_id
     end
     maps.uniq
+
   end
 end

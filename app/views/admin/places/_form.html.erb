@@ -19,6 +19,17 @@
     <% end %>
   <% end %>
 
+  <%= p.fields_for :place_slug_icon, @model.place_slug_icon ||= @model.build_place_slug_icon do |picon| %>
+  <%= picon.input :file, as: :file %>
+    <% if @model.place_slug_icon && @model.place_slug_icon.file.present? %>
+      <div class="control-group image">
+        <div class="controls">
+          <%= image_tag @model.place_slug_icon.file %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+
   <%= p.fields_for :place_image, @model.place_image ||= @model.build_place_image do |pimg|  %>  
     <%= pimg.input :file, :as => :file %>
     <% if @model.place_image && @model.place_image.file.present? %>

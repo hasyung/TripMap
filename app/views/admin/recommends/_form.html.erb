@@ -22,6 +22,17 @@
     <% end %>
   <% end %>
 
+	<%= r.fields_for :recommend_slug_icon, @recommend.recommend_slug_icon ||= @recommend.build_recommend_slug_icon do |ricon| %>
+  	<%= ricon.input :file, as: :file %>
+    <% if @recommend.recommend_slug_icon && @recommend.recommend_slug_icon.file.present? %>
+      <div class="control-group image">
+        <div class="controls">
+          <%= image_tag @recommend.recommend_slug_icon.file %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+
   <%= r.fields_for :recommend_video, @recommend.recommend_video ||= @recommend.build_recommend_video do |v| %>
     <%= v.input :file, as: :file %>
     <%= v.input :cover, as: :file %>

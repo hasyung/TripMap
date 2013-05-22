@@ -2,15 +2,21 @@ class InfoList < ActiveRecord::Base
   include ActiveModel::Validations
 
   # White list
-  attr_accessible :map_id, :name, :info_list_slug_attributes, :order, :is_free
+  attr_accessible :map_id, :name, :slug, :order, :is_free,
+                  :infolist_slug_icon_attributes, :info_list_slug_attributes
 
   # Associations
+  with_options :as => :imageable, :class_name => "Image", :dependent => :destroy do |assoc|
+    assoc.has_one :infolist_slug_icon,  :conditions => { :image_type => Image.infolist_slug_icon }
+  end
+
+  with_options :as => :keywordable, :class_name => 'Keyword', :dependent => :destroy do |assoc|
+    assoc.has_one :info_list_slug,      :conditions => { :keyword_type => Keyword.info_list_slug }
+  end
+
   has_many :infos, :dependent => :destroy
 
   belongs_to :map, :counter_cache => true
-  has_one :info_list_slug, :as => :keywordable, :class_name => 'Keyword', 
-          :conditions => { :keyword_type => Keyword.info_list_slug },
-          :dependent => :destroy
 
   # Validates
   with_options :presence => true do |column|
@@ -21,7 +27,9 @@ class InfoList < ActiveRecord::Base
   validates :order, numericality: { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999 }
   validates_with OrderValidator
 
-  accepts_nested_attributes_for :info_list_slug, :allow_destroy => true
+  # NestedAttributes
+  accepts_nested_attributes_for :infolist_slug_icon,         reject_if: lambda { |i| i[:file].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :info_list_slug,             allow_destroy: true
 
   # Scopes
   scope :order_asc,     order("`order` ASC")

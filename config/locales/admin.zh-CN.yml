@@ -550,6 +550,8 @@
       place:
         place_icon:
           file: "精彩介绍图片"
+        place_slug_icon:
+          file: "带简码小图"
         place_image:
           file: "实景图片"
         place_description_image:
@@ -578,6 +580,8 @@
           order: "排序"
         scenic_icon:
           file: "精彩介绍图片"
+        scenic_slug_icon:
+          file: "带简码小图片"
         scenic_image:
           file: "实景图片"
         scenic_description_image:
@@ -591,6 +595,8 @@
           file: "推荐视频"
           cover: "视频封面"
           duration: "视频时长"
+        recommend_slug_icon:
+          file: "带简码小图"
       recommend_record:
         order: "排序"
         recommend_record_cover:
@@ -628,6 +634,8 @@
         slug: "信息列表名简码（小写）"
         order: "信息列表顺序值（<b>选填</b>）"
         map: "地图"
+        infolist_slug_icon:
+          file: "带简码小图"
       info:
         order: "信息记录顺序值（<b>选填</b>）"
       surround_city:
@@ -660,6 +668,9 @@
       truncate: ""
 
   errors:
+    api:
+      maps:
+        device_id: "设备ID错误！"
     account:
       presence: "必填"
     type:

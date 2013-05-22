@@ -13,4 +13,17 @@ class Api::V1::ApplicationController < ActionController::Base
     request.format = 'json'.to_sym if params[:format].nil?
   end
 
+  def has_nil_value_in( keys = [] )
+    has_nil = false
+    keys.each do |k|
+      p = params[k.to_sym]
+      break if has_nil = p.nil? || p.blank?
+    end
+    has_nil
+  end
+
+  def set_error_msg( yml_path )
+    { error_msg: I18n.t(yml_path) }
+  end
+
 end
