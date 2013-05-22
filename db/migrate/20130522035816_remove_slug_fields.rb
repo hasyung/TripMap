@@ -1,4 +1,5 @@
-class RemoveSlug < ActiveRecord::Migration
+class RemoveSlugFields < ActiveRecord::Migration
+
   def change
     remove_column :maps, :slug
     remove_column :scenics, :slug
@@ -8,4 +9,5 @@ class RemoveSlug < ActiveRecord::Migration
     remove_column :infos, :slug
     remove_column :merchants, :slug
   end
+
 end
