@@ -11,7 +11,7 @@ class MapSerialNumber < ActiveRecord::Base
   belongs_to :map
   has_and_belongs_to_many :devices
 
-validates :code, :length => {:is => 16}, :format => { :with => /([0-9])+/}
+  validates :code, :length => {:is => 16}, :format => { :with => /([0-9])+/}
 
   # Enumerators, simple_enum plugin
   as_enum :type, { :free => 0, :ordinary => 1, :favorite => 2 }

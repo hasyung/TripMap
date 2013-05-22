@@ -167,6 +167,11 @@ TripMap::Application.routes.draw do
       end
 
     end
+
+    namespace :v1x do
+      resources :maps, :only => :index do
+      end
+    end
   end
 
   root :to => 'home#index'

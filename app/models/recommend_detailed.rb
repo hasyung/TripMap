@@ -27,7 +27,7 @@ class RecommendDetailed < ActiveRecord::Base
   # Scopes
   scope :order_asc, order("`order` ASC")
   scope :created_desc, order("`created_at` DESC")
-  
+
   private
 
   def order_increment
