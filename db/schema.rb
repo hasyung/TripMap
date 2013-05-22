@@ -144,8 +144,6 @@ ActiveRecord::Schema.define(:version => 20130521014400) do
     t.datetime "updated_at",                    :null => false
   end
 
-  add_index "images", ["imageable_id", "imageable_type", "order", "image_type"], :name => "iioi_index", :unique => true
-
   create_table "info_lists", :force => true do |t|
     t.integer  "map_id",                                       :null => false
     t.string   "name",        :limit => 20,                    :null => false
@@ -357,8 +355,6 @@ ActiveRecord::Schema.define(:version => 20130521014400) do
     t.datetime "created_at",                   :null => false
     t.datetime "updated_at",                   :null => false
   end
-
-  add_index "texts", ["textable_id", "textable_type", "order", "text_type"], :name => "ttot_index", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
