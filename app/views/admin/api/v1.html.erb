@@ -15,6 +15,7 @@
   <h4>API列表</h4>
   <ol>
     <li><a href="#maps">获取所有地图简略信息</a></li>
+    <li><a href="#maps_v1x">获取所有地图简略信息(v1x)</a></li>
     <li><a href="#maps_active">获取单个地图详细信息</a></li>
     <li><a href="#account_register">用户注册</a></li>
     <li><a href="#account_loggin">用户登陆(授权设备)</a></li>
@@ -39,12 +40,30 @@
   </ol>
 </div>
 <div class="api-content">
-  <div id="maps" class="api well">
-    <h3 class="name">API1</h3>
+	<div id="maps" class="api well">
+    <h3 class="name">API<%= @api_cnt = @api_cnt + 1 %></h3>
     <small class="desc">获取所有的地图信息，结果为JSON数据格式。</small>
     <dl>
       <dt>URL</dt>
       <dd><pre class="docs-example"><%= api_v1_maps_url(:format => :json) %></pre></dd>
+      <dt>HTTP请求方式</dt>
+      <dd>GET<dd>
+      <dt>支持格式</dt>
+      <dd>json<dd>
+      <dt>是否需要登录</dt>
+      <dd>否<dd>
+      <dt>请求参数</dt>
+      <dd>
+      	无
+      <dd>
+    </dl>
+  </div>
+  <div id="maps_v1x" class="api well">
+    <h3 class="name">API<%= @api_cnt = @api_cnt + 1 %></h3>
+    <small class="desc">获取所有的地图信息，结果为JSON数据格式。</small>
+    <dl>
+      <dt>URL</dt>
+      <dd><pre class="docs-example"><%= api_v1x_maps_url(:format => :json) %></pre></dd>
       <dt>HTTP请求方式</dt>
       <dd>GET<dd>
       <dt>支持格式</dt>
@@ -78,7 +97,7 @@
   </div>
   
   <div id="maps_active" class="api well">
-    <h3 class="name">API2</h3>
+    <h3 class="name">API<%= @api_cnt = @api_cnt + 1 %></h3>
     <small class="desc">获取单个地图详细信息，结果为JSON数据格式。</small>
     <dl>
       <dt>URL</dt>
@@ -116,7 +135,7 @@
   </div>
   
   <div id="account_register" class="api well">
-    <h3 class="name">API3</h3>
+    <h3 class="name">API<%= @api_cnt = @api_cnt + 1 %></h3>
     <small class="desc">用户注册</small>
     <dl>
       <dt>URL</dt>
@@ -191,7 +210,7 @@
   </div>
 
   <div id="account_loggin" class="api well">
-    <h3 class="name">API4</h3>
+    <h3 class="name">API<%= @api_cnt = @api_cnt + 1 %></h3>
     <small class="desc">用户登陆(授权设备)</small>
     <dl>
       <dt>URL</dt>
@@ -249,7 +268,7 @@
   </div>
 
   <div id="account_validate" class="api well">
-    <h3 class="name">API5</h3>
+    <h3 class="name">API<%= @api_cnt = @api_cnt + 1 %></h3>
     <small class="desc">用户绑定序列号</small>
     <dl>
       <dt>URL</dt>
@@ -302,7 +321,7 @@
   </div>
 
 	<div id="account_nickname" class="api well">
-    <h3 class="name">API6</h3>
+    <h3 class="name">API<%= @api_cnt = @api_cnt + 1 %></h3>
     <small class="desc">用户获取昵称</small>
     <dl>
       <dt>URL</dt>
@@ -340,7 +359,7 @@
   </div>
 
   <div id="account_update" class="api well">
-    <h3 class="name">API7</h3>
+    <h3 class="name">API<%= @api_cnt = @api_cnt + 1 %></h3>
     <small class="desc">用户修改昵称</small>
     <dl>
       <dt>URL</dt>
@@ -398,7 +417,7 @@
   </div>
 
 <div id="activate_validate" class="api well">
-    <h3 class="name">API8</h3>
+    <h3 class="name">API<%= @api_cnt = @api_cnt + 1 %></h3>
     <small class="desc">通过设备ID查看地图使用权限</small>
     <dl>
       <dt>URL</dt>
@@ -438,7 +457,7 @@
   </div>
 
 <div id="share_current" class="api well">
-    <h3 class="name">API9</h3>
+    <h3 class="name">API<%= @api_cnt = @api_cnt + 1 %></h3>
     <small class="desc">获取当前分享，结果为JSON数据格式。</small>
     <dl>
       <dt>URL</dt>
@@ -491,7 +510,7 @@
   
 
   <div id="share_arround" class="api well">
-    <h3 class="name">API10</h3>
+    <h3 class="name">API<%= @api_cnt = @api_cnt + 1 %></h3>
     <small class="desc">获取周边分享，结果为JSON数据格式。</small>
     <dl>
       <dt>URL</dt>
@@ -543,7 +562,7 @@
   </div>
   
   <div id="share_upload" class="api well">
-    <h3 class="name">API11</h3>
+    <h3 class="name">API<%= @api_cnt = @api_cnt + 1 %></h3>
     <small class="desc">上传我的分享，结果为JSON数据格式。</small>
     <dl>
       <dt>URL</dt>
@@ -609,7 +628,7 @@
   </div>
   
   <div id="weathers" class="api well">
-    <h3 class="name">API12</h3>
+    <h3 class="name">API<%= @api_cnt = @api_cnt + 1 %></h3>
     <small class="desc">获取当前地图所在城市天气</small>
     <dl>
       <dt>URL</dt>
@@ -649,7 +668,7 @@
   </div>
   
   <div id="logs" class="api well">
-    <h3 class="name">API13</h3>
+    <h3 class="name">API<%= @api_cnt = @api_cnt + 1 %></h3>
     <small class="desc">上传当前地图使用日志</small>
     <dl>
       <dt>URL</dt>
@@ -722,7 +741,7 @@
   </div>
   
   <div id="versions" class="api well">
-    <h3 class="name">API14</h3>
+    <h3 class="name">API<%= @api_cnt = @api_cnt + 1 %></h3>
     <small class="desc">检测地图数据包是否更新</small>
     <dl>
       <dt>URL</dt>
@@ -762,7 +781,7 @@
   </div>
 
 <div id="declaration" class="api well">
-    <h3 class="name">API15</h3>
+    <h3 class="name">API<%= @api_cnt = @api_cnt + 1 %></h3>
     <small class="desc">获取免责声明</small>
     <dl>
       <dt>URL</dt>
@@ -781,7 +800,7 @@
   </div>
 
   <div id="feedback" class="api well">
-    <h3 class="name">API16</h3>
+    <h3 class="name">API<%= @api_cnt = @api_cnt + 1 %></h3>
     <small class="desc">提交意见反馈</small>
     <dl>
       <dt>URL</dt>
@@ -826,7 +845,7 @@
   </div>
 
 	<div id="version" class="api well">
-    <h3 class="name">API17</h3>
+    <h3 class="name">API<%= @api_cnt = @api_cnt + 1 %></h3>
     <small class="desc">检测是否有最新版本</small>
     <dl>
       <dt>URL</dt>
@@ -864,7 +883,7 @@
   </div>
 
   <div id="download" class="api well">
-    <h3 class="name">API18</h3>
+    <h3 class="name">API<%= @api_cnt = @api_cnt + 1 %></h3>
     <small class="desc">统计下载次数</small>
     <dl>
       <dt>URL</dt>
@@ -903,7 +922,7 @@
 
   <div class="api-content">
   <div id="merchants" class="api well">
-    <h3 class="name">API19</h3>
+    <h3 class="name">API<%= @api_cnt = @api_cnt + 1 %></h3>
     <small class="desc">获取所有的商家信息，结果为JSON数据格式。</small>
     <dl>
       <dt>URL</dt>
@@ -920,7 +939,7 @@
   </div>
 
   <div id="merchant" class="api well">
-    <h3 class="name">API20</h3>
+    <h3 class="name">API<%= @api_cnt = @api_cnt + 1 %></h3>
     <small class="desc">获取单个商家详细信息</small>
     <dl>
       <dt>URL</dt>
@@ -960,7 +979,7 @@
   </div>
 
   <div id="device" class="api well">
-    <h3 class="name">API21</h3>
+    <h3 class="name">API<%= @api_cnt = @api_cnt + 1 %></h3>
     <small class="desc">通过设备查看地图使用权限</small>
     <dl>
       <dt>URL</dt>
@@ -1000,7 +1019,7 @@
   </div>
 
   <div id="device_validate" class="api well">
-    <h3 class="name">API22</h3>
+    <h3 class="name">API<%= @api_cnt = @api_cnt + 1 %></h3>
     <small class="desc">设备绑定序列号</small>
     <dl>
       <dt>URL</dt>

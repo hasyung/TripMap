@@ -12,6 +12,7 @@ class Admin::InfoListsController < Admin::ApplicationController
 
   def create
     @info_list = InfoList.new params[:info_list]
+    binding.pry
     if @info_list.save
       redirect_to admin_info_lists_path, :notice => t('messages.info_lists.success')
     else
