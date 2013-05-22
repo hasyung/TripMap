@@ -104,13 +104,13 @@ class Map < ActiveRecord::Base
     ret = []
     self.info_lists.order_asc.each do |info_list|
       r = {
-        info_list_slug:       info_list.slug,
+        info_list_slug:       get_file_value(info_list.info_list_slug, "slug"),
         info_list_is_free:    info_list.is_free.to_s,
         slug_icon:            get_file_value(info_list.infolist_slug_icon, "file", true),
       }
       tmp_infos = []
       info_list.infos.order_asc.each do |o|
-        tmp_infos << { name: o.name, slug: o.info_slug.slug, is_free: o.is_free.to_s, description: get_file_value(o.letter, "body")}
+        tmp_infos << { name: o.name, slug: get_file_value( o.info_slug, "slug"), is_free: o.is_free.to_s, description: get_file_value(o.letter, "body")}
       end
       r["infos"] = tmp_infos
       ret << r
@@ -125,7 +125,7 @@ class Map < ActiveRecord::Base
       is_free:                place.is_free.to_s,
       menu_type:              place.menu_type,
       subtitle:               place.subtitle,
-      slug:                   place.place_slug.slug,
+      slug:                   get_file_value(place.place_slug, "slug"),
       icon:                   get_file_value(place.place_icon, "file", true),
       slug_icon:              get_file_value(place.place_slug_icon, "file", true),
       image:                  get_file_value(place.place_image, "file", true),
@@ -153,7 +153,7 @@ class Map < ActiveRecord::Base
       is_free:                scenic.is_free.to_s,
       menu_type:              scenic.menu_type,
       subtitle:               scenic.subtitle,
-      slug:                   scenic.scenic_slug.slug,
+      slug:                   get_file_value( scenic.scenic_slug, "slug"),
       icon:                   get_file_value(scenic.scenic_icon, "file", true),
       slug_icon:              get_file_value(scenic.scenic_slug_icon, "file", true),
       image:                  get_file_value(scenic.scenic_image, "file", true),
@@ -236,7 +236,7 @@ class Map < ActiveRecord::Base
 
     {
       name:                   recommend.name,
-      slug:                   recommend.recommend_slug.slug,
+      slug:                   get_file_value(recommend.recommend_slug, "slug"),
       is_free:                recommend.is_free.to_s,
       menu_type:              recommend.menu_type,
       category:               recommend.category_cd,
