@@ -1,6 +1,8 @@
 #encoding: utf-8
+require 'memcached/dalli'
 
 class Api::V1::MapsController < Api::V1::ApplicationController
+  include Memcached
 
   def index
     result = []
@@ -18,9 +20,10 @@ class Api::V1::MapsController < Api::V1::ApplicationController
     mid = params[:map_id].to_i
     map = Map.find_by_id(mid)
     ( render :json => result; return ) if map.nil?                # Check map
-     cache_key = "map_#{mid}"
-     Rails.cache.write(cache_key, map.get_map_values) if !Rails.cache.exist?(cache_key)
-    render :json => Rails.cache.read(cache_key)
+    cache_key = "map_#{mid}"
+    @@dalli.set(cache_key, map.get_map_values) if @@dalli.get(cache_key).blank?
+    #Rails.cache.write(cache_key, map.get_map_values) if !Rails.cache.exist?(cache_key)
+    render :json => @@dalli.get(cache_key)
   end
 
   def version

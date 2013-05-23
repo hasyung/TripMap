@@ -31,6 +31,7 @@ gem "smart_tuple" #sql search
 gem 'thin'
 gem 'uuidtools'
 gem 'nokogiri'    # XML analyzing
+gem 'dalli'
 
 group :test, :development do
   gem 'rspec-rails'
