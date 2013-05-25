@@ -1,0 +1,51 @@
+<%- model_class = LijiangMailbox -%>
+
+<div class="box">
+
+  <div class="box-title">
+    <span class="icon"><i class="icon-th"></i></span>
+    <h5><%= t('links.infos.index') %></h5>
+  </div>
+
+  <div class="box-content">
+    <table class="table table-bordered table-striped with-check">
+      <thead>
+        <tr>
+          <th><input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" /></th>
+          <th><%= model_class.human_attribute_name(:device_id) %></th>
+          <th><%= model_class.human_attribute_name(:service_score) %></th>
+          <th><%= model_class.human_attribute_name(:env_score) %></th>
+          <th><%= model_class.human_attribute_name(:category) %></th>
+          <th><%= model_class.human_attribute_name(:title) %></th>
+          <th><%= model_class.human_attribute_name(:content) %></th>
+          <th><%= model_class.human_attribute_name(:who) %></th>
+          <th><%= model_class.human_attribute_name(:contact) %></th>
+          <th class="action"><%= t('links.commons.action') %></th>
+        </tr>
+      </thead>
+      </tbody>
+        <% @entities.each do |e| %>
+          <tr>
+            <td><%= check_box_tag "lijiang_mailbox_ids[]", e.id, false, :id => "lijiang_#{e.id}" %></td>
+            <td><%= e.device_id %></td>
+            <td><%= e.service_score %></td>
+            <td><%= e.env_score %></td>
+            <td><%= e.category %></td>
+            <td><%= e.title.to_s %></td>
+            <td><%= e.content.to_s %></td>
+            <td><%= e.who.to_s %></td>
+            <td><%= e.contact.to_s %></td>
+            <td class="action">
+              <%= link_to raw("<i class=\"icon-trash\"></i>"), admin_lijiang_mailbox_path(e), :method => :delete, :data => { :confirm => t('links.commons.confirm') } %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="table-footer clearfix">
+  <div class="paginates-info"><%= page_entries_info @entities %></div>
+  <%= paginate @entities, :theme => "admin" %>
+</div>

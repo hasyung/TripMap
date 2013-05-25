@@ -55,6 +55,8 @@
       index: "周边城市天气"
     settings:
       index: "设置"
+    lijiang_mailbox:
+      index: "丽江市旅游局局长信箱"
 
   breadcrumbs:
     admin:
@@ -154,6 +156,8 @@
         edit: "编辑周边城市"
       settings:
         index: "设置"
+      lijiang_mailboxes:
+        index: "丽江市旅游局局长信箱"
 
   links:
     home:
@@ -353,6 +357,9 @@
       purview: "抱歉，您没有查看序列号管理模块的权限！"
     settings:
       success: "设置成功！"
+    lijiang_mailboxes:
+      success: "操作成功！"
+      error: "操作失败！"
 
   activerecord:
     enums:
@@ -535,6 +542,15 @@
         serial_devices_size: "序列号绑定设备数"
       keyword:
         slug: "简码"
+      lijiang_mailbox:
+        device_id: "设备号"
+        service_score: "服务及设施得分"
+        env_score: "服务及设施得分"
+        category: "所属分类"
+        title: "回复标题"
+        content: "回复内容"
+        who: "回复者"
+        contact: "回复者联系信息"
 
   simple_form:
     labels:
@@ -671,6 +687,8 @@
     api:
       maps:
         device_id: "设备ID错误！"
+      lijiang_mailboxes:
+        invalid_params: "必填参数字段错误！"
     account:
       presence: "必填"
     type:

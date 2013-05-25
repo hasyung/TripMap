@@ -1,0 +1,16 @@
+<%= simple_form_for [:admin, :lijiang_mailboxes, @entity] do |e| %>
+
+  <%= e.input :device_id %>
+  <%= e.input :service_score %>
+  <%= e.input :env_score %>
+  <%= e.input :category %>
+  <%= e.input :title %>
+  <%= e.input :content %>
+  <%= e.input :who %>
+  <%= e.input :contact %>
+
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn-primary' %>
+  </div>
+
+<% end %>
