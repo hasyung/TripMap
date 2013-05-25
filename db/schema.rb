@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130522035816) do
+ActiveRecord::Schema.define(:version => 20130525035553) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",                                :default => "", :null => false
@@ -186,6 +186,19 @@ ActiveRecord::Schema.define(:version => 20130522035816) do
   end
 
   add_index "keywords", ["slug"], :name => "index_keywords_on_slug", :unique => true
+
+  create_table "lijiang_mailboxes", :force => true do |t|
+    t.string   "device_id",                    :null => false
+    t.integer  "service_score", :default => 0
+    t.integer  "env_score",     :default => 0
+    t.integer  "category",      :default => 0
+    t.string   "title"
+    t.string   "content"
+    t.string   "who"
+    t.string   "contact"
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+  end
 
   create_table "logs", :force => true do |t|
     t.integer  "map_id",                                       :null => false
