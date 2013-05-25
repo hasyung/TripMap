@@ -42,58 +42,31 @@
 </div>
 
 <div class="api-content">
+	<% api_cnt = 0%>
 
 	<div id="maps" class="api well">
-    <h3 class="name">API<%= @api_cnt += 1 %></h3>
+    <h3 class="name">API<%= api_cnt += 1 %></h3>
     <small class="desc">获取所有的地图信息，结果为JSON数据格式。</small>
     <dl>
-      <dt>URL</dt>
-      <dd><pre class="docs-example"><%= api_v1_maps_url(:format => :json) %></pre></dd>
-      <dt>HTTP请求方式</dt>
-      <dd>GET<dd>
-      <dt>支持格式</dt>
-      <dd>json<dd>
-      <dt>是否需要登录</dt>
-      <dd>否<dd>
-      <dt>请求参数</dt>
-      <dd>
-      	无
-      <dd>
+      <dt>URL</dt><dd><pre class="docs-example"><%= api_v1_maps_url(:format => :json) %></pre></dd>
+      <dt>HTTP请求方式</dt><dd>GET<dd><dt>支持格式</dt><dd>json<dd><dt>是否需要登录</dt><dd>否<dd><dt>请求参数</dt><dd>无<dd>
     </dl>
   </div>
 
   <div id="maps_v1x" class="api well">
-    <h3 class="name">API<%= @api_cnt += 1 %></h3>
+    <% param_item_cnt = 0 %>
+
+    <h3 class="name">API<%= api_cnt += 1 %></h3>
     <small class="desc">获取所有的地图信息，结果为JSON数据格式。</small>
     <dl>
       <dt>URL</dt>
       <dd><pre class="docs-example"><%= api_v1x_maps_url(:format => :json) %></pre></dd>
-      <dt>HTTP请求方式</dt>
-      <dd>GET<dd>
-      <dt>支持格式</dt>
-      <dd>json<dd>
-      <dt>是否需要登录</dt>
-      <dd>否<dd>
-      <dt>请求参数</dt>
+      <dt>HTTP请求方式</dt><dd>GET<dd><dt>支持格式</dt><dd>json<dd><dt>是否需要登录</dt><dd>否<dd><dt>请求参数</dt>
       <dd>
       	<table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>名字</th>
-              <th>类型</th>
-              <th>类别</th>
-              <th>说明</th>
-            </tr>
-          </thead>
+          <thead><tr><th>#</th><th>名字</th> <th>类型</th><th>类别</th><th>说明</th></tr></thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>device_id</td>
-              <td>uuid字符串</td>
-              <td>必选参数</td>
-              <td>设备唯一号</td>
-            </tr>
+            <tr><td><%= param_item_cnt += 1 %></td><td>device_id</td><td>uuid字符串</td><td>必选参数</td><td>设备唯一号</td></tr>
           </tbody>
         </table>
       <dd>
@@ -101,37 +74,19 @@
   </div>
 
   <div id="maps_active" class="api well">
-    <h3 class="name">API<%= @api_cnt += 1 %></h3>
+    <% param_item_cnt = 0 %>
+
+    <h3 class="name">API<%= api_cnt += 1 %></h3>
     <small class="desc">获取单个地图详细信息，结果为JSON数据格式。</small>
     <dl>
       <dt>URL</dt>
       <dd><pre class="docs-example"><%= show_api_v1_maps_url(:format => :json)  %></pre></dd>
-      <dt>HTTP请求方式</dt>
-      <dd>GET<dd>
-      <dt>支持格式</dt>
-      <dd>json<dd>
-      <dt>是否需要登录</dt>
-      <dd>否<dd>
-      <dt>请求参数</dt>
+      <dt>HTTP请求方式</dt><dd>GET<dd><dt>支持格式</dt><dd>json<dd><dt>是否需要登录</dt><dd>否<dd><dt>请求参数</dt>
       <dd>
         <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>名字</th>
-              <th>类型</th>
-              <th>类别</th>
-              <th>说明</th>
-            </tr>
-          </thead>
+          <thead><tr><th>#</th><th>名字</th> <th>类型</th><th>类别</th><th>说明</th></tr></thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>map_id</td>
-              <td>整数</td>
-              <td>必选参数</td>
-              <td>地图编号，以指定查找哪张地图的内容。</td>
-            </tr>
+            <tr><td><%= param_item_cnt += 1 %></td><td>map_id</td><td>整数</td><td>必选参数</td><td>地图编号，以指定查找哪张地图的内容。</td></tr>
           </tbody>
         </table>
       <dd>
@@ -139,177 +94,79 @@
   </div>
 
   <div id="account_register" class="api well">
-    <h3 class="name">API<%= @api_cnt += 1 %></h3>
+    <% param_item_cnt = 0 %>
+
+    <h3 class="name">API<%= api_cnt += 1 %></h3>
     <small class="desc">用户注册</small>
     <dl>
       <dt>URL</dt>
       <dd><pre class="docs-example"><%= create_api_v1_accounts_url(:format => :json) %></pre></dd>
-      <dt>HTTP请求方式</dt>
-      <dd>POST<dd>
-      <dt>支持格式</dt>
-      <dd>json<dd>
-      <dt>是否需要登录</dt>
-      <dd>否<dd>
-      <dt>请求参数</dt>
+      <dt>HTTP请求方式</dt><dd>POST<dd><dt>支持格式</dt><dd>json<dd><dt>是否需要登录</dt><dd>否<dd><dt>请求参数</dt>
       <dd>
         <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>名字</th>
-              <th>类型</th>
-              <th>类别</th>
-              <th>说明</th>
-            </tr>
-          </thead>
+          <thead><tr><th>#</th><th>名字</th> <th>类型</th><th>类别</th><th>说明</th></tr></thead>
           <tbody>
-           <tr>
-              <td>1</td>
-              <td>device_id</td>
-              <td>字符串</td>
-              <td>必选参数</td>
-              <td>用户设备ID</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>email</td>
-              <td>字符串</td>
-              <td>必选参数</td>
-              <td>email(用户帐号)</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>password</td>
-              <td>字符串</td>
-              <td>必选参数</td>
-              <td>密码</td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td>nickname</td>
-              <td>字符串</td>
-              <td>必选参数</td>
-              <td>昵称</td>
-            </tr>
-            <tr>
-              <td>5</td>
-              <td>serial</td>
-              <td>字符串</td>
-              <td>可选参数</td>
-              <td>序列号</td>
-            </tr>
+           <tr><td><%= param_item_cnt += 1 %></td><td>device_id</td><td>字符串</td><td>必选参数</td><td>用户设备ID</td></tr>
+           <tr><td><%= param_item_cnt += 1 %></td><td>email</td><td>字符串</td><td>必选参数</td><td>email(用户帐号)</td></tr>
+           <tr><td><%= param_item_cnt += 1 %></td><td>password</td><td>字符串</td><td>必选参数</td><td>密码</td></tr>
+           <tr><td><%= param_item_cnt += 1 %></td><td>nickname</td><td>字符串</td><td>必选参数</td><td>昵称</td></tr>
+           <tr><td><%= param_item_cnt += 1 %></td><td>serial</td><td>字符串</td><td>可选参数</td><td>序列号</td></tr>
           </tbody>
         </table>
         <dd>
     </dl>
      <p>结果：</p>
-     <p>result: 0   =>   成功 </p>
-      <p>result: 1   =>   参数错误 </p>
-      <p> result: 2   =>   email已存在 </p>
-      <p> result: 3   =>   昵称已存在 </p>
-      <p> result: 4   =>   序列号错误 </p>
-      <p> result: 5   =>   序列号已使用 </p>
-      <p> result: 6   =>   未知错误 </p>
-      <p>登录页面URL地址：/accounts/new/device_id</p>
+     <p>result: 0   =>   成功</p>
+     <p>result: 1   =>   参数错误</p>
+     <p>result: 2   =>   email已存在</p>
+     <p>result: 3   =>   昵称已存在</p>
+     <p>result: 4   =>   序列号错误</p>
+     <p>result: 5   =>   序列号已使用</p>
+     <p>result: 6   =>   未知错误</p>
+     <p>登录页面URL地址：/accounts/new/device_id</p>
   </div>
 
   <div id="account_loggin" class="api well">
-    <h3 class="name">API<%= @api_cnt += 1 %></h3>
+    <% param_item_cnt = 0 %>
+    <h3 class="name">API<%= api_cnt += 1 %></h3>
     <small class="desc">用户登陆(授权设备)</small>
     <dl>
       <dt>URL</dt>
       <dd><pre class="docs-example"><%= login_api_v1_accounts_url(:format => :json) %></pre></dd>
-      <dt>HTTP请求方式</dt>
-      <dd>POST<dd>
-      <dt>支持格式</dt>
-      <dd>json<dd>
-      <dt>是否需要登录</dt>
-      <dd>否<dd>
-      <dt>请求参数</dt>
+      <dt>HTTP请求方式</dt><dd>POST<dd><dt>支持格式</dt><dd>json<dd><dt>是否需要登录</dt><dd>否<dd><dt>请求参数</dt>
       <dd>
         <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>名字</th>
-              <th>类型</th>
-              <th>类别</th>
-              <th>说明</th>
-            </tr>
-          </thead>
+          <thead><tr><th>#</th><th>名字</th> <th>类型</th><th>类别</th><th>说明</th></tr></thead>
           <tbody>
-           <tr>
-              <td>1</td>
-              <td>device_id</td>
-              <td>字符串</td>
-              <td>必选参数</td>
-              <td>用户设备ID</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>email</td>
-              <td>字符串</td>
-              <td>必选参数</td>
-              <td>email(用户帐号)</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>password</td>
-              <td>字符串</td>
-              <td>必选参数</td>
-              <td>密码</td>
-            </tr>
+            <tr><td><%= param_item_cnt += 1 %></td><td>device_id</td><td>字符串</td><td>必选参数</td><td>用户设备ID</td></tr>
+            <tr><td><%= param_item_cnt += 1 %></td><td>email</td><td>字符串</td><td>必选参数</td><td>email(用户帐号)</td></tr>
+            <tr><td><%= param_item_cnt += 1 %></td><td>password</td><td>字符串</td><td>必选参数</td><td>密码</td></tr>
           </tbody>
         </table>
         <dd>
     </dl>
      <p>结果：</p>
      <p>result: 0, nickname: *   =>   成功 </p>
-      <p>result: 1   =>   参数错误 </p>
-      <p> result: 2   =>   email不存在或密码错误 </p>
-      <p> result: 3   =>   该用户授权设备超过限制</p>
-      <p> result: 4   =>   未知错误 </p>
+     <p>result: 1   =>   参数错误 </p>
+     <p>result: 2   =>   email不存在或密码错误 </p>
+     <p>result: 3   =>   该用户授权设备超过限制</p>
+     <p>result: 4   =>   未知错误 </p>
   </div>
 
   <div id="account_validate" class="api well">
-    <h3 class="name">API<%= @api_cnt += 1 %></h3>
+    <% param_item_cnt = 0 %>
+    <h3 class="name">API<%= api_cnt += 1 %></h3>
     <small class="desc">用户绑定序列号</small>
     <dl>
       <dt>URL</dt>
       <dd><pre class="docs-example"><%= validate_api_v1_accounts_url(:format => :json) %></pre></dd>
-      <dt>HTTP请求方式</dt>
-      <dd>POST<dd>
-      <dt>支持格式</dt>
-      <dd>json<dd>
-      <dt>是否需要登录</dt>
-      <dd>否<dd>
-      <dt>请求参数</dt>
+      <dt>HTTP请求方式</dt><dd>POST<dd><dt>支持格式</dt><dd>json<dd><dt>是否需要登录</dt><dd>否<dd><dt>请求参数</dt>
       <dd>
         <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>名字</th>
-              <th>类型</th>
-              <th>类别</th>
-              <th>说明</th>
-            </tr>
-          </thead>
+          <thead><tr><th>#</th><th>名字</th> <th>类型</th><th>类别</th><th>说明</th></tr></thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>email</td>
-              <td>字符串</td>
-              <td>必选参数</td>
-              <td>email(用户帐号)</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>serial</td>
-              <td>字符串</td>
-              <td>必选参数</td>
-              <td>序列号</td>
-            </tr>
+            <tr><td><%= param_item_cnt += 1 %></td><td>email</td><td>字符串</td><td>必选参数</td><td>email(用户帐号)</td></tr>
+            <tr><td><%= param_item_cnt += 1 %></td><td>serial</td><td>字符串</td><td>必选参数</td><td>序列号</td></tr>
           </tbody>
         </table>
         <dd>
@@ -325,37 +182,18 @@
   </div>
 
 	<div id="account_nickname" class="api well">
-    <h3 class="name">API<%= @api_cnt += 1 %></h3>
+	  <% param_item_cnt = 0 %>
+    <h3 class="name">API<%= api_cnt += 1 %></h3>
     <small class="desc">用户获取昵称</small>
     <dl>
       <dt>URL</dt>
       <dd><pre class="docs-example"><%= show_api_v1_accounts_url(:format => :json) %></pre></dd>
-      <dt>HTTP请求方式</dt>
-      <dd>GET<dd>
-      <dt>支持格式</dt>
-      <dd>json<dd>
-      <dt>是否需要登录</dt>
-      <dd>否<dd>
-      <dt>请求参数</dt>
+      <dt>HTTP请求方式</dt><dd>GET<dd><dt>支持格式</dt><dd>json<dd><dt>是否需要登录</dt><dd>否<dd><dt>请求参数</dt>
       <dd>
         <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>名字</th>
-              <th>类型</th>
-              <th>类别</th>
-              <th>说明</th>
-            </tr>
-          </thead>
+          <thead><tr><th>#</th><th>名字</th> <th>类型</th><th>类别</th><th>说明</th></tr></thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>email</td>
-              <td>字符串</td>
-              <td>必选参数</td>
-              <td>email(用户帐号)</td>
-            </tr>
+            <tr><td><%= param_item_cnt += 1 %></td><td>email</td><td>字符串</td><td>必选参数</td><td>email(用户帐号)</td></tr>
           </tbody>
         </table>
         <dd>
@@ -363,149 +201,68 @@
   </div>
 
   <div id="account_update" class="api well">
-    <h3 class="name">API<%= @api_cnt += 1 %></h3>
+    <% param_item_cnt = 0 %>
+    <h3 class="name">API<%= api_cnt += 1 %></h3>
     <small class="desc">用户修改昵称</small>
     <dl>
       <dt>URL</dt>
       <dd><pre class="docs-example"><%= update_api_v1_accounts_url(:format => :json) %></pre></dd>
-      <dt>HTTP请求方式</dt>
-      <dd>POST<dd>
-      <dt>支持格式</dt>
-      <dd>json<dd>
-      <dt>是否需要登录</dt>
-      <dd>否<dd>
-      <dt>请求参数</dt>
+      <dt>HTTP请求方式</dt><dd>POST<dd><dt>支持格式</dt><dd>json<dd><dt>是否需要登录</dt><dd>否<dd><dt>请求参数</dt>
       <dd>
         <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>名字</th>
-              <th>类型</th>
-              <th>类别</th>
-              <th>说明</th>
-            </tr>
-          </thead>
+          <thead><tr><th>#</th><th>名字</th> <th>类型</th><th>类别</th><th>说明</th></tr></thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>email</td>
-              <td>字符串</td>
-              <td>必选参数</td>
-              <td>email(用户帐号)</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>password</td>
-              <td>字符串</td>
-              <td>必选参数</td>
-              <td>密码</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>nickname</td>
-              <td>字符串</td>
-              <td>必选参数</td>
-              <td>昵称</td>
-            </tr>               
+            <tr><td><%= param_item_cnt += 1 %></td><td>email</td><td>字符串</td><td>必选参数</td><td>email(用户帐号)</td></tr>
+            <tr><td><%= param_item_cnt += 1 %></td><td>password</td><td>字符串</td><td>必选参数</td><td>密码</td></tr>
+            <tr><td><%= param_item_cnt += 1 %></td><td>nickname</td><td>字符串</td><td>必选参数</td><td>昵称</td></tr>
           </tbody>
         </table>
         <dd>
     </dl>
     <p>结果：</p>
      <p>result: 0   =>   成功 </p>
-      <p>result: 1   =>   参数错误 </p>
-      <p> result: 2   =>   email不存在或密码错误 </p>
-      <p> result: 3   =>   昵称已存在</p>
-      <p> result: 4   =>   未知错误 </p>
+     <p>result: 1   =>   参数错误 </p>
+     <p>result: 2   =>   email不存在或密码错误 </p>
+     <p>result: 3   =>   昵称已存在</p>
+     <p>result: 4   =>   未知错误 </p>
   </div>
 
 	<div id="activate_validate" class="api well">
-    <h3 class="name">API<%= @api_cnt += 1 %></h3>
+	  <% param_item_cnt = 0 %>
+    <h3 class="name">API<%= api_cnt += 1 %></h3>
     <small class="desc">通过设备ID查看地图使用权限</small>
     <dl>
       <dt>URL</dt>
       <dd><pre class="docs-example"><%= validate_api_v1_maps_url(:format => :json) %></pre></dd>
-      <dt>HTTP请求方式</dt>
-      <dd>GET<dd>
-      <dt>支持格式</dt>
-      <dd>json<dd>
-      <dt>是否需要登录</dt>
-      <dd>否<dd>
-      <dt>请求参数</dt>
+      <dt>HTTP请求方式</dt><dd>GET<dd><dt>支持格式</dt><dd>json<dd><dt>是否需要登录</dt><dd>否<dd><dt>请求参数</dt>
       <dd>
         <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>名字</th>
-              <th>类型</th>
-              <th>类别</th>
-              <th>说明</th>
-            </tr>
-          </thead>
+          <thead><tr><th>#</th><th>名字</th> <th>类型</th><th>类别</th><th>说明</th></tr></thead>
           <tbody>
-           <tr>
-              <td>1</td>
-              <td>device_id</td>
-              <td>字符串</td>
-              <td>必选参数</td>
-              <td>用户设备ID</td>
-            </tr>
+           <tr><td><%= param_item_cnt += 1 %></td><td>device_id</td><td>字符串</td><td>必选参数</td><td>用户设备ID</td></tr>
           </tbody>
         </table>
         <dd>
     </dl>
-     <p>结果：</p>
-     <p>maps: [map_ids] </p>
+    <p>结果：</p>
+    <p>maps: [map_ids] </p>
   </div>
 
 	<div id="share_current" class="api well">
-    <h3 class="name">API<%= @api_cnt += 1 %></h3>
+	  <% param_item_cnt = 0 %>
+    <h3 class="name">API<%= api_cnt += 1 %></h3>
     <small class="desc">获取当前分享，结果为JSON数据格式。</small>
     <dl>
       <dt>URL</dt>
       <dd><pre class="docs-example"><%= shares_current_api_v1_maps_url(:format => :json) %></pre></dd>
-      <dt>HTTP请求方式</dt>
-      <dd>GET<dd>
-      <dt>支持格式</dt>
-      <dd>json<dd>
-      <dt>是否需要登录</dt>
-      <dd>否<dd>
-      <dt>请求参数</dt>
+      <dt>HTTP请求方式</dt><dd>GET<dd><dt>支持格式</dt><dd>json<dd><dt>是否需要登录</dt><dd>否<dd><dt>请求参数</dt>
       <dd>
         <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>名字</th>
-              <th>类型</th>
-              <th>类别</th>
-              <th>说明</th>
-            </tr>
-          </thead>
+          <thead><tr><th>#</th><th>名字</th> <th>类型</th><th>类别</th><th>说明</th></tr></thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>map_id</td>
-              <td>整数</td>
-              <td>必选参数</td>
-              <td>地图编号</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>page_size</td>
-              <td>整数</td>
-              <td>必选参数</td>
-              <td>每一页的大小</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>page_index</td>
-              <td>整数</td>
-              <td>必选参数</td>
-              <td>起始页</td>
-            </tr>
+            <tr><td><%= param_item_cnt += 1 %></td><td>map_id</td><td>整数</td><td>必选参数</td><td>地图编号</td></tr>
+            <tr><td><%= param_item_cnt += 1 %></td><td>page_size</td><td>整数</td><td>必选参数</td><td>每一页的大小</td></tr>
+            <tr><td><%= param_item_cnt += 1 %></td><td>page_index</td><td>整数</td><td>必选参数</td><td>起始页</td></tr>
           </tbody>
         </table>
       <dd>
@@ -513,51 +270,20 @@
   </div>
 
   <div id="share_arround" class="api well">
-    <h3 class="name">API<%= @api_cnt += 1 %></h3>
+    <% param_item_cnt = 0 %>
+    <h3 class="name">API<%= api_cnt += 1 %></h3>
     <small class="desc">获取周边分享，结果为JSON数据格式。</small>
     <dl>
       <dt>URL</dt>
       <dd><pre class="docs-example"><%= shares_nearby_api_v1_maps_url(:format => :json) %></pre></dd>
-      <dt>HTTP请求方式</dt>
-      <dd>GET<dd>
-      <dt>支持格式</dt>
-      <dd>json<dd>
-      <dt>是否需要登录</dt>
-      <dd>否<dd>
-      <dt>请求参数</dt>
+      <dt>HTTP请求方式</dt><dd>GET<dd><dt>支持格式</dt><dd>json<dd><dt>是否需要登录</dt><dd>否<dd><dt>请求参数</dt>
       <dd>
         <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>名字</th>
-              <th>类型</th>
-              <th>类别</th>
-              <th>说明</th>
-            </tr>
-          </thead>
+          <thead><tr><th>#</th><th>名字</th> <th>类型</th><th>类别</th><th>说明</th></tr></thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>map_id</td>
-              <td>整数</td>
-              <td>必选参数</td>
-              <td>地图编号</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>page_size</td>
-              <td>整数</td>
-              <td>必选参数</td>
-              <td>每一页的大小</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>page_index</td>
-              <td>整数</td>
-              <td>必选参数</td>
-              <td>起始页</td>
-            </tr>
+            <tr><td><%= param_item_cnt += 1 %></td><td>map_id</td><td>整数</td><td>必选参数</td><td>地图编号</td></tr>
+            <tr><td><%= param_item_cnt += 1 %></td><td>page_size</td><td>整数</td><td>必选参数</td><td>每一页的大小</td></tr>
+            <tr><td><%= param_item_cnt += 1 %></td><td>page_index</td><td>整数</td><td>必选参数</td><td>起始页</td></tr>
           </tbody>
         </table>
       <dd>
@@ -565,65 +291,23 @@
   </div>
 
   <div id="share_upload" class="api well">
-    <h3 class="name">API<%= @api_cnt += 1 %></h3>
+    <% param_item_cnt = 0 %>
+    <h3 class="name">API<%= api_cnt += 1 %></h3>
     <small class="desc">上传我的分享，结果为JSON数据格式。</small>
     <dl>
       <dt>URL</dt>
       <dd><pre class="docs-example"><%= shares_create_api_v1_maps_url(:format => :json) %></pre></dd>
-      <dt>HTTP请求方式</dt>
-      <dd>POST<dd>
-      <dt>支持格式</dt>
-      <dd>json<dd>
-      <dt>是否需要登录</dt>
-      <dd>否<dd>
-      <dt>请求参数</dt>
+      <dt>HTTP请求方式</dt><dd>POST<dd><dt>支持格式</dt><dd>json<dd><dt>是否需要登录</dt><dd>否<dd><dt>请求参数</dt>
       <dd>
         <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>名字</th>
-              <th>类型</th>
-              <th>类别</th>
-              <th>说明</th>
-            </tr>
-          </thead>
+          <thead><tr><th>#</th><th>名字</th> <th>类型</th><th>类别</th><th>说明</th></tr></thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>map_id</td>
-              <td>整数</td>
-              <td>必选参数</td>
-              <td>地图编号</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>title</td>
-              <td>字符串</td>
-              <td>必选参数</td>
-              <td>分享标题</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>email</td>
-              <td>字符串</td>
-              <td>可选参数</td>
-              <td>邮件（用户帐号）</td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td>image</td>
-              <td>文件</td>
-              <td>必选参数</td>
-              <td>拍的照片</td>
-            </tr>
-            <tr>
-              <td>5</td>
-              <td>text</td>
-              <td>字符串</td>
-              <td>必选参数</td>
-              <td>心情文字描述</td>
-            </tr>
+            <tr><td><%= param_item_cnt += 1 %></td><td>map_id</td><td>整数</td><td>必选参数</td><td>地图编号</td></tr>
+            <tr><td><%= param_item_cnt += 1 %></td><td>title</td><td>字符串</td><td>必选参数</td><td>分享标题</td></tr>
+            <tr><td><%= param_item_cnt += 1 %></td><td>email</td><td>字符串</td><td>可选参数</td><td>邮件（用户帐号）</td></tr>
+            <tr><td><%= param_item_cnt += 1 %></td><td>map_id</td><td>字符串</td><td>必选参数</td><td>地图编号</td></tr>
+            <tr><td><%= param_item_cnt += 1 %></td><td>image</td><td>文件</td><td>必选参数</td><td>拍的照片</td></tr>
+            <tr><td><%= param_item_cnt += 1 %></td><td>text</td><td>字符串</td><td>必选参数</td><td>心情文字描述</td></tr>
           </tbody>
         </table>
       <dd>
@@ -631,37 +315,18 @@
   </div>
 
   <div id="weathers" class="api well">
-    <h3 class="name">API<%= @api_cnt += 1 %></h3>
+    <% param_item_cnt = 0 %>
+    <h3 class="name">API<%= api_cnt += 1 %></h3>
     <small class="desc">获取当前地图所在城市天气</small>
     <dl>
       <dt>URL</dt>
       <dd><pre class="docs-example"><%= api_v1_map_weathers_url(:map_id, :format => :json) %></pre></dd>
-      <dt>HTTP请求方式</dt>
-      <dd>GET<dd>
-      <dt>支持格式</dt>
-      <dd>json<dd>
-      <dt>是否需要登录</dt>
-      <dd>否<dd>
-      <dt>请求参数</dt>
+      <dt>HTTP请求方式</dt><dd>GET<dd><dt>支持格式</dt><dd>json<dd><dt>是否需要登录</dt><dd>否<dd><dt>请求参数</dt>
       <dd>
         <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>名字</th>
-              <th>类型</th>
-              <th>类别</th>
-              <th>说明</th>
-            </tr>
-          </thead>
+          <thead><tr><th>#</th><th>名字</th> <th>类型</th><th>类别</th><th>说明</th></tr></thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>map_id</td>
-              <td>整数</td>
-              <td>必选参数</td>
-              <td>地图编号</td>
-            </tr>
+            <tr><td><%= param_item_cnt += 1 %></td><td>map_id</td><td>整数</td><td>必选参数</td><td>地图编号</td></tr>
           </tbody>
         </table>
       <dd>
@@ -671,72 +336,23 @@
   </div>
 
   <div id="logs" class="api well">
-    <h3 class="name">API<%= @api_cnt += 1 %></h3>
+    <% param_item_cnt = 0 %>
+    <h3 class="name">API<%= api_cnt += 1 %></h3>
     <small class="desc">上传当前地图使用日志</small>
     <dl>
       <dt>URL</dt>
       <dd><pre class="docs-example"><%= logs_api_v1_maps_url(:format => :json) %></pre></dd>
-      <dt>HTTP请求方式</dt>
-      <dd>POST<dd>
-      <dt>支持格式</dt>
-      <dd>json<dd>
-      <dt>是否需要登录</dt>
-      <dd>否<dd>
-      <dt>请求参数</dt>
+      <dt>HTTP请求方式</dt><dd>POST<dd><dt>支持格式</dt><dd>json<dd><dt>是否需要登录</dt><dd>否<dd><dt>请求参数</dt>
       <dd>
         <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>名字</th>
-              <th>类型</th>
-              <th>类别</th>
-              <th>说明</th>
-            </tr>
-          </thead>
+          <thead><tr><th>#</th><th>名字</th> <th>类型</th><th>类别</th><th>说明</th></tr></thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>map_id</td>
-              <td>整数</td>
-              <td>必选参数</td>
-              <td>地图编号</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>device_id</td>
-              <td>字符串</td>
-              <td>必选参数</td>
-              <td>设备串号</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>device_type</td>
-              <td>字符串</td>
-              <td>必选参数</td>
-              <td>设备平台（Android、iOS、WindowsPhone）</td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td>slug</td>
-              <td>字符串</td>
-              <td>必选参数</td>
-              <td>简码</td>
-            </tr>
-            <tr>
-              <td>5</td>
-              <td>message</td>
-              <td>字符串</td>
-              <td>必选参数</td>
-              <td>日志状态</td>
-            </tr>
-            <tr>
-              <td>5</td>
-              <td>info</td>
-              <td>字符串</td>
-              <td>必选参数</td>
-              <td>日志详细信息</td>
-            </tr>
+            <tr><td><%= param_item_cnt += 1 %></td><td>map_id</td><td>整数</td><td>必选参数</td><td>地图编号</td></tr>
+            <tr><td><%= param_item_cnt += 1 %></td><td>device_id</td><td>整数</td><td>必选参数</td><td>设备串号</td></tr>
+            <tr><td><%= param_item_cnt += 1 %></td><td>device_type</td><td>整数</td><td>必选参数</td><td>设备平台（Android、iOS、WindowsPhone）</td></tr>
+            <tr><td><%= param_item_cnt += 1 %></td><td>slug</td><td>整数</td><td>必选参数</td><td>简码</td></tr>
+            <tr><td><%= param_item_cnt += 1 %></td><td>message</td><td>整数</td><td>必选参数</td><td>日志状态</td></tr>
+            <tr><td><%= param_item_cnt += 1 %></td><td>info</td><td>整数</td><td>必选参数</td><td>日志详细信息</td></tr>
           </tbody>
         </table>
       <dd>
@@ -744,37 +360,18 @@
   </div>
 
   <div id="versions" class="api well">
-    <h3 class="name">API<%= @api_cnt += 1 %></h3>
+    <% param_item_cnt = 0 %>
+    <h3 class="name">API<%= api_cnt += 1 %></h3>
     <small class="desc">检测地图数据包是否更新</small>
     <dl>
       <dt>URL</dt>
       <dd><pre class="docs-example"><%= version_api_v1_map_url(:map_id, :format => :json) %></pre></dd>
-      <dt>HTTP请求方式</dt>
-      <dd>GET<dd>
-      <dt>支持格式</dt>
-      <dd>json<dd>
-      <dt>是否需要登录</dt>
-      <dd>否<dd>
-      <dt>请求参数</dt>
+      <dt>HTTP请求方式</dt><dd>GET<dd><dt>支持格式</dt><dd>json<dd><dt>是否需要登录</dt><dd>否<dd><dt>请求参数</dt>
       <dd>
         <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>名字</th>
-              <th>类型</th>
-              <th>类别</th>
-              <th>说明</th>
-            </tr>
-          </thead>
+          <thead><tr><th>#</th><th>名字</th> <th>类型</th><th>类别</th><th>说明</th></tr></thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>map_id</td>
-              <td>整数</td>
-              <td>必选参数</td>
-              <td>地图编号</td>
-            </tr>            
+            <tr><td><%= param_item_cnt += 1 %></td><td>map_id</td><td>整数</td><td>必选参数</td><td>地图编号</td></tr>
           </tbody>
         </table>
       <dd>
@@ -784,101 +381,49 @@
   </div>
 
 	<div id="declaration" class="api well">
-    <h3 class="name">API<%= @api_cnt += 1 %></h3>
+	  <% param_item_cnt = 0 %>
+    <h3 class="name">API<%= api_cnt += 1 %></h3>
     <small class="desc">获取免责声明</small>
     <dl>
       <dt>URL</dt>
       <dd><pre class="docs-example"><%= show_api_v1_declarations_url(:format => :json) %></pre></dd>
-      <dt>HTTP请求方式</dt>
-      <dd>GET<dd>
-      <dt>支持格式</dt>
-      <dd>json<dd>
-      <dt>是否需要登录</dt>
-      <dd>否<dd>
-      <dt>请求参数</dt>
-      <dd>
-        无
-        <dd>
+      <dt>HTTP请求方式</dt><dd>GET<dd><dt>支持格式</dt><dd>json<dd><dt>是否需要登录</dt><dd>否<dd><dt>请求参数</dt><dd>无<dd>
     </dl>
   </div>
 
   <div id="feedback" class="api well">
-    <h3 class="name">API<%= @api_cnt += 1 %></h3>
+    <% param_item_cnt = 0 %>
+    <h3 class="name">API<%= api_cnt += 1 %></h3>
     <small class="desc">提交意见反馈</small>
     <dl>
       <dt>URL</dt>
       <dd><pre class="docs-example"><%= create_api_v1_feedbacks_url(:format => :json) %></pre></dd>
-      <dt>HTTP请求方式</dt>
-      <dd>POST<dd>
-      <dt>支持格式</dt>
-      <dd>json<dd>
-      <dt>是否需要登录</dt>
-      <dd>否<dd>
-      <dt>请求参数</dt>
+      <dt>HTTP请求方式</dt><dd>POST<dd><dt>支持格式</dt><dd>json<dd><dt>是否需要登录</dt><dd>否<dd><dt>请求参数</dt>
       <dd>
         <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>名字</th>
-              <th>类型</th>
-              <th>类别</th>
-              <th>说明</th>
-            </tr>
-          </thead>
+          <thead><tr><th>#</th><th>名字</th> <th>类型</th><th>类别</th><th>说明</th></tr></thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>email</td>
-              <td>字符串</td>
-              <td>可选参数</td>
-              <td>email(用户帐号)</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>feedback</td>
-              <td>字符串</td>
-              <td>必选参数</td>
-              <td>内容(限1000个字符以内)</td>
-            </tr>
+            <tr><td><%= param_item_cnt += 1 %></td><td>email</td><td>字符串</td><td>必选参数</td><td>email(用户帐号)</td></tr>
+            <tr><td><%= param_item_cnt += 1 %></td><td>feedback</td><td>字符串</td><td>必选参数</td><td>内容(限1000个字符以内)</td></tr>
           </tbody>
-        </table>  
+        </table>
       <dd>
     </dl>
   </div>
 
 	<div id="version" class="api well">
-    <h3 class="name">API<%= @api_cnt += 1 %></h3>
+	  <% param_item_cnt = 0 %>
+    <h3 class="name">API<%= api_cnt += 1 %></h3>
     <small class="desc">检测是否有最新版本</small>
     <dl>
       <dt>URL</dt>
       <dd><pre class="docs-example"><%= check_api_v1_versions_url(:format => :json) %></pre></dd>
-      <dt>HTTP请求方式</dt>
-      <dd>GET<dd>
-      <dt>支持格式</dt>
-      <dd>json<dd>
-      <dt>是否需要登录</dt>
-      <dd>否<dd>
-      <dt>请求参数</dt>
+      <dt>HTTP请求方式</dt><dd>GET<dd><dt>支持格式</dt><dd>json<dd><dt>是否需要登录</dt><dd>否<dd><dt>请求参数</dt>
       <dd>
         <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>名字</th>
-              <th>类型</th>
-              <th>类别</th>
-              <th>说明</th>
-            </tr>
-          </thead>
+          <thead><tr><th>#</th><th>名字</th> <th>类型</th><th>类别</th><th>说明</th></tr></thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>platform</td>
-              <td>整数</td>
-              <td>必选参数</td>
-              <td>平台类型（0：iOS, 1: Android）</td>
-            </tr>
+            <tr><td><%= param_item_cnt += 1 %></td><td>platform</td><td>整数</td><td>必选参数</td><td>平台类型（0：iOS, 1: Android）</td></tr>
           </tbody>
         </table>
       <dd>
@@ -886,37 +431,18 @@
   </div>
 
   <div id="download" class="api well">
-    <h3 class="name">API<%= @api_cnt += 1 %></h3>
+    <% param_item_cnt = 0 %>
+    <h3 class="name">API<%= api_cnt += 1 %></h3>
     <small class="desc">统计下载次数</small>
     <dl>
       <dt>URL</dt>
       <dd><pre class="docs-example"><%= count_api_v1_downloads_url(:format => :text) %></pre></dd>
-      <dt>HTTP请求方式</dt>
-      <dd>GET<dd>
-      <dt>支持格式</dt>
-      <dd>json<dd>
-      <dt>是否需要登录</dt>
-      <dd>否<dd>
-      <dt>请求参数</dt>
+      <dt>HTTP请求方式</dt><dd>GET<dd><dt>支持格式</dt><dd>json<dd><dt>是否需要登录</dt><dd>否<dd><dt>请求参数</dt>
       <dd>
         <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>名字</th>
-              <th>类型</th>
-              <th>类别</th>
-              <th>说明</th>
-            </tr>
-          </thead>
+          <thead><tr><th>#</th><th>名字</th> <th>类型</th><th>类别</th><th>说明</th></tr></thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>type</td>
-              <td>整数</td>
-              <td>必选参数</td>
-              <td>类型（0：iOS, 1: Android）</td>
-            </tr>
+            <tr><td><%= param_item_cnt += 1 %></td><td>type</td><td>整数</td><td>必选参数</td><td>类型（0：iOS, 1: Android）</td></tr>
           </tbody>
         </table>
       <dd>
@@ -924,54 +450,29 @@
   </div>
 
   <div id="merchants" class="api well">
-    <h3 class="name">API<%= @api_cnt += 1 %></h3>
+    <% param_item_cnt = 0 %>
+    <h3 class="name">API<%= api_cnt += 1 %></h3>
     <small class="desc">获取所有的商家信息，结果为JSON数据格式。</small>
     <dl>
       <dt>URL</dt>
       <dd><pre class="docs-example"><%= api_v1_merchants_url(:format => :json) %></pre></dd>
-      <dt>HTTP请求方式</dt>
-      <dd>GET<dd>
-      <dt>支持格式</dt>
-      <dd>json<dd>
-      <dt>是否需要登录</dt>
-      <dd>否<dd>
-      <dt>请求参数</dt>
-      <dd>无<dd>
+      <dt>HTTP请求方式</dt><dd>GET<dd><dt>支持格式</dt><dd>json<dd><dt>是否需要登录</dt><dd>否<dd><dt>请求参数</dt><dd>无<dd>
     </dl>
   </div>
 
   <div id="merchant" class="api well">
-    <h3 class="name">API<%= @api_cnt += 1 %></h3>
+    <% param_item_cnt = 0 %>
+    <h3 class="name">API<%= api_cnt += 1 %></h3>
     <small class="desc">获取单个商家详细信息</small>
     <dl>
       <dt>URL</dt>
       <dd><pre class="docs-example"><%= api_v1_merchant_url(:merchant_id, :format => :json) %></pre></dd>
-      <dt>HTTP请求方式</dt>
-      <dd>GET<dd>
-      <dt>支持格式</dt>
-      <dd>json<dd>
-      <dt>是否需要登录</dt>
-      <dd>否<dd>
-      <dt>请求参数</dt>
+      <dt>HTTP请求方式</dt><dd>GET<dd><dt>支持格式</dt><dd>json<dd><dt>是否需要登录</dt><dd>否<dd><dt>请求参数</dt>
       <dd>
         <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>名字</th>
-              <th>类型</th>
-              <th>类别</th>
-              <th>说明</th>
-            </tr>
-          </thead>
+          <thead><tr><th>#</th><th>名字</th> <th>类型</th><th>类别</th><th>说明</th></tr></thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>merchant_id</td>
-              <td>整数</td>
-              <td>必选参数</td>
-              <td>商家编号</td>
-            </tr>
+            <tr><td><%= param_item_cnt += 1 %></td><td>merchant_id</td><td>整数</td><td>必选参数</td><td>商家编号</td></tr>
           </tbody>
         </table>
       <dd>
@@ -981,37 +482,18 @@
   </div>
 
   <div id="device" class="api well">
-    <h3 class="name">API<%= @api_cnt += 1 %></h3>
+    <% param_item_cnt = 0 %>
+    <h3 class="name">API<%= api_cnt += 1 %></h3>
     <small class="desc">通过设备查看地图使用权限</small>
     <dl>
       <dt>URL</dt>
       <dd><pre class="docs-example"><%= api_v1_devices_url(:format => :json) %></pre></dd>
-      <dt>HTTP请求方式</dt>
-      <dd>GET<dd>
-      <dt>支持格式</dt>
-      <dd>json<dd>
-      <dt>是否需要登录</dt>
-      <dd>否<dd>
-      <dt>请求参数</dt>
+      <dt>HTTP请求方式</dt><dd>GET<dd><dt>支持格式</dt><dd>json<dd><dt>是否需要登录</dt><dd>否<dd><dt>请求参数</dt>
       <dd>
         <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>名字</th>
-              <th>类型</th>
-              <th>类别</th>
-              <th>说明</th>
-            </tr>
-          </thead>
+          <thead><tr><th>#</th><th>名字</th> <th>类型</th><th>类别</th><th>说明</th></tr></thead>
           <tbody>
-           <tr>
-              <td>1</td>
-              <td>device_id</td>
-              <td>字符串</td>
-              <td>必选参数</td>
-              <td>用户设备ID</td>
-            </tr>
+            <tr><td><%= param_item_cnt += 1 %></td><td>device_id</td><td>字符串</td><td>必选参数</td><td>用户设备ID</td></tr>
           </tbody>
         </table>
         <dd>
@@ -1021,24 +503,19 @@
   </div>
 
   <div id="device_validate" class="api well">
-    <h3 class="name">API<%= @api_cnt += 1 %></h3>
+    <% param_item_cnt = 0 %>
+    <h3 class="name">API<%= api_cnt += 1 %></h3>
     <small class="desc">设备绑定序列号</small>
     <dl>
       <dt>URL</dt>
       <dd><pre class="docs-example"><%= validate_api_v1_devices_url(:format => :json) %></pre></dd>
-      <dt>HTTP请求方式</dt>
-      <dd>POST<dd>
-      <dt>支持格式</dt>
-      <dd>json<dd>
-      <dt>是否需要登录</dt>
-      <dd>否<dd>
-      <dt>请求参数</dt>
+      <dt>HTTP请求方式</dt><dd>POST<dd><dt>支持格式</dt><dd>json<dd><dt>是否需要登录</dt><dd>否<dd><dt>请求参数</dt>
       <dd>
         <table class="table table-bordered">
           <thead><tr><th>#</th> <th>名字</th> <th>类型</th> <th>类别</th> <th>说明</th> </tr></thead>
           <tbody>
-          	<tr><td>1</td> <td>device_id</td> <td>字符串</td> <td>必选参数</td> <td>用户设备ID</td></tr>
-            <tr><td>2</td> <td>serial   </td> <td>字符串</td> <td>必选参数</td> <td>序列号</td></tr>
+            <tr><td><%= param_item_cnt += 1 %></td><td>device_id</td><td>字符串</td><td>必选参数</td><td>用户设备ID</td></tr>
+            <tr><td><%= param_item_cnt += 1 %></td><td>serial</td><td>字符串</td><td>必选参数</td><td>序列号</td></tr>
           </tbody>
         </table>
         <dd>
@@ -1052,31 +529,30 @@
   </div>
 
 	<div id="lijiang_mailboxes" class="api well">
-    <h3 class="name">API<%= @api_cnt += 1 %></h3>
-    <small class="desc">设备绑定序列号</small>
-    <dl>
-      <dt>URL        </dt> <dd><pre class="docs-example"><%= api_v1_lijiang_mailboxes_url(:format => :json) %></pre></dd>
-      <dt>HTTP请求方式</dt> <dd>POST<dd>
-      <dt>支持格式    </dt> <dd>json<dd>
-      <dt>是否需要登录 </dt> <dd>否<dd>
+    <% param_item_cnt = 0 %>
 
-      <dt>请求参数</dt>
+    <h3 class="name">API<%= api_cnt += 1 %></h3>
+    <small class="desc">丽江市旅游局局长信箱</small>
+    <dl>
+      <dt>URL</dt><dd><pre class="docs-example"><%= api_v1_lijiang_mailboxes_url(:format => :json) %></pre></dd>
+      <dt>HTTP请求方式</dt><dd>POST<dd><dt>支持格式</dt><dd>json<dd><dt>是否需要登录</dt><dd>否<dd><dt>请求参数</dt>
       <dd>
         <table class="table table-bordered">
-          <thead><tr><th>#</th> <th>名字</th> <th>类型</th> <th>类别</th> <th>说明</th> </tr></thead>
+          <thead><tr><th>#</th><th>名字</th><th>类型</th><th>类别</th><th>说明</th></tr></thead>
           <tbody>
-            <tr><td>1</td> <td>service_score</td> <td>整数值</td> <td>必填参数</td> <td>服务设施评分</td></tr>
-            <tr><td>2</td> <td>env_score    </td> <td>整数值</td> <td>必填参数</td> <td>环境及卫生评分</td></tr>
-            <tr><td>2</td> <td>category     </td> <td>字符串</td> <td>必填参数</td> <td>分类</td></tr>
-            <tr><td>2</td> <td>title        </td> <td>字符串</td> <td>选填参数</td> <td>回复标题</td></tr>
-            <tr><td>2</td> <td>content      </td> <td>字符串</td> <td>选填参数</td> <td>回复内容</td></tr>
-            <tr><td>2</td> <td>who          </td> <td>字符串</td> <td>选填参数</td> <td>回复作者</td></tr>
-            <tr><td>2</td> <td>contact      </td> <td>字符串</td> <td>选填参数</td> <td>回复者联系方式</td></tr>
+          	<tr><td><%=param_item_cnt +=1 %></td><td>device_id    </td><td>字符串</td> <td>必填参数</td><td>手机设备号</td></tr>
+            <tr><td><%=param_item_cnt +=1 %></td><td>service_score</td><td>整数值</td> <td>必填参数</td><td>服务设施评分</td></tr>
+            <tr><td><%=param_item_cnt +=1 %></td><td>env_score    </td><td>整数值</td> <td>必填参数</td><td>环境及卫生评分</td></tr>
+            <tr><td><%=param_item_cnt +=1 %></td><td>category     </td><td>字符串</td> <td>必填参数</td><td>分类</td></tr>
+            <tr><td><%=param_item_cnt +=1 %></td><td>title        </td><td>字符串</td> <td>选填参数</td><td>回复标题</td></tr>
+            <tr><td><%=param_item_cnt +=1 %></td><td>content      </td><td>字符串</td> <td>选填参数</td><td>回复内容</td></tr>
+            <tr><td><%=param_item_cnt +=1 %></td><td>who          </td><td>字符串</td> <td>选填参数</td><td>回复作者</td></tr>
+            <tr><td><%=param_item_cnt +=1 %></td><td>contact      </td><td>字符串</td> <td>选填参数</td><td>回复者联系方式</td></tr>
           </tbody>
         </table>
         <dd>
     </dl>
-     <p><b>返回值：</b> 成功：result=true； 失败： result=false。</p>
+    <p><b>返回值：</b> 成功：result=true； 失败： result=false, msg="错误信息"。</p>
   </div>
 
 </div>
