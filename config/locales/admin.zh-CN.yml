@@ -107,6 +107,8 @@
         edit_images: "修改推荐图集图片"
         new_text: "添加推荐描述"
         edit_text: "修改推荐描述"
+        new_detailed_info: "添加推荐信息"
+        edit_detailed_info: "修改推荐信息"
       shares:
         index: "分享"
         new: "添加分享"
@@ -209,6 +211,8 @@
         editimagelist: "修改图集"
         newtext: "添加描述"
         edittext: "修改描述"
+        new_detailed_info: "添加信息"
+        edit_detailed_info: "修改信息"
         videolist: "视频列表"
         audiolist: "音频列表"
         imagelist: "图片列表"
@@ -216,6 +220,7 @@
         newimages: "添加图集"
         images: "图集详细列表"
         textlist: "描述列表"
+        detailed_info_list: "信息列表"
     shares:
       index: "分享列表"
       show: "查看分享"
@@ -314,6 +319,9 @@
       text:        
         success: "操作描述成功！"
         error: "操作描述失败！"
+      detailed_info:        
+        success: "操作信息成功！"
+        error: "操作信息失败！"
     shares:
       success: "操作分享成功！"
       error: "操作分享失败！"

@@ -19,7 +19,11 @@ class Letter < ActiveRecord::Base
 
     :recommend_record_description   => 3,
 
-    :share_text                     => 4
+    :share_text                     => 4,
+
+    :detailed_info             => 5,
+
+    :detailed_text             => 6
   },
   :column => "text_type"
 

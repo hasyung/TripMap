@@ -11,7 +11,8 @@ class RecommendDetailed < ActiveRecord::Base
 
   has_many :videos, :as => :videoable,  :dependent => :destroy
   has_many :audios, :as => :audioable,  :dependent => :destroy
-  has_many :texts,  :as => :textable,   :dependent => :destroy, class_name: 'Letter'
+  has_many :detailed_texts,  :as => :textable,   :dependent => :destroy, class_name: 'Letter', :conditions => { :text_type => Letter.detailed_text }
+  has_many :detailed_infos,  :as => :textable,   :dependent => :destroy, class_name: 'Letter', :conditions => { :text_type => Letter.detailed_info }
   has_many :image_lists,  :dependent => :destroy
 
   belongs_to :recommend_record, :counter_cache => true

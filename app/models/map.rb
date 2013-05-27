@@ -193,13 +193,15 @@ class Map < ActiveRecord::Base
             if recommend.category_cd != 3
               detail += detailed.detailed_images if detailed.detailed_images.present?
             end
-            detail += detailed.texts if detailed.texts.present?
+            detail += detailed.detailed_texts if detailed.detailed_texts.present?
+            detail += detailed.detailed_infos if detailed.detailed_infos.present?
             detail = detail.sort {|a,b| a[:order] <=> b[:order]}
             content = { :name => detailed.name }
             images ||= []
             videos ||= []
             audios ||= []
             texts  ||= []
+            infos ||= []
             image_lists ||= []
 
             detail.each do |d|
@@ -211,7 +213,11 @@ class Map < ActiveRecord::Base
               when "Audio"
                 audios << {audio: d.file.url,  size: d.file_size, duration: d.duration,  order: d.order}
               when "Letter"
-                 texts << {text: d.body, order: d.order}
+                if d.text_type == 5
+                  infos << {url: d.body, order: d.order}
+                else
+                  texts << {text: d.body, order: d.order}
+                end
               when "ImageList"
                 imgs ||= []
                 d.images.order_asc.each{ |o| imgs << { image: o.file.url }}
@@ -227,6 +233,7 @@ class Map < ActiveRecord::Base
               content.merge!({image_lists: image_lists}) 
             end
             content.merge!({texts: texts})
+            content.merge!({infos: infos})
             if recommend.category_cd == 2
               content.merge!({cover: get_file_value(detailed.recommend_detailed_cover,"file",true)})
             end
