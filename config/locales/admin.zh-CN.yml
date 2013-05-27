@@ -685,10 +685,16 @@
 
   errors:
     api:
+      invalid_params: "必填参数字段错误！"
       maps:
         device_id: "设备ID错误！"
       lijiang_mailboxes:
         invalid_params: "必填参数字段错误！"
+      devices:
+        device_create_error: "设备信息入库失败"
+        serial_error: "序列号错误,请核对！"
+        ser_count_used_exp: "序列号使用次数超过限制！"
+        map_registered: "此地图已激活,无需重复激活！"
     account:
       presence: "必填"
     type:
@@ -705,6 +711,10 @@
     weather:
       map_id: "参数错误！"
       disabled: "当前天气不可用，请稍后再试！"
+
+  tips:
+    api:
+      success: "成功！"
 
   enums:
     share:

@@ -4,7 +4,7 @@ class  Api::V1x::MapsController < Api::V1x::ApplicationController
 
   def index
     fields = ['device_id']
-    ( render :json => set_error_msg("errors.api.maps.device_id"); return ) if has_nil_value_in fields
+    ( render :json => set_msg("errors.api.maps.device_id"); return ) if has_nil_value_in fields
     d = Device.find_by_device_id params[:device_id]
     serials = d.blank? ? [] : d.map_serial_numbers.map(&:code)
 
