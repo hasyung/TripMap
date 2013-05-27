@@ -572,6 +572,7 @@
         who: "回复者"
         contact: "回复者联系信息"
       panel_video:
+        map: "所属地图"
         name: "视频名称"
         panel_video_slug: "简码"
         panel_video_slug_cover: "简码小图片"

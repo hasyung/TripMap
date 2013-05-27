@@ -12,6 +12,7 @@
       <thead>
         <tr>
           <th><input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" /></th>
+          <th><%= model_class.human_attribute_name(:map) %></th>
           <th><%= model_class.human_attribute_name(:name) %></th>
           <th><%= model_class.human_attribute_name(:panel_video_slug) %></th>
           <th><%= model_class.human_attribute_name(:panel_video_slug_cover) %></th>
@@ -22,6 +23,7 @@
       <% @models.each do |m| %>
           <tr>
             <td><%= check_box_tag "panel_video_ids[]", m.id, false, id: "panel_video_#{m.id}" %></td>
+            <td><%= m.map.name %></td>
             <td><%= m.name %></td>
             <td><%= m.panel_video_slug.slug %></td>
             <td><%= image_tag m.panel_video_slug_cover.file, :size => "50x50" %></td>

@@ -265,7 +265,9 @@ class Map < ActiveRecord::Base
   def get_panel_videos
     pv = []
     PanelVideo.all.each do |m|
-      pv << { name: m.name, slug: m.panel_video_slug.slug, slug_cover: m.panel_video_slug_cover.file.url, video: m.video.url }
+      pv << { name: m.name, slug: get_file_value(m.panel_video_slug, "slug"),
+        slug_cover: get_file_value(m.panel_video_slug_cover, "file", true), video: m.video.url
+      }
     end
     pv
   end
