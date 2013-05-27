@@ -17,6 +17,7 @@ class Map < ActiveRecord::Base
     assoc.has_many :info_lists, :autosave => true
     assoc.has_many :logs
     assoc.has_many :surround_cities
+    assoc.has_many :panel_videos
   end
   has_many :map_serial_numbers
 
@@ -69,7 +70,8 @@ class Map < ActiveRecord::Base
       scenics:                get_scenics(),
       places:                 get_places(),
       recommends:             get_recommends(),
-      info_lists:             get_info_lists()
+      info_lists:             get_info_lists(),
+      panel_videos:           get_panel_videos()
     }
   end
 
@@ -251,6 +253,14 @@ class Map < ActiveRecord::Base
       cover:                  get_file_value(recommend.recommend_cover,"file",true),
       records:                records
     }
+  end
+
+  def get_panel_videos
+    pv = []
+    PanelVideo.all.each do |m|
+      pv << { name: m.name, slug: m.panel_video_slug.slug, slug_cover: m.panel_video_slug_cover.file.url, video: m.video.url }
+    end
+    pv
   end
 
   def get_file_value( file, meth_name, url = false )

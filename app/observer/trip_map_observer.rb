@@ -4,7 +4,7 @@ class TripMapObserver < ActiveRecord::Observer
   include Memcached
 
   # Observing models.
-  observe :scenic, :place, :recommend, :info_list,                    # Level 1.
+  observe :scenic, :place, :recommend, :info_list, :panel_video,      # Level 1.
           :recommend_record, :recommend_detailed, :info,              # Level 2.
           :image_list,
           :audio, :video, :image, :letter                             # Atom.
@@ -15,6 +15,7 @@ class TripMapObserver < ActiveRecord::Observer
     :Place              => "map",
     :Recommend          => "map",
     :InfoList           => "map",
+    :PanelVideo         => "map",
 
     :Info               => "info_list.map",
     :RecommendRecord    => "recommend.map",
@@ -44,15 +45,16 @@ class TripMapObserver < ActiveRecord::Observer
     map_instance = get_map(model)
     return nil if map_instance.nil?
 
+    @@dalli.flush
     @@dalli.set("map_#{map_instance.id}", map_instance.get_map_values)
+
     map_instance.version = Time.now.to_i
     map_instance.save
   end
 
   def get_map( model )
     map = nil
-    #kls_name = model.class.class_name  # ruby-1.9.3-p286 [ i586 ]
-    kls_name = model.class.to_s         # ruby-1.9.3-p392 [ x86_64 ]
+    kls_name = model.class.to_s
 
     poliable = POLIABLE_NAME_OPTIONS[ kls_name.to_sym ]
     nav_path = nil

@@ -57,7 +57,8 @@
       index: "设置"
     lijiang_mailbox:
       index: "丽江市旅游局局长信箱"
-
+    panel_videos:
+      index: "展板视频"
   breadcrumbs:
     admin:
       application:
@@ -158,7 +159,10 @@
         index: "设置"
       lijiang_mailboxes:
         index: "丽江市旅游局局长信箱"
-
+      panel_videos:
+        index: "展板视频"
+        new: "添加展板视频"
+        edit: "编辑展板视频"
   links:
     home:
       index: "返回首页"
@@ -277,6 +281,10 @@
       edit: "编辑周边城市"
     settings:
       index: "保存设置"
+    panel_videos:
+      index: "展板视频"
+      edit: "编辑展板视频"
+      new: "新建展板视频"
 
   messages:
     maps:
@@ -360,6 +368,9 @@
     lijiang_mailboxes:
       success: "操作成功！"
       error: "操作失败！"
+    panel_videos:
+      success: "操作成功！"
+      error: "操作失败！"
 
   activerecord:
     enums:
@@ -398,6 +409,7 @@
       feedback: "意见反馈"
       surround_city: "周边城市"
       setting: "设置"
+      panel_video: "展板视频"
     attributes:
       map:
         province: "省市"
@@ -551,6 +563,10 @@
         content: "回复内容"
         who: "回复者"
         contact: "回复者联系信息"
+      panel_video:
+        name: "视频名称"
+        panel_video_slug: "简码"
+        panel_video_slug_cover: "简码小图片"
 
   simple_form:
     labels:
@@ -656,6 +672,9 @@
         order: "信息记录顺序值（<b>选填</b>）"
       surround_city:
         city_name: "城市名称"
+      panel_video:
+        map: "地图"
+        video: "展板视频"
 
   helpers:
     links:

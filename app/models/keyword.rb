@@ -18,7 +18,8 @@ class Keyword < ActiveRecord::Base
     :recommend_slug             => 3,
     :info_list_slug             => 4,
     :info_slug                  => 5,
-    :merchant_slug              => 6
+    :merchant_slug              => 6,
+    :panel_video_slug           => 7
   },
   :column => "keyword_type"
 

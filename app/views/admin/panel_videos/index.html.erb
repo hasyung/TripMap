@@ -1,0 +1,42 @@
+<%- model_class = PanelVideo -%>
+
+<%= render 'base' %>
+
+<div class="box">
+  <div class="box-title">
+    <span class="icon"><i class="icon-th"></i></span>
+    <h5><%= t('links.panel_videos.index') %></h5>
+  </div>
+  <div class="box-content">
+    <table class="table table-bordered table-striped with-check">
+      <thead>
+        <tr>
+          <th><input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" /></th>
+          <th><%= model_class.human_attribute_name(:name) %></th>
+          <th><%= model_class.human_attribute_name(:panel_video_slug) %></th>
+          <th><%= model_class.human_attribute_name(:panel_video_slug_cover) %></th>
+          <th class="action"><%= t('links.commons.action') %></th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @models.each do |m| %>
+          <tr>
+            <td><%= check_box_tag "panel_video_ids[]", m.id, false, id: "panel_video_#{m.id}" %></td>
+            <td><%= m.name %></td>
+            <td><%= m.panel_video_slug.slug %></td>
+            <td><%= image_tag m.panel_video_slug_cover.file, :size => "50x50" %></td>
+
+            <td class="action">
+              <%= link_to raw("<i class=\"icon-edit\"></i>"), edit_admin_panel_video_path(m), title: t('links.panel_videos.edit') %>
+              <%= link_to raw("<i class=\"icon-trash\"></i>"), admin_panel_video_path(m), method: :delete, data: {confirm: t('links.commons.confirm')} %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="table-footer clearfix">
+  <div class="paginates-info"><%= page_entries_info @models %></div>
+  <%= paginate @models, :theme => "admin" %>
+</div>

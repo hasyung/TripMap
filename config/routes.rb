@@ -125,6 +125,8 @@ TripMap::Application.routes.draw do
     resources :surround_cities
 
     resources :lijiang_mailboxes, only: [ :index, :destroy ]
+
+    resources :panel_videos
   end
 
   namespace :api do

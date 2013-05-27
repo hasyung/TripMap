@@ -20,9 +20,10 @@ class Api::V1::MapsController < Api::V1::ApplicationController
     mid = params[:map_id].to_i
     map = Map.find_by_id(mid)
     ( render :json => result; return ) if map.nil?                # Check map
+
     cache_key = "map_#{mid}"
     @@dalli.set(cache_key, map.get_map_values) if @@dalli.get(cache_key).blank?
-    #Rails.cache.write(cache_key, map.get_map_values) if !Rails.cache.exist?(cache_key)
+
     render :json => @@dalli.get(cache_key)
   end
 
