@@ -22,8 +22,8 @@ class Api::ApplicationController < ActionController::Base
     has_nil
   end
 
-  def set_error_msg( yml_path )
-    { error_msg: I18n.t(yml_path) }
+  def set_msg( yml_path )
+    { msg: I18n.t(yml_path) }
   end
 
 end

@@ -521,11 +521,11 @@
         <dd>
     </dl>
     <p>结果：</p>
-    <p>result: "成功！" </p>
-    <p>result: "参数错误,请核对！" </p>
-    <p>result: "序列号错误,请核对！" </p>
-    <p>result: "序列号使用次数超过限制！" </p>
-    <p>result: "此地图已激活,无需重复激活！" </p>
+    <p>{ result: true, msg: "成功！" }</p>
+    <p>{ result: false, msg: "参数错误,请核对！" }</p>
+    <p>{ result: false, msg: "序列号错误,请核对！" }</p>
+    <p>{ result: false, msg: "序列号使用次数超过限制！" }</p>
+    <p>{ result: false, msg: "此地图已激活,无需重复激活！" }</p>
   </div>
 
 	<div id="lijiang_mailboxes" class="api well">
@@ -543,7 +543,7 @@
           	<tr><td><%=param_item_cnt +=1 %></td><td>device_id    </td><td>字符串</td> <td>必填参数</td><td>手机设备号</td></tr>
             <tr><td><%=param_item_cnt +=1 %></td><td>service_score</td><td>整数值</td> <td>必填参数</td><td>服务设施评分</td></tr>
             <tr><td><%=param_item_cnt +=1 %></td><td>env_score    </td><td>整数值</td> <td>必填参数</td><td>环境及卫生评分</td></tr>
-            <tr><td><%=param_item_cnt +=1 %></td><td>category     </td><td>字符串</td> <td>必填参数</td><td>分类</td></tr>
+            <tr><td><%=param_item_cnt +=1 %></td><td>category     </td><td>整数值</td> <td>必填参数</td><td>分类</td></tr>
             <tr><td><%=param_item_cnt +=1 %></td><td>title        </td><td>字符串</td> <td>选填参数</td><td>回复标题</td></tr>
             <tr><td><%=param_item_cnt +=1 %></td><td>content      </td><td>字符串</td> <td>选填参数</td><td>回复内容</td></tr>
             <tr><td><%=param_item_cnt +=1 %></td><td>who          </td><td>字符串</td> <td>选填参数</td><td>回复作者</td></tr>
@@ -552,7 +552,7 @@
         </table>
         <dd>
     </dl>
-    <p><b>返回值：</b> 成功：result=true； 失败： result=false, msg="错误信息"。</p>
+    <p><b>返回值：</b> 成功：{ result: true, msg: "成功！" }； 失败： { result: false, msg: "错误信息提示" }</p>
   </div>
 
 </div>
