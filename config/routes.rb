@@ -81,6 +81,12 @@ TripMap::Application.routes.draw do
           delete 'text/:id'  => 'recommend_detaileds#destroy_text'
           get    'text/:id/edit' => 'recommend_detaileds#edit_text', :as => 'text_edit'
 
+          get    'detailed_info/new'  => 'recommend_detaileds#new_detailed_info'
+          post   'detailed_infos'     => 'recommend_detaileds#create_detailed_info'
+          put    'detailed_info/:id'  => 'recommend_detaileds#update_detailed_info',  :as => 'detailed_info'
+          delete 'detailed_info/:id'  => 'recommend_detaileds#destroy_detailed_info'
+          get    'detailed_info/:id/edit' => 'recommend_detaileds#edit_detailed_info', :as => 'detailed_info_edit'
+
         end
       end
     end
@@ -125,6 +131,8 @@ TripMap::Application.routes.draw do
     resources :surround_cities
 
     resources :lijiang_mailboxes, only: [ :index, :destroy ]
+
+    resources :panel_videos
   end
 
   namespace :api do

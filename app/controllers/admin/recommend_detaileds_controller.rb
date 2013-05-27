@@ -77,7 +77,10 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
     if @recommend.category_cd != 3
       @images = @detailed.detailed_images.order_asc
     end
-    @texts  = @detailed.texts.order_asc
+    @texts  = @detailed.detailed_texts.order_asc
+    @texts  = Letter.select{|l| l.textable_id == @detailed.id && l.textable_type == "RecommendDetailed" && 
+                                (l.text_type == 0 || l.text_type == 6)}
+    @detailed_infos  = @detailed.detailed_infos.order_asc
 
     add_breadcrumb :show
   end
@@ -308,14 +311,14 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
     recommend = Recommend.find params[:recommend_id]
     @record = recommend.recommend_records.find params[:record_id]
     @detailed = RecommendDetailed.find params[:detailed_id]
-    @text = @detailed.texts.new
+    @text = @detailed.detailed_texts.new
 
     add_breadcrumb :new_text
   end
 
   def create_text
     @detailed = RecommendDetailed.find params[:detailed_id]
-    @text = @detailed.texts.new params[:letter]
+    @text = @detailed.detailed_texts.new params[:letter]
     if @text.save
       redirect_to admin_recommend_record_detailed_path(
                   params[:recommend_id],
@@ -329,14 +332,14 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
 
   def edit_text
     @detailed = RecommendDetailed.find params[:detailed_id]
-    @text = @detailed.texts.find params[:id]
+    @text = @detailed.detailed_texts.find params[:id]
 
     add_breadcrumb :edit_text
   end
 
   def update_text
     @detailed = RecommendDetailed.find params[:detailed_id]
-    @text = @detailed.texts.find params[:id]
+    @text = @detailed.detailed_texts.find params[:id]
     if @text.update_attributes params[:letter]
       redirect_to admin_recommend_record_detailed_path(
                   params[:recommend_id],
@@ -362,6 +365,67 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
                   params[:record_id],
                   params[:detailed_id]),
                   alert: t('messages.recommend_detaileds.text.error')
+    end
+  end
+
+  def new_detailed_info
+    recommend = Recommend.find params[:recommend_id]
+    @record = recommend.recommend_records.find params[:record_id]
+    @detailed = RecommendDetailed.find params[:detailed_id]
+    @detailed_info = @detailed.detailed_infos.new
+
+    add_breadcrumb :new_detailed_info
+  end
+
+  def create_detailed_info
+    @detailed = RecommendDetailed.find params[:detailed_id]
+    @detailed_info = @detailed.detailed_infos.new params[:letter]
+    if @detailed_info.save
+      redirect_to admin_recommend_record_detailed_path(
+                  params[:recommend_id],
+                  params[:record_id],
+                  params[:detailed_id]),
+                  notice: t('messages.recommend_detaileds.detailed_info.success')
+    else
+      render :new_detailed_info
+    end
+  end
+
+  def edit_detailed_info
+    @detailed = RecommendDetailed.find params[:detailed_id]
+    @detailed_info = @detailed.detailed_infos.find params[:id]
+
+    add_breadcrumb :edit_detailed_info
+  end
+
+  def update_detailed_info
+    @detailed = RecommendDetailed.find params[:detailed_id]
+    @detailed_info = @detailed.detailed_infos.find params[:id]
+    if @detailed_info.update_attributes params[:letter]
+      redirect_to admin_recommend_record_detailed_path(
+                  params[:recommend_id],
+                  params[:record_id],
+                  params[:detailed_id]),
+                  notice: t('messages.recommend_detaileds.detailed_info.success')
+    else
+      render :edit_detailed_info
+    end
+  end
+
+  def destroy_detailed_info
+    @detailed_info = Letter.find params[:id]
+    if @detailed_info.destroy
+      redirect_to admin_recommend_record_detailed_path(
+                  params[:recommend_id],
+                  params[:record_id],
+                  params[:detailed_id]),
+                  notice: t('messages.recommend_detaileds.detailed_info.success')
+    else
+      redirect_to admin_recommend_record_detailed_path(
+                  params[:recommend_id],
+                  params[:record_id],
+                  params[:detailed_id]),
+                  alert: t('messages.recommend_detaileds.detailed_info.error')
     end
   end
 

@@ -16,7 +16,7 @@ class RecommendRecord < ActiveRecord::Base
 
   validate :order_increment
   with_options :presence => true do |column|
-    column.validates :name, :length => { :within => 2..15 }, :uniqueness => true
+    column.validates :name, :length => { :within => 2..15 }
     column.validates :order, uniqueness: { scope: [:recommend_id, :order] }, 
                              numericality: { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999 }
   end
