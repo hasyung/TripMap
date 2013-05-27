@@ -101,7 +101,9 @@ TripMap::Application.routes.draw do
     end
 
     resources :cities, :except => :show
+
     resources :counties, :except => :show
+
     resources :merchants, :except => :show do
       resources :images, except: :show
     end
@@ -125,7 +127,10 @@ TripMap::Application.routes.draw do
     resources :versions
 
     resources :weathers, only: [:index]
+
     resources :surround_cities
+
+    resources :lijiang_mailboxes, only: [ :index, :destroy ]
   end
 
   namespace :api do
@@ -172,6 +177,7 @@ TripMap::Application.routes.draw do
         post '/validate' => 'devices#validate', :on => :collection
       end
 
+      resources :lijiang_mailboxes, only: [:create ]
     end
 
     namespace :v1x do

@@ -55,6 +55,8 @@
       index: "周边城市天气"
     settings:
       index: "设置"
+    lijiang_mailbox:
+      index: "丽江市旅游局局长信箱"
 
   breadcrumbs:
     admin:
@@ -156,6 +158,8 @@
         edit: "编辑周边城市"
       settings:
         index: "设置"
+      lijiang_mailboxes:
+        index: "丽江市旅游局局长信箱"
 
   links:
     home:
@@ -361,6 +365,9 @@
       purview: "抱歉，您没有查看序列号管理模块的权限！"
     settings:
       success: "设置成功！"
+    lijiang_mailboxes:
+      success: "操作成功！"
+      error: "操作失败！"
 
   activerecord:
     enums:
@@ -543,6 +550,15 @@
         serial_devices_size: "序列号绑定设备数"
       keyword:
         slug: "简码"
+      lijiang_mailbox:
+        device_id: "设备号"
+        service_score: "服务及设施得分"
+        env_score: "服务及设施得分"
+        category: "所属分类"
+        title: "回复标题"
+        content: "回复内容"
+        who: "回复者"
+        contact: "回复者联系信息"
 
   simple_form:
     labels:
@@ -677,8 +693,16 @@
 
   errors:
     api:
+      invalid_params: "必填参数字段错误！"
       maps:
         device_id: "设备ID错误！"
+      lijiang_mailboxes:
+        invalid_params: "必填参数字段错误！"
+      devices:
+        device_create_error: "设备信息入库失败"
+        serial_error: "序列号错误,请核对！"
+        ser_count_used_exp: "序列号使用次数超过限制！"
+        map_registered: "此地图已激活,无需重复激活！"
     account:
       presence: "必填"
     type:
@@ -695,6 +719,10 @@
     weather:
       map_id: "参数错误！"
       disabled: "当前天气不可用，请稍后再试！"
+
+  tips:
+    api:
+      success: "成功！"
 
   enums:
     share:
