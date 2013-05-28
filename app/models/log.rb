@@ -6,7 +6,8 @@ class Log < ActiveRecord::Base
   # Associations
   belongs_to :map
   belongs_to :activate_map
-
+  belongs_to :device
+  
   #SimpleEnum
   as_enum :device_type, { :iPhone => 0, :android => 1 }
   as_enum :message, { :success => 0, :time_out => 1, :not_found => 2, :error => 3 }
