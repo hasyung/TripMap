@@ -3,7 +3,7 @@ class Letter < ActiveRecord::Base
   self.table_name = 'texts'
 
   # White list
-  attr_accessible :body, :order
+  attr_accessible :body, :order, :text_type
 
   # Associations
   belongs_to :textable, :polymorphic => true

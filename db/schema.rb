@@ -149,6 +149,7 @@ ActiveRecord::Schema.define(:version => 20130527063411) do
   create_table "info_lists", :force => true do |t|
     t.integer  "map_id",                                       :null => false
     t.string   "name",        :limit => 20,                    :null => false
+    t.string   "slug",        :limit => 20,                    :null => false
     t.integer  "order",                     :default => 0
     t.boolean  "is_free",                   :default => false
     t.integer  "infos_count",               :default => 0
@@ -158,10 +159,12 @@ ActiveRecord::Schema.define(:version => 20130527063411) do
 
   add_index "info_lists", ["map_id", "order"], :name => "index_info_lists_on_map_id_and_order", :unique => true
   add_index "info_lists", ["name"], :name => "index_info_lists_on_name", :unique => true
+  add_index "info_lists", ["slug"], :name => "index_info_lists_on_slug", :unique => true
 
   create_table "infos", :force => true do |t|
     t.integer  "info_list_id",                                  :null => false
     t.string   "name",         :limit => 20,                    :null => false
+    t.string   "slug",         :limit => 20,                    :null => false
     t.integer  "order",                      :default => 0
     t.boolean  "is_free",                    :default => false
     t.datetime "created_at",                                    :null => false
@@ -170,6 +173,7 @@ ActiveRecord::Schema.define(:version => 20130527063411) do
 
   add_index "infos", ["info_list_id", "order"], :name => "index_infos_on_info_list_id_and_order", :unique => true
   add_index "infos", ["name"], :name => "index_infos_on_name", :unique => true
+  add_index "infos", ["slug"], :name => "index_infos_on_slug", :unique => true
 
   create_table "ip_addresses", :force => true do |t|
     t.string   "ip",                        :null => false
@@ -228,6 +232,7 @@ ActiveRecord::Schema.define(:version => 20130527063411) do
   create_table "maps", :force => true do |t|
     t.integer  "province_id",                                   :null => false
     t.string   "name",             :limit => 20,                :null => false
+    t.string   "slug",             :limit => 20
     t.string   "version",          :limit => 30
     t.integer  "scenics_count",                  :default => 0
     t.integer  "places_count",                   :default => 0
@@ -239,11 +244,13 @@ ActiveRecord::Schema.define(:version => 20130527063411) do
   end
 
   add_index "maps", ["name"], :name => "index_maps_on_name", :unique => true
+  add_index "maps", ["slug"], :name => "index_maps_on_slug", :unique => true
 
   create_table "merchants", :force => true do |t|
     t.integer  "county_id",                 :null => false
     t.string   "title",       :limit => 20, :null => false
     t.string   "name",        :limit => 50, :null => false
+    t.string   "slug",        :limit => 20, :null => false
     t.string   "tag",         :limit => 50
     t.string   "address",     :limit => 50, :null => false
     t.string   "phone",       :limit => 12, :null => false
@@ -265,6 +272,7 @@ ActiveRecord::Schema.define(:version => 20130527063411) do
   create_table "places", :force => true do |t|
     t.integer  "map_id",                                      :null => false
     t.string   "name",       :limit => 20,                    :null => false
+    t.string   "slug",       :limit => 20,                    :null => false
     t.string   "subtitle",   :limit => 30
     t.boolean  "is_free",                  :default => false
     t.string   "menu_type"
@@ -273,6 +281,7 @@ ActiveRecord::Schema.define(:version => 20130527063411) do
   end
 
   add_index "places", ["name"], :name => "index_places_on_name", :unique => true
+  add_index "places", ["slug"], :name => "index_places_on_slug", :unique => true
 
   create_table "provinces", :force => true do |t|
     t.string   "name",       :limit => 20,                :null => false
@@ -305,6 +314,7 @@ ActiveRecord::Schema.define(:version => 20130527063411) do
   create_table "recommends", :force => true do |t|
     t.integer  "map_id",                                                   :null => false
     t.string   "name",                    :limit => 20,                    :null => false
+    t.string   "slug",                    :limit => 20,                    :null => false
     t.integer  "recommend_records_count",               :default => 0
     t.boolean  "is_free",                               :default => false
     t.string   "menu_type"
@@ -314,10 +324,12 @@ ActiveRecord::Schema.define(:version => 20130527063411) do
   end
 
   add_index "recommends", ["name"], :name => "index_recommends_on_name", :unique => true
+  add_index "recommends", ["slug"], :name => "index_recommends_on_slug", :unique => true
 
   create_table "scenics", :force => true do |t|
     t.integer  "map_id",                                      :null => false
     t.string   "name",       :limit => 20,                    :null => false
+    t.string   "slug",       :limit => 20,                    :null => false
     t.string   "subtitle",   :limit => 30
     t.boolean  "is_free",                  :default => false
     t.string   "menu_type"
@@ -326,6 +338,7 @@ ActiveRecord::Schema.define(:version => 20130527063411) do
   end
 
   add_index "scenics", ["name"], :name => "index_scenics_on_name", :unique => true
+  add_index "scenics", ["slug"], :name => "index_scenics_on_slug", :unique => true
 
   create_table "settings", :force => true do |t|
     t.string   "var",                      :null => false
