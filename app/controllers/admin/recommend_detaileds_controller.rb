@@ -78,8 +78,6 @@ class Admin::RecommendDetailedsController < Admin::ApplicationController
       @images = @detailed.detailed_images.order_asc
     end
     @texts  = @detailed.detailed_texts.order_asc
-    @texts  = Letter.select{|l| l.textable_id == @detailed.id && l.textable_type == "RecommendDetailed" && 
-                                (l.text_type == 0 || l.text_type == 6)}
     @detailed_infos  = @detailed.detailed_infos.order_asc
 
     add_breadcrumb :show
