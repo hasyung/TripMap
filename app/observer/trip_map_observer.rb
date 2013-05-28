@@ -1,7 +1,4 @@
-require 'memcached/dalli'
-
 class TripMapObserver < ActiveRecord::Observer
-  include Memcached
 
   # Observing models.
   observe :scenic, :place, :recommend, :info_list, :panel_video,      # Level 1.
@@ -45,8 +42,7 @@ class TripMapObserver < ActiveRecord::Observer
     map_instance = get_map(model)
     return nil if map_instance.nil?
 
-    @@dalli.flush
-    @@dalli.set("map_#{map_instance.id}", map_instance.get_map_values)
+    Rails.cache.write("map_#{map_instance.id}", map_instance.get_map_values)
 
     map_instance.version = Time.now.to_i
     map_instance.save

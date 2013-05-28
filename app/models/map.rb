@@ -1,8 +1,5 @@
-require 'memcached/dalli'
-
 class Map < ActiveRecord::Base
  include SerialNumber::Generate
- include Memcached
 
   #White list
   attr_accessible :province, :province_id, :name, :map_slug_attributes, :version,
@@ -78,7 +75,7 @@ class Map < ActiveRecord::Base
   private
 
   def after_destroy
-    @@dalli.delete("map_#{self.id}")
+    Rails.cache.delete("map_#{self.id}")
   end
 
   def get_map_slides()
