@@ -723,6 +723,7 @@
         serial_error: "序列号错误,请核对！"
         ser_count_used_exp: "序列号使用次数超过限制！"
         map_registered: "此地图已激活,无需重复激活！"
+        serial_not_match_map: "输入的序列号与地图不匹配！"
     account:
       presence: "必填"
     type:
