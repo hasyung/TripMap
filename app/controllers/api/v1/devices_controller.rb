@@ -44,8 +44,10 @@ class Api::V1::DevicesController < Api::V1::ApplicationController
     fields = [ 'device_id' ]
     ( render :json => ret.merge(set_msg("errors.api.maps.device_id")); return ) if has_nil_value_in fields
 
-    d = Device.where(:device_id => params[:device_id])
-    d.delete_all
+    d = Device.find_by_device_id params[:device_id]
+    ( render :json => ret.merge(set_msg("errors.api.maps.device_id")); return ) if d.nil?
+
+    d.destroy
     ret[:result] = true
     render :json => ret.merge(set_msg("tips.api.success"))
   end
