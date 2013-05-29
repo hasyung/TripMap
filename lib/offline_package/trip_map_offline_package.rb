@@ -12,8 +12,13 @@ module TripMapOfflinePackage
     end
 
     def create_root_dir
-      rdir = Rails.root + "public/uploads/ylxs"
-      Dir.mkdir(rdir, 0700) unless Dir.exist?(rdir)
+      base_dir = Rails.root.to_s + "/public/uploads"
+      dir_paths = ['packages', 'ylxs']
+
+      dir_paths.each do |e|
+        base_dir += "/" + e
+        Dir.mkdir(base_dir, 0700) unless Dir.exist?(base_dir)
+      end
     end
 
     private :create_root_dir

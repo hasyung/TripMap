@@ -38,6 +38,7 @@
     <li><a href="#device">通过设备查看地图使用权限</a></li>
     <li><a href="#device_validate">设备绑定序列号</a></li>
     <li><a href="#lijiang_mailboxes">丽江市旅游局局长信箱</a></li>
+    <li><a href="#unbind_device">取消手机注册</a></li>
   </ol>
 </div>
 
@@ -528,7 +529,7 @@
     <p>{ result: false, msg: "此地图已激活,无需重复激活！" }</p>
   </div>
 
-	<div id="lijiang_mailboxes" class="api well">
+  <div id="lijiang_mailboxes" class="api well">
     <% param_item_cnt = 0 %>
 
     <h3 class="name">API<%= api_cnt += 1 %></h3>
@@ -548,6 +549,26 @@
             <tr><td><%=param_item_cnt +=1 %></td><td>content      </td><td>字符串</td> <td>选填参数</td><td>回复内容</td></tr>
             <tr><td><%=param_item_cnt +=1 %></td><td>who          </td><td>字符串</td> <td>选填参数</td><td>回复作者</td></tr>
             <tr><td><%=param_item_cnt +=1 %></td><td>contact      </td><td>字符串</td> <td>选填参数</td><td>回复者联系方式</td></tr>
+          </tbody>
+        </table>
+        <dd>
+    </dl>
+    <p><b>返回值：</b> 成功：{ result: true, msg: "成功！" }； 失败： { result: false, msg: "错误信息提示" }</p>
+  </div>
+
+  <div id="unbind_device" class="api well">
+    <% param_item_cnt = 0 %>
+
+    <h3 class="name">API<%= api_cnt += 1 %></h3>
+    <small class="desc">取消手机注册</small>
+    <dl>
+      <dt>URL</dt><dd><pre class="docs-example"><%= unbind_device_api_v1_devices_url(:format => :json) %></pre></dd>
+      <dt>HTTP请求方式</dt><dd>GET<dd><dt>支持格式</dt><dd>json<dd><dt>是否需要登录</dt><dd>否<dd><dt>请求参数</dt>
+      <dd>
+        <table class="table table-bordered">
+          <thead><tr><th>#</th><th>名字</th><th>类型</th><th>类别</th><th>说明</th></tr></thead>
+          <tbody>
+            <tr><td><%=param_item_cnt +=1 %></td><td>device_id    </td><td>字符串</td> <td>必填参数</td><td>手机设备号</td></tr>
           </tbody>
         </table>
         <dd>
