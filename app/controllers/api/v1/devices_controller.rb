@@ -39,6 +39,19 @@ class Api::V1::DevicesController < Api::V1::ApplicationController
     render :json => ret.merge(set_msg("tips.api.success"))
   end
 
+  def unbind_device
+    ret = { result: false }
+    fields = [ 'device_id' ]
+    ( render :json => ret.merge(set_msg("errors.api.maps.device_id")); return ) if has_nil_value_in fields
+
+    d = Device.find_by_device_id params[:device_id]
+    ( render :json => ret.merge(set_msg("errors.api.maps.device_id")); return ) if d.nil?
+
+    d.destroy
+    ret[:result] = true
+    render :json => ret.merge(set_msg("tips.api.success"))
+  end
+
   private
   def get_maps_from_serials serials
     maps = []

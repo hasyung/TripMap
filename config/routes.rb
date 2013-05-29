@@ -177,6 +177,7 @@ TripMap::Application.routes.draw do
 
       resources :devices, only: [:index] do
         post '/validate' => 'devices#validate', :on => :collection
+        get '/unbind_device' => 'devices#unbind_device', :on => :collection
       end
 
       resources :lijiang_mailboxes, only: [:create ]
