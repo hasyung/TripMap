@@ -4,7 +4,8 @@ class Scenic < ActiveRecord::Base
   attr_accessible :map, :map_id, :name, :subtitle, :is_free, :menu_type,
                   :scenic_slug_attributes, :scenic_impression_attributes,
                   :scenic_route_attributes, :scenic_icon_attributes, :scenic_slug_icon_attributes,
-                  :scenic_image_attributes, :scenic_description_attributes, :scenic_description_image_attributes
+                  :scenic_image_attributes, :scenic_description_attributes, :scenic_description_image_attributes,
+                  :scenic_slides_attributes
 
   # Associations
   with_options :as => :textable, :class_name => "Letter", :dependent => :destroy do |assoc|
