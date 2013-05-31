@@ -6,18 +6,18 @@ class PanelVideo < ActiveRecord::Base
 
   # Associations
   with_options :as => :keywordable, :class_name => "Keyword", :dependent => :destroy do |assoc|
-    assoc.has_one :panel_video_slug,              :conditions => { :keyword_type => Keyword.panel_video_slug }
+    assoc.has_one :panel_video_slug,          :conditions => { :keyword_type => Keyword.panel_video_slug }
   end
 
   with_options :as => :imageable, :class_name => 'Image', :dependent => :destroy do |assoc|
-    assoc.has_one  :panel_video_slug_cover,       :conditions => { :image_type => Image.panel_video_slug_cover }
+    assoc.has_one  :panel_video_slug_cover,   :conditions => { :image_type => Image.panel_video_slug_cover }
   end
 
   belongs_to :map
 
   # Validates
   with_options :presence => true do |column|
-    column.validates :name, :length => { :within => 1..20,    :message => I18n.t("errors.type.name") }, :uniqueness => true
+    column.validates :name, :length => { :within => 1..20, :message => I18n.t("errors.type.name") }, :uniqueness => true
     column.validates :map_id
     column.validates :video
   end

@@ -8,11 +8,24 @@ class Scenic < ActiveRecord::Base
 
   # Associations
   with_options :as => :textable, :class_name => "Letter", :dependent => :destroy do |assoc|
-    assoc.has_one :scenic_description, :conditions => { :text_type => Letter.scenic_description }
+    assoc.has_one :scenic_description,        :conditions => { :text_type => Letter.scenic_description }
   end
 
   with_options :as => :keywordable, :class_name => 'Keyword', :dependent => :destroy do |assoc|
-    assoc.has_one :scenic_slug,        :conditions => { :keyword_type => Keyword.scenic_slug }
+    assoc.has_one :scenic_slug,               :conditions => { :keyword_type => Keyword.scenic_slug }
+  end
+
+  with_options :as => :videoable, :class_name => "Video", :dependent => :destroy do |assoc|
+    assoc.has_one :scenic_impression,         :conditions => { :video_type => Video.scenic_impression }
+    assoc.has_one :scenic_route,              :conditions => { :video_type => Video.scenic_route }
+  end
+
+  with_options :as => :imageable, :class_name => "Image", :dependent => :destroy do |assoc|
+    assoc.has_one  :scenic_icon,              :conditions => { :image_type => Image.scenic_icon }
+    assoc.has_one  :scenic_slug_icon,         :conditions => { :image_type => Image.scenic_slug_icon }
+    assoc.has_one  :scenic_description_image, :conditions => { :image_type => Image.scenic_description_image }
+    assoc.has_one  :scenic_image,             :conditions => { :image_type => Image.scenic_image }
+    assoc.has_many :scenic_slides,            :conditions => { :image_type => Image.scenic_slides }
   end
 
   belongs_to :map, :counter_cache => true
@@ -22,19 +35,6 @@ class Scenic < ActiveRecord::Base
     column.validates :name, :length => { :within => 2..20 }, :uniqueness => true
     column.validates :map_id
     column.validates :subtitle, :length => { :within => 2..30 }
-  end
-
-  with_options :as => :videoable, :class_name => "Video", :dependent => :destroy do |assoc|
-    assoc.has_one :scenic_impression,         :conditions => { :video_type => Video.scenic_impression }
-    assoc.has_one :scenic_route,              :conditions => { :video_type => Video.scenic_route }
-  end
-
-  with_options :as => :imageable, :class_name => "Image", :dependent => :destroy do |assoc|
-    assoc.has_one :scenic_icon,               :conditions => { :image_type => Image.scenic_icon}
-    assoc.has_one :scenic_slug_icon,          :conditions => { :image_type => Image.scenic_slug_icon }
-    assoc.has_one :scenic_description_image,  :conditions => { :image_type => Image.scenic_description_image }
-    assoc.has_one :scenic_image,              :conditions => { :image_type => Image.scenic_image }
-    assoc.has_many :scenic_slides,            :conditions => { :image_type => Image.scenic_slides  }
   end
 
   # NestedAttributes
