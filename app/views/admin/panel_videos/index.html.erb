@@ -26,7 +26,11 @@
             <td><%= m.map.name %></td>
             <td><%= m.name %></td>
             <td><%= m.panel_video_slug.slug %></td>
-            <td><%= image_tag m.panel_video_slug_cover.nil? ? "" : m.panel_video_slug_cover.file, :size => "50x50" %></td>
+            <td>
+              <% unless m.panel_video_slug_cover.blank? %>
+                <%= image_tag m.panel_video_slug_cover.file, :size => "50x50" %>
+              <% end%>
+            </td>
 
             <td class="action">
               <%= link_to raw("<i class=\"icon-edit\"></i>"), edit_admin_panel_video_path(m), title: t('links.panel_videos.edit') %>
