@@ -22,6 +22,7 @@ config/database.yml
 
 # Ignore uploaded files.
 public/uploads/*
+public/uploads
 
 # Ignore assets files.
 public/assets
