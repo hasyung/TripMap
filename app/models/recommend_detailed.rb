@@ -4,26 +4,31 @@ class RecommendDetailed < ActiveRecord::Base
   attr_accessible :name, :order, :recommend_record_id, :recommend_detailed_cover_attributes
 
   # Associations
-  with_options :as => :imageable, :class_name => 'Image', :dependent => :destroy do |assoc|
+  belongs_to :recommend_record, :counter_cache => true
+
+  with_options :as => :imageable, :class_name => 'Image', :dependent => :destroy do|assoc|
     assoc.has_one  :recommend_detailed_cover,   :conditions => { :image_type => Image.recommend_detailed_cover   }
     assoc.has_many :detailed_images,  :conditions => { :image_type => Image.detailed_images  }
   end
 
+  with_options :as => :textable, :class_name => 'Letter', :dependent => :destroy do|assoc|
+    assoc.has_many :detailed_texts,  :conditions => { :text_type => Letter.detailed_text }
+    assoc.has_many :detailed_infos,  :conditions => { :text_type => Letter.detailed_info }
+  end
+
   has_many :videos, :as => :videoable,  :dependent => :destroy
   has_many :audios, :as => :audioable,  :dependent => :destroy
-  has_many :detailed_texts,  :as => :textable,   :dependent => :destroy, class_name: 'Letter', :conditions => { :text_type => Letter.detailed_text }
-  has_many :detailed_infos,  :as => :textable,   :dependent => :destroy, class_name: 'Letter', :conditions => { :text_type => Letter.detailed_info }
-  has_many :image_lists,  :dependent => :destroy
-
-  belongs_to :recommend_record, :counter_cache => true
+  has_many :image_lists,                :dependent => :destroy
 
   # Validates
   validate :order_increment
 
-  accepts_nested_attributes_for :recommend_detailed_cover,          reject_if: lambda { |c| c[:file].blank? }, allow_destroy: true
   validates :name, :length => { :within => 1..15 }, :presence => true
   validates :order, uniqueness: { scope: [:recommend_record_id, :order] },
                     numericality: { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999 }
+
+  # Nested attributes validates
+  accepts_nested_attributes_for :recommend_detailed_cover,          reject_if: lambda { |c| c[:file].blank? }, allow_destroy: true
 
   # Scopes
   scope :order_asc, order("`order` ASC")
@@ -38,4 +43,5 @@ class RecommendDetailed < ActiveRecord::Base
       self.order = 1
     end
   end
+
 end

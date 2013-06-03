@@ -32,6 +32,7 @@ gem 'thin'
 gem 'uuidtools'
 gem 'nokogiri'    # XML analyzing
 gem 'dalli'
+gem 'rubyzip'
 
 group :test, :development do
   gem 'rspec-rails'

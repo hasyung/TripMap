@@ -1,4 +1,5 @@
 class City < ActiveRecord::Base
+
   # White list
   attr_accessible :name, :slug
 
@@ -11,5 +12,7 @@ class City < ActiveRecord::Base
     column.validates :slug, :length => { :within => 2..20 },  :format => { :with => /^[a-z]+$/, :message => I18n.t("errors.type.slug") }, :uniqueness => true
   end
 
+  # Scopes
   scope :created_desc, order("`created_at` DESC")
+
 end
