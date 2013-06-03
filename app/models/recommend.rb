@@ -6,6 +6,8 @@ class Recommend < ActiveRecord::Base
                   :recommend_cover_attributes, :recommend_video_attributes
 
   # Associations
+  belongs_to :map, :counter_cache => true
+
   with_options :as => :videoable, :class_name => "Video", :dependent => :destroy do |assoc|
     assoc.has_one :recommend_video,     :conditions => { :video_type => Video.recommend_video }
   end
@@ -21,8 +23,6 @@ class Recommend < ActiveRecord::Base
 
   has_many :recommend_records, :dependent => :destroy
 
-  belongs_to :map, :counter_cache => true
-
   # Enumeration, simple_enum plugin.
   as_enum :category, { one: 1, two: 2, three: 3 }
 
@@ -33,7 +33,7 @@ class Recommend < ActiveRecord::Base
     column.validates :category_cd
   end
 
-  # NestedAttributes
+  # Nested attributes validates
   accepts_nested_attributes_for :recommend_cover,       reject_if: lambda { |c| c[:file].blank? }, allow_destroy: true
   accepts_nested_attributes_for :recommend_slug_icon,   reject_if: lambda { |c| c[:file].blank? }, allow_destroy: true
   accepts_nested_attributes_for :recommend_video,       reject_if: lambda { |v| (v[:cover].blank? && v[:id].blank?) }, allow_destroy: true

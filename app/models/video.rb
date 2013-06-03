@@ -14,9 +14,9 @@ class Video < ActiveRecord::Base
    validates :cover, :presence => true, :file_size => { :maximum => 10.megabytes.to_i, :message => I18n.t("errors.type.big_image_file") }
    validates_numericality_of :duration, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999999
 
-  validates :order, numericality: { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999 },
-                    uniqueness: { scope: [:videoable_id, :videoable_type, :video_type] },
-                    :if => :order_increment
+   validates :order, numericality: { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999 },
+                     uniqueness: { scope: [:videoable_id, :videoable_type, :video_type] },
+                     :if => :order_increment
 
   # SampleEnum. hash table is in growing.
   as_enum :type,

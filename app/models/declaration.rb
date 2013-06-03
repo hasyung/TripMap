@@ -1,4 +1,6 @@
 class Declaration < ActiveRecord::Base
+
+  # White list
   attr_accessible :body
 
   # Validates
@@ -6,4 +8,5 @@ class Declaration < ActiveRecord::Base
   with_options :if => :body? do |body|
     body.validates :body, :length => { :within => 2..5000 }
   end
+
 end

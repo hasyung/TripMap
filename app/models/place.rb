@@ -7,6 +7,8 @@ class Place < ActiveRecord::Base
                   :place_description_attributes, :place_slug_attributes, :place_slides_attributes
 
   # Associations
+  belongs_to :map, :counter_cache => true
+
   with_options :dependent => :destroy do |assoc|
     assoc.has_one :place_audio, :as => :audioable, :class_name => "Audio", :conditions => { :audio_type => Audio.place_audio }
     assoc.has_one :place_video, :as => :videoable, :class_name => "Video", :conditions => { :video_type => Video.place_video }
@@ -28,8 +30,6 @@ class Place < ActiveRecord::Base
     assoc.has_one :place_slug,                :conditions => { :keyword_type => Keyword.place_slug }
   end
 
-  belongs_to :map, :counter_cache => true
-
   # Validates
   with_options :presence => true do |column|
     column.validates :name, :length => { :within => 2..20 }
@@ -37,7 +37,7 @@ class Place < ActiveRecord::Base
     column.validates :subtitle, :length => { :within => 2..30 }
   end
 
-  # NestedAttributes
+  # Nested attributes validates
   accepts_nested_attributes_for :place_icon,              reject_if: lambda { |i| i[:file].blank? }, allow_destroy: true
   accepts_nested_attributes_for :place_slug_icon,         reject_if: lambda { |i| i[:file].blank? }, allow_destroy: true
   accepts_nested_attributes_for :place_description_image, reject_if: lambda { |d| d[:file].blank? }, allow_destroy: true
@@ -48,6 +48,7 @@ class Place < ActiveRecord::Base
   accepts_nested_attributes_for :place_slug,              allow_destroy: true
   accepts_nested_attributes_for :place_slides,            allow_destroy: true
 
+  # Scopes
   scope :created_desc, order("`created_at` DESC")
 
 end

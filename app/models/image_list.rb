@@ -5,11 +5,10 @@ class ImageList < ActiveRecord::Base
 
   # Associations
   has_many :images, :as => :imageable, :dependent => :destroy
-
   belongs_to :recommend_detailed
 
+  # Validates
   validate :order_increment
-
   validates :name, length: { within: 1..20 }, presence: true
   validates :order, uniqueness: { scope: [:recommend_detailed_id, :order] },
                     numericality: { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999 }
@@ -27,4 +26,5 @@ class ImageList < ActiveRecord::Base
       self.order = 1
     end
   end
+
 end

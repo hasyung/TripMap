@@ -23,7 +23,7 @@ class Share < ActiveRecord::Base
   # simple_enum plugin
   as_enum :state, { :draft => 0, :publish => 1 }
 
-  # NestedAttributes
+  # Nested attributes validates
   accepts_nested_attributes_for :share_image, reject_if: lambda { |img| img[:file].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :share_text,  reject_if: lambda { |pd| pd[:body].blank? }, :allow_destroy => true
 

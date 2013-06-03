@@ -9,6 +9,7 @@ class MapSerialNumber < ActiveRecord::Base
   # Associations
   belongs_to :account
   belongs_to :map
+
   has_and_belongs_to_many :devices
 
   validates :code, :length => {:is => 16}, :format => { :with => /([0-9])+/}
