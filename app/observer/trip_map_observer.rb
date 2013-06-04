@@ -32,6 +32,7 @@ class TripMapObserver < ActiveRecord::Observer
   }
 
   OFFLINE_PKGS = [ 'Scenic', 'Place' ]
+  PKG_PATH = 'public/uploads/packages'
 
   def after_save( model )
     update_map_version(model)
@@ -58,7 +59,13 @@ class TripMapObserver < ActiveRecord::Observer
     model_slug = "%s_slug"%model.class.name.downcase
     keyword = model.send(model_slug)
     keyword.version = Time.now.to_i
+    keyword.file_size = get_file_size_in_mega(keyword.slug)
     keyword.save
+  end
+
+  def get_file_size_in_mega( slug )
+    fp = File.join(Rails.root.to_s, PKG_PATH, "%s.zip"%slug)
+    fs = (File.size(fp).to_f / 2**20).round(2)
   end
 
   def create_offline_package( model )

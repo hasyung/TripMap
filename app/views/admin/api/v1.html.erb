@@ -40,6 +40,7 @@
     <li><a href="#lijiang_mailboxes">丽江市旅游局局长信箱</a></li>
     <li><a href="#unbind_device">取消手机注册</a></li>
     <li><a href="#offline_package_version">获取离线包的版本信息</a></li>
+    <li><a href="#get_all_pkg_infos">获取所有离线包的基本信息用于客户端下载页面展示</a></li>
   </ol>
 </div>
 
@@ -57,7 +58,6 @@
 
   <div id="maps_v1x" class="api well">
     <% param_item_cnt = 0 %>
-
     <h3 class="name">API<%= api_cnt += 1 %></h3>
     <small class="desc">获取所有的地图信息，结果为JSON数据格式。</small>
     <dl>
@@ -77,7 +77,6 @@
 
   <div id="maps_active" class="api well">
     <% param_item_cnt = 0 %>
-
     <h3 class="name">API<%= api_cnt += 1 %></h3>
     <small class="desc">获取单个地图详细信息，结果为JSON数据格式。</small>
     <dl>
@@ -97,7 +96,6 @@
 
   <div id="account_register" class="api well">
     <% param_item_cnt = 0 %>
-
     <h3 class="name">API<%= api_cnt += 1 %></h3>
     <small class="desc">用户注册</small>
     <dl>
@@ -533,7 +531,6 @@
 
   <div id="lijiang_mailboxes" class="api well">
     <% param_item_cnt = 0 %>
-
     <h3 class="name">API<%= api_cnt += 1 %></h3>
     <small class="desc">丽江市旅游局局长信箱</small>
     <dl>
@@ -560,7 +557,6 @@
 
   <div id="unbind_device" class="api well">
     <% param_item_cnt = 0 %>
-
     <h3 class="name">API<%= api_cnt += 1 %></h3>
     <small class="desc">取消手机注册</small>
     <dl>
@@ -587,6 +583,17 @@
       <dt>HTTP请求方式</dt><dd>GET<dd><dt>支持格式</dt><dd>json<dd><dt>是否需要登录</dt><dd>否<dd><dt>请求参数</dt><dd>无<dd>      
     </dl>
     <p><b>返回值：</b> [{slug:xxx, version: 123456 }+]</p>
+  </div>
+
+  <div id="get_all_pkg_infos" class="api well">
+    <% param_item_cnt = 0 %>
+    <h3 class="name">API<%= api_cnt += 1 %></h3>
+    <small class="desc">获取所有离线包的基本信息用于客户端下载页面展示</small>
+    <dl>
+      <dt>URL</dt><dd><pre class="docs-example"><%= get_all_pkg_infos_api_v1_offline_packages_url(:format => :json) %></pre></dd>
+      <dt>HTTP请求方式</dt><dd>GET<dd><dt>支持格式</dt><dd>json<dd><dt>是否需要登录</dt><dd>否<dd><dt>请求参数</dt><dd>无<dd>      
+    </dl>
+    <p><b>返回值：</b> JSON</p>
   </div>
 
 </div>
