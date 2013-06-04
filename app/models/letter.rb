@@ -21,9 +21,9 @@ class Letter < ActiveRecord::Base
 
     :share_text                     => 4,
 
-    :detailed_info             => 5,
+    :detailed_info                  => 5,
 
-    :detailed_text             => 6
+    :detailed_text                  => 6
   },
   :column => "text_type"
 

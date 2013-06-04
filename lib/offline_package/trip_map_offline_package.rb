@@ -1,4 +1,8 @@
 require 'fileutils'
+require 'rubygems'
+require 'zip/zip'
+
+# Note: all associations' object should be add to white list!
 
 module TripMapOfflinePackage
 
@@ -16,9 +20,10 @@ module TripMapOfflinePackage
       :Keyword      => 'slug',
       :Letter       => 'body'
     }
-    ARRAY_FIELD     = [ 'scenic_slides' ]
+    ARRAY_FIELD     = [ 'scenic_slides', 'place_slides' ]
 
     @@model         = nil
+    @@pkg_dir       = nil
     @@rc_dir        = nil
     @@slug          = nil
 
@@ -27,10 +32,12 @@ module TripMapOfflinePackage
 
       @@model = instance_model
       @@slug = extract_slug_val()
-      @@rc_dir = "%s/public/uploads/packages/%s/"%[Rails.root.to_s, @@slug]
+      @@pkg_dir = "%s/public/uploads/packages"%Rails.root.to_s
+      @@rc_dir = "%s/%s/"%[@@pkg_dir, @@slug]
 
       create_root_dir
       to_json
+      zip_resource
     end
 
     private
@@ -82,7 +89,10 @@ module TripMapOfflinePackage
         val = @@model.send(e.to_sym)
         klass_name = val.class.name
         ( h[e] = ""; next ) if val.nil?
-        ( h[e] = val.send(ATOM[klass_name.to_sym].to_sym); next ) unless ATOM[klass_name.to_sym].nil?
+        unless ATOM[klass_name.to_sym].nil?
+          ( h[:slug] = val.send(ATOM[klass_name.to_sym].to_sym); next) if e == "%s_slug"%@@model.class.name.downcase
+          h[e] = val.send(ATOM[klass_name.to_sym].to_sym); next
+        end
 
         if [A, V].include?(klass_name)
           h[e+"_size"] = val.file_size.to_s
@@ -120,6 +130,16 @@ module TripMapOfflinePackage
       end
     end
 
-  end
+    def self.zip_resource
+      zipfile_name = "%s/%s.zip"%[@@pkg_dir, @@slug]
+      File.delete(zipfile_name) if File.exist?(zipfile_name)
 
-end
+      Zip::ZipFile.open(zipfile_name, Zip::ZipFile::CREATE) do |zipfile|
+        Dir[File.join(@@rc_dir, '**', '**')].each do |file|
+          zipfile.add(file.sub(@@rc_dir, ''), file)
+        end
+      end
+    end
+
+  end # end class
+end # end module

@@ -6,6 +6,9 @@ class Map < ActiveRecord::Base
                   :map_description_attributes, :map_cover_attributes, :map_plat_attributes, :map_weather_bg_image_attributes
 
   # Associations
+  belongs_to :province, :counter_cache => true
+  belongs_to :active_map
+
   with_options :dependent => :destroy do |assoc|
     assoc.has_many :scenics, :autosave => true
     assoc.has_many :places, :autosave => true
@@ -16,7 +19,6 @@ class Map < ActiveRecord::Base
     assoc.has_many :surround_cities
     assoc.has_many :panel_videos
   end
-  has_many :map_serial_numbers
 
   with_options :as => :imageable, :class_name => 'Image', :dependent => :destroy do |assoc|
     assoc.has_one  :map_cover,            :conditions => { :image_type => Image.map_cover   }
@@ -33,8 +35,7 @@ class Map < ActiveRecord::Base
     assoc.has_one :map_slug,              :conditions => { :keyword_type => Keyword.map_slug }
   end
 
-  belongs_to :province, :counter_cache => true
-  belongs_to :active_map
+  has_many :map_serial_numbers
 
   # Validates
   with_options :presence => true do |column|
@@ -42,9 +43,7 @@ class Map < ActiveRecord::Base
     column.validates :name, :length => { :within => 1..20,    :message => I18n.t("errors.type.name") }, :uniqueness => true
   end
 
-  #validate :require_map_cover_attributes
-
-  # NestedAttributes
+  # Nested attributes validates
   accepts_nested_attributes_for :map_cover,             reject_if: lambda { |img| img[:file].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :map_plat,              reject_if: lambda { |img| img[:file].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :map_weather_bg_image,  reject_if: lambda { |img| img[:file].blank? }, :allow_destroy => true

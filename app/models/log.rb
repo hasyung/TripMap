@@ -1,6 +1,6 @@
 class Log < ActiveRecord::Base
 
-  # White llist
+  # White list
   attr_accessible :map_id, :activate_map_id, :device_type_cd, :slug, :message_cd, :info
 
   # Associations

@@ -1,6 +1,7 @@
 class ActivateWithAccount < ActiveRecord::Base
-  # attr_accessible :title, :body
 
+  # Associations
   belongs_to :account
   belongs_to :activate_map
+
 end
