@@ -5,12 +5,37 @@ namespace :offline_package do
 
   include TripMapOfflinePackage
 
+  PKG_PATH = 'public/uploads/packages'
+
   desc 'Create Offline Package'
   task :create_pkg => :environment do
-    scenic = Scenic.first
-    place = Place.first
-    OfflinePackage.create_package scenic
-    OfflinePackage.create_package place
+    t_start = Time.now
+    Scenic.all.each do|e|
+      OfflinePackage.create_package e
+      update_keyword_version e
+    end
+    t_end_s = Time.now
+    puts "All Scenics packaged time span: %s(s)"%(t_end_s - t_start).to_s
+
+    Place.all.each do|e|
+      OfflinePackage.create_package e
+      update_keyword_version e
+    end
+    t_end_p = Time.now
+    puts "All Places packaged time span:  %s(s)"%(t_end_p - t_end_s).to_s
+  end
+
+  def update_keyword_version( model )
+    model_slug = "%s_slug"%model.class.name.downcase
+    keyword = model.send(model_slug)
+    keyword.version = Time.now.to_i
+    keyword.file_size = get_file_size_in_mega(keyword.slug)
+    keyword.save
+  end
+
+  def get_file_size_in_mega( slug )
+    fp = File.join(Rails.root.to_s, PKG_PATH, "%s.zip"%slug)
+    fs = (File.size(fp).to_f / 2**20).round(2)
   end
 
 end
