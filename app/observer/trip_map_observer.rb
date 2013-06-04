@@ -1,4 +1,7 @@
+require "offline_package/trip_map_offline_package"
+
 class TripMapObserver < ActiveRecord::Observer
+  include TripMapOfflinePackage
 
   # Observing models.
   observe :scenic, :place, :recommend, :info_list, :panel_video,      # Level 1.
@@ -28,8 +31,11 @@ class TripMapObserver < ActiveRecord::Observer
     :Letter             => "textable"
   }
 
+  OFFLINE_PKGS = [ 'Scenic', 'Place' ]
+
   def after_save( model )
     update_map_version(model)
+    create_offline_package(model)
   end
 
   def after_destroy( model )
@@ -46,6 +52,20 @@ class TripMapObserver < ActiveRecord::Observer
 
     map_instance.version = Time.now.to_i
     map_instance.save
+  end
+
+  def update_keyword_version( model )
+    model_slug = "%s_slug"%model.class.name.downcase
+    keyword = model.send(model_slug)
+    keyword.version = Time.now.to_i
+    keyword.save
+  end
+
+  def create_offline_package( model )
+    return unless OFFLINE_PKGS.include?(model.class.name)
+
+    OfflinePackage.create_package model
+    update_keyword_version(model)
   end
 
   def get_map( model )

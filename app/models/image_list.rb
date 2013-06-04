@@ -4,8 +4,9 @@ class ImageList < ActiveRecord::Base
   attr_accessible :name, :order
 
   # Associations
-  has_many :images, :as => :imageable, :dependent => :destroy
   belongs_to :recommend_detailed
+
+  has_many :images, :as => :imageable, :dependent => :destroy
 
   # Validates
   validate :order_increment
