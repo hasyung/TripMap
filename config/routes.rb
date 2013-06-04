@@ -182,8 +182,9 @@ TripMap::Application.routes.draw do
 
       resources :lijiang_mailboxes, only: [:create ]
 
-      resources :offline_packages, only: [ ] do
+      resources :offline_packages, only: [] do
         get '/pkg_versions' => 'offline_packages#pkg_versions', :on => :collection
+        get '/get_all_pkg_infos' => 'offline_packages#get_all_pkg_infos', :on => :collection
       end
 
     end
