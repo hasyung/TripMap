@@ -39,6 +39,7 @@
     <li><a href="#device_validate">设备绑定序列号</a></li>
     <li><a href="#lijiang_mailboxes">丽江市旅游局局长信箱</a></li>
     <li><a href="#unbind_device">取消手机注册</a></li>
+    <li><a href="#offline_package_version">获取离线包的版本信息</a></li>
   </ol>
 </div>
 
@@ -575,6 +576,17 @@
         <dd>
     </dl>
     <p><b>返回值：</b> 成功：{ result: true, msg: "成功！" }； 失败： { result: false, msg: "错误信息提示" }</p>
+  </div>
+
+  <div id="offline_package_version" class="api well">
+    <% param_item_cnt = 0 %>
+    <h3 class="name">API<%= api_cnt += 1 %></h3>
+    <small class="desc">获取离线包的版本信息</small>
+    <dl>
+      <dt>URL</dt><dd><pre class="docs-example"><%= pkg_versions_api_v1_offline_packages_url(:format => :json) %></pre></dd>
+      <dt>HTTP请求方式</dt><dd>GET<dd><dt>支持格式</dt><dd>json<dd><dt>是否需要登录</dt><dd>否<dd><dt>请求参数</dt><dd>无<dd>      
+    </dl>
+    <p><b>返回值：</b> [{slug:xxx, version: 123456 }+]</p>
   </div>
 
 </div>

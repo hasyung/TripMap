@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130529035334) do
+ActiveRecord::Schema.define(:version => 20130603091520) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",                                :default => "", :null => false
@@ -183,6 +183,7 @@ ActiveRecord::Schema.define(:version => 20130529035334) do
     t.string  "keywordable_type"
     t.integer "keyword_type",                   :default => 0
     t.string  "slug",             :limit => 20,                :null => false
+    t.string  "version"
   end
 
   add_index "keywords", ["slug"], :name => "index_keywords_on_slug", :unique => true

@@ -132,6 +132,7 @@ module TripMapOfflinePackage
 
     def self.zip_resource
       zipfile_name = "%s/%s.zip"%[@@pkg_dir, @@slug]
+      File.delete(zipfile_name) if File.exist?(zipfile_name)
 
       Zip::ZipFile.open(zipfile_name, Zip::ZipFile::CREATE) do |zipfile|
         Dir[File.join(@@rc_dir, '**', '**')].each do |file|
