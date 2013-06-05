@@ -1,8 +1,6 @@
 #encoding: utf-8
-require "memcached/memcache"
 
 class Api::V1::MapsController < Api::V1::ApplicationController
-  include TripMapCache
 
   def index
     result = []
@@ -22,9 +20,9 @@ class Api::V1::MapsController < Api::V1::ApplicationController
     ( render :json => result; return ) if map.nil?                # Check map
 
     cache_key = "map_#{mid}"
-    @@trip_cache[cache_key] = map.get_map_values if @@trip_cache[cache_key].blank?
+    TRIP_CACHE[cache_key] = map.get_map_values if TRIP_CACHE[cache_key].blank?
 
-    render :json => @@trip_cache[cache_key]
+    render :json => TRIP_CACHE[cache_key]
   end
 
   def version

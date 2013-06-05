@@ -42,3 +42,5 @@ module TripMap
 end
 
 Dir[File.join(Rails.root, "lib", "core", "*.rb")].each {|l| require l }
+
+TRIP_CACHE = { }
