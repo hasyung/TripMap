@@ -1,3 +1,3 @@
 module TripMapCache
-  @@trip_cache = ActiveSupport::Cache::MemoryStore.new
+  @@trip_cache = { }
 end
