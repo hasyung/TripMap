@@ -1,7 +1,9 @@
 require "offline_package/trip_map_offline_package"
+require "memcached/memcache"
 
 class TripMapObserver < ActiveRecord::Observer
   include TripMapOfflinePackage
+  include TripMapCache
 
   # Observing models.
   observe :scenic, :place, :recommend, :info_list, :panel_video,      # Level 1.
@@ -49,8 +51,8 @@ class TripMapObserver < ActiveRecord::Observer
     map_instance = get_map(model)
     return nil if map_instance.nil?
 
-    Rails.cache.clear
-    Rails.cache.write("map_#{map_instance.id}", map_instance.get_map_values)
+    @@trip_cache.clear
+    @@trip_cache.write("map_#{map_instance.id}", map_instance.get_map_values)
 
     map_instance.version = Time.now.to_i
     map_instance.save
