@@ -90,7 +90,7 @@ module TripMapOfflinePackage
         klass_name = val.class.name
         ( h[e] = ""; next ) if val.nil?
         unless ATOM[klass_name.to_sym].nil?
-          ( h[:slug] = val.send(ATOM[klass_name.to_sym].to_sym); next) if e == "%s_slug"%@@model.class.name.downcase
+          ( h[:slug] = val.send(ATOM[klass_name.to_sym].to_sym); next ) if e == "%s_slug"%@@model.class.name.downcase
           h[e] = val.send(ATOM[klass_name.to_sym].to_sym); next
         end
 
