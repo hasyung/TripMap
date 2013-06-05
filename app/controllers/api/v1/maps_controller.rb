@@ -20,9 +20,9 @@ class Api::V1::MapsController < Api::V1::ApplicationController
     ( render :json => result; return ) if map.nil?                # Check map
 
     cache_key = "map_#{mid}"
-    Rails.cache.write(cache_key, map.get_map_values) if Rails.cache.read(cache_key).blank?
+    ( Rails.cache.clear; Rails.cache.write(cache_key, map.get_map_values) ) if Rails.cache.fetch(cache_key).blank?
 
-    render :json => Rails.cache.read(cache_key)
+    render :json => Rails.cache.fetch(cache_key)
   end
 
   def version
