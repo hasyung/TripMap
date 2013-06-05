@@ -49,6 +49,7 @@ class TripMapObserver < ActiveRecord::Observer
     map_instance = get_map(model)
     return nil if map_instance.nil?
 
+    Rails.cache.clear
     Rails.cache.write("map_#{map_instance.id}", map_instance.get_map_values)
 
     map_instance.version = Time.now.to_i
