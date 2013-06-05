@@ -20,9 +20,9 @@ class Api::V1::MapsController < Api::V1::ApplicationController
     ( render :json => result; return ) if map.nil?                # Check map
 
     cache_key = "map_#{mid}"
-    $trip_cache[cache_key] = map.get_map_values if $trip_cache[cache_key].blank?
+    RAILS_CACHE.write(cache_key, map.get_map_values) if RAILS_CACHE.read(cache_key).blank?
 
-    render :json => $trip_cache[cache_key]
+    render :json => RAILS_CACHE.read(cache_key)
   end
 
   def version
