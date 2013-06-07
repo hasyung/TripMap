@@ -18,6 +18,7 @@ class Map < ActiveRecord::Base
     assoc.has_many :logs
     assoc.has_many :surround_cities
     assoc.has_many :panel_videos
+    assoc.has_many :children_broadcasts
   end
 
   with_options :as => :imageable, :class_name => 'Image', :dependent => :destroy do |assoc|
@@ -67,7 +68,8 @@ class Map < ActiveRecord::Base
       places:                 get_places(),
       recommends:             get_recommends(),
       info_lists:             get_info_lists(),
-      panel_videos:           get_panel_videos()
+      panel_videos:           get_panel_videos(),
+      children_broadcasts:    get_children_broadcasts()
     }
   end
 
@@ -266,6 +268,20 @@ class Map < ActiveRecord::Base
       }
     end
     pv
+  end
+
+  def get_children_broadcasts
+    cb = []
+    self.children_broadcasts.each do|m|
+      cb << { name: m.name, cover: get_file_value(m.broadcast_cover, "file", true),
+        audio: get_file_value(m.broadcast_audio, "file", true),
+        size: get_file_value(m.broadcast_audio, "file_size", false),
+        duration: get_file_value(m.broadcast_audio, "duration", false),
+        order: m.order,
+        desc: get_file_value(m.broadcast_desc, "body", false)
+      }
+    end
+    cb.sort_by{|e| e[:order] }
   end
 
   def get_file_value( file, meth_name, url = false )

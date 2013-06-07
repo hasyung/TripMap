@@ -27,7 +27,7 @@ class RecommendRecord < ActiveRecord::Base
 
   # Nested attributes validates
   accepts_nested_attributes_for :recommend_record_cover,          reject_if: lambda { |c| c[:file].blank? }, allow_destroy: true
-  accepts_nested_attributes_for :recommend_record_description, allow_destroy: true
+  accepts_nested_attributes_for :recommend_record_description,                                               allow_destroy: true
 
   # Scopes
   scope :order_asc, order("`order` ASC")

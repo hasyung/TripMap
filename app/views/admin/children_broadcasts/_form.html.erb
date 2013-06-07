@@ -1,0 +1,41 @@
+<%= simple_form_for [:admin, @model], html: { class: 'form-horizontal' } do |m| %>
+
+  <%= m.association :map, collection: Map.all, prompt: t("helpers.links.select", :model_name => Map.model_name.human) %>
+
+  <%= m.input :name %>
+
+  <%= m.fields_for :broadcast_cover, @model.broadcast_cover ||= @model.build_broadcast_cover do |img|  %>
+    <%= img.input :file, :as => :file %>
+
+    <% if @model.broadcast_cover && @model.broadcast_cover.file.present? %>
+        <div class="control-group image">
+          <div class="controls">
+            <%= image_tag @model.broadcast_cover.file %>
+          </div>
+        </div>
+    <% end %>
+  <% end %>
+
+  <%= m.fields_for :broadcast_audio, @model.broadcast_audio ||= @model.build_broadcast_audio do |o|  %>
+    <%= o.input :file, :as => :file %>
+
+    <% if @model.broadcast_audio && @model.broadcast_audio.file.present? %>
+        <div class="control-group">
+          <div class="controls">
+            <%= audio_tag(@model.broadcast_audio.file, :controls => true) %>
+          </div>
+        </div>
+    <% end %>
+
+    <%= o.input :duration %>
+  <% end %>
+
+  <%= m.input :order %>
+
+  <%= m.fields_for :broadcast_desc, @model.broadcast_desc ||= @model.build_broadcast_desc do |d| %>
+    <%= d.input :body, :as => :text, input_html: { :class => "span-full"} %>
+  <% end %>
+
+  <div class="form-actions"><%= m.button :submit, :class => 'btn-primary' %></div>
+
+<% end %>

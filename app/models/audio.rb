@@ -22,7 +22,9 @@ class Audio < ActiveRecord::Base
   # SampleEnum. hash table is in growing.
   as_enum :type,
   {
-    :place_audio => 0,
+    :place_audio                    => 0,
+
+    :broadcast_audio                => 1,
   },
   :column => "audio_type"
 

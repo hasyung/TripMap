@@ -48,7 +48,9 @@ class Image < ActiveRecord::Base
     :recommend_slug_icon        => 20,
     :infolist_slug_icon         => 21,
 
-    :panel_video_slug_cover     => 22
+    :panel_video_slug_cover     => 22,
+
+    :broadcast_cover            => 23
   },
   :column => "image_type"
 

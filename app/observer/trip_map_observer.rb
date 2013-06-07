@@ -4,10 +4,10 @@ class TripMapObserver < ActiveRecord::Observer
   include TripMapOfflinePackage
 
   # Observing models.
-  observe :scenic, :place, :recommend, :info_list, :panel_video,      # Level 1.
-          :recommend_record, :recommend_detailed, :info,              # Level 2.
+  observe :scenic, :place, :recommend, :info_list, :panel_video, :children_broadcast, # Level 1.
+          :recommend_record, :recommend_detailed, :info, # Level 2.
           :image_list,
-          :audio, :video, :image, :letter                             # Atom.
+          :audio, :video, :image, :letter # Atom.
 
   NAV_PATH_OPTIONS = {
     # class name           path to map
@@ -16,6 +16,7 @@ class TripMapObserver < ActiveRecord::Observer
     :Recommend          => "map",
     :InfoList           => "map",
     :PanelVideo         => "map",
+    :ChildrenBroadcast  => "map",
 
     :Info               => "info_list.map",
     :RecommendRecord    => "recommend.map",
