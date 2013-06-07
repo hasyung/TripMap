@@ -3,7 +3,7 @@ class Merchant < ActiveRecord::Base
   attr_accessor :city
 
   # White list
-  attr_accessible :name, :title, :conuty, :county_id, :address, :phone, :description, :tag, :city, :merchant_slug_attributes
+  attr_accessible :name, :title, :conuty, :county_id, :address, :phone, :shop_hour, :expence, :special, :description, :tag, :city, :merchant_slug_attributes
 
   # Associations
   belongs_to :county, :counter_cache => true
@@ -20,9 +20,12 @@ class Merchant < ActiveRecord::Base
   validates :name, :length => { :within => 2..50 }, :presence => true
   validates :title, :length => { :within => 2..20 }, :presence => true
   validates :address, :length => { :within => 2..50 }, :presence => true
+  validates :shop_hour, :length => { :within => 0..20 }
+  validates :expence, :length => { :within => 0..20 }
   validates :phone, :length => { :within => 7..11 }, :format => { :with => /^[0-9]+$/, :message => I18n.t("errors.type.phone") }, :presence => true
   validates :county_id, :presence => true
   validates :description, :length => { :within => 0..2000 }
+  validates :special, :length => { :within => 0..200 }
   validates :tag, :length => { :within => 0..50 }
 
   # Nested attributes validates

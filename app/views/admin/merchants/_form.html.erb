@@ -9,7 +9,10 @@
   <%= p.association :county, collection: (@city.present?? @city.counties : (@model.county_id.present?? [@model.county] : [])), prompt: t("helpers.links.select", :model_name => County.model_name.human) %>
   <%= p.input :phone, :input_html => { :class => "span3" } %>
   <%= p.input :address %>
-  <%= p.input :description, :as => :text, as: :text%>
+  <%= p.input :shop_hour %>
+  <%= p.input :expence %>
+  <%= p.input :description, :as => :text%>
+  <%= p.input :special, :as => :text%>
 
   <div class="form-actions">
     <%= p.button :submit, :class => 'btn-primary' %>
