@@ -1,5 +1,6 @@
 class Device < ActiveRecord::Base
-   # White list
+
+  # White list
   attr_accessible :device_id, :created_at
 
   # Associations
@@ -11,4 +12,5 @@ class Device < ActiveRecord::Base
 
   # Scopes
   scope :created_desc, order("created_at DESC")
+
 end

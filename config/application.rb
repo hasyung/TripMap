@@ -35,8 +35,6 @@ module TripMap
 
     config.assets.version = '1.0'
 
-    config.cache_store = :memory_store
-
     config.middleware.use Rack::ContentLength
   end
 end

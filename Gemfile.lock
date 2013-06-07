@@ -247,6 +247,7 @@ DEPENDENCIES
   rails-i18n
   rails-settings-cached
   rspec-rails
+  rubyzip
   sass-rails (~> 3.2.3)
   simple_enum
   simple_form
