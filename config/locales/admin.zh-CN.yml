@@ -511,9 +511,12 @@
         merchant_slug: "简码"
         title: "标题"
         tag: "简介"
-        description: "描述"
+        description: "推荐"
         address: "地址"
         phone: "电话"
+        shop_hour: "营业时间"
+        expence: "人均消费"
+        special: "特色"
         county: "区县"
         city: "省市"
       info_list:
