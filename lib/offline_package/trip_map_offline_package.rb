@@ -2,7 +2,7 @@ require 'fileutils'
 require 'rubygems'
 require 'zip/zip'
 
-# Note: all associations' object should be add to white list!
+# Note: all associations' objects should add to white list!
 
 module TripMapOfflinePackage
 
@@ -35,13 +35,13 @@ module TripMapOfflinePackage
       @@pkg_dir = "%s/public/uploads/packages"%Rails.root.to_s
       @@rc_dir = "%s/%s/"%[@@pkg_dir, @@slug]
 
-      create_root_dir
-      to_json
-      zip_resource
+      layout_dirs
+      collect_resources
+      zip_resources
     end
 
     private
-    def self.create_root_dir
+    def self.layout_dirs
       base_dir = Rails.root.to_s + "/public/uploads"
       dir_paths = [ 'packages', @@slug ]
 
@@ -50,8 +50,8 @@ module TripMapOfflinePackage
         Dir.mkdir(base_dir, 0700) unless Dir.exist?(base_dir)
       end
 
-      ['image', 'audio', 'video'].each do|e|
-        curr_dir = "%s/%s"%[base_dir, e]
+      [A, V, I].each do|e|
+        curr_dir = "%s/%s"%[base_dir, e.downcase]
         Dir.mkdir(curr_dir, 0700) unless Dir.exist?(curr_dir)
       end
     end
@@ -71,7 +71,7 @@ module TripMapOfflinePackage
       @@model.send(model_slug.to_sym).slug
     end
 
-    def self.copy_resources( src_file, media_type = "image" )
+    def self.copy_resources( src_file, media_type = I.downcase )
       dst_dir = "%s%s"%[@@rc_dir, media_type.downcase]
       begin
         FileUtils.cp(src_file, dst_dir)
@@ -81,8 +81,7 @@ module TripMapOfflinePackage
       end
     end
 
-    def self.to_json
-      src_dir = "%s/public/uploads/%s"
+    def self.collect_resources
       h = {}
 
       extract_attrs(["id"], ["map"]).each do |e|
@@ -119,18 +118,18 @@ module TripMapOfflinePackage
       h[e] = val.to_s
      end
 
-      serialize_json(h)
+      serialize(h)
     end
 
-    def self.serialize_json( json )
+    def self.serialize( datum = {} )
       file_path = File.join(@@rc_dir, "%s.json"%@@slug)
       File.open(file_path, "w") do |f|
-        f.write(json.to_json)
+        f.write(datum.to_json)
         f.close()
       end
     end
 
-    def self.zip_resource
+    def self.zip_resources
       zipfile_name = "%s/%s.zip"%[@@pkg_dir, @@slug]
       File.delete(zipfile_name) if File.exist?(zipfile_name)
 
