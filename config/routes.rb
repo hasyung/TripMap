@@ -133,6 +133,11 @@ TripMap::Application.routes.draw do
     resources :lijiang_mailboxes, only: [ :index, :destroy ]
 
     resources :panel_videos
+
+    resources :broadcasts do
+      resources :children_broadcasts
+    end
+
   end
 
   namespace :api do

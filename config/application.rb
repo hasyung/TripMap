@@ -35,12 +35,8 @@ module TripMap
 
     config.assets.version = '1.0'
 
-    #config.cache_store = :memory_store
-
     config.middleware.use Rack::ContentLength
   end
 end
 
 Dir[File.join(Rails.root, "lib", "core", "*.rb")].each {|l| require l }
-
-$trip_cache = {}

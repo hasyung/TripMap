@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130604062712) do
+ActiveRecord::Schema.define(:version => 20130608061157) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",                                :default => "", :null => false
@@ -63,6 +63,23 @@ ActiveRecord::Schema.define(:version => 20130604062712) do
   end
 
   add_index "audios", ["audioable_id", "audioable_type", "order", "audio_type"], :name => "aaoa_index", :unique => true
+
+  create_table "broadcasts", :force => true do |t|
+    t.integer  "map_id",     :null => false
+    t.string   "name",       :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "children_broadcasts", :force => true do |t|
+    t.integer  "broadcast_id"
+    t.string   "name",         :null => false
+    t.integer  "order",        :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "children_broadcasts", ["name"], :name => "index_children_broadcasts_on_name", :unique => true
 
   create_table "cities", :force => true do |t|
     t.string   "name",           :limit => 20,                :null => false
@@ -250,6 +267,9 @@ ActiveRecord::Schema.define(:version => 20130604062712) do
     t.string   "tag",         :limit => 50
     t.string   "address",     :limit => 50, :null => false
     t.string   "phone",       :limit => 12, :null => false
+    t.string   "shop_hour",   :limit => 20
+    t.string   "expence",     :limit => 20
+    t.string   "special"
     t.text     "description"
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false

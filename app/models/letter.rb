@@ -23,7 +23,9 @@ class Letter < ActiveRecord::Base
 
     :detailed_info                  => 5,
 
-    :detailed_text                  => 6
+    :detailed_text                  => 6,
+
+    :broadcast_desc                 => 7
   },
   :column => "text_type"
 

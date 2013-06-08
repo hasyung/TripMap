@@ -19,7 +19,10 @@ class Api::V1::MerchantsController < Api::V1::ApplicationController
                 tag: merchant.tag,
                 phone: merchant.phone,
                 address: merchant.address,
+                shop_hour: merchant.shop_hour,
+                expence: merchant.expence,
                 description: merchant.description,
+                special: merchant.special,
                 slides: slides
               }
     end

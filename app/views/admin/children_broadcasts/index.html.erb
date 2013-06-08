@@ -1,0 +1,68 @@
+<%- model_class = ChildrenBroadcast -%>
+
+<%= render 'base' %>
+
+<div class="box">
+  <div class="box-title">
+    <span class="icon"><i class="icon-th"></i></span>
+    <h5><%= t('links.children_broadcasts.index') %></h5>
+  </div>
+  <div class="box-content">
+    <table class="table table-bordered table-striped with-check">
+      <thead>
+        <tr>
+          <th><input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" /></th>
+          <th><%= model_class.human_attribute_name(:broadcast) %></th>
+          <th><%= model_class.human_attribute_name(:name) %></th>
+          <th><%= model_class.human_attribute_name(:broadcast_cover) %></th>
+          <th><%= model_class.human_attribute_name(:order) %></th>
+          <th><%= model_class.human_attribute_name(:size) %></th>
+          <th><%= model_class.human_attribute_name(:duration) %></th>
+          <th><%= model_class.human_attribute_name(:broadcast_desc) %></th>
+          <th class="action"><%= t('links.commons.action') %></th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @models.each do |m| %>
+          <tr>
+            <td><%= check_box_tag "children_broadcast_ids[]", m.id, false, id: "children_broadcast_#{m.id}" %></td>
+            <td><%= m.broadcast.name %></td>
+            <td><%= m.name %></td>
+
+            <td>
+              <% unless m.broadcast_cover.blank? %>
+                <%= image_tag m.broadcast_cover.file, :size => "50x50" %>
+              <% end %>
+            </td>
+
+            <td><%= m.order %></td>
+
+            <td>
+              <% unless m.broadcast_audio.blank? %>
+                <%= m.broadcast_audio.file_size %>
+              <% end %>
+            </td>
+
+            <td>
+              <% unless m.broadcast_audio.blank? %>
+                <%= m.broadcast_audio.duration %>
+              <% end %>
+            </td>
+
+            <td><%= m.broadcast_desc.body[0...20] %></td>
+
+            <td class="action">
+              <%= link_to raw("<i class=\"icon-edit\"></i>"), edit_admin_broadcast_children_broadcast_path(m.broadcast, m.id), title: t('links.panel_videos.edit') %>
+              <%= link_to raw("<i class=\"icon-trash\"></i>"), admin_broadcast_children_broadcast_path(m.broadcast, m.id), method: :delete, data: {confirm: t('links.commons.confirm')} %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="table-footer clearfix">
+  <div class="paginates-info"><%= page_entries_info @models %></div>
+  <%= paginate @models, :theme => "admin" %>
+</div>
