@@ -1,11 +1,11 @@
 class ChildrenBroadcast < ActiveRecord::Base
 
   # White list
-  attr_accessible :map, :map_id, :name, :cover, :audio, :duration, :size, :description, :order,
+  attr_accessible :broadcast_id, :name, :cover, :audio, :duration, :size, :description, :order,
                   :broadcast_cover_attributes, :broadcast_audio_attributes, :broadcast_desc_attributes
 
   # Associations
-  belongs_to :map
+  belongs_to :broadcast
 
   with_options :as => :imageable, :class_name => 'Image', :dependent => :destroy do|assoc|
     assoc.has_one  :broadcast_cover,   :conditions => { :image_type => Image.broadcast_cover }
@@ -22,7 +22,7 @@ class ChildrenBroadcast < ActiveRecord::Base
   # Validates
   with_options :presence => true do |column|
     column.validates :name, :length => { :within => 1..20, :message => I18n.t("errors.type.name") }, :uniqueness => true
-    column.validates :map_id
+    column.validates :broadcast_id
   end
 
   validates_with OrderValidator
@@ -33,6 +33,7 @@ class ChildrenBroadcast < ActiveRecord::Base
   accepts_nested_attributes_for :broadcast_desc,                                             :allow_destroy => true
 
   # Scopes
+  scope :order_asc,     order("`order` ASC")
   scope :created_desc, order("created_at DESC")
 
 end

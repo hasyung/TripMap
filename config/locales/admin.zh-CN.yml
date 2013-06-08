@@ -61,6 +61,8 @@
       index: "展板视频"
     children_broadcasts:
       index: "儿童广播"
+    broadcasts:
+      index: "广播剧"
   breadcrumbs:
     admin:
       application:
@@ -171,6 +173,10 @@
         index: "儿童广播剧"
         new: "添加儿童广播剧"
         edit: "编辑儿童广播剧"
+      broadcasts:
+        index: "广播剧"
+        new: "添加广播剧"
+        edit: "编辑广播剧"
   links:
     home:
       index: "返回首页"
@@ -300,6 +306,10 @@
       index: "儿童广播"
       edit: "编辑儿童广播"
       new: "新建儿童广播"
+    broadcasts:
+      index: "广播剧"
+      edit: "编辑广播剧"
+      new: "新建广播剧"
 
   messages:
     maps:
@@ -432,6 +442,7 @@
       setting: "设置"
       panel_video: "展板视频"
       children_broadcast: "儿童广播剧"
+      broadcast: "广播剧"
     attributes:
       map:
         province: "省市"
@@ -594,13 +605,19 @@
         panel_video_slug: "简码"
         panel_video_slug_cover: "简码小图片"
       children_broadcast:
-        map: "所属地图"
+        broadcast: "所属广播剧"
         name: "儿童广播剧名称"
         broadcast_cover: "封面"
         broadcast_audio: "音频"
         broadcast_desc: "描述"
         order: "排序号"
+        duration: "时长(秒)"
         size: "音频大小"
+      broadcast:
+        map: "所属地图"
+        name: "儿童广播剧名称"
+        broadcast_slug: "简码"
+        broadcast_slug_cover: "封面"
 
   simple_form:
     labels:
@@ -710,7 +727,7 @@
         map: "地图"
         video: "展板视频"
       children_broadcast:
-        map: "所属地图"
+        broadcast: "所属广播剧"
         broadcast_audio:
           file: "音频"
           duration: "音频时长（秒）"

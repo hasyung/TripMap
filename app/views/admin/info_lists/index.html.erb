@@ -35,12 +35,8 @@
             <td><%= e.order %></td>
             <td><%= e.is_free %></td>
             <td class="action">
-              <%= link_to raw("<i class=\"icon-edit\"></i>"), edit_admin_info_list_path(e), 
-                          :title => t('links.info_lists.edit') %>
-              <%= link_to raw("<i class=\"icon-trash\"></i>"),
-                          admin_info_list_path(e),
-                          :method => :delete,
-                          :data => { :confirm => t('links.commons.confirm') } %>
+              <%= link_to raw("<i class=\"icon-edit\"></i>"), edit_admin_info_list_path(e), :title => t('links.info_lists.edit') %>
+              <%= link_to raw("<i class=\"icon-trash\"></i>"), admin_info_list_path(e), :method => :delete, :data => { :confirm => t('links.commons.confirm') } %>
             </td>
           </tr>
         <% end %>

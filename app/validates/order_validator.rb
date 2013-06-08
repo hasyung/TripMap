@@ -3,7 +3,7 @@ class OrderValidator < ActiveModel::Validator
   NAV_PATH_OPTIONS = {
     # sub class              foreign key
     :Info                 => "info_list_id",
-    :ChildrenBroadcast    => "map_id"
+    :ChildrenBroadcast    => "broadcast_id"
   }
 
   def validate(record)

@@ -3,7 +3,7 @@ class CreateChildrenBroadcasts < ActiveRecord::Migration
   def change
 
     create_table :children_broadcasts do |t|
-      t.references  :map,                    :null => false
+      t.references  :map,                        :null => false
 
       t.string      :name,                       :null => false
       #t.string     :broadcast_cover,            :null => false    # Polymorphic 'Image'

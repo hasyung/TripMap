@@ -50,7 +50,9 @@ class Image < ActiveRecord::Base
 
     :panel_video_slug_cover     => 22,
 
-    :broadcast_cover            => 23
+    :broadcast_cover            => 23,
+
+    :broadcast_slug_cover       => 24
   },
   :column => "image_type"
 
