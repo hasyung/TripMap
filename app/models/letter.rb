@@ -25,7 +25,13 @@ class Letter < ActiveRecord::Base
 
     :detailed_text                  => 6,
 
-    :broadcast_desc                 => 7
+    :broadcast_desc                 => 7,
+    
+    :minority_description           => 8,
+    
+    :minority_feel_description      => 9,
+    
+    :minority_detail_description    => 10
   },
   :column => "text_type"
 

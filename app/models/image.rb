@@ -50,7 +50,19 @@ class Image < ActiveRecord::Base
 
     :panel_video_slug_cover     => 22,
 
-    :broadcast_cover            => 23
+    :broadcast_cover            => 23,
+    
+    :special_icon               => 24,
+    :special_slug_icon          => 25,
+    
+    :minority_icon              => 26,
+    :minority_slug_icon         => 27,
+    :minority_slides            => 28,
+    
+    :minority_feel_icon         => 29,
+    :minority_feel_slides       => 30,
+    
+    :minority_detail_slides     => 31
   },
   :column => "image_type"
 

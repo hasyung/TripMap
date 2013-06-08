@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130607065116) do
+ActiveRecord::Schema.define(:version => 20130608055558) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",                                :default => "", :null => false
@@ -270,6 +270,34 @@ ActiveRecord::Schema.define(:version => 20130607065116) do
 
   add_index "merchants", ["name"], :name => "index_merchants_on_name", :unique => true
 
+  create_table "minorities", :force => true do |t|
+    t.integer  "special_id",                                  :null => false
+    t.string   "name",       :limit => 20,                    :null => false
+    t.integer  "order",                    :default => 0
+    t.boolean  "is_free",                  :default => false
+    t.string   "menu_type"
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
+  end
+
+  add_index "minorities", ["name"], :name => "index_minorities_on_name", :unique => true
+
+  create_table "minority_details", :force => true do |t|
+    t.integer  "minority_id",                              :null => false
+    t.string   "name",        :limit => 20,                :null => false
+    t.integer  "order",                     :default => 0
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+  end
+
+  create_table "minority_feels", :force => true do |t|
+    t.integer  "minority_id",                              :null => false
+    t.string   "name",        :limit => 20,                :null => false
+    t.integer  "order",                     :default => 0
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+  end
+
   create_table "panel_videos", :force => true do |t|
     t.integer  "map_id",     :null => false
     t.string   "name",       :null => false
@@ -362,6 +390,16 @@ ActiveRecord::Schema.define(:version => 20130607065116) do
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
   end
+
+  create_table "specials", :force => true do |t|
+    t.string   "name",       :limit => 20,                    :null => false
+    t.boolean  "is_free",                  :default => false
+    t.string   "menu_type"
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
+  end
+
+  add_index "specials", ["name"], :name => "index_specials_on_name", :unique => true
 
   create_table "surround_cities", :force => true do |t|
     t.integer  "map_id",                  :null => false
