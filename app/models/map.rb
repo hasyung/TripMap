@@ -19,6 +19,7 @@ class Map < ActiveRecord::Base
     assoc.has_many :surround_cities
     assoc.has_many :panel_videos
     assoc.has_many :broadcasts
+    assoc.has_many :specials
   end
 
   with_options :as => :imageable, :class_name => 'Image', :dependent => :destroy do |assoc|
@@ -69,7 +70,8 @@ class Map < ActiveRecord::Base
       recommends:             get_recommends(),
       info_lists:             get_info_lists(),
       panel_videos:           get_panel_videos(),
-      broadcasts:             get_broadcasts()
+      broadcasts:             get_broadcasts(),
+      specials:               get_specials()
     }
   end
 
@@ -294,6 +296,54 @@ class Map < ActiveRecord::Base
       ret << p
     end # End outer loop
     ret
+  end
+  
+  def get_specials
+    specials ||= []
+    self.specials.each do |s|
+      minorities ||= []
+      s.minorities.order_asc.each do |m|
+        slides ||= []
+        feels ||= []
+        m.minority_slides.order_asc.each do |ms|
+          slides << { image:                  get_file_value(ms.minority_slide_icon, "file", true),
+                      description:            get_file_value(ms.minority_slide_description,"body")
+                        }
+        end
+        m.minority_feels.order_asc.each do |mf|
+          sl ||= []
+          mf.minority_feel_slides.order_asc.each{ |o| sl << { image: o.file.url} }
+          feels << {name:                   mf.name,
+                    image:                  get_file_value(mf.minority_feel_icon, "file", true),
+                    description:            get_file_value(mf.minority_feel_description,"body"),
+                    slides:                 sl
+                        }
+        end
+        minorities << { name:                   m.name,
+                        slug:                   get_file_value(m.minority_slug, "slug"),
+                        slug_icon:              get_file_value(m.minority_slug_icon, "file", true),
+                        is_free:                m.is_free.to_s,
+                        menu_type:              m.menu_type,
+                        image:                  get_file_value(m.minority_icon, "file", true),
+                        video:                  get_file_value(m.minority_video, "file", true),
+                        video_size:             get_file_value(m.minority_video,"file_size"),
+                        video_duration:         get_file_value(m.minority_video,"duration"),
+                        video_cover:            get_file_value(m.minority_video,"cover",true),
+                        description:            get_file_value(m.minority_description,"body"),
+                        slides:                 slides,
+                        feels:                  feels
+                            }
+      end
+      specials << { name:                   s.name, 
+                    slug:                   get_file_value(s.special_slug, "slug"),
+                    slug_icon:              get_file_value(s.special_slug_icon, "file", true),
+                    is_free:                s.is_free.to_s,
+                    menu_type:              s.menu_type,
+                    image:                  get_file_value(s.special_icon, "file", true),
+                    minorities:             minorities
+                            }
+    end
+    specials
   end
 
   def get_file_value( file, meth_name, url = false )
