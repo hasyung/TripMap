@@ -24,16 +24,9 @@
           <tr>
             <td><%= check_box_tag "panel_video_ids[]", m.id, false, id: "panel_video_#{m.id}" %></td>
             <td><%= m.map.name %></td>
-            <td>
-              <%= link_to(m.name, admin_broadcast_children_broadcasts_path(m)) %>
-            </td>
-            <td><%= m.broadcast_slug.slug %></td>
-            <td>
-              <% unless m.broadcast_slug_cover.blank? %>
-                <%= image_tag m.broadcast_slug_cover.file, :size => "50x50" %>
-              <% end %>
-            </td>
-
+            <td><%= link_to(m.name, admin_broadcast_children_broadcasts_path(m)) %></td>
+            <td><%= m.broadcast_slug.slug unless m.broadcast_slug.blank? %></td>
+            <td><%= image_tag m.broadcast_slug_cover.file, :size => "50x50" unless m.broadcast_slug_cover.blank? %></td>
             <td class="action">
               <%= link_to raw("<i class=\"icon-edit\"></i>"), edit_admin_broadcast_path(m), title: t('links.panel_videos.edit') %>
               <%= link_to raw("<i class=\"icon-trash\"></i>"), admin_broadcast_path(m), method: :delete, data: {confirm: t('links.commons.confirm')} %>

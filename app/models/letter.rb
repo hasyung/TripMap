@@ -26,17 +26,17 @@ class Letter < ActiveRecord::Base
     :detailed_text                  => 6,
 
     :broadcast_desc                 => 7,
-    
+
     :minority_description           => 8,
-    
+
     :minority_feel_description      => 9,
-    
+
     :minority_slide_description     => 10
   },
   :column => "text_type"
 
   validate :order_increment
-  
+
   validates :order, uniqueness: { scope: [:textable_id, :textable_type, :text_type] },
                     numericality: { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999 }
 

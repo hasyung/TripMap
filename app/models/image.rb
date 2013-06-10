@@ -54,15 +54,15 @@ class Image < ActiveRecord::Base
     
     :special_icon               => 24,
     :special_slug_icon          => 25,
-    
+
     :minority_icon              => 26,
     :minority_slug_icon         => 27,
-    
+
     :minority_slide_icon        => 28,
-    
+
     :minority_feel_icon         => 29,
     :minority_feel_slides       => 30,
-    
+
     :broadcast_slug_cover       => 31
   },
   :column => "image_type"

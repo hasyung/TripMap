@@ -1,7 +1,8 @@
 class MinoritySlide < ActiveRecord::Base
+
   # White list
   attr_accessible :minority_id, :minority, :order, :minority_slide_description_attributes, :minority_slide_icon_attributes
-  
+
   # Associations
   belongs_to :minority
 
@@ -24,11 +25,11 @@ class MinoritySlide < ActiveRecord::Base
   # Nested attributes validates
   accepts_nested_attributes_for :minority_slide_icon,              reject_if: lambda { |i| i[:file].blank? }, allow_destroy: true
   accepts_nested_attributes_for :minority_slide_description,       allow_destroy: true
- 
+
   # Scopes
   scope :order_asc, order("`order` ASC")
   scope :created_desc, order("`created_at` DESC")
-  
+
   def order_increment
     if self.new_record? && self.order == 0 && !self.minority_id.nil?
       self.order = MinoritySlide.where( minority_id: self.minority_id ).maximum(:order).to_i + 1
@@ -36,4 +37,5 @@ class MinoritySlide < ActiveRecord::Base
       self.order = 1
     end
   end
+
 end

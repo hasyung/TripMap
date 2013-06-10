@@ -297,7 +297,7 @@ class Map < ActiveRecord::Base
     end # End outer loop
     ret
   end
-  
+
   def get_specials
     specials ||= []
     self.specials.each do |s|
