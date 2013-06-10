@@ -57,6 +57,10 @@ class Admin::ImagesController < Admin::ApplicationController
       @model = Merchant.find params[:merchant_id]
       @image = @model.merchant_slides.new params[:image]
       @path = edit_admin_merchant_path(@model.id)
+    elsif params[:minority_feel_id].present?
+      @model = MinorityFeel.find(params[:minority_feel_id], include: [:minority])
+      @image = @model.minority_feel_slides.new params[:image]
+      @path = edit_admin_special_minority_feel_path(@model.minority.special.id, @model.minority.id, @model.id)
     end
   end
 

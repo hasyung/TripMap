@@ -1,0 +1,45 @@
+<%- model_class = MinoritySlide -%>
+<div class="box">
+  <div class="box-title">
+    <span class="icon"><i class="icon-th"></i></span>
+    <h5><%= t('links.minority_slides.index') %>
+      <%= link_to t('links.minority_slides.new'), 
+                  new_admin_special_minority_slide_path(
+                    params[:special_id],
+                    params[:id]) %>
+    </h5>
+  </div>
+  <div class="box-content">
+    <table class="table table-bordered table-striped with-check">
+      <thead>
+        <tr>
+          <th><input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" /></th>
+          <th><%= model_class.human_attribute_name(:minority_slide_icon) %></th>
+          <th><%= model_class.human_attribute_name(:minority_slide_description) %></th>
+          <th><%= model_class.human_attribute_name(:order) %></th>
+          <th class="action"><%= t('links.commons.action') %></th>
+        </tr>
+      </thead>
+      </tbody>
+        <% if !@slides.blank? %>
+        <% @slides.each do |img| %>
+          <tr>
+            <td><%= check_box_tag "slide_ids[]", img.id, false, :id => "slide_#{img.id}" %></td>
+            <td><%= img.minority_slide_icon.file %></td>
+            <td><%= truncate(img.minority_slide_description.body, :length => 30, :separator => '...')%></td>
+            <td><%= img.order %></td>
+            <td class="action">
+              <%= link_to raw("<i class=\"icon-edit\"></i>"), 
+                          edit_admin_special_minority_slide_path(params[:special_id], params[:id], img.id) %>
+              <%= link_to raw("<i class=\"icon-trash\"></i>"),
+                          admin_special_minority_slide_path(params[:special_id], params[:id], img.id), 
+                          :method => :delete,
+                          :data => { :confirm => t('links.commons.confirm') } %>
+            </td>
+          </tr>
+        <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

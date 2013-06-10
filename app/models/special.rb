@@ -1,10 +1,11 @@
 class Special < ActiveRecord::Base
   # White list
-  attr_accessible :name, :is_free, :menu_type,
+  attr_accessible :name, :is_free, :menu_type, :map_id, :map,
                   :special_icon_attributes, :special_slug_icon_attributes, :special_slug_attributes
 
   # Associations
   has_many :minorities, :dependent => :destroy
+  belongs_to :map
 
   with_options :as => :imageable, :class_name => "Image", :dependent => :destroy do|assoc|
     assoc.has_one  :special_icon,               :conditions => { :image_type => Image.special_icon }
@@ -18,6 +19,7 @@ class Special < ActiveRecord::Base
   # Validates
   with_options :presence => true do |column|
     column.validates :name, :length => { :within => 2..20 }, :uniqueness => true
+    column.validates :map_id
   end
 
   # Nested attributes validates

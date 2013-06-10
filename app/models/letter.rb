@@ -31,7 +31,7 @@ class Letter < ActiveRecord::Base
     
     :minority_feel_description      => 9,
     
-    :minority_detail_description    => 10
+    :minority_slide_description     => 10
   },
   :column => "text_type"
 

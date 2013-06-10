@@ -1,0 +1,58 @@
+<%= simple_form_for [:admin,@model], url: @model.new_record? ? 
+           admin_special_minorities_path(
+              params[:special_id]) : 
+           admin_special_minority_path(
+              params[:special_id], @model) do |p| %>
+  <%= p.input :name %>
+ <%= p.fields_for :minority_slug, @model.minority_slug ||= @model.build_minority_slug do |s|  %>  
+    <%= s.input :slug, :input_html => { :class => "span-full" } %>
+  <% end %>
+  <%= p.input :is_free %>
+  <%= p.input :menu_type %>
+  <%= p.input :order %>
+
+  <%= p.fields_for :minority_icon, @model.minority_icon ||= @model.build_minority_icon do |picon|  %>  
+    <%= picon.input :file, :as => :file %>
+    <% if @model.minority_icon && @model.minority_icon.file.present? %>
+        <div class="control-group image">
+          <div class="controls">
+            <%= image_tag @model.minority_icon.file %>
+          </div>
+        </div>
+    <% end %>
+  <% end %>
+
+  <%= p.fields_for :minority_slug_icon, @model.minority_slug_icon ||= @model.build_minority_slug_icon do |picon| %>
+  <%= picon.input :file, as: :file %>
+    <% if @model.minority_slug_icon && @model.minority_slug_icon.file.present? %>
+      <div class="control-group image">
+        <div class="controls">
+          <%= image_tag @model.minority_slug_icon.file %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+
+  <%= p.fields_for :minority_video, @model.minority_video ||= @model.build_minority_video do |pv|  %>  
+    <%= pv.input :file,  :as => :file %>
+    <%= pv.input :cover, :as => :file %>
+    <%= pv.input :duration %>
+
+    <% if @model.minority_video && @model.minority_video.file.present? %>
+      <div class="control-group">
+        <div class="controls">
+          <%= video_tag(@model.minority_video.file, :controls => true, :autobuffer => true, :width => 400, :height => 240, :poster => @model.minority_video.cover ) %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+
+  <%= p.fields_for :minority_description, 
+                   @model.minority_description ||= @model.build_minority_description do |pd|  %>  
+    <%= pd.input :body, :as => :text, input_html: { :class => "span-full"} %>
+  <% end %>
+
+  <div class="form-actions">
+    <%= p.button :submit, :class => 'btn-primary' %>
+  </div>
+<% end %>

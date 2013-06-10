@@ -57,12 +57,11 @@ class Image < ActiveRecord::Base
     
     :minority_icon              => 26,
     :minority_slug_icon         => 27,
-    :minority_slides            => 28,
+    
+    :minority_slide_icon        => 28,
     
     :minority_feel_icon         => 29,
-    :minority_feel_slides       => 30,
-    
-    :minority_detail_slides     => 31
+    :minority_feel_slides       => 30
   },
   :column => "image_type"
 

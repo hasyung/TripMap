@@ -30,6 +30,8 @@ module Admin::ApplicationHelper
       path = edit_admin_scenic_image_path(model.id, image_id)
     when "Merchant"
       path = edit_admin_merchant_image_path(model.id, image_id)
+    when "MinorityFeel"
+      path = edit_admin_minority_feel_image_path(model.id, image_id)
     end
     path
   end
@@ -44,6 +46,8 @@ module Admin::ApplicationHelper
       path = admin_scenic_image_path(model.id, image_id)
     when "Merchant"
       path = admin_merchant_image_path(model.id, image_id)
+    when "MinorityFeel"
+      path = admin_minority_feel_image_path(model.id, image_id)
     end
     path
   end

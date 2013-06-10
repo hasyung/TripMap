@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130608055558) do
+ActiveRecord::Schema.define(:version => 20130609024632) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",                                :default => "", :null => false
@@ -282,7 +282,7 @@ ActiveRecord::Schema.define(:version => 20130608055558) do
 
   add_index "minorities", ["name"], :name => "index_minorities_on_name", :unique => true
 
-  create_table "minority_details", :force => true do |t|
+  create_table "minority_feels", :force => true do |t|
     t.integer  "minority_id",                              :null => false
     t.string   "name",        :limit => 20,                :null => false
     t.integer  "order",                     :default => 0
@@ -290,12 +290,11 @@ ActiveRecord::Schema.define(:version => 20130608055558) do
     t.datetime "updated_at",                               :null => false
   end
 
-  create_table "minority_feels", :force => true do |t|
-    t.integer  "minority_id",                              :null => false
-    t.string   "name",        :limit => 20,                :null => false
-    t.integer  "order",                     :default => 0
-    t.datetime "created_at",                               :null => false
-    t.datetime "updated_at",                               :null => false
+  create_table "minority_slides", :force => true do |t|
+    t.integer  "minority_id",                :null => false
+    t.integer  "order",       :default => 0
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
   end
 
   create_table "panel_videos", :force => true do |t|
@@ -392,6 +391,7 @@ ActiveRecord::Schema.define(:version => 20130608055558) do
   end
 
   create_table "specials", :force => true do |t|
+    t.integer  "map_id",                                      :null => false
     t.string   "name",       :limit => 20,                    :null => false
     t.boolean  "is_free",                  :default => false
     t.string   "menu_type"

@@ -1,0 +1,35 @@
+<%= simple_form_for [:admin, @special], html: { class: 'form-horizontal' } do |r| %>
+  <%= r.input :name %>
+ <%= r.fields_for :special_slug, @special.special_slug ||= @special.build_special_slug do |s|  %>  
+    <%= s.input :slug, :input_html => { :class => "span-full" } %>
+  <% end %>
+  <%= r.fields_for :special_slug_icon, @special.special_slug_icon ||= @special.build_special_slug_icon do |ricon| %>
+    <%= ricon.input :file, as: :file %>
+    <% if @special.special_slug_icon && @special.special_slug_icon.file.present? %>
+      <div class="control-group image">
+        <div class="controls">
+          <%= image_tag @special.special_slug_icon.file %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+  <%= r.input :is_free %>
+  <%= r.input :menu_type %>
+  <%= r.association :map, collection: Map.all, 
+                          prompt: t("helpers.links.select", 
+                          :model_name => Map.model_name.human) %>
+  <%= r.fields_for :special_icon, @special.special_icon ||= @special.build_special_icon do |c| %>
+    <%= c.input :file, as: :file %>
+    <% if @special.special_icon && @special.special_icon.file.present? %>
+      <div class="control-group image">
+        <div class="controls">
+          <%= image_tag @special.special_icon.file %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+  <div class="form-actions">
+    <%= r.button :submit, :class => 'btn-primary' %>
+  </div>
+
+<% end %>

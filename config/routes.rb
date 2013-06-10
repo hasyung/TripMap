@@ -90,7 +90,18 @@ TripMap::Application.routes.draw do
         end
       end
     end
-
+    
+    resources :specials, :except => :show do
+      resources :minorities do
+        resources :minority_slides, path: 'slides', :as => "slides", :except => :show
+        resources :minority_feels, path: 'feels', :as => "feels", :except => :show
+      end
+    end
+    
+    resources :minority_feels, :only => [] do
+      resources :images, except: :show
+    end
+    
     resources :info_lists do
       resources :infos
     end

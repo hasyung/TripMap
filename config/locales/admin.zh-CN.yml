@@ -61,6 +61,8 @@
       index: "展板视频"
     children_broadcasts:
       index: "儿童广播"
+    specials:
+      index: "专题列表"
   breadcrumbs:
     admin:
       application:
@@ -171,6 +173,22 @@
         index: "儿童广播剧"
         new: "添加儿童广播剧"
         edit: "编辑儿童广播剧"
+      specials:
+        index: "专题列表"
+        new: "添加专题列表"
+        edit: "修改专题列表"
+      minorities:
+        index: "民族专题"
+        new: "添加民族专题"
+        edit: "修改民族专题"
+        show: "查看民族专题"
+      minority_slides:
+        new: "添加民族图集"
+        edit: "修改民族图集"
+      minority_feels:
+        new: "添加民族风情"
+        edit: "修改民族风情"
+        
   links:
     home:
       index: "返回首页"
@@ -300,6 +318,23 @@
       index: "儿童广播"
       edit: "编辑儿童广播"
       new: "新建儿童广播"
+    specials:
+      index: "专题列表"
+      new: "添加专题列表"
+      edit: "修改专题列表"
+    minorities:
+      index: "民族专题"
+      new: "添加民族专题"
+      edit: "修改民族专题"
+      show: "查看民族专题"
+    minority_slides:
+      index: "民族图集"
+      new: "添加民族图集"
+      edit: "修改民族图集"
+    minority_feels:
+      index: "民族风情"
+      new: "添加民族风情"
+      edit: "修改民族风情"
 
   messages:
     maps:
@@ -381,6 +416,18 @@
       sum: "序列号总数[%{sum}]小于您导出的数量！"
       export: "序列号已生成，请联系系统开发部人员获取！"
       purview: "抱歉，您没有查看序列号管理模块的权限！"
+    specials:
+      success: "操作专题列表成功！"
+      error: "操作专题列表失败！"
+    minorities:
+      success: "操作民族专题成功！"
+      error: "操作民族专题失败！"
+    minority_slides:
+      success: "操作民族图集成功！"
+      error: "操作民族图集失败！"
+    minority_feels:
+      success: "操作民族风情成功！"
+      error: "操作民族风情失败！"
     settings:
       success: "设置成功！"
     lijiang_mailboxes:
@@ -432,6 +479,10 @@
       setting: "设置"
       panel_video: "展板视频"
       children_broadcast: "儿童广播剧"
+      special: "专题列表"
+      minority: "民族专题"
+      minority_slide: "民族图集"
+      minority_feel: "民族风情"
     attributes:
       map:
         province: "省市"
@@ -601,6 +652,30 @@
         broadcast_desc: "描述"
         order: "排序号"
         size: "音频大小"
+      special:
+        map: "所属地图"
+        name: "名称"
+        special_slug: "简码"
+        is_free: "免费"
+        menu_type: "菜单标注"
+      minority:
+        special: "专题列表"
+        name: "名称"
+        minority_slug: "简码"
+        is_free: "免费"
+        menu_type: "菜单标注"
+        order: "排序"
+      minority_slide:
+        minority: "民族专题"
+        minority_slide_icon: "图片"
+        minority_slide_description: "内容"
+        order: "排序"
+      minority_feel:
+        minority: "民族专题"
+        name: "名称"
+        minority_feel_icon: "图片"
+        minority_feel_description: "内容"
+        order: "排序"
 
   simple_form:
     labels:
@@ -717,6 +792,28 @@
         broadcast_desc:
           body: "描述"
         order: "序号"
+      special:
+        special_slug_icon: 
+          file: "简码小图"
+      minority:
+        minority_slug_icon: 
+          file: "简码小图"
+        minority_video:
+          file: "视频"
+          cover: "视频封面"
+          duration: "视频时长"
+        minority_description:
+          body: "内容"
+      minority_slide:
+        minority_slide_icon: 
+          file: "图片"
+        minority_slide_description:
+          body: "内容"
+      minority_feel:
+        minority_feel_icon: 
+          file: "图片"
+        minority_feel_description:
+          body: "内容"
 
   helpers:
     links:

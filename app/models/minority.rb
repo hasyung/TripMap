@@ -5,14 +5,13 @@ class Minority < ActiveRecord::Base
                   :minority_description_attributes, :minority_video_attributes
 
   # Associations
-  has_many :minority_details, :dependent => :destroy
   has_many :minority_feels, :dependent => :destroy
+  has_many :minority_slides, :dependent => :destroy
   belongs_to :special
 
   with_options :as => :imageable, :class_name => "Image", :dependent => :destroy do|assoc|
     assoc.has_one  :minority_icon,               :conditions => { :image_type => Image.minority_icon }
     assoc.has_one  :minority_slug_icon,          :conditions => { :image_type => Image.minority_slug_icon }
-    assoc.has_many :minority_slides,           :conditions => { :image_type => Image.minority_slides  }
   end
 
   with_options :as => :keywordable, :class_name => 'Keyword', :dependent => :destroy do|assoc|
@@ -37,11 +36,11 @@ class Minority < ActiveRecord::Base
   end
 
   # Nested attributes validates
-  accepts_nested_attributes_for :minority_icon_attributes,              reject_if: lambda { |i| i[:file].blank? }, allow_destroy: true
-  accepts_nested_attributes_for :minority_slug_icon_attributes,         reject_if: lambda { |i| i[:file].blank? }, allow_destroy: true
-  accepts_nested_attributes_for :minority_slug_attributes,              allow_destroy: true
-  accepts_nested_attributes_for :minority_description_attributes,       allow_destroy: true
-  accepts_nested_attributes_for :minority_video_attributes,             reject_if: lambda { |pv| (pv[:file].blank? && pv[:id].blank?) }, allow_destroy: true
+  accepts_nested_attributes_for :minority_icon,              reject_if: lambda { |i| i[:file].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :minority_slug_icon,         reject_if: lambda { |i| i[:file].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :minority_slug,              allow_destroy: true
+  accepts_nested_attributes_for :minority_description,       allow_destroy: true
+  accepts_nested_attributes_for :minority_video,             reject_if: lambda { |pv| (pv[:file].blank? && pv[:id].blank?) }, allow_destroy: true
 
   # Scopes
   scope :order_asc, order("`order` ASC")
