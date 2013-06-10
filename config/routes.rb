@@ -145,7 +145,10 @@ TripMap::Application.routes.draw do
 
     resources :panel_videos
 
-    resources :children_broadcasts
+    resources :broadcasts do
+      resources :children_broadcasts
+    end
+
   end
 
   namespace :api do

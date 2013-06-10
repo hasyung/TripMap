@@ -18,7 +18,7 @@ class Map < ActiveRecord::Base
     assoc.has_many :logs
     assoc.has_many :surround_cities
     assoc.has_many :panel_videos
-    assoc.has_many :children_broadcasts
+    assoc.has_many :broadcasts
   end
 
   with_options :as => :imageable, :class_name => 'Image', :dependent => :destroy do |assoc|
@@ -69,7 +69,7 @@ class Map < ActiveRecord::Base
       recommends:             get_recommends(),
       info_lists:             get_info_lists(),
       panel_videos:           get_panel_videos(),
-      children_broadcasts:    get_children_broadcasts()
+      broadcasts:             get_broadcasts()
     }
   end
 
@@ -270,18 +270,30 @@ class Map < ActiveRecord::Base
     pv
   end
 
-  def get_children_broadcasts
-    cb = []
-    self.children_broadcasts.each do|m|
-      cb << { name: m.name, cover: get_file_value(m.broadcast_cover, "file", true),
-        audio: get_file_value(m.broadcast_audio, "file", true),
-        size: get_file_value(m.broadcast_audio, "file_size", false),
-        duration: get_file_value(m.broadcast_audio, "duration", false),
-        order: m.order,
-        desc: get_file_value(m.broadcast_desc, "body", false)
+  def get_broadcasts
+    ret = []
+
+    self.broadcasts.each do|m|
+      p = {
+        broadcast_slug: get_file_value(m.broadcast_slug, "slug"),
+        broadcast_slug_cover: get_file_value(m.broadcast_slug_cover, "file", true),
       }
-    end
-    cb.sort_by{|e| e[:order] }
+
+      tmps = []
+      m.children_broadcasts.order_asc.each do|o|
+        tmps << { name: o.name,
+          cover: get_file_value(o.broadcast_cover, "file", true),
+          audio: get_file_value(o.broadcast_audio, "file", true),
+          size: get_file_value(o.broadcast_audio, "file_size", false),
+          duration: get_file_value(o.broadcast_audio, "duration", false),
+          order: o.order,
+          desc: get_file_value(o.broadcast_desc, "body", false)
+        }
+      end
+      p["children_broadcasts"] = tmps
+      ret << p
+    end # End outer loop
+    ret
   end
 
   def get_file_value( file, meth_name, url = false )

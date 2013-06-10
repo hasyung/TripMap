@@ -63,6 +63,8 @@
       index: "儿童广播"
     specials:
       index: "专题列表"
+    broadcasts:
+      index: "广播剧"
   breadcrumbs:
     admin:
       application:
@@ -188,7 +190,10 @@
       minority_feels:
         new: "添加民族风情"
         edit: "修改民族风情"
-        
+      broadcasts:
+        index: "广播剧"
+        new: "添加广播剧"
+        edit: "编辑广播剧"
   links:
     home:
       index: "返回首页"
@@ -335,6 +340,10 @@
       index: "民族风情"
       new: "添加民族风情"
       edit: "修改民族风情"
+    broadcasts:
+      index: "广播剧"
+      edit: "编辑广播剧"
+      new: "新建广播剧"
 
   messages:
     maps:
@@ -483,6 +492,7 @@
       minority: "民族专题"
       minority_slide: "民族图集"
       minority_feel: "民族风情"
+      broadcast: "广播剧"
     attributes:
       map:
         province: "省市"
@@ -645,12 +655,13 @@
         panel_video_slug: "简码"
         panel_video_slug_cover: "简码小图片"
       children_broadcast:
-        map: "所属地图"
+        broadcast: "所属广播剧"
         name: "儿童广播剧名称"
         broadcast_cover: "封面"
         broadcast_audio: "音频"
         broadcast_desc: "描述"
         order: "排序号"
+        duration: "时长(秒)"
         size: "音频大小"
       special:
         map: "所属地图"
@@ -676,6 +687,11 @@
         minority_feel_icon: "图片"
         minority_feel_description: "内容"
         order: "排序"
+      broadcast:
+        map: "所属地图"
+        name: "儿童广播剧名称"
+        broadcast_slug: "简码"
+        broadcast_slug_cover: "封面"
 
   simple_form:
     labels:
@@ -785,7 +801,7 @@
         map: "地图"
         video: "展板视频"
       children_broadcast:
-        map: "所属地图"
+        broadcast: "所属广播剧"
         broadcast_audio:
           file: "音频"
           duration: "音频时长（秒）"

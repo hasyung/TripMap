@@ -3,9 +3,11 @@ require "offline_package/trip_map_offline_package"
 class TripMapObserver < ActiveRecord::Observer
   include TripMapOfflinePackage
 
+  # Note: if observe's object changed, then NAV_PATH_OPTIONS should be changed together.
+
   # Observing models.
-  observe :scenic, :place, :recommend, :info_list, :panel_video, :children_broadcast, # Level 1.
-          :recommend_record, :recommend_detailed, :info, # Level 2.
+  observe :scenic, :place, :recommend, :info_list, :panel_video, :broadcast, # Level 1.
+          :recommend_record, :recommend_detailed, :info, :children_broadcast, # Level 2.
           :image_list,
           :audio, :video, :image, :letter # Atom.
 
@@ -16,11 +18,12 @@ class TripMapObserver < ActiveRecord::Observer
     :Recommend          => "map",
     :InfoList           => "map",
     :PanelVideo         => "map",
-    :ChildrenBroadcast  => "map",
+    :Broadcast          => "map",
 
     :Info               => "info_list.map",
     :RecommendRecord    => "recommend.map",
     :RecommendDetailed  => "recommend_record.recommend.map",
+    :ChildrenBroadcast  => "broadcast.map",
 
     :ImageList          => "recommend_detailed.recommend_record.recommend.map",
   }

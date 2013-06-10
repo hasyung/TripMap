@@ -12,7 +12,7 @@
       <thead>
         <tr>
           <th><input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" /></th>
-          <th><%= model_class.human_attribute_name(:map) %></th>
+          <th><%= model_class.human_attribute_name(:broadcast) %></th>
           <th><%= model_class.human_attribute_name(:name) %></th>
           <th><%= model_class.human_attribute_name(:broadcast_cover) %></th>
           <th><%= model_class.human_attribute_name(:order) %></th>
@@ -25,8 +25,8 @@
       <tbody>
       <% @models.each do |m| %>
           <tr>
-            <td><%= check_box_tag "panel_video_ids[]", m.id, false, id: "panel_video_#{m.id}" %></td>
-            <td><%= m.map.name %></td>
+            <td><%= check_box_tag "children_broadcast_ids[]", m.id, false, id: "children_broadcast_#{m.id}" %></td>
+            <td><%= m.broadcast.name %></td>
             <td><%= m.name %></td>
 
             <td>
@@ -52,8 +52,8 @@
             <td><%= m.broadcast_desc.body[0...20] %></td>
 
             <td class="action">
-              <%= link_to raw("<i class=\"icon-edit\"></i>"), edit_admin_children_broadcast_path(m), title: t('links.panel_videos.edit') %>
-              <%= link_to raw("<i class=\"icon-trash\"></i>"), admin_children_broadcast_path(m), method: :delete, data: {confirm: t('links.commons.confirm')} %>
+              <%= link_to raw("<i class=\"icon-edit\"></i>"), edit_admin_broadcast_children_broadcast_path(m.broadcast, m.id), title: t('links.panel_videos.edit') %>
+              <%= link_to raw("<i class=\"icon-trash\"></i>"), admin_broadcast_children_broadcast_path(m.broadcast, m.id), method: :delete, data: {confirm: t('links.commons.confirm')} %>
             </td>
           </tr>
         <% end %>

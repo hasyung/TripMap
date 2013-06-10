@@ -21,7 +21,8 @@ class Keyword < ActiveRecord::Base
     :merchant_slug              => 6,
     :panel_video_slug           => 7,
     :special_slug               => 8,
-    :minority_slug              => 9
+    :minority_slug              => 9,
+    :broadcast_slug             => 10
   },
   :column => "keyword_type"
 

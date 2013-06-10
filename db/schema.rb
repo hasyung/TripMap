@@ -64,12 +64,19 @@ ActiveRecord::Schema.define(:version => 20130609024632) do
 
   add_index "audios", ["audioable_id", "audioable_type", "order", "audio_type"], :name => "aaoa_index", :unique => true
 
-  create_table "children_broadcasts", :force => true do |t|
+  create_table "broadcasts", :force => true do |t|
     t.integer  "map_id",     :null => false
     t.string   "name",       :null => false
-    t.integer  "order",      :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "children_broadcasts", :force => true do |t|
+    t.integer  "broadcast_id"
+    t.string   "name",         :null => false
+    t.integer  "order",        :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   add_index "children_broadcasts", ["name"], :name => "index_children_broadcasts_on_name", :unique => true
