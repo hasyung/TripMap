@@ -1,5 +1,5 @@
 class Map < ActiveRecord::Base
- include SerialNumber::Generate
+  include SerialNumber::Generate
 
   #White list
   attr_accessible :province, :province_id, :name, :map_slug_attributes, :version,
@@ -283,7 +283,8 @@ class Map < ActiveRecord::Base
 
       tmps = []
       m.children_broadcasts.order_asc.each do|o|
-        tmps << { name: o.name,
+        tmps << {
+          name: o.name,
           cover: get_file_value(o.broadcast_cover, "file", true),
           audio: get_file_value(o.broadcast_audio, "file", true),
           size: get_file_value(o.broadcast_audio, "file_size", false),

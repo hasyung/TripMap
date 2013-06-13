@@ -25,7 +25,6 @@ class  Api::V1x::MapsController < Api::V1x::ApplicationController
       }
     end
     render :json => result
-
   end
 
 end

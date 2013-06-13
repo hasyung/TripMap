@@ -79,13 +79,14 @@ class Api::V1::SharesController < Api::V1::ApplicationController
 
   private
   def get_share_value(share)
-    r = {id: share.id,
-         title: share.title,
-         nickname: share.account.present?? share.account.nickname : "游客",
-         image: share.share_image.file.url,
-         cover: share.share_image.file.thumbnail.url,
-         text: share.share_text.body
-         }
+    r = {
+      id: share.id,
+      title: share.title,
+      nickname: share.account.present?? share.account.nickname : "游客",
+      image: share.share_image.file.url,
+      cover: share.share_image.file.thumbnail.url,
+      text: share.share_text.body
+     }
   end
 
 end

@@ -9,7 +9,7 @@ class MinoritySlide < ActiveRecord::Base
   with_options :as => :imageable, :class_name => "Image", :dependent => :destroy do|assoc|
     assoc.has_one  :minority_slide_icon,               :conditions => { :image_type => Image.minority_slide_icon }
   end
-  
+
   with_options :as => :textable, :class_name => "Letter", :dependent => :destroy do |assoc|
     assoc.has_one :minority_slide_description,       :conditions => { :text_type => Letter.minority_slide_description }
   end

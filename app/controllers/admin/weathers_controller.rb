@@ -37,7 +37,7 @@ class Admin::WeathersController < Admin::ApplicationController
     surr_cities = SurroundCity.where(map_id: mid.to_i)
 
     @surr_w = []
-    if not surr_cities.empty?
+    unless surr_cities.empty?
       surr_cities.each do|city|
         ploy_options = { weatherable_type: city.class.to_s, weatherable_id: city.id }
         city_w = get_today_weather(ploy_options)

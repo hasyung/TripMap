@@ -20,7 +20,7 @@ module Admin::ApplicationHelper
     button_status = action_name == type ? "btn active" : "btn"
   end
 
-  def get_edit_image_path(model,image_id)
+  def get_edit_image_path(model, image_id)
     case model.class.name
     when "Map"
       path = edit_admin_map_image_path(model.id, image_id)
@@ -36,7 +36,7 @@ module Admin::ApplicationHelper
     path
   end
 
-  def get_delete_image_path(model,image_id)
+  def get_delete_image_path(model, image_id)
     case model.class.name
     when "Map"
       path = admin_map_image_path(model.id, image_id)
