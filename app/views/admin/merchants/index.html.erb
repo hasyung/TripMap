@@ -29,8 +29,8 @@
           <td><%= p.name %></td>
           <td><%= p.merchant_slug.slug %></td>
           <td><%= p.title %></td>
-          <td><%= p.county.city.name %></td>
-          <td><%= p.county.name %></td>
+          <td><%= p.county.city.name if p.county.present? && p.county.city.present? %></td>
+          <td><%= p.county.name if p.county.present? %></td>
           <td><%= p.phone %></td>
           <td class="action">
             <%= link_to raw("<i class=\"icon-edit\"></i>"), edit_admin_merchant_path(p), 

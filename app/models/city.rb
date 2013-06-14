@@ -4,7 +4,7 @@ class City < ActiveRecord::Base
   attr_accessible :name, :slug
 
   # Associations
-  has_many :counties, :autosave => true
+  has_many :counties, :autosave => true, :dependent => :destroy
 
   # Validates
   with_options :presence => true do |column|
