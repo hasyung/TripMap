@@ -24,4 +24,5 @@ class Account < ActiveRecord::Base
 
   # Nested attributes validates
   accepts_nested_attributes_for :map_serial_number,              reject_if: lambda { |i| i[:code].blank? }
+
 end

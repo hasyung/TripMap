@@ -138,6 +138,7 @@ module TripMapOfflinePackage
           zipfile.add(file.sub(@@rc_dir, ''), file)
         end
       end
+      File.chmod(0644, zipfile_name)
     end
 
   end # end class

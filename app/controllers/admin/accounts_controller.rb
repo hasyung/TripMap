@@ -1,4 +1,5 @@
 class Admin::AccountsController < Admin::ApplicationController
+
   def index
     @accounts = Account.includes(:map_serial_number).page(params[:page]).per(Setting.page_size).created_desc
     add_breadcrumb :index
@@ -54,4 +55,5 @@ class Admin::AccountsController < Admin::ApplicationController
       redirect_to admin_accounts_path , alert: t('messages.accounts.error')
     end
   end
+
 end

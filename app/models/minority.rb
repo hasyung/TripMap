@@ -1,4 +1,5 @@
 class Minority < ActiveRecord::Base
+
   # White list
   attr_accessible :name, :is_free, :menu_type, :special_id, :special, :order,
                   :minority_icon_attributes, :minority_slug_icon_attributes, :minority_slug_attributes,
@@ -17,11 +18,11 @@ class Minority < ActiveRecord::Base
   with_options :as => :keywordable, :class_name => 'Keyword', :dependent => :destroy do|assoc|
     assoc.has_one :minority_slug,                :conditions => { :keyword_type => Keyword.minority_slug }
   end
-  
+
   with_options :dependent => :destroy do |assoc|
     assoc.has_one :minority_video, :as => :videoable, :class_name => "Video", :conditions => { :video_type => Video.minority_video }
   end
-  
+
   with_options :as => :textable, :class_name => "Letter", :dependent => :destroy do |assoc|
     assoc.has_one :minority_description,       :conditions => { :text_type => Letter.minority_description }
   end
@@ -45,7 +46,7 @@ class Minority < ActiveRecord::Base
   # Scopes
   scope :order_asc, order("`order` ASC")
   scope :created_desc, order("`created_at` DESC")
-  
+
   def order_increment
     if self.new_record? && self.order == 0 && !self.special_id.nil?
       self.order = Minority.where( special_id: self.special_id ).maximum(:order).to_i + 1
@@ -53,4 +54,5 @@ class Minority < ActiveRecord::Base
       self.order = 1
     end
   end
+
 end

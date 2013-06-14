@@ -1,4 +1,5 @@
 class Admin::SpecialsController < Admin::ApplicationController
+
   def index
     @specials = Special.includes(:map).page(params[:page]).per(Setting.page_size).created_desc
 

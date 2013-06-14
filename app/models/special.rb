@@ -1,4 +1,5 @@
 class Special < ActiveRecord::Base
+
   # White list
   attr_accessible :name, :is_free, :menu_type, :map_id, :map,
                   :special_icon_attributes, :special_slug_icon_attributes, :special_slug_attributes
@@ -29,4 +30,5 @@ class Special < ActiveRecord::Base
 
   # Scopes
   scope :created_desc, order("`created_at` DESC")
+
 end

@@ -15,7 +15,6 @@ class Api::V1::DownloadsController < Api::V1::ApplicationController
     end
 
     render :text => d.count.to_s
-
   end
 
 end
