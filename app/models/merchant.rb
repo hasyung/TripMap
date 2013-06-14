@@ -3,8 +3,11 @@ class Merchant < ActiveRecord::Base
   attr_accessor :city
 
   # White list
-  attr_accessible :name, :title, :conuty, :county_id, :address, :phone, :shop_hour, :expence, :special, :description, :tag, :city, :merchant_slug_attributes
-
+  attr_accessible :name, :title, :conuty, :county_id, :address, :phone, :shop_hour, :expence, :special, :description, :tag, :type_cd, :city, :merchant_slug_attributes
+  
+  #SimpleEnum
+  as_enum :type, {:meishi => 0, :gouwu => 1, :yule => 2, :zhusu => 4}
+  
   # Associations
   belongs_to :county, :counter_cache => true
 
