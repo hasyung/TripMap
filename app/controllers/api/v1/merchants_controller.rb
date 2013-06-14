@@ -3,7 +3,7 @@ class Api::V1::MerchantsController < Api::V1::ApplicationController
   def index
     result = []
     Merchant.all.each do |m|
-      result << { :id => m.id, :name => m.name, :slug => m.merchant_slug.slug }
+      result << { :id => m.id, :name => m.name, :slug => m.merchant_slug.slug, :phone => m.phone, :type => m.type_cd }
     end
     render :json => result
   end
@@ -17,7 +17,6 @@ class Api::V1::MerchantsController < Api::V1::ApplicationController
       result = {
         title: merchant.title,
         tag: merchant.tag,
-        phone: merchant.phone,
         address: merchant.address,
         shop_hour: merchant.shop_hour,
         expence: merchant.expence,

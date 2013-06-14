@@ -15,6 +15,7 @@
           <th><%= model_class.human_attribute_name(:name) %></th>
           <th><%= model_class.human_attribute_name(:merchant_slug) %></th>
           <th><%= model_class.human_attribute_name(:title) %></th>
+          <th><%= model_class.human_attribute_name(:type_cd) %></th>
           <th><%= model_class.human_attribute_name(:city) %></th>
           <th><%= model_class.human_attribute_name(:county) %></th>
           <th><%= model_class.human_attribute_name(:phone) %></th>
@@ -29,8 +30,9 @@
           <td><%= p.name %></td>
           <td><%= p.merchant_slug.slug %></td>
           <td><%= p.title %></td>
-          <td><%= p.county.city.name %></td>
-          <td><%= p.county.name %></td>
+          <td><%= t("activerecord.enums.merchant.types.#{model_class.types.key(p.type_cd)}") %></td>
+          <td><%= p.county.city.name if p.county.present? && p.county.city.present? %></td>
+          <td><%= p.county.name if p.county.present? %></td>
           <td><%= p.phone %></td>
           <td class="action">
             <%= link_to raw("<i class=\"icon-edit\"></i>"), edit_admin_merchant_path(p), 

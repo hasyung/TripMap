@@ -5,6 +5,9 @@
   <% end %>
   <%= p.input :title %>
   <%= p.input :tag %>
+  <%= p.input :type_cd do %>
+    <%= p.select :type_cd, Merchant.types_for_select(:value) %>
+  <% end -%>
   <%= p.input :city, collection: City.all, input_html: {onchange: "getcity()"}, prompt: t("helpers.links.select", :model_name => City.model_name.human) %>
   <%= p.association :county, collection: (@city.present?? @city.counties : (@model.county_id.present?? [@model.county] : [])), prompt: t("helpers.links.select", :model_name => County.model_name.human) %>
   <%= p.input :phone, :input_html => { :class => "span3" } %>

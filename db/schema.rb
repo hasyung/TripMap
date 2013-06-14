@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130614034000) do
+ActiveRecord::Schema.define(:version => 20130614073602) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",                                :default => "", :null => false
@@ -292,18 +292,19 @@ ActiveRecord::Schema.define(:version => 20130614034000) do
   add_index "maps", ["name"], :name => "index_maps_on_name", :unique => true
 
   create_table "merchants", :force => true do |t|
-    t.integer  "county_id",                 :null => false
-    t.string   "title",       :limit => 20, :null => false
-    t.string   "name",        :limit => 50, :null => false
+    t.integer  "county_id",                                :null => false
+    t.string   "title",       :limit => 20,                :null => false
+    t.string   "name",        :limit => 50,                :null => false
     t.string   "tag",         :limit => 50
-    t.string   "address",     :limit => 50, :null => false
-    t.string   "phone",       :limit => 12, :null => false
+    t.integer  "type_cd",                   :default => 0
+    t.string   "address",     :limit => 50,                :null => false
+    t.string   "phone",       :limit => 12,                :null => false
     t.string   "shop_hour",   :limit => 20
     t.string   "expence",     :limit => 20
     t.string   "special"
     t.text     "description"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
   end
 
   add_index "merchants", ["name"], :name => "index_merchants_on_name", :unique => true

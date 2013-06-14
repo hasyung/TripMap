@@ -486,6 +486,13 @@
         activates:
           yes_activate: "已激活"
           no_activate: "未激活"
+      merchant:
+        types:
+          meishi: "美食"
+          gouwu: "购物"
+          yule: "娱乐"
+          zhusu: "住宿"
+          
     models:
       place: "景点"
       scenic: "景区"
@@ -602,6 +609,7 @@
         merchant_slug: "简码"
         title: "标题"
         tag: "简介"
+        type_cd: "分类"
         description: "推荐"
         address: "地址"
         phone: "电话"
