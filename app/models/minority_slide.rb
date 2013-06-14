@@ -23,8 +23,8 @@ class MinoritySlide < ActiveRecord::Base
   end
 
   # Nested attributes validates
-  accepts_nested_attributes_for :minority_slide_icon,              reject_if: lambda { |i| i[:file].blank? }, allow_destroy: true
-  accepts_nested_attributes_for :minority_slide_description,       allow_destroy: true
+  accepts_nested_attributes_for :minority_slide_icon,        reject_if: ->(attr){ attr[:file].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :minority_slide_description,                                            :allow_destroy => true
 
   # Scopes
   scope :order_asc, order("`order` ASC")

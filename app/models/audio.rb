@@ -25,6 +25,8 @@ class Audio < ActiveRecord::Base
     :place_audio                    => 0,
 
     :broadcast_audio                => 1,
+
+    :audio_list_item_audio          => 2,
   },
   :column => "audio_type"
 

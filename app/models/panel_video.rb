@@ -23,8 +23,8 @@ class PanelVideo < ActiveRecord::Base
   end
 
   # Nested attributes validates
-  accepts_nested_attributes_for :panel_video_slug_cover, reject_if: lambda { |img| img[:file].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :panel_video_slug,       :allow_destroy => true
+  accepts_nested_attributes_for :panel_video_slug_cover, reject_if: ->(attr){ attr[:file].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :panel_video_slug,                                                  :allow_destroy => true
 
   # Carrierwave
   mount_uploader :video, VideoUploader do

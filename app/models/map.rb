@@ -20,6 +20,7 @@ class Map < ActiveRecord::Base
     assoc.has_many :panel_videos
     assoc.has_many :broadcasts
     assoc.has_many :specials
+    assoc.has_many :audio_list_categories
   end
 
   with_options :as => :imageable, :class_name => 'Image', :dependent => :destroy do |assoc|
@@ -71,7 +72,8 @@ class Map < ActiveRecord::Base
       info_lists:             get_info_lists(),
       panel_videos:           get_panel_videos(),
       broadcasts:             get_broadcasts(),
-      specials:               get_specials()
+      specials:               get_specials(),
+      audio_list_categories:  get_audio_list_categories()
     }
   end
 
@@ -265,7 +267,8 @@ class Map < ActiveRecord::Base
   def get_panel_videos
     pv = []
     self.panel_videos.each do |m|
-      pv << { name: m.name, slug: get_file_value(m.panel_video_slug, "slug"),
+      pv << {
+        name: m.name, slug: get_file_value(m.panel_video_slug, "slug"),
         slug_cover: get_file_value(m.panel_video_slug_cover, "file", true), video: m.video.url
       }
     end
@@ -277,20 +280,20 @@ class Map < ActiveRecord::Base
 
     self.broadcasts.each do|m|
       p = {
-        broadcast_slug: get_file_value(m.broadcast_slug, "slug"),
+        broadcast_slug:       get_file_value(m.broadcast_slug, "slug"),
         broadcast_slug_cover: get_file_value(m.broadcast_slug_cover, "file", true),
       }
 
       tmps = []
       m.children_broadcasts.order_asc.each do|o|
         tmps << {
-          name: o.name,
-          cover: get_file_value(o.broadcast_cover, "file", true),
-          audio: get_file_value(o.broadcast_audio, "file", true),
-          size: get_file_value(o.broadcast_audio, "file_size", false),
+          name:     o.name,
+          cover:    get_file_value(o.broadcast_cover, "file", true),
+          audio:    get_file_value(o.broadcast_audio, "file", true),
+          size:     get_file_value(o.broadcast_audio, "file_size", false),
           duration: get_file_value(o.broadcast_audio, "duration", false),
-          order: o.order,
-          desc: get_file_value(o.broadcast_desc, "body", false)
+          order:    o.order,
+          desc:     get_file_value(o.broadcast_desc, "body", false)
         }
       end
       p["children_broadcasts"] = tmps
@@ -301,50 +304,91 @@ class Map < ActiveRecord::Base
 
   def get_specials
     specials ||= []
+
     self.specials.each do |s|
       minorities ||= []
       s.minorities.order_asc.each do |m|
         slides ||= []
-        feels ||= []
+        feels  ||= []
         m.minority_slides.order_asc.each do |ms|
-          slides << { image:                  get_file_value(ms.minority_slide_icon, "file", true),
-                      description:            get_file_value(ms.minority_slide_description,"body")
-                        }
+          slides << {
+            image:       get_file_value(ms.minority_slide_icon, "file", true),
+            description: get_file_value(ms.minority_slide_description,"body")
+          }
         end
         m.minority_feels.order_asc.each do |mf|
           sl ||= []
           mf.minority_feel_slides.order_asc.each{ |o| sl << { image: o.file.url} }
-          feels << {name:                   mf.name,
-                    image:                  get_file_value(mf.minority_feel_icon, "file", true),
-                    description:            get_file_value(mf.minority_feel_description,"body"),
-                    slides:                 sl
-                        }
+          feels << {
+            name:        mf.name,
+            image:       get_file_value(mf.minority_feel_icon, "file", true),
+            description: get_file_value(mf.minority_feel_description,"body"),
+            slides:      sl
+          }
         end
-        minorities << { name:                   m.name,
-                        slug:                   get_file_value(m.minority_slug, "slug"),
-                        slug_icon:              get_file_value(m.minority_slug_icon, "file", true),
-                        is_free:                m.is_free.to_s,
-                        menu_type:              m.menu_type,
-                        image:                  get_file_value(m.minority_icon, "file", true),
-                        video:                  get_file_value(m.minority_video, "file", true),
-                        video_size:             get_file_value(m.minority_video,"file_size"),
-                        video_duration:         get_file_value(m.minority_video,"duration"),
-                        video_cover:            get_file_value(m.minority_video,"cover",true),
-                        description:            get_file_value(m.minority_description,"body"),
-                        slides:                 slides,
-                        feels:                  feels
-                            }
+        minorities << {
+          name:           m.name,
+          slug:           get_file_value(m.minority_slug, "slug"),
+          slug_icon:      get_file_value(m.minority_slug_icon, "file", true),
+          is_free:        m.is_free.to_s,
+          menu_type:      m.menu_type,
+          image:          get_file_value(m.minority_icon, "file", true),
+          video:          get_file_value(m.minority_video, "file", true),
+          video_size:     get_file_value(m.minority_video,"file_size"),
+          video_duration: get_file_value(m.minority_video,"duration"),
+          video_cover:    get_file_value(m.minority_video,"cover",true),
+          description:    get_file_value(m.minority_description,"body"),
+          slides:         slides,
+          feels:          feels
+        }
       end
-      specials << { name:                   s.name, 
-                    slug:                   get_file_value(s.special_slug, "slug"),
-                    slug_icon:              get_file_value(s.special_slug_icon, "file", true),
-                    is_free:                s.is_free.to_s,
-                    menu_type:              s.menu_type,
-                    image:                  get_file_value(s.special_icon, "file", true),
-                    minorities:             minorities
-                            }
+      specials << { 
+        name:             s.name, 
+        slug:             get_file_value(s.special_slug, "slug"),
+        slug_icon:        get_file_value(s.special_slug_icon, "file", true),
+        is_free:          s.is_free.to_s,
+        menu_type:        s.menu_type,
+        image:            get_file_value(s.special_icon, "file", true),
+        minorities:       minorities
+      }
     end
     specials
+  end
+
+  def get_audio_list_categories
+    ret = []
+
+    self.audio_list_categories.each do|c|
+      h = {
+        name: c.name,
+        slug: get_file_value(c.audio_list_category_slug, "slug")
+      }
+      l = []
+      c.audio_lists.order_asc.each do |cc|
+        lh = {
+          name:            cc.name,
+          abstract:        cc.abstract,
+          audio_list_icon: get_file_value(cc.audio_list_icon, "file", true)
+        }
+        alits = []
+        cc.audio_list_items.order_asc.each do |ccc|
+          alits << {
+            title:                 ccc.title,
+            abstract:              ccc.abstract,
+            audio_list_item_icon:  get_file_value(ccc.audio_list_item_icon, "file", true),
+            audio_list_item_audio: get_file_value(ccc.audio_list_item_audio, "file", true),
+            duration:              get_file_value(ccc.audio_list_item_audio, "duration"),
+            file_size:             get_file_value(ccc.audio_list_item_audio, "file_size"),
+            body:                  get_file_value(ccc.audio_list_item_desc, "body"),
+          }
+        end
+        lh[:audio_list_items] = alits
+        l << lh
+      end
+      h[:audio_lists] = l
+      ret << h
+    end # End outer loop
+    ret
   end
 
   def get_file_value( file, meth_name, url = false )

@@ -43,15 +43,15 @@ module TripMapOfflinePackage
     private
     def self.layout_dirs
       base_dir = Rails.root.to_s + "/public/uploads"
-      dir_paths = [ 'packages', @@slug ]
+      pkg_dir  = base_dir + "/packages"
+      slug_dir = pkg_dir + "/" + @@slug
 
-      dir_paths.each do |e|
-        base_dir += "/" + e
-        Dir.mkdir(base_dir, 0700) unless Dir.exist?(base_dir)
-      end
+      Dir.mkdir(pkg_dir, 0755) unless Dir.exist?(pkg_dir)
+      FileUtils.rm_rf(slug_dir) if Dir.exist?(slug_dir)
+      Dir.mkdir(slug_dir, 0700)
 
       [A, V, I].each do|e|
-        curr_dir = "%s/%s"%[base_dir, e.downcase]
+        curr_dir = "%s/%s"%[slug_dir, e.downcase]
         Dir.mkdir(curr_dir, 0700) unless Dir.exist?(curr_dir)
       end
     end

@@ -17,15 +17,15 @@ class Broadcast < ActiveRecord::Base
 
   has_many :children_broadcasts, :dependent => :destroy
 
-   # Validates
+  # Validates
   with_options :presence => true do |column|
     column.validates :map_id
     column.validates :name, :length => { :within => 1..20, :message => I18n.t("errors.type.name") }, :uniqueness => true
   end
 
   # Nested attributes validates
-  accepts_nested_attributes_for :broadcast_slug_cover, reject_if: lambda { |img| img[:file].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :broadcast_slug,                                                      :allow_destroy => true
+  accepts_nested_attributes_for :broadcast_slug_cover, reject_if: ->(attr){ attr[:file].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :broadcast_slug,                                                  :allow_destroy => true
 
   # Scopes
   scope :created_desc, order("created_at DESC")

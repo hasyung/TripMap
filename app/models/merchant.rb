@@ -9,24 +9,26 @@ class Merchant < ActiveRecord::Base
   belongs_to :county, :counter_cache => true
 
   with_options :as => :keywordable, :class_name => "Keyword", :dependent => :destroy do|assoc|
-    assoc.has_one :merchant_slug, :conditions => { :keyword_type => Keyword.merchant_slug }
+    assoc.has_one   :merchant_slug,     :conditions => { :keyword_type => Keyword.merchant_slug }
   end
 
   with_options :as => :imageable, :class_name => "Image", :dependent => :destroy do|assoc|
-    assoc.has_many :merchant_slides,  :conditions => { :image_type => Image.merchant_slides  }
+    assoc.has_many  :merchant_slides,   :conditions => { :image_type => Image.merchant_slides  }
   end
 
   # Validates
-  validates :name, :length => { :within => 2..50 }, :presence => true
-  validates :title, :length => { :within => 2..20 }, :presence => true
-  validates :address, :length => { :within => 2..50 }, :presence => true
-  validates :shop_hour, :length => { :within => 0..20 }
-  validates :expence, :length => { :within => 0..20 }
-  validates :phone, :length => { :within => 7..11 }, :format => { :with => /^[0-9]+$/, :message => I18n.t("errors.type.phone") }, :presence => true
-  validates :county_id, :presence => true
+  with_options :presence=> true do |column|
+    column.validates :name,        :length => { :within => 2..50 }
+    column.validates :title,       :length => { :within => 2..50 }
+    column.validates :address,     :length => { :within => 2..50 }
+    column.validates :phone,       :length => { :within => 7..11 }, :format => { :with => /^[0-9]+$/, :message => I18n.t("errors.type.phone") }
+    column.validates :county_id
+  end
+  validates :shop_hour,   :length => { :within => 0..20 }
+  validates :expence,     :length => { :within => 0..20 }
   validates :description, :length => { :within => 0..2000 }
-  validates :special, :length => { :within => 0..200 }
-  validates :tag, :length => { :within => 0..50 }
+  validates :special,     :length => { :within => 0..200 }
+  validates :tag,         :length => { :within => 0..50 }
 
   # Nested attributes validates
   accepts_nested_attributes_for :merchant_slug, allow_destroy: true

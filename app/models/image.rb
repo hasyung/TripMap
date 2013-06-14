@@ -16,54 +16,58 @@ class Image < ActiveRecord::Base
   # SampleEnum. hash table is in growing.
   as_enum :type,
   {
-    :map_cover                  => 0,
-    :map_plat                   => 1,
-    :map_slides                 => 2,
+    :map_cover                                   => 0,
+    :map_plat                                    => 1,
+    :map_slides                                  => 2,
 
-    :scenic_icon                => 3,
-    :scenic_description_image   => 4,
-    :scenic_image               => 5,
+    :scenic_icon                                 => 3,
+    :scenic_description_image                    => 4,
+    :scenic_image                                => 5,
 
-    :place_icon                 => 6,
-    :place_description_image    => 7,
-    :place_image                => 8,
+    :place_icon                                  => 6,
+    :place_description_image                     => 7,
+    :place_image                                 => 8,
 
-    :recommend_cover            => 9,
+    :recommend_cover                             => 9,
 
-    :recommend_record_cover     => 10,
+    :recommend_record_cover                      => 10,
 
-    :share_image                => 11,
-    :recommend_detailed_cover   => 12,
-    :detailed_images            => 13,
+    :share_image                                 => 11,
+    :recommend_detailed_cover                    => 12,
+    :detailed_images                             => 13,
 
-    :place_slides               => 14,
-    :scenic_slides              => 15,
+    :place_slides                                => 14,
+    :scenic_slides                               => 15,
 
-    :map_weather_bg_image       => 16,
+    :map_weather_bg_image                        => 16,
 
-    :merchant_slides            => 17,
+    :merchant_slides                             => 17,
 
-    :scenic_slug_icon           => 18,
-    :place_slug_icon            => 19,
-    :recommend_slug_icon        => 20,
-    :infolist_slug_icon         => 21,
+    :scenic_slug_icon                            => 18,
+    :place_slug_icon                             => 19,
+    :recommend_slug_icon                         => 20,
+    :infolist_slug_icon                          => 21,
 
-    :panel_video_slug_cover     => 22,
+    :panel_video_slug_cover                      => 22,
 
-    :broadcast_cover            => 23,
+    :broadcast_cover                             => 23,
     
-    :special_icon               => 24,
-    :special_slug_icon          => 25,
+    :special_icon                                => 24,
+    :special_slug_icon                           => 25,
 
-    :minority_icon              => 26,
-    :minority_slug_icon         => 27,
+    :minority_icon                               => 26,
+    :minority_slug_icon                          => 27,
 
-    :minority_slide_icon        => 28,
+    :minority_slide_icon                         => 28,
 
-    :minority_feel_icon         => 29,
-    :minority_feel_slides       => 30,
+    :minority_feel_icon                          => 29,
+    :minority_feel_slides                        => 30,
 
-    :broadcast_slug_cover       => 31
+    :broadcast_slug_cover                        => 31,
+
+    :audio_list_category_slug_cover              => 32,
+    :audio_list_icon                             => 33,
+    :audio_list_item_icon                        => 34,
   },
   :column => "image_type"
 

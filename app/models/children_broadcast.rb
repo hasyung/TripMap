@@ -28,12 +28,12 @@ class ChildrenBroadcast < ActiveRecord::Base
   validates_with OrderValidator
 
   # Nested attributes validates
-  accepts_nested_attributes_for :broadcast_cover, reject_if: lambda { |f| f[:file].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :broadcast_cover, reject_if: ->(attr){ attr[:file].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :broadcast_audio,                                            :allow_destroy => true
   accepts_nested_attributes_for :broadcast_desc,                                             :allow_destroy => true
 
   # Scopes
-  scope :order_asc,     order("`order` ASC")
+  scope :order_asc,    order("`order` ASC")
   scope :created_desc, order("created_at DESC")
 
 end

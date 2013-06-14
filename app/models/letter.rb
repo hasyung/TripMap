@@ -22,16 +22,15 @@ class Letter < ActiveRecord::Base
     :share_text                     => 4,
 
     :detailed_info                  => 5,
-
     :detailed_text                  => 6,
 
     :broadcast_desc                 => 7,
 
     :minority_description           => 8,
-
     :minority_feel_description      => 9,
+    :minority_slide_description     => 10,
 
-    :minority_slide_description     => 10
+    :audio_list_item_desc           => 11,
   },
   :column => "text_type"
 

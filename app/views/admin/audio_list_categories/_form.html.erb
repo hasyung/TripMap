@@ -1,0 +1,24 @@
+<%= simple_form_for [:admin, @model], html: { class: 'form-horizontal' } do |m| %>
+
+  <%= m.association :map, collection: Map.all, prompt: t("helpers.links.select", :model_name => Map.model_name.human) %>
+
+  <%= m.input :name %>
+
+  <%= m.fields_for :audio_list_category_slug, @model.audio_list_category_slug ||= @model.build_audio_list_category_slug do |s|  %>
+    <%= s.input :slug, :input_html => { :class => "span-full" } %>
+  <% end %>
+
+  <%= m.fields_for :audio_list_category_slug_cover, @model.audio_list_category_slug_cover ||= @model.build_audio_list_category_slug_cover do |img|  %>  
+    <%= img.input :file, :as => :file %>
+    <% if @model.audio_list_category_slug_cover && @model.audio_list_category_slug_cover.file.present? %>
+        <div class="control-group image">
+          <div class="controls">
+            <%= image_tag @model.audio_list_category_slug_cover.file %>
+          </div>
+        </div>
+    <% end %>
+  <% end %>
+
+  <div class="form-actions"><%= m.button :submit, :class => 'btn-primary' %></div>
+
+<% end %>

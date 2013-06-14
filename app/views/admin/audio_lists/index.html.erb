@@ -1,0 +1,47 @@
+<%- model_class = AudioList -%>
+
+<%= render 'base' %>
+
+<div class="box">
+  <div class="box-title">
+    <span class="icon"><i class="icon-th"></i></span>
+    <h5><%= t('links.audio_lists.index') %></h5>
+  </div>
+  <div class="box-content">
+    <table class="table table-bordered table-striped with-check">
+      <thead>
+        <tr>
+          <th><input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" /></th>
+          <th><%= model_class.human_attribute_name(:audio_list_category) %></th>
+          <th><%= model_class.human_attribute_name(:name) %></th>
+          <th><%= model_class.human_attribute_name(:abstract) %></th>
+          <th><%= model_class.human_attribute_name(:audio_list_icon) %></th>
+          <th><%= model_class.human_attribute_name(:order) %></th>
+          <th class="action"><%= t('links.commons.action') %></th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @models.each do |m| %>
+          <tr>
+            <td><%= check_box_tag "children_broadcast_ids[]", m.id, false, id: "children_broadcast_#{m.id}" %></td>
+            <td><%= m.audio_list_category.name %></td>
+            <td><%= link_to(m.name, admin_audio_list_category_audio_list_audio_list_items_path(m.audio_list_category_id, m.id))%></td>
+            <td><%= m.abstract[0...20] %></td>
+            <td><%= image_tag m.audio_list_icon.file, :size => "50x50" unless m.audio_list_icon.blank? %></td>
+            <td><%= m.order %></td>
+
+            <td class="action">
+              <%= link_to raw("<i class=\"icon-edit\"></i>"), edit_admin_audio_list_category_audio_list_path(m.audio_list_category, m.id), title: t('links.audio_lists.edit') %>
+              <%= link_to raw("<i class=\"icon-trash\"></i>"), admin_audio_list_category_audio_list_path(m.audio_list_category, m.id), method: :delete, data: {confirm: t('links.commons.confirm')} %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="table-footer clearfix">
+  <div class="paginates-info"><%= page_entries_info @models %></div>
+  <%= paginate @models, :theme => "admin" %>
+</div>

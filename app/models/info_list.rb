@@ -28,8 +28,8 @@ class InfoList < ActiveRecord::Base
   validates_with OrderValidator
 
   # Nested attributes validates
-  accepts_nested_attributes_for :infolist_slug_icon,         reject_if: lambda { |i| i[:file].blank? }, allow_destroy: true
-  accepts_nested_attributes_for :info_list_slug,             allow_destroy: true
+  accepts_nested_attributes_for :infolist_slug_icon, reject_if: ->(attr){ attr[:file].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :info_list_slug,                                                :allow_destroy => true
 
   # Scopes
   scope :order_asc,     order("`order` ASC")

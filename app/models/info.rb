@@ -24,8 +24,8 @@ class Info < ActiveRecord::Base
   validates_with OrderValidator
 
   # Nested attributes validates
-  accepts_nested_attributes_for :letter, reject_if: lambda { |pd| pd[:body].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :info_slug, allow_destroy: true
+  accepts_nested_attributes_for :letter, reject_if: ->(attr){ attr[:body].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :info_slug,                                         :allow_destroy => true
 
   # Scopes
   scope :order_asc,     order("`order` ASC")

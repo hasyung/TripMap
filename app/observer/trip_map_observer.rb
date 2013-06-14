@@ -6,9 +6,9 @@ class TripMapObserver < ActiveRecord::Observer
   # Note: if observe's object changed, then NAV_PATH_OPTIONS should be changed together.
 
   # Observing models.
-  observe :scenic, :place, :recommend, :info_list, :panel_video, :broadcast, # Level 1.
-          :recommend_record, :recommend_detailed, :info, :children_broadcast, # Level 2.
-          :image_list,
+  observe :scenic, :place, :recommend, :info_list, :panel_video, :broadcast, :audio_list_category, # Level 1.
+          :recommend_record, :recommend_detailed, :info, :children_broadcast, :audio_list, # Level 2.
+          :image_list, :audio_list_item,
           :audio, :video, :image, :letter # Atom.
 
   NAV_PATH_OPTIONS = {
@@ -19,13 +19,16 @@ class TripMapObserver < ActiveRecord::Observer
     :InfoList           => "map",
     :PanelVideo         => "map",
     :Broadcast          => "map",
+    :AudioListCategory  => "map",
 
     :Info               => "info_list.map",
     :RecommendRecord    => "recommend.map",
     :RecommendDetailed  => "recommend_record.recommend.map",
     :ChildrenBroadcast  => "broadcast.map",
+    :AudioList          => "audio_list_category.map",
 
     :ImageList          => "recommend_detailed.recommend_record.recommend.map",
+    :AudioListItem      => "audio_list.audio_list_category.map",
   }
 
   POLIABLE_NAME_OPTIONS = {
