@@ -24,9 +24,9 @@ class Special < ActiveRecord::Base
   end
 
   # Nested attributes validates
-  accepts_nested_attributes_for :special_icon,              reject_if: lambda { |i| i[:file].blank? }, allow_destroy: true
-  accepts_nested_attributes_for :special_slug_icon,         reject_if: lambda { |i| i[:file].blank? }, allow_destroy: true
-  accepts_nested_attributes_for :special_slug,              allow_destroy: true
+  accepts_nested_attributes_for :special_icon,      reject_if: ->(attr){ attr[:file].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :special_slug_icon, reject_if: ->(attr){ attr[:file].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :special_slug,                                                 :allow_destroy => true
 
   # Scopes
   scope :created_desc, order("`created_at` DESC")

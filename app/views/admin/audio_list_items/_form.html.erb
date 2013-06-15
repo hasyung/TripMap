@@ -1,0 +1,42 @@
+<%= simple_form_for [:admin, :audio_list_category, :audio_list, @model], html: { class: 'form-horizontal' } do |m| %>
+
+  <%= m.association :audio_list, collection: AudioList.all, prompt: t("helpers.links.select", :model_name => AudioList.model_name.human) %>
+
+  <%= m.input :title %>
+  <%= m.input :abstract %>
+
+  <%= m.fields_for :audio_list_item_icon, @model.audio_list_item_icon ||= @model.build_audio_list_item_icon do |img|  %>
+    <%= img.input :file, :as => :file %>
+
+    <% if @model.audio_list_item_icon && @model.audio_list_item_icon.file.present? %>
+        <div class="control-group image">
+          <div class="controls">
+            <%= image_tag @model.audio_list_item_icon.file %>
+          </div>
+        </div>
+    <% end %>
+  <% end %>
+
+  <%= m.fields_for :audio_list_item_audio, @model.audio_list_item_audio ||= @model.build_audio_list_item_audio do |o|  %>
+    <%= o.input :file, :as => :file %>
+
+    <% if @model.audio_list_item_audio && @model.audio_list_item_audio.file.present? %>
+        <div class="control-group">
+          <div class="controls">
+            <%= audio_tag(@model.audio_list_item_audio.file, :controls => true) %>
+          </div>
+        </div>
+    <% end %>
+
+    <%= o.input :duration %>
+  <% end %>
+
+  <%= m.input :order %>
+
+  <%= m.fields_for :audio_list_item_desc, @model.audio_list_item_desc ||= @model.build_audio_list_item_desc do |d| %>
+    <%= d.input :body, :as => :text, input_html: { :class => "span-full"} %>
+  <% end %>
+
+  <div class="form-actions"><%= m.button :submit, :class => 'btn-primary' %></div>
+
+<% end %>

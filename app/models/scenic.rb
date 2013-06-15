@@ -39,14 +39,14 @@ class Scenic < ActiveRecord::Base
   end
 
   # Nested attributes validates
-  accepts_nested_attributes_for :scenic_impression,          reject_if: lambda { |i| (i[:file].blank? && i[:id].blank?) }, allow_destroy: true
-  accepts_nested_attributes_for :scenic_route,               reject_if: lambda { |r| (r[:file].blank? && r[:id].blank?) }, allow_destroy: true
-  accepts_nested_attributes_for :scenic_icon,                reject_if: lambda { |icon| icon[:file].blank? }, allow_destroy: true
-  accepts_nested_attributes_for :scenic_slug_icon,           reject_if: lambda { |icon| icon[:file].blank? }, allow_destroy: true
-  accepts_nested_attributes_for :scenic_image,               reject_if: lambda { |image| image[:file].blank? }, allow_destroy: true
-  accepts_nested_attributes_for :scenic_description,         allow_destroy: true
-  accepts_nested_attributes_for :scenic_description_image,   reject_if: lambda { |di| di[:file].blank? }, allow_destroy: true
-  accepts_nested_attributes_for :scenic_slug,                allow_destroy: true
+  accepts_nested_attributes_for :scenic_impression,        reject_if: ->(attr){ (attr[:file].blank? && attr[:id].blank?) }, :allow_destroy => true
+  accepts_nested_attributes_for :scenic_route,             reject_if: ->(attr){ (attr[:file].blank? && attr[:id].blank?) }, :allow_destroy => true
+  accepts_nested_attributes_for :scenic_icon,              reject_if: ->(attr){ attr[:file].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :scenic_slug_icon,         reject_if: ->(attr){ attr[:file].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :scenic_image,             reject_if: ->(attr){ attr[:file].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :scenic_description,                                                  :allow_destroy => true
+  accepts_nested_attributes_for :scenic_description_image, reject_if: ->(attr){ attr[:file].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :scenic_slug,                                                         :allow_destroy => true
 
   # Scopes
   scope :created_desc, order("`created_at` DESC")

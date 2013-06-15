@@ -149,6 +149,12 @@ TripMap::Application.routes.draw do
       resources :children_broadcasts
     end
 
+    resources :audio_list_categories do
+      resources :audio_lists do
+        resources :audio_list_items
+      end
+    end
+
   end
 
   namespace :api do

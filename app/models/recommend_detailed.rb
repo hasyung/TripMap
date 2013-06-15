@@ -28,7 +28,7 @@ class RecommendDetailed < ActiveRecord::Base
                     numericality: { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999 }
 
   # Nested attributes validates
-  accepts_nested_attributes_for :recommend_detailed_cover,          reject_if: lambda { |c| c[:file].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :recommend_detailed_cover, reject_if: ->(attr){ attr[:file].blank? }, :allow_destroy => true
 
   # Scopes
   scope :order_asc, order("`order` ASC")

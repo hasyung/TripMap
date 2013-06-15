@@ -63,6 +63,9 @@
       index: "专题列表"
     broadcasts:
       index: "广播剧"
+    audio＿list＿categories:
+      index: "音频列表"
+
   breadcrumbs:
     admin:
       application:
@@ -192,6 +195,18 @@
         index: "广播剧"
         new: "添加广播剧"
         edit: "编辑广播剧"
+      audio_list_categories:
+        index: "音频列表分类"
+        new: "添加音频列表分类项"
+        edit: "编辑音频列表分类项"
+      audio_lists:
+        index: "音频列表"
+        new: "添加音频列表项"
+        edit: "编辑音频列表项"
+      audio_list_items:
+        index: "音频列表子项"
+        new: "添加音频列表子项"
+        edit: "编辑音频列表子项"
   links:
     home:
       index: "返回首页"
@@ -342,6 +357,20 @@
       index: "广播剧"
       edit: "编辑广播剧"
       new: "新建广播剧"
+    audio_list_categories:
+      index: "音频列表分类"
+      edit: "编辑音频列表分类"
+      new: "新建音频列表分类"
+    audio_lists:
+      index: "音频列表"
+      edit: "编辑音频列表"
+      new: "新建音频列表"
+      audio_list_category: "返回音频列表分类"
+    audio_list_items:
+      index: "音频列表子项"
+      edit: "编辑音频列表子项"
+      new: "新建音频列表子项"
+      audio_list: "返回音频列表"
 
   messages:
     maps:
@@ -498,6 +527,9 @@
       minority_slide: "民族图集"
       minority_feel: "民族风情"
       broadcast: "广播剧"
+      audio_list_category: "音频列表分类"
+      audio_list: "音频列表"
+      audio_list_item: "音频列表子项"
     attributes:
       map:
         province: "省市"
@@ -697,8 +729,26 @@
         map: "所属地图"
         name: "儿童广播剧名称"
         broadcast_slug: "简码"
-        broadcast_slug_cover: "封面"
-
+        broadcast_slug_cover: "简码封面"
+      audio_list_category:
+        map: "所属地图"
+        name: "音频列表分类名称"
+        audio_list_category_slug: "简码"
+        audio_list_category_slug_cover: "简码封面"
+      audio_list:
+        audio_list_category: "所属音频列表分类"
+        name: "音频列表名称"
+        abstract: "音频列表简介"
+        audio_list_icon: "音频列表图标"
+        order: "音频列表序号"
+      audio_list_item:
+        audio_list: "所属音频列表"
+        title: "音频列表子项名称"
+        abstract: "音频列表子项简介"
+        audio_list_item_icon: "音频列表子项图标"
+        audio_list_item_desc: "音频列表子项描述"
+        order: "音频列表子项序号"
+        duration: "音频播放时长"
   simple_form:
     labels:
       map:
@@ -836,6 +886,15 @@
           file: "图片"
         minority_feel_description:
           body: "内容"
+      audio_list_item:
+        audio_list_item_icon:
+          file: "音频列表子项图标"
+        audio_list_item_desc:
+          body: "音频列表子项描述"
+        audio_list_item_audio:
+          file: "音频"
+          order: "音频列表子项序号"
+          duration: "音频播放时长"
 
   helpers:
     links:

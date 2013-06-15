@@ -24,8 +24,8 @@ class Share < ActiveRecord::Base
   as_enum :state, { :draft => 0, :publish => 1 }
 
   # Nested attributes validates
-  accepts_nested_attributes_for :share_image, reject_if: lambda { |img| img[:file].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :share_text,  reject_if: lambda { |pd| pd[:body].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :share_image, reject_if: ->(attr){ attr[:file].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :share_text,  reject_if: ->(attr){ attr[:body].blank? }, :allow_destroy => true
 
   # Scopes
   scope :created_desc, order("created_at DESC")

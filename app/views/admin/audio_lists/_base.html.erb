@@ -1,0 +1,7 @@
+<div class="toolbar">
+  <div class="btn-toolbar">
+    <%= link_to_if %w(index).include?(action_name), t('links.audio_lists.new'), new_admin_audio_list_category_audio_list_path, class: 'btn btn-success' %>
+    <%= link_to_if %w(index).include?(action_name), t('links.audio_lists.audio_list_category'), admin_audio_list_categories_path, :class => 'btn btn-success' %>
+    <%= link_to_if %w(new create edit update).include?(action_name), t('links.audio_lists.index'), admin_audio_list_category_audio_lists_path, class: 'btn btn-success' %>
+ </div>
+</div>

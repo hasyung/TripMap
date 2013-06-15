@@ -49,6 +49,37 @@ ActiveRecord::Schema.define(:version => 20130614073602) do
 
   add_index "activate_with_accounts", ["activate_map_id", "account_id"], :name => "index_activate_with_accounts_on_activate_map_id_and_account_id", :unique => true
 
+  create_table "audio_list_categories", :force => true do |t|
+    t.integer  "map_id",     :null => false
+    t.string   "name",       :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "audio_list_categories", ["name"], :name => "index_audio_list_categories_on_name", :unique => true
+
+  create_table "audio_list_items", :force => true do |t|
+    t.integer  "audio_list_id",                :null => false
+    t.string   "title",                        :null => false
+    t.string   "abstract",                     :null => false
+    t.integer  "order",         :default => 0, :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+  end
+
+  add_index "audio_list_items", ["audio_list_id", "title", "order"], :name => "index_audio_list_items_on_audio_list_id_and_title_and_order", :unique => true
+
+  create_table "audio_lists", :force => true do |t|
+    t.integer  "audio_list_category_id",                :null => false
+    t.string   "name",                                  :null => false
+    t.string   "abstract",                              :null => false
+    t.integer  "order",                  :default => 0, :null => false
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
+  end
+
+  add_index "audio_lists", ["audio_list_category_id", "name", "order"], :name => "index_audio_lists_on_audio_list_category_id_and_name_and_order", :unique => true
+
   create_table "audios", :force => true do |t|
     t.integer  "audioable_id"
     t.string   "audioable_type"

@@ -1,0 +1,23 @@
+<%= simple_form_for [:admin, :audio_list_category, @model], html: { class: 'form-horizontal' } do |m| %>
+
+  <%= m.association :audio_list_category, collection: AudioListCategory.all, prompt: t("helpers.links.select", :model_name => AudioListCategory.model_name.human) %>
+
+  <%= m.input :name %>
+  <%= m.input :abstract %>
+
+  <%= m.fields_for :audio_list_icon, @model.audio_list_icon ||= @model.build_audio_list_icon do |img|  %>
+    <%= img.input :file, :as => :file %>
+    <% if @model.audio_list_icon && @model.audio_list_icon.file.present? %>
+        <div class="control-group image">
+          <div class="controls">
+            <%= image_tag @model.audio_list_icon.file %>
+          </div>
+        </div>
+    <% end %>
+  <% end %>
+
+  <%= m.input :order %>
+
+  <div class="form-actions"><%= m.button :submit, :class => 'btn-primary' %></div>
+
+<% end %>

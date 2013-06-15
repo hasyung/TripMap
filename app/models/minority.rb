@@ -37,11 +37,11 @@ class Minority < ActiveRecord::Base
   end
 
   # Nested attributes validates
-  accepts_nested_attributes_for :minority_icon,              reject_if: lambda { |i| i[:file].blank? }, allow_destroy: true
-  accepts_nested_attributes_for :minority_slug_icon,         reject_if: lambda { |i| i[:file].blank? }, allow_destroy: true
-  accepts_nested_attributes_for :minority_slug,              allow_destroy: true
-  accepts_nested_attributes_for :minority_description,       allow_destroy: true
-  accepts_nested_attributes_for :minority_video,             reject_if: lambda { |pv| (pv[:file].blank? && pv[:id].blank?) }, allow_destroy: true
+  accepts_nested_attributes_for :minority_icon,        reject_if: ->(attr){ attr[:file].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :minority_slug_icon,   reject_if: ->(attr){ attr[:file].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :minority_slug,                                                   :allow_destroy => true
+  accepts_nested_attributes_for :minority_description,                                            :allow_destroy => true 
+  accepts_nested_attributes_for :minority_video,       reject_if: ->(attr){ attr[:file].blank? && attr[:id].blank? }, :allow_destroy => true
 
   # Scopes
   scope :order_asc, order("`order` ASC")
