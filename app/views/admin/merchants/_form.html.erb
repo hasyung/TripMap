@@ -14,6 +14,16 @@
   <%= p.input :address %>
   <%= p.input :shop_hour %>
   <%= p.input :expence %>
+  <%= p.fields_for :merchant_image, @model.merchant_image ||= @model.build_merchant_image do |pimg|  %>  
+    <%= pimg.input :file, :as => :file %>
+    <% if @model.merchant_image && @model.merchant_image.file.present? %>
+      <div class="control-group image">
+        <div class="controls">
+          <%= image_tag @model.merchant_image.file %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
   <%= p.input :description, :as => :text%>
   <%= p.input :special, :as => :text%>
 

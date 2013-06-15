@@ -63,7 +63,9 @@ class Image < ActiveRecord::Base
     :minority_feel_icon         => 29,
     :minority_feel_slides       => 30,
 
-    :broadcast_slug_cover       => 31
+    :broadcast_slug_cover       => 31,
+    
+    :merchant_image             => 17
   },
   :column => "image_type"
 
