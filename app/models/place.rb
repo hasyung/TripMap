@@ -42,8 +42,8 @@ class Place < ActiveRecord::Base
   accepts_nested_attributes_for :place_slug_icon,         reject_if: ->(attr){ attr[:file].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :place_description_image, reject_if: ->(attr){ attr[:file].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :place_image,             reject_if: ->(attr){ attr[:file].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :place_audio,             reject_if: ->(attr){ attr[:file].blank? && [:id].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :place_video,             reject_if: ->(attr){ attr[:file].blank? && [:id].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :place_audio,             reject_if: ->(attr){ attr[:file].blank? && attr[:id].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :place_video,             reject_if: ->(attr){ attr[:file].blank? && attr[:id].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :place_description,       :allow_destroy => true
   accepts_nested_attributes_for :place_slug,              :allow_destroy => true
   accepts_nested_attributes_for :place_slides,            :allow_destroy => true
