@@ -20,7 +20,7 @@ module TripMapOfflinePackage
       :Keyword      => 'slug',
       :Letter       => 'body'
     }
-    ARRAY_FIELD     = [ 'scenic_slides', 'place_slides' ]
+    ARRAY_FIELD     = [ 'slides' ]
 
     @@model         = nil
     @@pkg_dir       = nil
@@ -87,6 +87,9 @@ module TripMapOfflinePackage
       extract_attrs(["id"], ["map"]).each do |e|
         val = @@model.send(e.to_sym)
         klass_name = val.class.name
+        prefix = @@model.class.name.downcase + "_"
+        e = e.gsub(Regexp.new(prefix),"")
+
         ( h[e] = ""; next ) if val.nil?
         unless ATOM[klass_name.to_sym].nil?
           ( h[:slug] = val.send(ATOM[klass_name.to_sym].to_sym); next ) if e == "%s_slug"%@@model.class.name.downcase
