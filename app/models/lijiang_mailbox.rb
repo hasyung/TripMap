@@ -7,6 +7,6 @@ class LijiangMailbox < ActiveRecord::Base
   validates :device_id, :service_score, :env_score, :category, :presence => true
 
   # Scopes
-  scope :created_desc,  order("created_at DESC")
+  scope :created_desc, order("created_at DESC")
 
 end

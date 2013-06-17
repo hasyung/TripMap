@@ -7,7 +7,7 @@ class Keyword < ActiveRecord::Base
   belongs_to :keywordable, :polymorphic => true
 
   # Validates
-  validates :slug, :presence=> true, :length => { :within => 1..20 },  :format => { :with => /^[a-z]+$/, :message => I18n.t("errors.type.slug") }, :uniqueness => true
+  validates :slug, :presence=> true, :length => { :within => 1..20 }, :format => { :with => /^[a-z]+$/, :message => I18n.t("errors.type.slug") }, :uniqueness => true
 
   # SampleEnum. hash table is in growing.
   as_enum :type,

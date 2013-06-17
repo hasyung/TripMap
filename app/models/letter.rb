@@ -40,7 +40,7 @@ class Letter < ActiveRecord::Base
                     numericality: { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999 }
 
   # Scopes
-  scope :order_asc, order("`order` ASC")
+  scope :order_asc,    order("`order` ASC")
   scope :created_desc, order("`created_at` DESC")
 
   private

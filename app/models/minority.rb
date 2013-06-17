@@ -11,12 +11,12 @@ class Minority < ActiveRecord::Base
   belongs_to :special
 
   with_options :as => :imageable, :class_name => "Image", :dependent => :destroy do|assoc|
-    assoc.has_one  :minority_icon,               :conditions => { :image_type => Image.minority_icon }
-    assoc.has_one  :minority_slug_icon,          :conditions => { :image_type => Image.minority_slug_icon }
+    assoc.has_one  :minority_icon,       :conditions => { :image_type => Image.minority_icon }
+    assoc.has_one  :minority_slug_icon,  :conditions => { :image_type => Image.minority_slug_icon }
   end
 
   with_options :as => :keywordable, :class_name => 'Keyword', :dependent => :destroy do|assoc|
-    assoc.has_one :minority_slug,                :conditions => { :keyword_type => Keyword.minority_slug }
+    assoc.has_one :minority_slug,        :conditions => { :keyword_type => Keyword.minority_slug }
   end
 
   with_options :dependent => :destroy do |assoc|
@@ -24,7 +24,7 @@ class Minority < ActiveRecord::Base
   end
 
   with_options :as => :textable, :class_name => "Letter", :dependent => :destroy do |assoc|
-    assoc.has_one :minority_description,       :conditions => { :text_type => Letter.minority_description }
+    assoc.has_one :minority_description, :conditions => { :text_type => Letter.minority_description }
   end
 
   # Validates
@@ -32,7 +32,7 @@ class Minority < ActiveRecord::Base
   with_options :presence => true do |column|
     column.validates :name, :length => { :within => 2..20 }, :uniqueness => true
     column.validates :special_id
-    column.validates :order, uniqueness: { scope: [:special_id, :order] }, 
+    column.validates :order, uniqueness: { scope: [:special_id, :order] },
                              numericality: { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999 }
   end
 

@@ -68,7 +68,7 @@ class Image < ActiveRecord::Base
     :audio_list_category_slug_cover              => 32,
     :audio_list_icon                             => 33,
     :audio_list_item_icon                        => 34,
-    
+
     :merchant_image                              => 35
   },
   :column => "image_type"

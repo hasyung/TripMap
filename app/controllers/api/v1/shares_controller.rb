@@ -4,7 +4,10 @@ class Api::V1::SharesController < Api::V1::ApplicationController
 
   def current
     result = []
-     (render :json => result; return) if params[:map_id].blank? || params[:page_size].blank? || params[:page_index].blank?
+
+    fields = ['map_id', 'page_size', 'page_index']
+    ( render :json => result; return ) if has_nil_value_in fields
+
     @map = Map.find_by_id(params[:map_id].to_i, include: [:shares])
     (render :json => result; return) if @map.blank?
     size = params[:page_size].to_i
@@ -32,9 +35,11 @@ class Api::V1::SharesController < Api::V1::ApplicationController
 
   def nearby
     result = []
-    (render :json => result; return) if params[:map_id].blank? || params[:page_size].blank? || params[:page_index].blank?
+    fields = ['map_id', 'page_size', 'page_index']
+    ( render :json => result; return ) if has_nil_value_in fields
+
     @map = Map.find_by_id params[:map_id].to_i
-    (render :json => result; return) if @map.blank?
+    ( render :json => result; return ) if @map.blank?
     @shares = Share.publish.reject{|lambda| lambda.map_id == params[:map_id].to_i}.created_desc
     size = params[:page_size].to_i
     index = params[:page_index].to_i
@@ -60,8 +65,10 @@ class Api::V1::SharesController < Api::V1::ApplicationController
 
   def create
     result = {result: false}
-     (render :json => result; return) if params[:map_id].blank? || params[:title].blank? ||
-                                         params[:image].blank? ||params[:text].blank?
+
+    fields = ['map_id', 'title', 'image', 'text']
+    ( render :json => result; return ) if has_nil_value_in fields
+
     map = Map.find_by_id params[:map_id].to_i
     account = Account.find{|a| a.email == params[:email].downcase}
     if map.present?
@@ -78,14 +85,15 @@ class Api::V1::SharesController < Api::V1::ApplicationController
   end
 
   private
+
   def get_share_value(share)
     r = {
-      id: share.id,
-      title: share.title,
+      id:       share.id,
+      title:    share.title,
       nickname: share.account.present?? share.account.nickname : "游客",
-      image: share.share_image.file.url,
-      cover: share.share_image.file.thumbnail.url,
-      text: share.share_text.body
+      image:    share.share_image.file.url,
+      cover:    share.share_image.file.thumbnail.url,
+      text:     share.share_text.body
      }
   end
 

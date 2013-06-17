@@ -17,7 +17,7 @@ class OrderValidator < ActiveModel::Validator
 
     order_duplicate = all_orders.include?(record.order)
 
-    if not record.new_record?
+    unless record.new?
       old_order = klass.constantize.find(record.id).order
       all_orders.delete(old_order)
       is_invalid = old_order != record.order && all_orders.include?(record.order)

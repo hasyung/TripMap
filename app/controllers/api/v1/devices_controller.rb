@@ -58,9 +58,7 @@ class Api::V1::DevicesController < Api::V1::ApplicationController
   private
   def get_maps_from_serials serials
     maps = []
-    serials.each do |serial|
-      maps << serial.map_id
-    end
+    serials.each{|serial| maps << serial.map_id }
     maps.uniq
   end
 

@@ -7,18 +7,18 @@ class MinoritySlide < ActiveRecord::Base
   belongs_to :minority
 
   with_options :as => :imageable, :class_name => "Image", :dependent => :destroy do|assoc|
-    assoc.has_one  :minority_slide_icon,               :conditions => { :image_type => Image.minority_slide_icon }
+    assoc.has_one  :minority_slide_icon,       :conditions => { :image_type => Image.minority_slide_icon }
   end
 
   with_options :as => :textable, :class_name => "Letter", :dependent => :destroy do |assoc|
-    assoc.has_one :minority_slide_description,       :conditions => { :text_type => Letter.minority_slide_description }
+    assoc.has_one :minority_slide_description, :conditions => { :text_type => Letter.minority_slide_description }
   end
 
   # Validates
   validate :order_increment
   with_options :presence => true do |column|
     column.validates :minority_id
-    column.validates :order, uniqueness: { scope: [:minority_id, :order] }, 
+    column.validates :order, uniqueness: { scope: [:minority_id, :order] },
                              numericality: { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999 }
   end
 

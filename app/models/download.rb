@@ -5,6 +5,6 @@ class Download < ActiveRecord::Base
   attr_accessible :count, :type
 
   # Scope
-  scope :get_downloads, ->(type) { where(:type => type) }
+  scope :get_downloads, ->(type){ where(:type => type) }
 
 end

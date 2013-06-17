@@ -8,10 +8,10 @@ class Info < ActiveRecord::Base
   # Associations
   belongs_to :info_list, :counter_cache => true
 
-  has_one :letter,  :as => :textable,   :dependent => :destroy
+  has_one :letter, :as => :textable, :dependent => :destroy
 
   with_options :as => :keywordable, :class_name => 'Keyword', :dependent => :destroy do|assoc|
-    assoc.has_one :info_slug,      :conditions => { :keyword_type => Keyword.info_slug }
+    assoc.has_one :info_slug, :conditions => { :keyword_type => Keyword.info_slug }
   end
 
   # Validates
@@ -28,7 +28,7 @@ class Info < ActiveRecord::Base
   accepts_nested_attributes_for :info_slug,                                         :allow_destroy => true
 
   # Scopes
-  scope :order_asc,     order("`order` ASC")
-  scope :created_desc,  order("created_at DESC")
+  scope :order_asc,    order("`order` ASC")
+  scope :created_desc, order("created_at DESC")
 
 end
