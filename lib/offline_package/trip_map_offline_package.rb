@@ -88,7 +88,7 @@ module TripMapOfflinePackage
         val = @@model.send(e.to_sym)
         klass_name = val.class.name
         prefix = @@model.class.name.downcase + "_"
-        e = e.gsub(Regexp.new(prefix),"")
+        e = e.gsub(Regexp.new(prefix), "")
 
         ( h[e] = ""; next ) if val.nil?
         unless ATOM[klass_name.to_sym].nil?
