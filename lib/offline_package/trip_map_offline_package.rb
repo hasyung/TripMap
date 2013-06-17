@@ -103,25 +103,31 @@ module TripMapOfflinePackage
 
         if [I, A, V].include?(klass_name)
           copy_resources(val.file.path, MT[klass_name.to_sym])
-          h[e] = "%s/%s"%[MT[klass_name.to_sym], val.file.file.filename]
+          h[e] = "%s/%s"%[MT[klass_name.to_sym], get_filename(val)]
           next
         end
 
-      # Slides
-      if ARRAY_FIELD.include?(e)
-        slides = []
-        val.each do |img|
-          copy_resources(img.file.path, I.downcase)
-          slides << { :image => "%s/%s"%[I.downcase, img.file.file.filename] }
+        # Slides
+        if ARRAY_FIELD.include?(e)
+          slides = []
+          val.each do |img|
+            copy_resources(img.file.path, I.downcase)
+            slides << { :image => "%s/%s"%[I.downcase, get_filename(img)] }
+          end
+          h[e] = slides
+          next
         end
-        h[e] = slides
-        next
-      end
 
       h[e] = val.to_s
      end
 
       serialize(h)
+    end
+
+    def self.get_filename( res_model )
+      v = res_model
+      ['file', 'file', 'filename'].each{|e| v = v.send e.to_sym unless v.nil? }
+      v.to_s
     end
 
     def self.serialize( datum = {} )
