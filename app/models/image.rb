@@ -51,15 +51,13 @@ class Image < ActiveRecord::Base
     :panel_video_slug_cover                      => 22,
 
     :broadcast_cover                             => 23,
-    
+
     :special_icon                                => 24,
     :special_slug_icon                           => 25,
 
     :minority_icon                               => 26,
     :minority_slug_icon                          => 27,
-
     :minority_slide_icon                         => 28,
-
     :minority_feel_icon                          => 29,
     :minority_feel_slides                        => 30,
 
@@ -69,7 +67,13 @@ class Image < ActiveRecord::Base
     :audio_list_icon                             => 33,
     :audio_list_item_icon                        => 34,
 
-    :merchant_image                              => 35
+    :merchant_image                              => 35,
+
+    :first_known_slug_cover                      => 36,
+    :first_known_slides                          => 37,
+    :first_known_list_icon                       => 38,
+
+    :merchant_horizontal_image                   => 39,
   },
   :column => "image_type"
 
@@ -77,7 +81,7 @@ class Image < ActiveRecord::Base
   mount_uploader :file, ImageUploader
 
   # Scopes
-  scope :order_asc, order("`order` ASC")
+  scope :order_asc,    order("`order` ASC")
   scope :created_desc, order("`created_at` DESC")
 
   # Callbacks

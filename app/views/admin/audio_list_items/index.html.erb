@@ -28,7 +28,7 @@
           <td><%= check_box_tag "children_broadcast_ids[]", m.id, false, id: "children_broadcast_#{m.id}" %></td>
           <td><%= m.audio_list.name %></td>
           <td><%= m.title %></td>
-          <td><%= image_tag m.audio_list_item_icon.file, :size => "50x50" unless m.audio_list_item_icon.blank? %></td>
+          <td><%= image_tag m.audio_list_item_icon.file, :size => "35x35" unless m.audio_list_item_icon.blank? %></td>
           <td><%= m.order %></td>
           <td><%= m.audio_list_item_audio.file_size unless m.audio_list_item_audio.blank? %></td>
           <td><%= m.audio_list_item_audio.duration unless m.audio_list_item_audio.blank? %></td>

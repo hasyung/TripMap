@@ -3,8 +3,13 @@ class Api::V1::MerchantsController < Api::V1::ApplicationController
   def index
     result = []
     Merchant.all.each do |m|
-      result << { :id => m.id, :name => m.name, :slug => m.merchant_slug.slug, :phone => m.phone, :type => m.type_cd,
-                        :image => (m.merchant_image && m.merchant_image.file.present?) ? m.merchant_image.file.url : "" }
+      result << {
+        :id => m.id, :name => m.name,
+        :slug => m.merchant_slug.slug,
+        :phone => m.phone, :type => m.type_cd,
+        :image => get_url(m.merchant_image),
+        :horizontal_image => get_url(m.merchant_horizontal_image) 
+      }
     end
 
     render :json => result

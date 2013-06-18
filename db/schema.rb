@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130614073602) do
+ActiveRecord::Schema.define(:version => 20130618063250) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",                                :default => "", :null => false
@@ -169,6 +169,26 @@ ActiveRecord::Schema.define(:version => 20130614073602) do
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
   end
+
+  create_table "first_known_lists", :force => true do |t|
+    t.integer  "first_known_id",                :null => false
+    t.string   "title_cn",                      :null => false
+    t.string   "title_en",                      :null => false
+    t.string   "abstract"
+    t.string   "url"
+    t.integer  "order",          :default => 0, :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
+
+  create_table "first_knowns", :force => true do |t|
+    t.integer  "map_id",     :null => false
+    t.string   "name",       :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "first_knowns", ["map_id", "name"], :name => "index_first_knowns_on_map_id_and_name", :unique => true
 
   create_table "image_lists", :force => true do |t|
     t.integer  "recommend_detailed_id",                :null => false

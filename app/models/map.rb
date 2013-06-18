@@ -21,6 +21,7 @@ class Map < ActiveRecord::Base
     assoc.has_many :broadcasts
     assoc.has_many :specials
     assoc.has_many :audio_list_categories
+    assoc.has_many :first_knowns
   end
 
   with_options :as => :imageable, :class_name => 'Image', :dependent => :destroy do |assoc|
@@ -43,7 +44,7 @@ class Map < ActiveRecord::Base
   # Validates
   with_options :presence => true do |column|
     column.validates :province_id
-    column.validates :name, :length => { :within => 1..20,    :message => I18n.t("errors.type.name") }, :uniqueness => true
+    column.validates :name, :length => { :within => 1..20, :message => I18n.t("errors.type.name") }, :uniqueness => true
   end
 
   # Nested attributes validates
@@ -73,7 +74,8 @@ class Map < ActiveRecord::Base
       panel_videos:           get_panel_videos(),
       broadcasts:             get_broadcasts(),
       specials:               get_specials(),
-      audio_list_categories:  get_audio_list_categories()
+      audio_list_categories:  get_audio_list_categories(),
+      first_known:            get_first_known()
     }
   end
 
@@ -308,8 +310,7 @@ class Map < ActiveRecord::Base
     self.specials.each do |s|
       minorities ||= []
       s.minorities.order_asc.each do |m|
-        slides ||= []
-        feels  ||= []
+        slides, feels = [], []
         m.minority_slides.order_asc.each do |ms|
           slides << {
             image:       get_file_value(ms.minority_slide_icon, "file", true),
@@ -391,13 +392,37 @@ class Map < ActiveRecord::Base
     ret
   end
 
-  def get_file_value( file, meth_name, url = false )
-    is_file_blank = file.blank? || file.send(meth_name.to_sym).blank?
-    is_zero_type = (meth_name == "file_size" || meth_name == "duration")
+  def get_first_known
+    ret = []
+    self.first_knowns.each do |c|
+      h = {
+        name: c.name,
+        slug: get_file_value(c.first_known_slug, "slug")
+      }
+      l = []
+      c.first_known_lists.order_asc.each do |cc|
+        lh = {
+          title_cn:              cc.title_cn,
+          title_en:              cc.title_en,
+          abstract:              cc.abstract,
+          url:                   cc.url,
+          order:                 cc.order,
+          first_known_list_icon: get_file_value(cc.first_known_list_icon, "file", true)
+        }
+        l << lh
+      end
+      h[:first_known_lists] = l; ret << h
+    end # End outer loop
+    ret
+  end
+
+  def get_file_value( file, field, url = false )
+    is_file_blank = file.blank? || file.send(field.to_sym).blank?
+    is_zero_type = ( field == "file_size" || field == "duration" )
 
     ( return is_zero_type ? 0 : "" ) if is_file_blank
 
-    result = url ? file.send(meth_name.to_sym).url : file.send(meth_name.to_sym)
+    result = url ? file.send(field.to_sym).url : file.send(field.to_sym)
   end
 
 end

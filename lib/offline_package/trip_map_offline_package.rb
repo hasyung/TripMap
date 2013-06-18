@@ -2,7 +2,7 @@ require 'fileutils'
 require 'rubygems'
 require 'zip/zip'
 
-# Note: all associations' objects should add to white list!
+# Note: all associations' objects should be added to white list!
 
 module TripMapOfflinePackage
 
@@ -21,6 +21,7 @@ module TripMapOfflinePackage
       :Letter       => 'body'
     }
     ARRAY_FIELD     = [ 'slides' ]
+    PATH_SEG        = ['/public/uploads/packages', '/public/uploads', '/packages']
 
     @@model         = nil
     @@pkg_dir       = nil
@@ -32,7 +33,7 @@ module TripMapOfflinePackage
 
       @@model = instance_model
       @@slug = extract_slug_val()
-      @@pkg_dir = "%s/public/uploads/packages"%Rails.root.to_s
+      @@pkg_dir = Rails.root.to_s + PATH_SEG[0]
       @@rc_dir = "%s/%s/"%[@@pkg_dir, @@slug]
 
       layout_dirs
@@ -41,10 +42,11 @@ module TripMapOfflinePackage
     end
 
     private
+
     def self.layout_dirs
-      base_dir = Rails.root.to_s + "/public/uploads"
-      pkg_dir  = base_dir + "/packages"
-      slug_dir = pkg_dir + "/" + @@slug
+      base_dir = Rails.root.to_s + PATH_SEG[1]
+      pkg_dir  = base_dir + PATH_SEG[2]
+      slug_dir = "%s/%s"%[pkg_dir, @@slug]
 
       Dir.mkdir(pkg_dir, 0755) unless Dir.exist?(pkg_dir)
       FileUtils.rm_rf(slug_dir) if Dir.exist?(slug_dir)
@@ -72,7 +74,7 @@ module TripMapOfflinePackage
     end
 
     def self.copy_resources( src_file, media_type = I.downcase )
-      dst_dir = "%s%s"%[@@rc_dir, media_type.downcase]
+      dst_dir = @@rc_dir + media_type.downcase
       begin
         FileUtils.cp(src_file, dst_dir)
         true
@@ -92,7 +94,8 @@ module TripMapOfflinePackage
 
         ( h[e] = ""; next ) if val.nil?
         unless ATOM[klass_name.to_sym].nil?
-          ( h[:slug] = val.send(ATOM[klass_name.to_sym].to_sym); next ) if e == "%s_slug"%@@model.class.name.downcase
+          is_slug_field = e == ("%s_slug"%@@model.class.name.downcase)
+          ( h[:slug] = val.send(ATOM[klass_name.to_sym].to_sym); next ) if is_slug_field
           h[e] = val.send(ATOM[klass_name.to_sym].to_sym); next
         end
 
@@ -114,8 +117,7 @@ module TripMapOfflinePackage
             copy_resources(img.file.path, I.downcase)
             slides << { :image => "%s/%s"%[I.downcase, get_filename(img)] }
           end
-          h[e] = slides
-          next
+          h[e] = slides; next
         end
 
       h[e] = val.to_s
@@ -151,4 +153,5 @@ module TripMapOfflinePackage
     end
 
   end # end class
+
 end # end module

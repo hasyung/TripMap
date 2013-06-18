@@ -1,0 +1,26 @@
+<%= simple_form_for [:admin, :first_known, @model], html: { class: 'form-horizontal' } do |m| %>
+
+  <%= m.association :first_known, collection: FirstKnown.all, prompt: t("helpers.links.select", :model_name => FirstKnown.model_name.human) %>
+
+  <%= m.input :title_cn %>
+  <%= m.input :title_en %>
+  <%= m.input :abstract %>
+  <%= m.input :url, :type => :text %>
+
+  <%= m.fields_for :first_known_list_icon, @model.first_known_list_icon ||= @model.build_first_known_list_icon do |img|  %>
+    <%= img.input :file, :as => :file %>
+
+    <% if @model.first_known_list_icon && @model.first_known_list_icon.file.present? %>
+        <div class="control-group image">
+          <div class="controls">
+            <%= image_tag @model.first_known_list_icon.file, :size => "50X50" %>
+          </div>
+        </div>
+    <% end %>
+  <% end %>
+
+  <%= m.input :order %>
+
+  <div class="form-actions"><%= m.button :submit, :class => 'btn-primary' %></div>
+
+<% end %>

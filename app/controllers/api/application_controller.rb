@@ -26,4 +26,11 @@ class Api::ApplicationController < ActionController::Base
     { msg: I18n.t(yml_path) }
   end
 
+  def get_url( avi_model )
+    ret = ""
+    return ret if avi_model.nil?
+    ret = avi_model.file.url if avi_model.file.present?
+    ret
+  end
+
 end

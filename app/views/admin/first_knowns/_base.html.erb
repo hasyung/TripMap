@@ -1,0 +1,7 @@
+<div class="toolbar">
+  <div class="btn-toolbar">
+      <%= link_to_if %w(index).include?(action_name), t('links.first_knowns.new'), new_admin_first_known_path, class: 'btn btn-success' %>
+      <%= link_to_if %w(new create edit update).include?(action_name), t('links.first_knowns.index'), admin_first_knowns_path, class: 'btn btn-success' %>
+      <%= link_to t('links.images.new'), new_admin_first_known_image_path(params[:id]), class: 'btn btn-success' if %w(edit).include?(action_name) %>
+  </div>
+</div>

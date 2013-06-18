@@ -6,6 +6,7 @@ class OrderValidator < ActiveModel::Validator
     :ChildrenBroadcast    => "broadcast_id",
     :AudioList            => "audio_list_category_id",
     :AudioListItem        => "audio_list_id",
+    :FirstKnownList       => "first_known_id",
   }
 
   def validate(record)
@@ -17,7 +18,7 @@ class OrderValidator < ActiveModel::Validator
 
     order_duplicate = all_orders.include?(record.order)
 
-    unless record.new?
+    unless record.new_record?
       old_order = klass.constantize.find(record.id).order
       all_orders.delete(old_order)
       is_invalid = old_order != record.order && all_orders.include?(record.order)

@@ -1,0 +1,51 @@
+<%- model_class = FirstKnownList -%>
+
+<%= render 'base' %>
+
+<div class="box">
+  <div class="box-title">
+    <span class="icon"><i class="icon-th"></i></span>
+    <h5><%= t('links.first_known_lists.index') %></h5>
+  </div>
+  <div class="box-content">
+    <table class="table table-bordered table-striped with-check">
+      <thead>
+        <tr>
+          <th><input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" /></th>
+          <th><%= model_class.human_attribute_name(:first_known) %></th>
+          <th><%= model_class.human_attribute_name(:title_cn) %></th>
+          <th><%= model_class.human_attribute_name(:title_en) %></th>
+          <th><%= model_class.human_attribute_name(:abstract) %></th>
+          <th><%= model_class.human_attribute_name(:url) %></th>
+          <th><%= model_class.human_attribute_name(:first_known_list_icon) %></th>
+          <th><%= model_class.human_attribute_name(:order) %></th>
+          <th class="action"><%= t('links.commons.action') %></th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @models.each do |m| %>
+          <tr>
+            <td><%= check_box_tag "first＿known＿list_ids[]", m.id, false, id: "first＿known＿list_#{m.id}" %></td>
+            <td><%= m.first_known.name %></td>
+            <td><%= m.title_cn %></td>
+            <td><%= m.title_en %></td>
+            <td><%= m.abstract[0...20] %></td>
+            <td><%= m.url %></td>
+            <td><%= image_tag m.first_known_list_icon.file, :size => "35x35" unless m.first_known_list_icon.blank? %></td>
+            <td><%= m.order %></td>
+
+            <td class="action">
+              <%= link_to raw("<i class=\"icon-edit\"></i>"), edit_admin_first_known_first_known_list_path(m.first_known, m.id), title: t('links.audio_lists.edit') %>
+              <%= link_to raw("<i class=\"icon-trash\"></i>"), admin_first_known_first_known_list_path(m.first_known, m.id), method: :delete, data: {confirm: t('links.commons.confirm')} %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="table-footer clearfix">
+  <div class="paginates-info"><%= page_entries_info @models %></div>
+  <%= paginate @models, :theme => "admin" %>
+</div>

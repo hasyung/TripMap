@@ -1,14 +1,18 @@
 <%= simple_form_for [:admin, @model, @image] do |i| %>
   <%= i.input :file,  as: :file %>
-    <% if @image.file && @image.file.present? %>
-      <div class="control-group image">
-        <div class="controls">
-          <%= image_tag @image.file %>
-        </div>
+
+  <% if @image.file && @image.file.present? %>
+    <div class="control-group image">
+      <div class="controls">
+        <%= image_tag @image.file %>
       </div>
-    <% end %>
+    </div>
+  <% end %>
+
   <%= i.input :order %>
+
   <div class="form-actions">
     <%= i.button :submit, :class => 'btn-primary' %>
   </div>
+
 <% end %>

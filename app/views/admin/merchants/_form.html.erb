@@ -14,16 +14,29 @@
   <%= p.input :address %>
   <%= p.input :shop_hour %>
   <%= p.input :expence %>
+
   <%= p.fields_for :merchant_image, @model.merchant_image ||= @model.build_merchant_image do |pimg|  %>  
     <%= pimg.input :file, :as => :file %>
     <% if @model.merchant_image && @model.merchant_image.file.present? %>
       <div class="control-group image">
         <div class="controls">
-          <%= image_tag @model.merchant_image.file %>
+          <%= image_tag @model.merchant_image.file, :size => "50x50" %>
         </div>
       </div>
     <% end %>
   <% end %>
+
+  <%= p.fields_for :merchant_horizontal_image, @model.merchant_horizontal_image ||= @model.build_merchant_horizontal_image do |pimg|  %>  
+    <%= pimg.input :file, :as => :file %>
+    <% if @model.merchant_horizontal_image && @model.merchant_horizontal_image.file.present? %>
+      <div class="control-group image">
+        <div class="controls">
+          <%= image_tag @model.merchant_horizontal_image.file, :size => "50x50" %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+
   <%= p.input :description, :as => :text%>
   <%= p.input :special, :as => :text%>
 
@@ -34,7 +47,7 @@
 
 <%= content_for :scripts do -%>
   <script type="text/javascript">
-    function getcity() 
+    function getcity()
     { 
       $("form").attr("action", $("form").attr("action") + "?type=true" );
       $("form").submit();

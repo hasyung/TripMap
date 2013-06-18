@@ -1,39 +1,39 @@
 <%- model_class = Image -%>
+
 <div class="box">
-  <div class="box-title">
-    <span class="icon"><i class="icon-th"></i></span>
-    <h5><%= t('links.images.index') %></h5>
-  </div>
-  <div class="box-content">
-    <table class="table table-bordered table-striped with-check">
-      <thead>
+
+<div class="box-title">
+  <span class="icon"><i class="icon-th"></i></span>
+  <h5><%= t('links.images.index') %></h5>
+</div>
+
+<div class="box-content">
+  <table class="table table-bordered table-striped with-check">
+    <thead>
+      <tr>
+        <th><input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" /></th>
+        <th><%= model_class.human_attribute_name(:file) %></th>
+        <th><%= model_class.human_attribute_name(:order) %></th>
+        <th class="action"><%= t('links.commons.action') %></th>
+      </tr>
+    </thead>
+    <tbody>
+    <% if !@images.blank? %>
+      <% @images.each do |img| %>
         <tr>
-          <th><input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" /></th>
-          <th><%= model_class.human_attribute_name(:file) %></th>
-          <th><%= model_class.human_attribute_name(:order) %></th>
-          <th class="action"><%= t('links.commons.action') %></th>
+          <td><%= check_box_tag "image_ids[]", img.id, false, :id => "image_#{img.id}" %></td>
+          <td><%= image_tag(img.file, :size => "35x35") %></td>
+          <td><%= img.file %></td>
+          <td><%= img.order %></td>
+          <td class="action">
+            <%= link_to raw("<i class=\"icon-edit\"></i>"), get_edit_image_path(@model, img.id), :title => t('links.images.edit') %>
+            <%= link_to raw("<i class=\"icon-trash\"></i>"), get_delete_image_path(@model, img.id), :method => :delete, :data => { :confirm => t('links.commons.confirm') } %>
+          </td>
         </tr>
-      </thead>
-      </tbody>
-        <% if !@images.blank? %>
-        <% @images.each do |img| %>
-          <tr>
-            <td><%= check_box_tag "image_ids[]", img.id, false, :id => "image_#{img.id}" %></td>
-            <td><%= img.file %></td>
-            <td><%= img.order %></td>
-            <td class="action">
-              <%= link_to raw("<i class=\"icon-edit\"></i>"), 
-                          get_edit_image_path(@model, img.id), 
-                          :title => t('links.images.edit') %>
-              <%= link_to raw("<i class=\"icon-trash\"></i>"),
-                          get_delete_image_path(@model, img.id), 
-                          :method => :delete,
-                          :data => { :confirm => t('links.commons.confirm') } %>
-            </td>
-          </tr>
-        <% end %>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
+      <% end %>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
 </div>

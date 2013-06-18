@@ -65,6 +65,8 @@
       index: "广播剧"
     audio＿list＿categories:
       index: "音频列表"
+    first_knowns:
+      index: "先知道"
 
   breadcrumbs:
     admin:
@@ -207,6 +209,15 @@
         index: "音频列表子项"
         new: "添加音频列表子项"
         edit: "编辑音频列表子项"
+      first_knowns:
+        index: "先知道"
+        new: "添加先知道"
+        edit: "编辑先知道"
+      first_known_lists:
+        index: "先知道子项"
+        new: "添加先知道子项"
+        edit: "编辑先知道子项"
+
   links:
     home:
       index: "返回首页"
@@ -371,6 +382,15 @@
       edit: "编辑音频列表子项"
       new: "新建音频列表子项"
       audio_list: "返回音频列表"
+    first_knowns:
+      index: "先知道"
+      edit: "编辑先知道"
+      new: "新建先知道"
+    first_known_lists:
+      index: "先知道子项"
+      edit: "编辑先知道子项"
+      new: "新建先知道子项"
+      first_known: "返回到先知道"
 
   messages:
     maps:
@@ -492,7 +512,7 @@
           gouwu: "购物"
           yule: "娱乐"
           zhusu: "住宿"
-          
+
     models:
       place: "景点"
       scenic: "景区"
@@ -530,6 +550,9 @@
       audio_list_category: "音频列表分类"
       audio_list: "音频列表"
       audio_list_item: "音频列表子项"
+      first_known: "先知道"
+      first_known_list: "先知道子项列表"
+
     attributes:
       map:
         province: "省市"
@@ -749,6 +772,20 @@
         audio_list_item_desc: "音频列表子项描述"
         order: "音频列表子项序号"
         duration: "音频播放时长"
+      first_known:
+        map: "所属地图"
+        name: "名称"
+        first_known_slug: "简码"
+        first_known_slug_cover: "简码封面"
+      first_known_list:
+        first_known: "所属于先知道"
+        title_cn: "中文标题"
+        title_en: "英文标题"
+        abstract: "简介"
+        url: "天气网址"
+        first_known_list_icon: "图标"
+        order: "序号"
+
   simple_form:
     labels:
       map:
@@ -895,6 +932,9 @@
           file: "音频"
           order: "音频列表子项序号"
           duration: "音频播放时长"
+      merchant:
+        merchant_horizontal_image:
+          file: "水平旋转图片"
 
   helpers:
     links:
@@ -940,7 +980,7 @@
     type:
       phone: "类型错误，只能为数字！"
       slug: "简码必须为小写字母！"
-      name: "名字长度不能超过15个汉字！"
+      name: "名字长度不能超过20个汉字！"
       big_image_file: "亲，你上传的文件超过了5MB！"
       big_audio_file: "亲，你上传的文件超过了8MB！"
       big_video_file: "亲，你上传的文件超过了15MB！"
@@ -951,6 +991,8 @@
     weather:
       map_id: "参数错误！"
       disabled: "当前天气不可用，请稍后再试！"
+    first_known_list:
+      title_en: "请输入英文单词！"
 
   tips:
     api:
