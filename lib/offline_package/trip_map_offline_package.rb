@@ -17,7 +17,7 @@ module TripMapOfflinePackage
       :Video        => "video"
     }
     ATOM = {
-      :Keyword      => 'slug',
+      :Keyword      => ['slug', 'version'],
       :Letter       => 'body'
     }
     ARRAY_FIELD     = [ 'slides' ]
@@ -94,8 +94,7 @@ module TripMapOfflinePackage
 
         ( h[e] = ""; next ) if val.nil?
         unless ATOM[klass_name.to_sym].nil?
-          is_slug_field = e == ("%s_slug"%@@model.class.name.downcase)
-          ( h[:slug] = val.send(ATOM[klass_name.to_sym].to_sym); next ) if is_slug_field
+          ( ATOM[klass_name.to_sym].each{|attr| h[attr] = val.send(attr) }; next ) if e == "slug"
           h[e] = val.send(ATOM[klass_name.to_sym].to_sym); next
         end
 
