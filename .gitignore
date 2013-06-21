@@ -29,6 +29,7 @@ public/assets
 
 .idea/
 
+config/initializers/carrierwave.rb
 config/initializers/version.rb
 config/thin.yml.default
 config/database.yml.default
