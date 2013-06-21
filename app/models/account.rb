@@ -8,7 +8,7 @@ class Account < ActiveRecord::Base
 
   # Associations
   has_one  :map_serial_number
-  has_many :shares,   :dependent => :destroy
+  has_many :shares, :dependent => :destroy
   has_many :feedbacks, :dependent => :destroy
   has_many :activate_with_accounts
   has_many :activate_maps, :through => :activate_with_accounts
@@ -20,7 +20,7 @@ class Account < ActiveRecord::Base
 
   # Scopes
   scope :created_desc, order("created_at DESC")
-  scope :search_name, lambda { |name| where("ucase(`accounts`.`nickname`) like concat('%',ucase(?),'%')", name) }
+  scope :search_name, lambda {|name| where("ucase(`accounts`.`nickname`) like concat('%',ucase(?),'%')", name) }
 
   # Nested attributes validates
   accepts_nested_attributes_for :map_serial_number, reject_if: ->(attr){ attr[:code].blank? }

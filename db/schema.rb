@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130618063250) do
+ActiveRecord::Schema.define(:version => 20130621071406) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",                                :default => "", :null => false
@@ -170,6 +170,17 @@ ActiveRecord::Schema.define(:version => 20130618063250) do
     t.datetime "updated_at",                 :null => false
   end
 
+  create_table "first_known_list_items", :force => true do |t|
+    t.integer  "first_known_list_id",                :null => false
+    t.integer  "order",               :default => 0, :null => false
+    t.string   "title",                              :null => false
+    t.string   "description"
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+  end
+
+  add_index "first_known_list_items", ["first_known_list_id", "title"], :name => "index_first_known_list_items_on_first_known_list_id_and_title", :unique => true
+
   create_table "first_known_lists", :force => true do |t|
     t.integer  "first_known_id",                :null => false
     t.string   "title_cn",                      :null => false
@@ -247,12 +258,14 @@ ActiveRecord::Schema.define(:version => 20130618063250) do
   end
 
   create_table "keywords", :force => true do |t|
-    t.integer "keywordable_id"
-    t.string  "keywordable_type"
-    t.integer "keyword_type",                   :default => 0
-    t.string  "slug",             :limit => 20,                :null => false
-    t.string  "version"
-    t.string  "file_size"
+    t.integer  "keywordable_id"
+    t.string   "keywordable_type"
+    t.integer  "keyword_type",                   :default => 0
+    t.string   "slug",             :limit => 20,                :null => false
+    t.string   "version"
+    t.string   "file_size"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "keywords", ["slug"], :name => "index_keywords_on_slug", :unique => true
@@ -504,6 +517,7 @@ ActiveRecord::Schema.define(:version => 20130618063250) do
     t.string   "value",                      :null => false
     t.string   "description"
     t.string   "app"
+    t.string   "url"
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
   end

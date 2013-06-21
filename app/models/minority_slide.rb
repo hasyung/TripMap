@@ -15,12 +15,12 @@ class MinoritySlide < ActiveRecord::Base
   end
 
   # Validates
-  validate :order_increment
   with_options :presence => true do |column|
     column.validates :minority_id
     column.validates :order, uniqueness: { scope: [:minority_id, :order] },
                              numericality: { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999 }
   end
+  validates_with OrderValidator
 
   # Nested attributes validates
   accepts_nested_attributes_for :minority_slide_icon,        reject_if: ->(attr){ attr[:file].blank? }, :allow_destroy => true
@@ -29,13 +29,5 @@ class MinoritySlide < ActiveRecord::Base
   # Scopes
   scope :order_asc, order("`order` ASC")
   scope :created_desc, order("`created_at` DESC")
-
-  def order_increment
-    if self.new_record? && self.order == 0 && !self.minority_id.nil?
-      self.order = MinoritySlide.where( minority_id: self.minority_id ).maximum(:order).to_i + 1
-    elsif self.minority_id.nil?
-      self.order = 1
-    end
-  end
 
 end

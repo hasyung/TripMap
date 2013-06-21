@@ -7,7 +7,6 @@ class SurroundCity < ActiveRecord::Base
   belongs_to :map
 
   # Validates
-  validates :city_name, :map_id, :presence => true
-  validates :city_name, :uniqueness => true
+  validates :city_name, :map_id, :presence => true, :uniqueness => true
 
 end

@@ -2,6 +2,9 @@
 
   <%= f.input :platform, collection: [["iOS", "0"], ["Android", "1"]], :prompt=> true %>
   <%= f.input :value %>
+  <%= f.input :app %>
+  <%= f.input :url, :as => :string %>
+  <%= f.input :description, :as => :text %>
 
   <div class="form-actions">
     <%= f.button :submit, :class => 'btn-primary' %>

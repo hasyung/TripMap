@@ -41,6 +41,8 @@
     <li><a href="#unbind_device">取消手机注册</a></li>
     <li><a href="#offline_package_version">获取离线包的版本信息</a></li>
     <li><a href="#get_all_pkg_infos">获取所有离线包的基本信息用于客户端下载页面展示</a></li>
+    <li><a href="#get_latest_file_name">获取最新离线包的下载文件名</a></li>
+    <li><a href="#download_ios">下载iOS包</a></li>
   </ol>
 </div>
 
@@ -541,7 +543,7 @@
         <table class="table table-bordered">
           <thead><tr><th>#</th><th>名字</th><th>类型</th><th>类别</th><th>说明</th></tr></thead>
           <tbody>
-          	<tr><td><%=param_item_cnt +=1 %></td><td>device_id    </td><td>字符串</td> <td>必填参数</td><td>手机设备号</td></tr>
+            <tr><td><%=param_item_cnt +=1 %></td><td>device_id    </td><td>字符串</td> <td>必填参数</td><td>手机设备号</td></tr>
             <tr><td><%=param_item_cnt +=1 %></td><td>service_score</td><td>整数值</td> <td>必填参数</td><td>服务设施评分</td></tr>
             <tr><td><%=param_item_cnt +=1 %></td><td>env_score    </td><td>整数值</td> <td>必填参数</td><td>环境及卫生评分</td></tr>
             <tr><td><%=param_item_cnt +=1 %></td><td>category     </td><td>整数值</td> <td>必填参数</td><td>分类</td></tr>
@@ -581,7 +583,7 @@
     <small class="desc">获取离线包的版本信息</small>
     <dl>
       <dt>URL</dt><dd><pre class="docs-example"><%= pkg_versions_api_v1_offline_packages_url(:format => :json) %></pre></dd>
-      <dt>HTTP请求方式</dt><dd>GET<dd><dt>支持格式</dt><dd>json<dd><dt>是否需要登录</dt><dd>否<dd><dt>请求参数</dt><dd>无<dd>      
+      <dt>HTTP请求方式</dt><dd>GET<dd><dt>支持格式</dt><dd>json<dd><dt>是否需要登录</dt><dd>否<dd><dt>请求参数</dt><dd>无<dd>
     </dl>
     <p><b>返回值：</b> [{slug:xxx, version: 123456 }+]</p>
   </div>
@@ -592,9 +594,60 @@
     <small class="desc">获取所有离线包的基本信息用于客户端下载页面展示</small>
     <dl>
       <dt>URL</dt><dd><pre class="docs-example"><%= get_all_pkg_infos_api_v1_offline_packages_url(:format => :json) %></pre></dd>
-      <dt>HTTP请求方式</dt><dd>GET<dd><dt>支持格式</dt><dd>json<dd><dt>是否需要登录</dt><dd>否<dd><dt>请求参数</dt><dd>无<dd>      
+      <dt>HTTP请求方式</dt><dd>GET<dd><dt>支持格式</dt><dd>json<dd><dt>是否需要登录</dt><dd>否<dd><dt>请求参数</dt><dd>无<dd>
     </dl>
     <p><b>返回值：</b> JSON</p>
+  </div>
+
+  <div id="get_latest_file_name" class="api well">
+    <% param_item_cnt = 0 %>
+    <h3 class="name">API<%= api_cnt += 1 %></h3>
+    <small class="desc">获取最新离线包的下载文件名</small>
+    <dl>
+      <dt>URL</dt><dd><pre class="docs-example"><%= get_offline_pkg_url_api_v1_offline_packages_url(:format => :json) %></pre></dd>
+      <dt>HTTP请求方式</dt><dd>GET<dd><dt>支持格式</dt><dd>json<dd><dt>是否需要登录</dt><dd>否<dd><dt>请求参数</dt>
+      <dd>
+        <table class="table table-bordered">
+          <thead><tr><th>#</th><th>名字</th><th>类型</th><th>类别</th><th>说明</th></tr></thead>
+          <tbody>
+            <tr><td><%=param_item_cnt +=1 %></td><td>slug    </td><td>字符串</td> <td>必填参数</td><td>简码</td></tr>
+            <tr><td><%=param_item_cnt +=1 %></td><td>version </td><td>由数字组成的字符串</td> <td>必填参数</td><td>版本号</td></tr>
+          </tbody>
+        </table>
+      <dd>
+    </dl>
+    <p><b>返回值：</b> JSON</p>
+    <p> 成功：
+      <pre>
+        {
+          result: true, msg: "",
+          curr_url: "原来版本的url地址，上一版本文件存在，则有值，不存在则为空",
+          latest_url: "slug对应的最新离线包URL下载地址",
+          is_expired: "原版本地址是否失效"
+        }
+      </pre>
+      </p>
+    <p>失败： { result: false, msg: "错误信息描述！", curr_url: "", latest_url: "", is_expired: true }</p>
+  </div>
+
+  <div id="download_ios" class="api well">
+    <% param_item_cnt = 0 %>
+    <h3 class="name">API<%= api_cnt += 1 %></h3>
+    <small class="desc">下载iOS包</small>
+    <dl>
+      <dt>URL</dt><dd><pre class="docs-example"><%= d_admin_downloads_url %></pre></dd>
+      <dt>HTTP请求方式</dt><dd>GET<dd><dt>支持格式</dt><dd>json<dd><dt>是否需要登录</dt><dd>否<dd><dt>请求参数</dt>
+      <dd>
+        <table class="table table-bordered">
+          <thead><tr><th>#</th><th>名字</th><th>类型</th><th>类别</th><th>说明</th></tr></thead>
+          <tbody>
+            <tr><td><%=param_item_cnt +=1 %></td><td>plist    </td><td>字符串</td> <td>必填参数</td><td>iOS的plist文件名</td></tr>
+          </tbody>
+        </table>
+      <dd>
+    </dl>
+    <p><b>返回值：</b> 无</p>
+    <p><b>示例：</b> <%= d_admin_downloads_url(:plist => "trip_map_1.2.1.plist") %></p>
   </div>
 
 </div>

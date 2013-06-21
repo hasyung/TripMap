@@ -14,7 +14,7 @@ class FirstKnownList < ActiveRecord::Base
     assoc.has_one  :first_known_list_icon, :conditions => { :image_type => Image.first_known_list_icon }
   end
 
-  #has_many :audio_list_items, :dependent => :destroy
+  has_many :first_known_list_items, :dependent => :destroy
 
   # Validates
   with_options :presence => true do |column|

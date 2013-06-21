@@ -85,8 +85,8 @@ class TripMapObserver < ActiveRecord::Observer
   def create_offline_package( model )
     return unless OFFLINE_PKGS.include?(model.class.name)
 
-    OfflinePackage.create_package model
     update_keyword_version(model)
+    OfflinePackage.create_package model
   end
 
   def get_map( model )

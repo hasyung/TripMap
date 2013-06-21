@@ -9,11 +9,11 @@ class InfoList < ActiveRecord::Base
   belongs_to :map, :counter_cache => true
 
   with_options :as => :imageable, :class_name => "Image", :dependent => :destroy do |assoc|
-    assoc.has_one :infolist_slug_icon,  :conditions => { :image_type => Image.infolist_slug_icon }
+    assoc.has_one :infolist_slug_icon, :conditions => { :image_type => Image.infolist_slug_icon }
   end
 
   with_options :as => :keywordable, :class_name => 'Keyword', :dependent => :destroy do |assoc|
-    assoc.has_one :info_list_slug,      :conditions => { :keyword_type => Keyword.info_list_slug }
+    assoc.has_one :info_list_slug,     :conditions => { :keyword_type => Keyword.info_list_slug }
   end
 
   has_many :infos, :dependent => :destroy

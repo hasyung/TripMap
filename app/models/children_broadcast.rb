@@ -8,15 +8,15 @@ class ChildrenBroadcast < ActiveRecord::Base
   belongs_to :broadcast
 
   with_options :as => :imageable, :class_name => 'Image', :dependent => :destroy do|assoc|
-    assoc.has_one  :broadcast_cover,   :conditions => { :image_type => Image.broadcast_cover }
+    assoc.has_one  :broadcast_cover, :conditions => { :image_type => Image.broadcast_cover }
   end
 
   with_options :as => :audioable, :class_name => 'Audio', :dependent => :destroy do|assoc|
-    assoc.has_one :broadcast_audio,    :conditions => { :audio_type => Audio.broadcast_audio }
+    assoc.has_one :broadcast_audio,  :conditions => { :audio_type => Audio.broadcast_audio }
   end
 
   with_options :as => :textable, :class_name => 'Letter', :dependent => :destroy do|assoc|
-    assoc.has_one :broadcast_desc,     :conditions => { :text_type => Letter.broadcast_desc }
+    assoc.has_one :broadcast_desc,   :conditions => { :text_type => Letter.broadcast_desc }
   end
 
   # Validates

@@ -10,13 +10,14 @@ class Video < ActiveRecord::Base
   before_save :update_video_attributes, :update_video_cover_attributes
 
   # Validates
-   validates :file, :file_size => { :maximum => 40.megabytes.to_i, :message => I18n.t("errors.type.big_video_file") }
-   validates :cover, :presence => true, :file_size => { :maximum => 10.megabytes.to_i, :message => I18n.t("errors.type.big_image_file") }
-   validates_numericality_of :duration, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999999
+  validates :file, :file_size => { :maximum => 40.megabytes.to_i, :message => I18n.t("errors.type.big_video_file") }
+  validates :cover, :presence => true, :file_size => { :maximum => 10.megabytes.to_i, :message => I18n.t("errors.type.big_image_file") }
+  validates_numericality_of :duration, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999999
 
-   validates :order, numericality: { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999 },
-                     uniqueness: { scope: [:videoable_id, :videoable_type, :video_type] },
-                     :if => :order_increment
+  validates :order, numericality: { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999 },
+                    uniqueness: { scope: [:videoable_id, :videoable_type, :video_type] },
+                    :if => :order_increment
+   validates_with OrderValidator
 
   # SampleEnum. hash table is in growing.
   as_enum :type,
@@ -27,14 +28,14 @@ class Video < ActiveRecord::Base
     :place_video            => 2,
 
     :recommend_video        => 3,
-    
+
     :minority_video         => 4
   },
   :column => "video_type"
 
   # Carrierwave
-  mount_uploader :file,   VideoUploader
-  mount_uploader :cover,  ImageUploader
+  mount_uploader :file,  VideoUploader
+  mount_uploader :cover, ImageUploader
 
   # Scopes
   scope :order_asc, order("`order` ASC")
@@ -54,16 +55,6 @@ class Video < ActiveRecord::Base
     if cover.present? and cover_changed?
       self.cover_size = cover.file.size
       self.cover_type = cover.file.content_type
-    end
-  end
-
-  def order_increment
-    if self.new_record? && self.order == 0 && !self.videoable_id.nil?
-      self.order = Video.where( videoable_id: self.videoable_id, 
-                                videoable_type: self.videoable_type, 
-                                video_type: self.video_type ).maximum(:order).to_i + 1
-    elsif self.videoable_id.nil?
-      self.order = 1
     end
   end
 

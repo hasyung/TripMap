@@ -63,7 +63,7 @@
       index: "专题列表"
     broadcasts:
       index: "广播剧"
-    audio＿list＿categories:
+    audio_list_categories:
       index: "音频列表"
     first_knowns:
       index: "先知道"
@@ -217,6 +217,10 @@
         index: "先知道子项"
         new: "添加先知道子项"
         edit: "编辑先知道子项"
+      first_known_list_items:
+        index: "先知道列表子项"
+        new: "添加先知道列表子项"
+        edit: "编辑先知道列表子项"
 
   links:
     home:
@@ -391,6 +395,11 @@
       edit: "编辑先知道子项"
       new: "新建先知道子项"
       first_known: "返回到先知道"
+    first_known_list_items:
+      index: "先知道列表子项"
+      edit: "编辑先知道列表子项"
+      new: "新建先知道列表子项"
+      first_known_list: "返回到先知道列表"
 
   messages:
     maps:
@@ -552,6 +561,7 @@
       audio_list_item: "音频列表子项"
       first_known: "先知道"
       first_known_list: "先知道子项列表"
+      first_known_list_item: "先知道子项列表子项"
 
     attributes:
       map:
@@ -689,6 +699,9 @@
       version:
         platform: "平台"
         value: "版本号"
+        app: "应用程序"
+        description: "描述"
+        url: "iOS app连接网址"
       feedback: 
         body: "内容"
         account: "用户"
@@ -784,6 +797,12 @@
         abstract: "简介"
         url: "天气网址"
         first_known_list_icon: "图标"
+        order: "序号"
+      first_known_list_item:
+        first_known_list: "所属先知道列表项　"
+        title: "标题"
+        description: "简介"
+        first_known_list_item_icon: "图标"
         order: "序号"
 
   simple_form:
@@ -935,6 +954,11 @@
       merchant:
         merchant_horizontal_image:
           file: "水平旋转图片"
+      version:
+        platform: "平台"
+        value: "版本号"
+        app: "应用程序(ipa | apk后缀)"
+        url: "iOS app连接网址"
 
   helpers:
     links:
@@ -965,6 +989,10 @@
   errors:
     api:
       invalid_params: "必填参数字段错误！"
+      empty: "没有找到任何结果！"
+      file_not_exist: "文件不存在！"
+      slug_error: "简码无效！"
+      creating_file: "服务器正在创建新版本的离线包，请稍后再试！"
       maps:
         device_id: "设备ID错误！"
       lijiang_mailboxes:
@@ -993,6 +1021,8 @@
       disabled: "当前天气不可用，请稍后再试！"
     first_known_list:
       title_en: "请输入英文单词！"
+    messages:
+      extension_white_list_error: "上传文件后缀名不对！"
 
   tips:
     api:

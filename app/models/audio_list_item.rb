@@ -8,15 +8,15 @@ class AudioListItem < ActiveRecord::Base
   belongs_to :audio_list
 
   with_options :as => :imageable, :class_name => 'Image', :dependent => :destroy do |assoc|
-    assoc.has_one :audio_list_item_icon, :conditions => { :image_type => Image.audio_list_item_icon }
+    assoc.has_one :audio_list_item_icon,  :conditions => { :image_type => Image.audio_list_item_icon }
   end
 
   with_options :as => :audioable, :class_name => 'Audio', :dependent => :destroy do|assoc|
-    assoc.has_one :audio_list_item_audio,    :conditions => { :audio_type => Audio.audio_list_item_audio }
+    assoc.has_one :audio_list_item_audio, :conditions => { :audio_type => Audio.audio_list_item_audio }
   end
 
   with_options :as => :textable, :class_name => 'Letter', :dependent => :destroy do|assoc|
-    assoc.has_one :audio_list_item_desc,     :conditions => { :text_type => Letter.audio_list_item_desc }
+    assoc.has_one :audio_list_item_desc,  :conditions => { :text_type => Letter.audio_list_item_desc }
   end
 
   # Validates
