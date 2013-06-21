@@ -7,14 +7,15 @@ class Admin::RecommendsController < Admin::ApplicationController
   end
 
   def new
-    @recommend = Recommend.new
+    @model = Recommend.new
 
     add_breadcrumb :new
   end
 
   def create
-    @recommend = Recommend.new params[:recommend]
-    if @recommend.save
+    add_breadcrumb :new
+    @model = Recommend.new params[:recommend]
+    if @model.save
       redirect_to admin_recommends_path, notice: t('messages.recommends.success')
     else 
       render :new
@@ -22,12 +23,15 @@ class Admin::RecommendsController < Admin::ApplicationController
   end
 
   def edit
-    @recommend = Recommend.find params[:id]
+    add_breadcrumb :edit
+    @model = Recommend.find params[:id]
+    @images = @model.recommend_slides.order_asc
   end
 
   def update
-    @recommend = Recommend.find params[:id]
-    if @recommend.update_attributes params[:recommend]
+    add_breadcrumb :edit
+    @model = Recommend.find params[:id]
+    if @model.update_attributes params[:recommend]
       redirect_to admin_recommends_path, notice: t('messages.recommends.success')
     else
       render :edit

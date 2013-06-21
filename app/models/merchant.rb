@@ -27,7 +27,7 @@ class Merchant < ActiveRecord::Base
     column.validates :name,        :length => { :within => 2..50 }
     column.validates :title,       :length => { :within => 2..50 }
     column.validates :address,     :length => { :within => 2..50 }
-    column.validates :phone,       :length => { :within => 7..11 }, :format => { :with => /^[0-9]+$/, :message => I18n.t("errors.type.phone") }
+    column.validates :phone,       :length => { :within => 7..12 }, :format => { :with => /^[0-9]+$/, :message => I18n.t("errors.type.phone") }
     column.validates :county_id
   end
   validates :shop_hour,   :length => { :within => 0..20 }

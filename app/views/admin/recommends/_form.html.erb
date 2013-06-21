@@ -1,6 +1,6 @@
-<%= simple_form_for [:admin, @recommend], html: { class: 'form-horizontal' } do |r| %>
+<%= simple_form_for [:admin, @model], html: { class: 'form-horizontal' } do |r| %>
   <%= r.input :name %>
- <%= r.fields_for :recommend_slug, @recommend.recommend_slug ||= @recommend.build_recommend_slug do |s|  %>  
+ <%= r.fields_for :recommend_slug, @model.recommend_slug ||= @model.build_recommend_slug do |s|  %>  
     <%= s.input :slug, :input_html => { :class => "span-full" } %>
   <% end %>
   <%= r.input :is_free %>
@@ -11,42 +11,42 @@
   <%= r.input :category_cd do %>
       <%= r.select :category_cd, Recommend.categories_for_select(:value) %>
     <% end -%>
-  <%= r.fields_for :recommend_cover, @recommend.recommend_cover ||= @recommend.build_recommend_cover do |c| %>
+  <%= r.fields_for :recommend_cover, @model.recommend_cover ||= @model.build_recommend_cover do |c| %>
     <%= c.input :file, as: :file %>
-    <% if @recommend.recommend_cover && @recommend.recommend_cover.file.present? %>
+    <% if @model.recommend_cover && @model.recommend_cover.file.present? %>
       <div class="control-group image">
         <div class="controls">
-          <%= image_tag @recommend.recommend_cover.file %>
+          <%= image_tag @model.recommend_cover.file %>
         </div>
       </div>
     <% end %>
   <% end %>
 
-	<%= r.fields_for :recommend_slug_icon, @recommend.recommend_slug_icon ||= @recommend.build_recommend_slug_icon do |ricon| %>
+	<%= r.fields_for :recommend_slug_icon, @model.recommend_slug_icon ||= @model.build_recommend_slug_icon do |ricon| %>
   	<%= ricon.input :file, as: :file %>
-    <% if @recommend.recommend_slug_icon && @recommend.recommend_slug_icon.file.present? %>
+    <% if @model.recommend_slug_icon && @model.recommend_slug_icon.file.present? %>
       <div class="control-group image">
         <div class="controls">
-          <%= image_tag @recommend.recommend_slug_icon.file %>
+          <%= image_tag @model.recommend_slug_icon.file %>
         </div>
       </div>
     <% end %>
   <% end %>
 
-  <%= r.fields_for :recommend_video, @recommend.recommend_video ||= @recommend.build_recommend_video do |v| %>
+  <%= r.fields_for :recommend_video, @model.recommend_video ||= @model.build_recommend_video do |v| %>
     <%= v.input :file, as: :file %>
     <%= v.input :cover, as: :file %>
     <%= v.input :duration %>
-    <% if @recommend.recommend_video && @recommend.recommend_video.file.present? %>
+    <% if @model.recommend_video && @model.recommend_video.file.present? %>
       <div class="control-group">
         <div class="controls">
-          <%= video_tag(@recommend.recommend_video.file, :controls => true, :autobuffer => true, :width => 400, :height => 240, :poster => @recommend.recommend_video.cover ) %>
+          <%= video_tag(@model.recommend_video.file, :controls => true, :autobuffer => true, :width => 400, :height => 240, :poster => @model.recommend_video.cover ) %>
         </div>
       </div>
-    <%elsif @recommend.recommend_video && @recommend.recommend_video.cover.present? %>    
+    <%elsif @model.recommend_video && @model.recommend_video.cover.present? %>    
       <div class="control-group">
         <div class="controls">
-          <%= image_tag(@recommend.recommend_video.cover) %>
+          <%= image_tag(@model.recommend_video.cover) %>
         </div>
       </div>
     <% end %>

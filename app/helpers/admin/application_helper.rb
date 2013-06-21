@@ -34,6 +34,8 @@ module Admin::ApplicationHelper
       path = edit_admin_minority_feel_image_path(model.id, image_id)
     when "FirstKnown"
       path = edit_admin_first_known_image_path(model.id, image_id)
+    when "Recommend"
+      path = edit_admin_recommend_image_path(model.id, image_id)
     end
 
     path
@@ -53,6 +55,8 @@ module Admin::ApplicationHelper
       path = admin_minority_feel_image_path(model.id, image_id)
     when "FirstKnown"
       path = admin_first_known_image_path(model.id, image_id)
+    when "Recommend"
+      path = admin_recommend_image_path(model.id, image_id)
     end
 
     path

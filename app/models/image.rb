@@ -77,6 +77,8 @@ class Image < ActiveRecord::Base
     :merchant_horizontal_image                   => 39,
 
     :first_known_list_item_icon                  => 40,
+
+    :recommend_slides                            => 41,
   },
   :column => "image_type"
 

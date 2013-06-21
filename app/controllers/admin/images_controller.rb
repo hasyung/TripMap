@@ -66,6 +66,10 @@ class Admin::ImagesController < Admin::ApplicationController
       @model = FirstKnown.find params[:first_known_id]
       @image = @model.first_known_slides.new params[:image]
       @path  = edit_admin_first_known_path(@model.id)
+    elsif params.has_key?(:recommend_id)
+      @model = Recommend.find params[:recommend_id]
+      @image = @model.recommend_slides.new params[:image]
+      @path  = edit_admin_recommend_path(@model.id)
     end
   end
 
