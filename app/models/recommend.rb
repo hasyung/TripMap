@@ -13,8 +13,9 @@ class Recommend < ActiveRecord::Base
   end
 
   with_options :as => :imageable, :class_name => "Image", :dependent => :destroy do |assoc|
-    assoc.has_one :recommend_slug_icon, :conditions => { :image_type => Image.recommend_slug_icon }
-    assoc.has_one :recommend_cover,     :conditions => { :image_type => Image.recommend_cover }
+    assoc.has_one  :recommend_slug_icon, :conditions => { :image_type => Image.recommend_slug_icon }
+    assoc.has_one  :recommend_cover,     :conditions => { :image_type => Image.recommend_cover }
+    assoc.has_many :recommend_slides,    :conditions => { :image_type => Image.recommend_slides }
   end
 
   with_options :as => :keywordable, :class_name => "Keyword", :dependent => :destroy do |assoc|

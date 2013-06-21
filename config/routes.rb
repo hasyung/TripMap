@@ -41,6 +41,7 @@ TripMap::Application.routes.draw do
     end
 
     resources :recommends do
+      resources :images, except: :show
       resources :recommend_records,
                 path: 'records',:as => "records" do
         resources :recommend_detaileds, path: 'detaileds', :as => "detaileds" do
