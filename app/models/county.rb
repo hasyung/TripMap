@@ -7,6 +7,7 @@ class County < ActiveRecord::Base
   belongs_to :city, :counter_cache => true
 
   has_many :merchants, :autosave => true
+  has_many :fights, :autosave => true
 
   # Validates
   with_options :presence => true do |column|

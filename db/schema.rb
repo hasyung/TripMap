@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130624074809) do
+ActiveRecord::Schema.define(:version => 20130624093601) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",                                :default => "", :null => false
@@ -169,6 +169,15 @@ ActiveRecord::Schema.define(:version => 20130624074809) do
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
   end
+
+  create_table "fights", :force => true do |t|
+    t.integer  "county_id",                :null => false
+    t.string   "name",       :limit => 20, :null => false
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+  end
+
+  add_index "fights", ["name"], :name => "index_fights_on_name", :unique => true
 
   create_table "first_known_list_items", :force => true do |t|
     t.integer  "first_known_list_id",                :null => false

@@ -10,8 +10,6 @@ class Special < ActiveRecord::Base
     assoc.has_many  :minorities
   end
 
-  has_many :minorities, :dependent => :destroy
-
   with_options :as => :imageable, :class_name => "Image", :dependent => :destroy do|assoc|
     assoc.has_one  :special_icon,      :conditions => { :image_type => Image.special_icon }
     assoc.has_one  :special_slug_icon, :conditions => { :image_type => Image.special_slug_icon }
