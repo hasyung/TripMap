@@ -4,7 +4,7 @@ class Merchant < ActiveRecord::Base
 
   # White list
   attr_accessible :name, :title, :conuty, :county_id, :address, :phone, :shop_hour, :expence, :special, :description, :tag, :type_cd, :city,
-                  :merchant_slug_attributes, :merchant_image_attributes, :merchant_horizontal_image_attributes
+                  :merchant_slug_attributes, :merchant_image_attributes, :merchant_horizontal_image_attributes, :merchant_video_attributes
 
   #SimpleEnum
   as_enum :type, { :meishi => 0, :gouwu => 1, :yule => 2, :zhusu => 4 }
@@ -14,6 +14,10 @@ class Merchant < ActiveRecord::Base
 
   with_options :as => :keywordable, :class_name => "Keyword", :dependent => :destroy do|assoc|
     assoc.has_one  :merchant_slug,    :conditions => { :keyword_type => Keyword.merchant_slug }
+  end
+  
+  with_options :as => :videoable, :class_name => "Video", :dependent => :destroy do |assoc|
+    assoc.has_one :merchant_video,     :conditions => { :video_type => Video.merchant_video }
   end
 
   with_options :as => :imageable, :class_name => "Image", :dependent => :destroy do|assoc|
@@ -40,6 +44,7 @@ class Merchant < ActiveRecord::Base
   accepts_nested_attributes_for :merchant_slug,  :allow_destroy => true
   accepts_nested_attributes_for :merchant_image,            reject_if: ->(attr){ attr[:file].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :merchant_horizontal_image, reject_if: ->(attr){ attr[:file].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :merchant_video,     reject_if: ->(attr){ (attr[:cover].blank? && attr[:id].blank?) }, :allow_destroy => true
 
   # Scopes
   scope :created_desc, order("`created_at` DESC")

@@ -79,6 +79,9 @@ class Image < ActiveRecord::Base
     :first_known_list_item_icon                  => 40,
 
     :recommend_slides                            => 41,
+    
+    :fight_icon                                  => 42,
+    :fight_slug_icon                             => 43,
   },
   :column => "image_type"
 

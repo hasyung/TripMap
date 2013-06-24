@@ -744,7 +744,6 @@
         is_free: "免费"
         menu_type: "菜单标注"
       minority:
-        special: "专题列表"
         name: "名称"
         minority_slug: "简码"
         is_free: "免费"
@@ -954,6 +953,10 @@
       merchant:
         merchant_horizontal_image:
           file: "水平旋转图片"
+        merchant_video:
+          file: "视频"
+          cover: "视频封面"
+          duration: "视频时长"
       version:
         platform: "平台"
         value: "版本号"

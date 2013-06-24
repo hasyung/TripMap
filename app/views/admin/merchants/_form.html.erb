@@ -36,7 +36,25 @@
       </div>
     <% end %>
   <% end %>
-
+  
+  <%= p.fields_for :merchant_video, @model.merchant_video ||= @model.build_merchant_video do |v| %>
+    <%= v.input :file, as: :file %>
+    <%= v.input :cover, as: :file %>
+    <%= v.input :duration %>
+    <% if @model.merchant_video && @model.merchant_video.file.present? %>
+      <div class="control-group">
+        <div class="controls">
+          <%= video_tag(@model.merchant_video.file, :controls => true, :autobuffer => true, :width => 400, :height => 240, :poster => @model.merchant_video.cover ) %>
+        </div>
+      </div>
+    <%elsif @model.merchant_video && @model.merchant_video.cover.present? %>    
+      <div class="control-group">
+        <div class="controls">
+          <%= image_tag(@model.merchant_video.cover) %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>  
   <%= p.input :description, :as => :text%>
   <%= p.input :special, :as => :text%>
 

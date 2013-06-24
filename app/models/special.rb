@@ -6,8 +6,9 @@ class Special < ActiveRecord::Base
 
   # Associations
   belongs_to :map
-
-  has_many :minorities, :dependent => :destroy
+  with_options :as => :minorityable, :class_name => "Minority", :dependent => :destroy do|assoc|
+    assoc.has_many  :minorities
+  end
 
   with_options :as => :imageable, :class_name => "Image", :dependent => :destroy do|assoc|
     assoc.has_one  :special_icon,      :conditions => { :image_type => Image.special_icon }
