@@ -5,8 +5,10 @@ class Special < ActiveRecord::Base
                   :special_icon_attributes, :special_slug_icon_attributes, :special_slug_attributes
 
   # Associations
-  has_many :minorities, :dependent => :destroy
   belongs_to :map
+  with_options :as => :minorityable, :class_name => "Minority", :dependent => :destroy do|assoc|
+    assoc.has_many  :minorities
+  end
 
   with_options :as => :imageable, :class_name => "Image", :dependent => :destroy do|assoc|
     assoc.has_one  :special_icon,               :conditions => { :image_type => Image.special_icon }

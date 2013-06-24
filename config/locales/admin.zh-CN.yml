@@ -731,7 +731,6 @@
         is_free: "免费"
         menu_type: "菜单标注"
       minority:
-        special: "专题列表"
         name: "名称"
         minority_slug: "简码"
         is_free: "免费"
