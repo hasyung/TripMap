@@ -36,6 +36,8 @@ class Keyword < ActiveRecord::Base
     :audio_list_category_slug   => 11,
 
     :first_known_slug           => 12,
+
+    :fight_slug                 => 13,
   },
   :column => "keyword_type"
 
