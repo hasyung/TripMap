@@ -731,9 +731,9 @@
       children_broadcast:
         broadcast: "所属广播剧"
         name: "儿童广播剧名称"
-        broadcast_cover: "封面"
-        broadcast_audio: "音频"
-        broadcast_desc: "描述"
+        children_broadcast_cover: "封面"
+        children_broadcast_audio: "音频"
+        children_broadcast_desc: "描述"
         order: "排序号"
         duration: "时长(秒)"
         size: "音频大小"
@@ -914,10 +914,10 @@
         video: "展板视频"
       children_broadcast:
         broadcast: "所属广播剧"
-        broadcast_audio:
+        children_broadcast_audio:
           file: "音频"
           duration: "音频时长（秒）"
-        broadcast_desc:
+        children_broadcast_desc:
           body: "描述"
         order: "序号"
       special:

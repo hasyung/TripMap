@@ -1,5 +1,8 @@
+require 'app/common'
+
 class Map < ActiveRecord::Base
   include SerialNumber::Generate
+  include App::Model
 
   #White list
   attr_accessible :province, :province_id, :name, :map_slug_attributes, :version,
@@ -267,40 +270,20 @@ class Map < ActiveRecord::Base
   end
 
   def get_panel_videos
-    pv = []
-    self.panel_videos.each do |m|
-      pv << {
-        name: m.name, slug: get_file_value(m.panel_video_slug, "slug"),
-        slug_cover: get_file_value(m.panel_video_slug_cover, "file", true), video: m.video.url
-      }
-    end
-    pv
+    ret = []
+    self.panel_videos.each{|c| ret << o_to_h(c, ['map_id', 'version']) }
+    ret
   end
 
   def get_broadcasts
     ret = []
-
-    self.broadcasts.each do|m|
-      p = {
-        broadcast_slug:       get_file_value(m.broadcast_slug, "slug"),
-        broadcast_slug_cover: get_file_value(m.broadcast_slug_cover, "file", true),
-      }
-
-      tmps = []
-      m.children_broadcasts.order_asc.each do|o|
-        tmps << {
-          name:     o.name,
-          cover:    get_file_value(o.broadcast_cover, "file", true),
-          audio:    get_file_value(o.broadcast_audio, "file", true),
-          size:     get_file_value(o.broadcast_audio, "file_size", false),
-          duration: get_file_value(o.broadcast_audio, "duration", false),
-          order:    o.order,
-          desc:     get_file_value(o.broadcast_desc, "body", false)
-        }
-      end
-      p["children_broadcasts"] = tmps
-      ret << p
-    end # End outer loop
+    self.broadcasts.each do|c|
+      h_c = o_to_h(c, ['map_id', 'version'])
+      l_cc = []
+      c.children_broadcasts.order_asc.each{|cc| l_cc << o_to_h(cc, ['broadcast_id']) }
+      h_c[:children_broadcasts] = l_cc
+      ret << h_c
+    end
     ret
   end
 
@@ -358,61 +341,37 @@ class Map < ActiveRecord::Base
 
   def get_audio_list_categories
     ret = []
-
     self.audio_list_categories.each do|c|
-      h = {
-        name: c.name,
-        slug: get_file_value(c.audio_list_category_slug, "slug")
-      }
-      l = []
+      h_c = o_to_h(c, ['map_id', 'version'])
+      l_cc = []
       c.audio_lists.order_asc.each do |cc|
-        lh = {
-          name:            cc.name,
-          abstract:        cc.abstract,
-          audio_list_icon: get_file_value(cc.audio_list_icon, "file", true)
-        }
-        alits = []
-        cc.audio_list_items.order_asc.each do |ccc|
-          alits << {
-            title:                 ccc.title,
-            abstract:              ccc.abstract,
-            audio_list_item_icon:  get_file_value(ccc.audio_list_item_icon, "file", true),
-            audio_list_item_audio: get_file_value(ccc.audio_list_item_audio, "file", true),
-            duration:              get_file_value(ccc.audio_list_item_audio, "duration"),
-            file_size:             get_file_value(ccc.audio_list_item_audio, "file_size"),
-            body:                  get_file_value(ccc.audio_list_item_desc, "body"),
-          }
-        end
-        lh[:audio_list_items] = alits
-        l << lh
+        h_cc = o_to_h(cc, ['audio_list_category_id'])
+        l_ccc = []
+        cc.audio_list_items.order_asc.each{|ccc| l_ccc << o_to_h(ccc, ['audio_list_id']) }
+        h_cc[:audio_list_items] = l_ccc
+        l_cc << h_cc
       end
-      h[:audio_lists] = l
-      ret << h
-    end # End outer loop
+      h_c[:audio_lists] = l_cc
+      ret << h_c
+    end
     ret
   end
 
   def get_first_known
     ret = []
-    self.first_knowns.each do |c|
-      h = {
-        name: c.name,
-        slug: get_file_value(c.first_known_slug, "slug")
-      }
-      l = []
+    self.first_knowns.each do|c|
+      h_c = o_to_h(c, ['map_id', 'version'])
+      l_cc = []
       c.first_known_lists.order_asc.each do |cc|
-        lh = {
-          title_cn:              cc.title_cn,
-          title_en:              cc.title_en,
-          abstract:              cc.abstract,
-          url:                   cc.url,
-          order:                 cc.order,
-          first_known_list_icon: get_file_value(cc.first_known_list_icon, "file", true)
-        }
-        l << lh
+        h_cc = o_to_h(cc, ['first_known_id'])
+        l_ccc = []
+        cc.first_known_list_items.order_asc.each{|ccc| l_ccc << o_to_h(ccc, ['first_known_list_id']) }
+        h_cc[:first_known_list_items] = l_ccc
+        l_cc << h_cc
       end
-      h[:first_known_lists] = l; ret << h
-    end # End outer loop
+      h_c[:first_known_lists] = l_cc
+      ret << h_c
+    end
     ret
   end
 

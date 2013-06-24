@@ -51,7 +51,7 @@ class Image < ActiveRecord::Base
 
     :panel_video_slug_cover                      => 22,
 
-    :broadcast_cover                             => 23,
+    :children_broadcast_cover                    => 23,
 
     :special_icon                                => 24,
     :special_slug_icon                           => 25,

@@ -4,25 +4,25 @@
 
   <%= m.input :name %>
 
-  <%= m.fields_for :broadcast_cover, @model.broadcast_cover ||= @model.build_broadcast_cover do |img|  %>
+  <%= m.fields_for :children_broadcast_cover, @model.children_broadcast_cover ||= @model.build_children_broadcast_cover do |img|  %>
     <%= img.input :file, :as => :file %>
 
-    <% if @model.broadcast_cover && @model.broadcast_cover.file.present? %>
+    <% if @model.children_broadcast_cover && @model.children_broadcast_cover.file.present? %>
         <div class="control-group image">
           <div class="controls">
-            <%= image_tag @model.broadcast_cover.file %>
+            <%= image_tag @model.children_broadcast_cover.file %>
           </div>
         </div>
     <% end %>
   <% end %>
 
-  <%= m.fields_for :broadcast_audio, @model.broadcast_audio ||= @model.build_broadcast_audio do |o|  %>
+  <%= m.fields_for :children_broadcast_audio, @model.children_broadcast_audio ||= @model.build_children_broadcast_audio do |o|  %>
     <%= o.input :file, :as => :file %>
 
-    <% if @model.broadcast_audio && @model.broadcast_audio.file.present? %>
+    <% if @model.children_broadcast_audio && @model.children_broadcast_audio.file.present? %>
         <div class="control-group">
           <div class="controls">
-            <%= audio_tag(@model.broadcast_audio.file, :controls => true) %>
+            <%= audio_tag(@model.children_broadcast_audio.file, :controls => true) %>
           </div>
         </div>
     <% end %>
@@ -32,7 +32,7 @@
 
   <%= m.input :order %>
 
-  <%= m.fields_for :broadcast_desc, @model.broadcast_desc ||= @model.build_broadcast_desc do |d| %>
+  <%= m.fields_for :children_broadcast_desc, @model.children_broadcast_desc ||= @model.build_children_broadcast_desc do |d| %>
     <%= d.input :body, :as => :text, input_html: { :class => "span-full"} %>
   <% end %>
 

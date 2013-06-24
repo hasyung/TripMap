@@ -14,11 +14,11 @@
           <th><input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" /></th>
           <th><%= model_class.human_attribute_name(:broadcast) %></th>
           <th><%= model_class.human_attribute_name(:name) %></th>
-          <th><%= model_class.human_attribute_name(:broadcast_cover) %></th>
+          <th><%= model_class.human_attribute_name(:children_broadcast_cover) %></th>
           <th><%= model_class.human_attribute_name(:order) %></th>
           <th><%= model_class.human_attribute_name(:size) %></th>
           <th><%= model_class.human_attribute_name(:duration) %></th>
-          <th><%= model_class.human_attribute_name(:broadcast_desc) %></th>
+          <th><%= model_class.human_attribute_name(:children_broadcast_desc) %></th>
           <th class="action"><%= t('links.commons.action') %></th>
         </tr>
       </thead>
@@ -30,26 +30,20 @@
             <td><%= m.name %></td>
 
             <td>
-              <% unless m.broadcast_cover.blank? %>
-                <%= image_tag m.broadcast_cover.file, :size => "50x50" %>
-              <% end %>
+              <%= image_tag m.children_broadcast_cover.file, :size => "50x50" unless m.children_broadcast_cover.blank? %>
             </td>
 
             <td><%= m.order %></td>
 
             <td>
-              <% unless m.broadcast_audio.blank? %>
-                <%= m.broadcast_audio.file_size %>
-              <% end %>
+              <%= m.children_broadcast_audio.file_size unless m.children_broadcast_audio.blank? %>
             </td>
 
             <td>
-              <% unless m.broadcast_audio.blank? %>
-                <%= m.broadcast_audio.duration %>
-              <% end %>
+              <%= m.children_broadcast_audio.duration unless m.children_broadcast_audio.blank? %>
             </td>
 
-            <td><%= m.broadcast_desc.body[0...20] %></td>
+            <td><%= m.children_broadcast_desc.body[0...20] %></td>
 
             <td class="action">
               <%= link_to raw("<i class=\"icon-edit\"></i>"), edit_admin_broadcast_children_broadcast_path(m.broadcast, m.id), title: t('links.panel_videos.edit') %>

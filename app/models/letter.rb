@@ -24,7 +24,7 @@ class Letter < ActiveRecord::Base
     :detailed_info                  => 5,
     :detailed_text                  => 6,
 
-    :broadcast_desc                 => 7,
+    :children_broadcast_desc        => 7,
 
     :minority_description           => 8,
     :minority_feel_description      => 9,
