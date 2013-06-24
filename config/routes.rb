@@ -98,7 +98,7 @@ TripMap::Application.routes.draw do
         resources :minority_feels, path: 'feels', :as => "feels", :except => :show
       end
     end
-    
+
     resources :minority_feels, :only => [] do
       resources :images, except: :show
     end
@@ -158,9 +158,14 @@ TripMap::Application.routes.draw do
 
     resources :first_knowns, :except => :show do
       resources :images, :except => :show
-      resources :first_known_lists, :except => :show
+      resources :first_known_lists, :except => :show do
+        resources :first_known_list_items
+      end
     end
 
+    resources :downloads, :only => [] do
+      get '/d', :on => :collection
+    end
   end
 
   namespace :api do
@@ -208,11 +213,12 @@ TripMap::Application.routes.draw do
         get '/unbind_device' => 'devices#unbind_device', :on => :collection
       end
 
-      resources :lijiang_mailboxes, only: [:create ]
+      resources :lijiang_mailboxes, only: [:create]
 
       resources :offline_packages, only: [] do
         get '/pkg_versions' => 'offline_packages#pkg_versions', :on => :collection
         get '/get_all_pkg_infos' => 'offline_packages#get_all_pkg_infos', :on => :collection
+        get '/get_offline_pkg_url' => 'offline_packages#get_offline_pkg_url', :on => :collection
       end
 
     end

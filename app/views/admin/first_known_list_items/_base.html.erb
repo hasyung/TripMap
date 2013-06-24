@@ -1,0 +1,9 @@
+<div class="toolbar">
+  <div class="btn-toolbar">
+
+    <%= link_to_if %w(index).include?(action_name), t('links.first_known_list_items.new'), new_admin_first_known_first_known_list_first_known_list_item_path, class: 'btn btn-success' %>
+    <%= link_to_if %w(index).include?(action_name), t('links.first_known_list_items.first_known_list'), admin_first_known_first_known_lists_path, class: 'btn btn-success' %>
+    <%= link_to_if %w(new create edit update).include?(action_name), t('links.first_known_list_items.index'),  admin_first_known_first_known_list_first_known_list_items_path, class: 'btn btn-success' %>
+
+  </div>
+</div>

@@ -27,7 +27,9 @@
           <tr>
             <td><%= check_box_tag "first＿known＿list_ids[]", m.id, false, id: "first＿known＿list_#{m.id}" %></td>
             <td><%= m.first_known.name %></td>
-            <td><%= m.title_cn %></td>
+            <td>
+              <%= m.url.blank? ? link_to(m.title_cn, admin_first_known_first_known_list_first_known_list_items_path(m.first_known.id, m.id)) : m.title_cn %>
+            </td>
             <td><%= m.title_en %></td>
             <td><%= m.abstract[0...20] %></td>
             <td><%= m.url %></td>

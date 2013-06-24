@@ -9,9 +9,10 @@ class Image < ActiveRecord::Base
   # Validates
   validates :file, :imageable_type, :image_type, :presence => true
   validates :file, :file_size => { :maximum => 5.megabytes.to_i, :message => I18n.t("errors.type.big_image_file") }
-  validate :order_increment
+
   validates :order, uniqueness: { scope: [:imageable_id, :imageable_type, :image_type] },
                     numericality: { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999 }
+  validates_with OrderValidator
 
   # SampleEnum. hash table is in growing.
   as_enum :type,
@@ -74,8 +75,10 @@ class Image < ActiveRecord::Base
     :first_known_list_icon                       => 38,
 
     :merchant_horizontal_image                   => 39,
-    
-    :recommend_slides                            => 40
+
+    :first_known_list_item_icon                  => 40,
+
+    :recommend_slides                            => 41,
   },
   :column => "image_type"
 
@@ -98,6 +101,7 @@ class Image < ActiveRecord::Base
     end
   end
 
+=begin
   def order_increment
     if self.new_record? && self.order == 0 && !self.imageable_id.nil?
       self.order = Image.where( imageable_id: self.imageable_id, 
@@ -107,5 +111,6 @@ class Image < ActiveRecord::Base
       self.order = 1
     end
   end
+=end
 
 end

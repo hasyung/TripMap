@@ -27,12 +27,13 @@ module TripMapOfflinePackage
     @@pkg_dir       = nil
     @@rc_dir        = nil
     @@slug          = nil
+    @@version       = nil
 
     def self.create_package( instance_model )
       return if instance_model.nil?
 
       @@model = instance_model
-      @@slug = extract_slug_val()
+      @@slug, @@version = extract_slug_and_version()
       @@pkg_dir = Rails.root.to_s + PATH_SEG[0]
       @@rc_dir = "%s/%s/"%[@@pkg_dir, @@slug]
 
@@ -68,19 +69,15 @@ module TripMapOfflinePackage
       attrs
     end
 
-    def self.extract_slug_val
+    def self.extract_slug_and_version
       model_slug = "%s_slug"%@@model.class.name.downcase
-      @@model.send(model_slug.to_sym).slug
+      keyword = @@model.send(model_slug.to_sym)
+      ret = keyword.slug, keyword.version
     end
 
     def self.copy_resources( src_file, media_type = I.downcase )
       dst_dir = @@rc_dir + media_type.downcase
-      begin
-        FileUtils.cp(src_file, dst_dir)
-        true
-      rescue
-        false
-      end
+      FileUtils.cp(src_file, dst_dir)
     end
 
     def self.collect_resources
@@ -140,8 +137,7 @@ module TripMapOfflinePackage
     end
 
     def self.zip_resources
-      zipfile_name = "%s/%s.zip"%[@@pkg_dir, @@slug]
-      File.delete(zipfile_name) if File.exist?(zipfile_name)
+      zipfile_name = "%s/%s.zip"%[@@pkg_dir, @@version]
 
       Zip::ZipFile.open(zipfile_name, Zip::ZipFile::CREATE) do |zipfile|
         Dir[File.join(@@rc_dir, '**', '**')].each do |file|

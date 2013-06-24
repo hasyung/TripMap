@@ -5,7 +5,7 @@
   <%= m.input :title_cn %>
   <%= m.input :title_en %>
   <%= m.input :abstract %>
-  <%= m.input :url, :type => :text %>
+  <%= m.input :url, :as => :string %>
 
   <%= m.fields_for :first_known_list_icon, @model.first_known_list_icon ||= @model.build_first_known_list_icon do |img|  %>
     <%= img.input :file, :as => :file %>

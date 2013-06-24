@@ -21,11 +21,10 @@ class RecommendDetailed < ActiveRecord::Base
   has_many :image_lists,                :dependent => :destroy
 
   # Validates
-  validate :order_increment
-
   validates :name, :length => { :within => 1..15 }, :presence => true
   validates :order, uniqueness: { scope: [:recommend_record_id, :order] },
                     numericality: { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999 }
+  validates_with OrderValidator
 
   # Nested attributes validates
   accepts_nested_attributes_for :recommend_detailed_cover, reject_if: ->(attr){ attr[:file].blank? }, :allow_destroy => true
@@ -33,15 +32,5 @@ class RecommendDetailed < ActiveRecord::Base
   # Scopes
   scope :order_asc, order("`order` ASC")
   scope :created_desc, order("`created_at` DESC")
-
-  private
-
-  def order_increment
-    if self.new_record? && self.order == 0 && !self.recommend_record_id.nil?
-      self.order = RecommendDetailed.where( recommend_record_id: self.recommend_record_id ).maximum(:order).to_i + 1
-    elsif self.recommend_record_id.nil?       
-      self.order = 1
-    end
-  end
 
 end

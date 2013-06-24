@@ -48,11 +48,11 @@ class Map < ActiveRecord::Base
   end
 
   # Nested attributes validates
-  accepts_nested_attributes_for :map_cover,             reject_if: lambda { |img| img[:file].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :map_plat,              reject_if: lambda { |img| img[:file].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :map_weather_bg_image,  reject_if: lambda { |img| img[:file].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :map_description,       :allow_destroy => true
-  accepts_nested_attributes_for :map_slug,              :allow_destroy => true
+  accepts_nested_attributes_for :map_cover,            reject_if: lambda { |img| img[:file].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :map_plat,             reject_if: lambda { |img| img[:file].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :map_weather_bg_image, reject_if: lambda { |img| img[:file].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :map_description,      :allow_destroy => true
+  accepts_nested_attributes_for :map_slug,             :allow_destroy => true
 
   # Scopes
   scope :created_desc, order("created_at DESC")

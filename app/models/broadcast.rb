@@ -8,11 +8,11 @@ class Broadcast < ActiveRecord::Base
   belongs_to :map
 
   with_options :as => :keywordable, :class_name => "Keyword", :dependent => :destroy do |assoc|
-    assoc.has_one :broadcast_slug,          :conditions => { :keyword_type => Keyword.broadcast_slug }
+    assoc.has_one :broadcast_slug,        :conditions => { :keyword_type => Keyword.broadcast_slug }
   end
 
   with_options :as => :imageable, :class_name => 'Image', :dependent => :destroy do |assoc|
-    assoc.has_one  :broadcast_slug_cover,   :conditions => { :image_type => Image.broadcast_slug_cover }
+    assoc.has_one  :broadcast_slug_cover, :conditions => { :image_type => Image.broadcast_slug_cover }
   end
 
   has_many :children_broadcasts, :dependent => :destroy

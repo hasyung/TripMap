@@ -22,12 +22,10 @@ class MapSerialNumber < ActiveRecord::Base
   scope :created_desc, order("created_at DESC")
 
   # Methods
-  def self.to_csv(options = {})
+  def self.to_csv( options = {} )
     CSV.generate(options) do |csv|
       csv << column_names
-      all.each do |serial|
-        csv << serial.attributes.values_at(*column_names)
-      end
+      all.each{|serial| csv << serial.attributes.values_at(*column_names) }
     end
   end
 

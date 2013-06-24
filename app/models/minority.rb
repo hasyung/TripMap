@@ -28,13 +28,13 @@ class Minority < ActiveRecord::Base
   end
 
   # Validates
-  validate :order_increment
   with_options :presence => true do |column|
     column.validates :name, :length => { :within => 2..20 }, :uniqueness => true
     column.validates :minorityable_id
     column.validates :order, uniqueness: { scope: [:minorityable_id, :minorityable_type, :order] },
                              numericality: { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 999 }
   end
+  validates_with OrderValidator
 
   # Nested attributes validates
   accepts_nested_attributes_for :minority_icon,        reject_if: ->(attr){ attr[:file].blank? }, :allow_destroy => true
@@ -54,5 +54,4 @@ class Minority < ActiveRecord::Base
       self.order = 1
     end
   end
-
 end

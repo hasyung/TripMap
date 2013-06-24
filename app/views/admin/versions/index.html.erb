@@ -16,6 +16,9 @@
           <th><input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" /></th>
           <th><%= model_class.human_attribute_name(:platform) %></th>
           <th><%= model_class.human_attribute_name(:value) %></th>
+          <th><%= model_class.human_attribute_name(:app) %></th>
+          <th><%= model_class.human_attribute_name(:url) %></th>
+          <th><%= model_class.human_attribute_name(:description) %></th>
           <th class="action"><%= t('links.commons.action') %></th>
         </tr>
       </thead>
@@ -26,13 +29,16 @@
             <td><%= check_box_tag "version_ids[]", v.id, false, :id => "version_#{v.id}" %></td>
             <td><%= v.platform.zero? ? "iOS" : "Android" %></td>
             <td><%= v.value %></td>
+            <td><%= v.app %></td>
+            <td><%= v.url %></td>
+            <td><%= v.description %></td>
             <td class="action">
               <%= link_to raw("<i class=\"icon-edit\"></i>"), edit_admin_version_path(v), :title => t('links.versions.edit') %>
               <%= link_to raw("<i class=\"icon-trash\"></i>"), admin_version_path(v), :method => :delete, :data => { :confirm => t('links.commons.confirm') } %>
             </td>
           </tr>
         <% end %>
- 
+
       </tbody>
     </table>
   </div>

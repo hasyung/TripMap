@@ -1,5 +1,6 @@
 # encoding : utf-8
 require "offline_package/trip_map_offline_package"
+require 'fileutils'
 
 namespace :offline_package do
 
@@ -11,18 +12,33 @@ namespace :offline_package do
   task :create_pkg => :environment do
     t_start = Time.now
     Scenic.all.each do|e|
-      OfflinePackage.create_package e
       update_keyword_version e
+      OfflinePackage.create_package e
     end
     t_end_s = Time.now
     puts "All Scenics packaged time span: %s(s)"%(t_end_s - t_start).to_s
 
     Place.all.each do|e|
-      OfflinePackage.create_package e
       update_keyword_version e
+      OfflinePackage.create_package e
     end
     t_end_p = Time.now
     puts "All Places packaged time span:  %s(s)"%(t_end_p - t_end_s).to_s
+  end
+
+  desc 'Remove all expired Offline Packages'
+  task :rm_expired_offline_pkgs => :environment do
+    puts 'Begin cleaning expired offline packages !'
+    versions = Keyword.all.map(&:version).select{|e| e.present? }
+
+    zip_pattern = Rails.root.to_s + "/public/uploads/packages/*.zip"
+    zip_files = Dir[zip_pattern]
+    zip_files.map!{|e| e = File.basename(e, '.zip') }
+    (zip_files - versions).each do|e|
+      zip_file_path = "%s/public/uploads/packages/%s.zip"%[Rails.root.to_s, e]
+      File.delete(zip_file_path) if File.exist?(zip_file_path)
+    end
+    puts 'All expired offline packages cleaned!'
   end
 
   def update_keyword_version( model )

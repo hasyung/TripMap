@@ -4,7 +4,7 @@ class ActivateMap < ActiveRecord::Base
   attr_accessible :device_id
 
   # Associations
-  has_many :logs,   :dependent => :destroy
+  has_many :logs, :dependent => :destroy
   has_many :activate_with_accounts
   has_many :accounts, :through => :activate_with_accounts
 

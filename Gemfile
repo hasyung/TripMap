@@ -12,7 +12,6 @@ end
 gem 'jquery-rails'
 gem 'quiet_assets'
 
-# bootstrap
 gem 'less-rails'
 gem 'twitter-bootstrap-rails'
 gem 'simple_enum'
@@ -27,11 +26,10 @@ gem 'simple_form'
 gem 'friendly_id'
 gem 'devise'
 gem 'httpclient'
-gem "smart_tuple" #sql search
+gem "smart_tuple" #SQL search
 gem 'thin'
 gem 'uuidtools'
 gem 'nokogiri'    # XML analyzing
-gem 'dalli'
 gem 'rubyzip'
 
 group :test, :development do
