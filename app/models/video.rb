@@ -28,7 +28,9 @@ class Video < ActiveRecord::Base
 
     :recommend_video        => 3,
 
-    :minority_video         => 4
+    :minority_video         => 4,
+    
+    :merchant_video         => 5,
   },
   :column => "video_type"
 

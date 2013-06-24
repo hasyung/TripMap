@@ -953,6 +953,10 @@
       merchant:
         merchant_horizontal_image:
           file: "水平旋转图片"
+        merchant_video:
+          file: "视频"
+          cover: "视频封面"
+          duration: "视频时长"
       version:
         platform: "平台"
         value: "版本号"
