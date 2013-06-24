@@ -47,11 +47,4 @@ class Minority < ActiveRecord::Base
   scope :order_asc, order("`order` ASC")
   scope :created_desc, order("`created_at` DESC")
 
-  def order_increment
-    if self.new_record? && self.order == 0 && !self.minorityable_id.nil?
-      self.order = Minority.where(minorityable_id: self.minorityable_id, minorityable_type: self.minorityable_type).maximum(:order).to_i + 1
-    elsif self.minorityable_id.nil?
-      self.order = 1
-    end
-  end
 end

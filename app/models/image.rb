@@ -79,7 +79,7 @@ class Image < ActiveRecord::Base
     :first_known_list_item_icon                  => 40,
 
     :recommend_slides                            => 41,
-    
+
     :fight_icon                                  => 42,
     :fight_slug_icon                             => 43,
   },
@@ -103,17 +103,5 @@ class Image < ActiveRecord::Base
       self.file_type = file.file.content_type
     end
   end
-
-=begin
-  def order_increment
-    if self.new_record? && self.order == 0 && !self.imageable_id.nil?
-      self.order = Image.where( imageable_id: self.imageable_id, 
-                                imageable_type: self.imageable_type, 
-                                image_type: self.image_type ).maximum(:order).to_i + 1
-    elsif self.imageable_id.nil?
-      self.order = 1
-    end
-  end
-=end
 
 end
