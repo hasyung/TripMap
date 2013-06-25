@@ -29,7 +29,9 @@ class Api::V1::MerchantsController < Api::V1::ApplicationController
         expence:     merchant.expence,
         description: merchant.description,
         special:     merchant.special,
-        slides:      slides
+        slides:      slides,
+        video:       get_url(merchant.merchant_video),
+        video_cover: (merchant.merchant_video && merchant.merchant_video.cover) ? merchant.merchant_video.cover.url : ""
       }
     end
 
