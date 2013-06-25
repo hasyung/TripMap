@@ -98,6 +98,13 @@ TripMap::Application.routes.draw do
         resources :minority_feels, path: 'feels', :as => "feels", :except => :show
       end
     end
+    
+    resources :fights, :except => :show do
+      resources :minorities do
+        resources :minority_slides, path: 'slides', :as => "slides", :except => :show
+        resources :minority_feels, path: 'feels', :as => "feels", :except => :show
+      end
+    end
 
     resources :minority_feels, :only => [] do
       resources :images, except: :show

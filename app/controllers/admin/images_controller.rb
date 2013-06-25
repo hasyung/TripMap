@@ -61,7 +61,12 @@ class Admin::ImagesController < Admin::ApplicationController
     elsif params.has_key?(:minority_feel_id)
       @model = MinorityFeel.find(params[:minority_feel_id], include: [:minority])
       @image = @model.minority_feel_slides.new params[:image]
-      @path  = edit_admin_special_minority_feel_path(@model.minority.special.id, @model.minority.id, @model.id)
+      parent = @model.minority.minorityable_type.constantize.find(@model.minority.minorityable_id)
+      if parent.class.to_s == "Special"
+        @path = edit_admin_special_minority_feel_path(parent.id, @model.minority.id, @model.id)
+      elsif parent.class.to_s == "Fight"
+        @path = edit_admin_fight_minority_feel_path(parent.id, @model.minority.id, @model.id)
+      end
     elsif params.has_key?(:first_known_id)
       @model = FirstKnown.find params[:first_known_id]
       @image = @model.first_known_slides.new params[:image]

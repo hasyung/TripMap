@@ -3,10 +3,11 @@
   <div class="box-title">
     <span class="icon"><i class="icon-th"></i></span>
     <h5><%= t('links.minority_feels.index') %>
-      <%= link_to t('links.minority_feels.new'), 
-                  new_admin_special_minority_feel_path(
-                    params[:special_id],
-                    params[:id]) %>
+      <% if params[:special_id].present? %>
+        <%= link_to t('links.minority_feels.new'), new_admin_special_minority_feel_path(params[:special_id], params[:id]) %>
+      <% elsif params[:fight_id].present? %>
+         <%= link_to t('links.minority_feels.new'), new_admin_fight_minority_feel_path(params[:fight_id], params[:id]) %>
+      <% end %>
     </h5>
   </div>
   <div class="box-content">
@@ -31,12 +32,22 @@
             <td><%= truncate(img.minority_feel_description.body, :length => 30, :separator => '...')%></td>
             <td><%= img.order %></td>
             <td class="action">
-              <%= link_to raw("<i class=\"icon-edit\"></i>"), 
+              <% if params[:special_id].present? %>
+                <%= link_to raw("<i class=\"icon-edit\"></i>"), 
                           edit_admin_special_minority_feel_path(params[:special_id], params[:id], img.id) %>
-              <%= link_to raw("<i class=\"icon-trash\"></i>"),
+                <%= link_to raw("<i class=\"icon-trash\"></i>"),
                           admin_special_minority_feel_path(params[:special_id], params[:id], img.id), 
                           :method => :delete,
                           :data => { :confirm => t('links.commons.confirm') } %>
+              <% elsif params[:fight_id].present? %>
+                <%= link_to raw("<i class=\"icon-edit\"></i>"), 
+                          edit_admin_fight_minority_feel_path(params[:fight_id], params[:id], img.id) %>
+                <%= link_to raw("<i class=\"icon-trash\"></i>"),
+                          admin_fight_minority_feel_path(params[:fight_id], params[:id], img.id), 
+                          :method => :delete,
+                          :data => { :confirm => t('links.commons.confirm') } %>
+              <% end %>
+              
             </td>
           </tr>
         <% end %>

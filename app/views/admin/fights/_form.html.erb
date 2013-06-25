@@ -1,0 +1,56 @@
+<%= simple_form_for [:admin, @fight] do |r| %>
+  <%= r.input :name %>
+  <%= r.input :city, collection: City.all, input_html: {onchange: "getcity()"}, prompt: t("helpers.links.select", :model_name => City.model_name.human) %>
+  <%= r.association :county, collection: (@city.present?? @city.counties : (@fight.county_id.present?? [@fight.county] : [])), prompt: t("helpers.links.select", :model_name => County.model_name.human) %>
+  <%= r.fields_for :fight_slug, @fight.fight_slug ||= @fight.build_fight_slug do |s|  %>  
+    <%= s.input :slug, :input_html => { :class => "span-full" } %>
+  <% end %>
+  <%= r.fields_for :fight_slug_icon, @fight.fight_slug_icon ||= @fight.build_fight_slug_icon do |ricon| %>
+    <%= ricon.input :file, as: :file %>
+    <% if @fight.fight_slug_icon && @fight.fight_slug_icon.file.present? %>
+      <div class="control-group image">
+        <div class="controls">
+          <%= image_tag @fight.fight_slug_icon.file %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+  <%= r.fields_for :fight_icon, @fight.fight_icon ||= @fight.build_fight_icon do |c| %>
+    <%= c.input :file, as: :file %>
+    <% if @fight.fight_icon && @fight.fight_icon.file.present? %>
+      <div class="control-group image">
+        <div class="controls">
+          <%= image_tag @fight.fight_icon.file %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+  <%= r.fields_for :fight_video, @fight.fight_video ||= @fight.build_fight_video do |pv|  %>  
+    <%= pv.input :file,  :as => :file %>
+    <%= pv.input :cover, :as => :file %>
+    <%= pv.input :duration %>
+
+    <% if @fight.fight_video && @fight.fight_video.file.present? %>
+      <div class="control-group">
+        <div class="controls">
+          <%= video_tag(@fight.fight_video.file, :controls => true, :autobuffer => true, :width => 400, :height => 240, :poster => @fight.fight_video.cover ) %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+  
+  <div class="form-actions">
+    <%= r.button :submit, :class => 'btn-primary' %>
+  </div>
+
+<% end %>
+
+<%= content_for :scripts do -%>
+  <script type="text/javascript">
+    function getcity()
+    { 
+      $("form").attr("action", $("form").attr("action") + "?type=true" );
+      $("form").submit();
+    }
+  </script>
+<% end -%>

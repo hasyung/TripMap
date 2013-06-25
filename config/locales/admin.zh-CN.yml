@@ -67,6 +67,8 @@
       index: "音频列表"
     first_knowns:
       index: "先知道"
+    fights:
+      index: "PK"
 
   breadcrumbs:
     admin:
@@ -191,8 +193,8 @@
         new: "添加民族图集"
         edit: "修改民族图集"
       minority_feels:
-        new: "添加民族风情"
-        edit: "修改民族风情"
+        new: "添加延伸阅读"
+        edit: "修改延伸阅读"
       broadcasts:
         index: "广播剧"
         new: "添加广播剧"
@@ -221,6 +223,10 @@
         index: "先知道列表子项"
         new: "添加先知道列表子项"
         edit: "编辑先知道列表子项"
+      fights:
+        index: "PK列表"
+        new: "添加PK"
+        edit: "修改PK"
 
   links:
     home:
@@ -360,14 +366,18 @@
       new: "添加民族专题"
       edit: "修改民族专题"
       show: "查看民族专题"
+      back_show: "返回民族专题"
+      back_index: "返回民族列表"
+      back_special: "返回专题列表"
+      back_fight: "返回PK列表"
     minority_slides:
       index: "民族图集"
       new: "添加民族图集"
       edit: "修改民族图集"
     minority_feels:
-      index: "民族风情"
-      new: "添加民族风情"
-      edit: "修改民族风情"
+      index: "延伸阅读"
+      new: "添加延伸阅读"
+      edit: "修改延伸阅读"
     broadcasts:
       index: "广播剧"
       edit: "编辑广播剧"
@@ -400,6 +410,10 @@
       edit: "编辑先知道列表子项"
       new: "新建先知道列表子项"
       first_known_list: "返回到先知道列表"
+    fights:
+      index: "PK列表"
+      new: "添加PK"
+      edit: "修改PK"
 
   messages:
     maps:
@@ -491,8 +505,11 @@
       success: "操作民族图集成功！"
       error: "操作民族图集失败！"
     minority_feels:
-      success: "操作民族风情成功！"
-      error: "操作民族风情失败！"
+      success: "操作延伸阅读成功！"
+      error: "操作延伸阅读失败！"
+    fights:
+      success: "操作PK成功！"
+      error: "操作PK失败！"
     settings:
       success: "设置成功！"
     lijiang_mailboxes:
@@ -554,7 +571,7 @@
       special: "专题列表"
       minority: "民族专题"
       minority_slide: "民族图集"
-      minority_feel: "民族风情"
+      minority_feel: "延伸阅读"
       broadcast: "广播剧"
       audio_list_category: "音频列表分类"
       audio_list: "音频列表"
@@ -562,6 +579,7 @@
       first_known: "先知道"
       first_known_list: "先知道子项列表"
       first_known_list_item: "先知道子项列表子项"
+      fight: "PK"
 
     attributes:
       map:
@@ -755,7 +773,7 @@
         minority_slide_description: "内容"
         order: "排序"
       minority_feel:
-        minority: "民族专题"
+        minority: "延伸阅读"
         name: "名称"
         minority_feel_icon: "图片"
         minority_feel_description: "内容"
@@ -803,6 +821,11 @@
         description: "简介"
         first_known_list_item_icon: "图标"
         order: "序号"
+      fight:
+        name: "名称"
+        city: "省市"
+        county: "区县"
+        fight_slug: "简码"
 
   simple_form:
     labels:
@@ -954,6 +977,15 @@
         merchant_horizontal_image:
           file: "水平旋转图片"
         merchant_video:
+          file: "视频"
+          cover: "视频封面"
+          duration: "视频时长"
+      fight:
+        fight_slug_icon: 
+          file: "简码小图"
+        fight_icon:
+          file: "PK图片"
+        fight_video:
           file: "视频"
           cover: "视频封面"
           duration: "视频时长"

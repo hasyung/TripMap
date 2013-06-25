@@ -13,7 +13,6 @@ class TripMapObserver < ActiveRecord::Observer
           :audio_list, :first_known_list, :minority,
 
           :image_list, :audio_list_item, :first_known_list_item,              # Level 3.
-          :minority_feel, :minority_slide,
 
           :audio, :video, :image, :letter                           # Atom.
 
