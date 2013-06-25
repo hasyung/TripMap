@@ -1,8 +1,4 @@
-<%= simple_form_for [:admin, @model], url: @model.new_record? ? 
-            admin_special_minority_feels_path(
-              params[:special_id], params[:minority_id]) : 
-           admin_special_minority_feel_path(
-              params[:special_id], params[:minority_id], @model) do |p| %>
+<%= simple_form_for [:admin, @model], url: get_minority_feel_form_url(@model, params[:minority_id], @parent) do |p| %>
   <%= p.input :name %>
   <%= p.fields_for :minority_feel_icon, @model.minority_feel_icon ||= @model.build_minority_feel_icon do |picon|  %>  
     <%= picon.input :file, :as => :file %>

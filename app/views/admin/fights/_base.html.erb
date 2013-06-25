@@ -1,0 +1,8 @@
+<div class="toolbar">
+  <div class="btn-toolbar">
+    <div clss="btn_group">
+      <%= link_to_if %w(index).include?(action_name), t('links.fights.new'), new_admin_fight_path, class: "btn btn-success" %>
+      <%= link_to_if %w(new create edit update).include?(action_name), t('links.fights.index'), admin_fights_path, class: "btn btn-success backinfo" %>
+    </div>
+  </div>
+</div>

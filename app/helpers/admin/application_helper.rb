@@ -61,5 +61,55 @@ module Admin::ApplicationHelper
 
     path
   end
+  
+  def get_edit_polymorphic_path(model, id)
+    case model.class.name
+    when "Special"
+      path = edit_admin_special_minority_path(model, id)
+    when "Fight"
+      path = edit_admin_fight_minority_path(model, id)
+    end
+    path
+  end
+  
+  def get_delete_polymorphic_path(model, id)
+    case model.class.name
+    when "Special"
+      path = admin_special_minority_path(model, id)
+    when "Fight"
+      path = admin_fight_minority_path(model, id)
+    end
+    path
+  end
+  
+  def get_minority_form_url(model, parent)
+    case parent.class.name
+    when "Special"
+      path = model.new_record? ? admin_special_minorities_path(parent) : admin_special_minority_path(parent, model)
+    when "Fight"
+      path = model.new_record? ? admin_fight_minorities_path(parent) : admin_fight_minority_path(parent, model)
+    end
+    path
+  end
+  
+  def get_minority_feel_form_url(model, id, parent)
+    case parent.class.name
+    when "Special"
+      path = model.new_record? ? admin_special_minority_feels_path(parent, id) : admin_special_minority_feel_path(parent, id, model)
+    when "Fight"
+      path = model.new_record? ? admin_fight_minority_feels_path(parent, id) : admin_fight_minority_feel_path(parent, id, model)
+    end
+    path
+  end
+  
+  def get_minority_slide_form_url(model, id, parent)
+    case parent.class.name
+    when "Special"
+      path = model.new_record? ? admin_special_minority_slides_path(parent, id) : admin_special_minority_slide_path(parent, id, model)
+    when "Fight"
+      path = model.new_record? ? admin_fight_minority_slides_path(parent, id) : admin_fight_minority_slide_path(parent, id, model)
+    end
+    path
+  end
 
 end

@@ -1,8 +1,4 @@
-<%= simple_form_for [:admin, @model], url: @model.new_record? ? 
-            admin_special_minority_slides_path(
-              params[:special_id], params[:minority_id]) : 
-           admin_special_minority_slide_path(
-              params[:special_id], params[:minority_id], @model) do |p| %>
+<%= simple_form_for [:admin, @model], url: get_minority_slide_form_url(@model, params[:minority_id], @parent) do |p| %>
   <%= p.fields_for :minority_slide_icon, @model.minority_slide_icon ||= @model.build_minority_slide_icon do |picon|  %>  
     <%= picon.input :file, :as => :file %>
     <% if @model.minority_slide_icon && @model.minority_slide_icon.file.present? %>

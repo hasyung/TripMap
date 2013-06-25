@@ -18,5 +18,4 @@ class County < ActiveRecord::Base
 
   # Scopes
   scope :created_desc, order("`created_at` DESC")
-
 end

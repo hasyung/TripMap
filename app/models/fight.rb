@@ -1,6 +1,7 @@
 class Fight < ActiveRecord::Base
+  attr_accessor :city
   # White list
-  attr_accessible :name, :county_id, :county,
+  attr_accessible :name, :county_id, :county, :city,
                   :fight_icon_attributes, :fight_slug_icon_attributes, :fight_slug_attributes, :fight_video_attributes
 
   # Associations

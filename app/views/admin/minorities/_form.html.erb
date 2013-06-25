@@ -1,8 +1,4 @@
-<%= simple_form_for [:admin,@model], url: @model.new_record? ? 
-           admin_special_minorities_path(
-              params[:special_id]) : 
-           admin_special_minority_path(
-              params[:special_id], @model) do |p| %>
+<%= simple_form_for [:admin,@model], url: get_minority_form_url(@model, @parent) do |p| %>
   <%= p.input :name %>
  <%= p.fields_for :minority_slug, @model.minority_slug ||= @model.build_minority_slug do |s|  %>  
     <%= s.input :slug, :input_html => { :class => "span-full" } %>
