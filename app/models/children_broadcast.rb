@@ -1,22 +1,22 @@
 class ChildrenBroadcast < ActiveRecord::Base
 
   # White list
-  attr_accessible :broadcast_id, :name, :cover, :audio, :duration, :size, :description, :order,
-                  :broadcast_cover_attributes, :broadcast_audio_attributes, :broadcast_desc_attributes
+  attr_accessible :broadcast_id, :name, :order,
+                  :children_broadcast_cover_attributes, :children_broadcast_audio_attributes, :children_broadcast_desc_attributes
 
   # Associations
   belongs_to :broadcast
 
   with_options :as => :imageable, :class_name => 'Image', :dependent => :destroy do|assoc|
-    assoc.has_one  :broadcast_cover, :conditions => { :image_type => Image.broadcast_cover }
+    assoc.has_one  :children_broadcast_cover, :conditions => { :image_type => Image.children_broadcast_cover }
   end
 
   with_options :as => :audioable, :class_name => 'Audio', :dependent => :destroy do|assoc|
-    assoc.has_one :broadcast_audio,  :conditions => { :audio_type => Audio.broadcast_audio }
+    assoc.has_one :children_broadcast_audio,  :conditions => { :audio_type => Audio.children_broadcast_audio }
   end
 
   with_options :as => :textable, :class_name => 'Letter', :dependent => :destroy do|assoc|
-    assoc.has_one :broadcast_desc,   :conditions => { :text_type => Letter.broadcast_desc }
+    assoc.has_one :children_broadcast_desc,   :conditions => { :text_type => Letter.children_broadcast_desc }
   end
 
   # Validates
@@ -28,9 +28,9 @@ class ChildrenBroadcast < ActiveRecord::Base
   validates_with OrderValidator
 
   # Nested attributes validates
-  accepts_nested_attributes_for :broadcast_cover, reject_if: ->(attr){ attr[:file].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :broadcast_audio,                                            :allow_destroy => true
-  accepts_nested_attributes_for :broadcast_desc,                                             :allow_destroy => true
+  accepts_nested_attributes_for :children_broadcast_cover, reject_if: ->(attr){ attr[:file].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :children_broadcast_audio,                                            :allow_destroy => true
+  accepts_nested_attributes_for :children_broadcast_desc,                                             :allow_destroy => true
 
   # Scopes
   scope :order_asc,    order("`order` ASC")

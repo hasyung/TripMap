@@ -86,7 +86,7 @@ module TripMapOfflinePackage
       extract_attrs(["id"], ["map"]).each do |e|
         val = @@model.send(e.to_sym)
         klass_name = val.class.name
-        prefix = @@model.class.name.downcase + "_"
+        prefix = @@model.class.name.underscore + "_"
         e = e.gsub(Regexp.new(prefix), "")
 
         ( h[e] = ""; next ) if val.nil?

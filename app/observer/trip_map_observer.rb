@@ -12,7 +12,7 @@ class TripMapObserver < ActiveRecord::Observer
           :recommend_record, :recommend_detailed, :info, :children_broadcast, # Level 2.
           :audio_list, :first_known_list,
 
-          :image_list, :audio_list_item,                                      # Level 3.
+          :image_list, :audio_list_item, :first_known_list_item,              # Level 3.
 
           :audio, :video, :image, :letter                                     # Atom.
 
@@ -47,6 +47,7 @@ class TripMapObserver < ActiveRecord::Observer
 
   OFFLINE_PKGS = [ 'Scenic', 'Place' ]
   PKG_PATH = 'public/uploads/packages'
+  TYPES = ['version', 'file_size']
 
   def after_save( model )
     update_map_version(model)
@@ -69,24 +70,25 @@ class TripMapObserver < ActiveRecord::Observer
     map_instance.save
   end
 
-  def update_keyword_version( model )
+  def update_keyword( model, attr )
     model_slug = "%s_slug"%model.class.name.downcase
     keyword = model.send(model_slug)
-    keyword.version = Time.now.to_i
-    keyword.file_size = get_file_size_in_mega(keyword.slug)
+    keyword.version = Time.now.to_i if attr == TYPES[0]
+    keyword.file_size = get_file_size_in_mega(keyword.version) if attr == TYPES[1]
     keyword.save
   end
 
-  def get_file_size_in_mega( slug )
-    fp = File.join(Rails.root.to_s, PKG_PATH, "%s.zip"%slug)
+  def get_file_size_in_mega( version )
+    fp = File.join(Rails.root.to_s, PKG_PATH, "%s.zip"%version)
     fs = (File.size(fp).to_f / 2**20).round(2)
   end
 
   def create_offline_package( model )
     return unless OFFLINE_PKGS.include?(model.class.name)
 
-    update_keyword_version(model)
+    update_keyword(model, TYPES[0])
     OfflinePackage.create_package model
+    update_keyword(model, TYPES[1])
   end
 
   def get_map( model )

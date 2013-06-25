@@ -17,7 +17,7 @@ class Fight < ActiveRecord::Base
   with_options :as => :keywordable, :class_name => 'Keyword', :dependent => :destroy do|assoc|
     assoc.has_one :fight_slug,       :conditions => { :keyword_type => Keyword.fight_slug }
   end
-  
+
   with_options :as => :videoable, :class_name => "Video", :dependent => :destroy do |assoc|
     assoc.has_one :fight_video,     :conditions => { :video_type => Video.fight_video }
   end
@@ -36,4 +36,5 @@ class Fight < ActiveRecord::Base
 
   # Scopes
   scope :created_desc, order("`created_at` DESC")
+
 end
