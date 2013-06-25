@@ -3,7 +3,7 @@
   <%= m.association :first_known_list, collection: FirstKnownList.all, :label_method => :title_cn, prompt: t("helpers.links.select") %>
 
   <%= m.input :title %>
-  <%= m.input :description %>
+  <%= m.input :description, :as => :text %>
 
   <%= m.fields_for :first_known_list_item_icon, @model.first_known_list_item_icon ||= @model.build_first_known_list_item_icon do |img|  %>
     <%= img.input :file, :as => :file %>

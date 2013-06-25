@@ -19,6 +19,17 @@
     <% end %>
   <% end %>
 
+  <%= m.fields_for :first_known_cover, @model.first_known_cover ||= @model.build_first_known_cover do |img|  %>  
+  <%= img.input :file, :as => :file %>
+  <% if @model.first_known_cover && @model.first_known_cover.file.present? %>
+      <div class="control-group image">
+        <div class="controls">
+          <%= image_tag @model.first_known_cover.file %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+
   <div class="form-actions"><%= m.button :submit, :class => 'btn-primary' %></div>
 
 <% end %>
