@@ -6,6 +6,7 @@ class Special < ActiveRecord::Base
 
   # Associations
   belongs_to :map
+
   with_options :as => :minorityable, :class_name => "Minority", :dependent => :destroy do|assoc|
     assoc.has_many  :minorities
   end

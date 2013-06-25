@@ -6,9 +6,10 @@ class Minority < ActiveRecord::Base
                   :minority_description_attributes, :minority_video_attributes
 
   # Associations
-  has_many :minority_feels, :dependent => :destroy
-  has_many :minority_slides, :dependent => :destroy
-  belongs_to :minorityable, :polymorphic => true
+  belongs_to :minorityable,    :polymorphic => true
+
+  has_many   :minority_feels,  :dependent => :destroy
+  has_many   :minority_slides, :dependent => :destroy
 
   with_options :as => :imageable, :class_name => "Image", :dependent => :destroy do|assoc|
     assoc.has_one  :minority_icon,       :conditions => { :image_type => Image.minority_icon }

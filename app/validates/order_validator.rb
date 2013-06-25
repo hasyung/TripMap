@@ -10,7 +10,6 @@ class OrderValidator < ActiveModel::Validator
     :ImageList            => "recommend_detailed_id",
     :MinorityFeel         => "minority_id",
     :MinoritySlide        => "minority_id",
-    :Minority             => "special_id",
     :RecommendDetailed    => "recommend_record_id",
     :RecommendRecord      => "recommend_id",
     :FirstKnownListItem   => "first_known_list_id",
@@ -22,6 +21,7 @@ class OrderValidator < ActiveModel::Validator
     :Audio                => ['audio_type', 'audioable_id', 'audioable_type'],
     :Video                => ['video_type', 'videoable_id', 'videoable_type'],
     :Image                => ['image_type', 'imageable_id', 'imageable_type'],
+    :Minority             => ['minorityable_id', 'minorityable_type']
   }
 
   def validate(record)

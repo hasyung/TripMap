@@ -7,14 +7,15 @@ class TripMapObserver < ActiveRecord::Observer
 
   # Observing models.
   observe :scenic, :place, :recommend, :info_list, :panel_video, :broadcast,  # Level 1.
-          :audio_list_category, :first_known,
+          :audio_list_category, :first_known, :special,
 
           :recommend_record, :recommend_detailed, :info, :children_broadcast, # Level 2.
-          :audio_list, :first_known_list,
+          :audio_list, :first_known_list, :minority,
 
           :image_list, :audio_list_item, :first_known_list_item,              # Level 3.
+          :minority_feel, :minority_slide,
 
-          :audio, :video, :image, :letter                                     # Atom.
+          :audio, :video, :image, :letter                           # Atom.
 
   NAV_PATH_OPTIONS = {
     # class name           path to map
@@ -26,6 +27,7 @@ class TripMapObserver < ActiveRecord::Observer
     :Broadcast          => "map",
     :AudioListCategory  => "map",
     :FirstKnown         => "map",
+    :Special            => "map",
 
     :Info               => "info_list.map",
     :RecommendRecord    => "recommend.map",
@@ -42,7 +44,8 @@ class TripMapObserver < ActiveRecord::Observer
     :Video              => "videoable",
     :Audio              => "audioable",
     :Image              => "imageable",
-    :Letter             => "textable"
+    :Letter             => "textable",
+    :Minority           => "minorityable",
   }
 
   OFFLINE_PKGS = [ 'Scenic', 'Place' ]
