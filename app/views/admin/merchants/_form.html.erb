@@ -14,6 +14,7 @@
   <%= p.input :address %>
   <%= p.input :shop_hour %>
   <%= p.input :expence %>
+  <%= p.input :privilege, :as => :text %>
 
   <%= p.fields_for :merchant_image, @model.merchant_image ||= @model.build_merchant_image do |pimg|  %>  
     <%= pimg.input :file, :as => :file %>

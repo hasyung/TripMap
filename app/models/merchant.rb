@@ -4,7 +4,8 @@ class Merchant < ActiveRecord::Base
 
   # White list
   attr_accessible :name, :title, :conuty, :county_id, :address, :phone, :shop_hour, :expence, :special, :description, :tag, :type_cd, :city,
-                  :merchant_slug_attributes, :merchant_image_attributes, :merchant_horizontal_image_attributes, :merchant_video_attributes
+                  :merchant_slug_attributes, :merchant_image_attributes, :merchant_horizontal_image_attributes, :merchant_video_attributes,
+                  :privilege
 
   #SimpleEnum
   as_enum :type, { :meishi => 0, :gouwu => 1, :yule => 2, :zhusu => 4 }
@@ -39,6 +40,7 @@ class Merchant < ActiveRecord::Base
   validates :description, :length => { :within => 0..2000 }
   validates :special,     :length => { :within => 0..200 }
   validates :tag,         :length => { :within => 0..50 }
+  validates :privilege,   :length => { :within => 0..300 }
 
   # Nested attributes validates
   accepts_nested_attributes_for :merchant_slug,  :allow_destroy => true

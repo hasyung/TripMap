@@ -29,6 +29,7 @@ class Api::V1::MerchantsController < Api::V1::ApplicationController
         expence:     merchant.expence,
         description: merchant.description,
         special:     merchant.special,
+        privilege:   merchant.privilege,
         slides:      slides,
         video:       get_url(merchant.merchant_video),
         video_cover: get_file_value(merchant.merchant_video,"cover",true)
