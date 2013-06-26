@@ -43,6 +43,8 @@
     <li><a href="#get_all_pkg_infos">获取所有离线包的基本信息用于客户端下载页面展示</a></li>
     <li><a href="#get_latest_file_name">获取最新离线包的下载文件名</a></li>
     <li><a href="#download_ios">下载iOS包</a></li>
+    <li><a href="#fights">获取所有PK简略信息</a></li>
+    <li><a href="#fight">获取单个PK详细信息</a></li>
   </ol>
 </div>
 
@@ -650,4 +652,36 @@
     <p><b>示例：</b> <%= d_admin_downloads_url(:plist => "trip_map_1.2.1.plist") %></p>
   </div>
 
+<div id="fights" class="api well">
+    <% param_item_cnt = 0 %>
+    <h3 class="name">API<%= api_cnt += 1 %></h3>
+    <small class="desc">获取所有的PK信息，结果为JSON数据格式。</small>
+    <dl>
+      <dt>URL</dt>
+      <dd><pre class="docs-example"><%= api_v1_fights_url(:format => :json) %></pre></dd>
+      <dt>HTTP请求方式</dt><dd>GET<dd><dt>支持格式</dt><dd>json<dd><dt>是否需要登录</dt><dd>否<dd><dt>请求参数</dt><dd>无<dd>
+    </dl>
+  </div>
+
+  <div id="fight" class="api well">
+    <% param_item_cnt = 0 %>
+    <h3 class="name">API<%= api_cnt += 1 %></h3>
+    <small class="desc">获取单个PK详细信息</small>
+    <dl>
+      <dt>URL</dt>
+      <dd><pre class="docs-example"><%= api_v1_fight_url(:slug, :format => :json) %></pre></dd>
+      <dt>HTTP请求方式</dt><dd>GET<dd><dt>支持格式</dt><dd>json<dd><dt>是否需要登录</dt><dd>否<dd><dt>请求参数</dt>
+      <dd>
+        <table class="table table-bordered">
+          <thead><tr><th>#</th><th>名字</th> <th>类型</th><th>类别</th><th>说明</th></tr></thead>
+          <tbody>
+            <tr><td><%= param_item_cnt += 1 %></td><td>slug</td><td>字符串</td><td>必选参数</td><td>PK简码</td></tr>
+          </tbody>
+        </table>
+      <dd>
+      <dt>例子</dt>
+      <dd><%= api_v1_fight_url(:id => "aaa", :format => :json) %><dd>
+    </dl>
+  </div>
+  
 </div>
