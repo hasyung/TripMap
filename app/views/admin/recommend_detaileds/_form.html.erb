@@ -1,19 +1,26 @@
-<%= simple_form_for @detailed, 
+<%= simple_form_for @detailed,
                     html: { class: 'form-horizontal' },
-                    url: @detailed.new_record? ? 
-                         admin_recommend_record_detaileds_path(
-                            params[:recommend_id], 
-                            params[:record_id]) :
-                         admin_recommend_record_detailed_path(
-                            params[:recommend_id],
-                            params[:record_id],
-                            @detailed)  do |d| %>
+                    url: @detailed.new_record? ?
+                         admin_recommend_record_detaileds_path(params[:recommend_id], params[:record_id]) :
+                         admin_recommend_record_detailed_path(params[:recommend_id], params[:record_id], @detailed)  do |d| %>
   <%= d.input :name %>
-  <%= d.input :order %>
+
+  <%= d.fields_for :recommend_detailed_item_cover, @detailed.recommend_detailed_item_cover ||= @detailed.build_recommend_detailed_item_cover do |c|%>
+    <%= c.input :file, as: :file %>
+
+    <% if @detailed.recommend_detailed_item_cover && @detailed.recommend_detailed_item_cover.file.present? %>
+      <div class="control-group image">
+        <div class="controls">
+          <%= image_tag @detailed.recommend_detailed_item_cover.file %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+
   <% if @recommend.category_cd == 2 %>
-    <%= d.fields_for :recommend_detailed_cover, 
-                     @detailed.recommend_detailed_cover ||= @detailed.build_recommend_detailed_cover  do |c|%>
+    <%= d.fields_for :recommend_detailed_cover, @detailed.recommend_detailed_cover ||= @detailed.build_recommend_detailed_cover do |c|%>
       <%= c.input :file, as: :file %>
+
       <% if @detailed.recommend_detailed_cover && @detailed.recommend_detailed_cover.file.present? %>
         <div class="control-group image">
           <div class="controls">
@@ -23,6 +30,9 @@
       <% end %>
     <% end %>
   <% end %>
+
+  <%= d.input :order %>
+
   <div class="form-actions">
     <%= d.button :submit, :class => 'btn-primary' %>
   </div>

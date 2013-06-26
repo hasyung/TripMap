@@ -14,7 +14,7 @@ class TripMapObserver < ActiveRecord::Observer
 
           :image_list, :audio_list_item, :first_known_list_item,              # Level 3.
 
-          :audio, :video, :image, :letter                           # Atom.
+          :audio, :video, :image, :letter                                     # Atom.
 
   NAV_PATH_OPTIONS = {
     # class name           path to map

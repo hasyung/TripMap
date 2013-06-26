@@ -1,6 +1,6 @@
 class Admin::MinoritiesController < Admin::ApplicationController
   before_filter :find_parent_model
-  
+
   def index
     @minorities = @parent.minorities.page(params[:page]).per(Setting.page_size).created_desc
 
@@ -47,14 +47,14 @@ class Admin::MinoritiesController < Admin::ApplicationController
       redirect_to @path, alert: t('messages.minorities.error')
     end
   end
-  
+
   def show
     add_breadcrumb :show
     @model = Minority.find params[:id]
     @slides = @model.minority_slides.order_asc
     @feels = @model.minority_feels.order_asc
   end
-  
+
   private
   def find_parent_model
     if !params[:special_id].blank?

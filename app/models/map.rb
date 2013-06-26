@@ -3,6 +3,7 @@ require 'app/common'
 class Map < ActiveRecord::Base
   include SerialNumber::Generate
   include App::Model
+  include App::Common
 
   #White list
   attr_accessible :province, :province_id, :name, :map_slug_attributes, :version,
@@ -72,7 +73,7 @@ class Map < ActiveRecord::Base
       slides:                 get_map_slides(),
       scenics:                get_scenics(),
       places:                 get_places(),
-      recommends:             get_recommends(),
+      recommends:             get_recommends_ext,
       info_lists:             get_info_lists(),
       panel_videos:           get_panel_videos(),
       broadcasts:             get_broadcasts(),
@@ -110,6 +111,50 @@ class Map < ActiveRecord::Base
     recommends = []
     self.recommends.each{ |o| recommends << get_map_recommend_values(o) } if self.recommends_count > 0
     recommends
+  end
+
+  def get_recommends_ext()
+    ret = []
+
+    self.recommends.each do|c|
+      h_c, l_cc = o_to_h(c, ['map', 'map_id', 'version'], nil, {:category_cd => "category"}), []
+
+      c.recommend_records.order_asc.each do |cc|
+        h_cc, l_ccc = o_to_h(cc, ['recommend', 'recommend_id']), []
+
+        cc.recommend_detaileds.order_asc.each do |ccc|
+          h_cccc, l_cccc = o_to_h(ccc, ['recommend_record_id']), []
+          images, videos, audios, texts, infos, image_lists = [], [], [], [], [], []
+          all_avi = ccc.videos | ccc.audios | ccc.image_lists | ccc.detailed_images | ccc.detailed_texts | ccc.detailed_infos
+          all_avi = all_avi.sort {|a,b| a[:order] <=> b[:order] }
+
+          all_avi.each do |e|
+            ilist_imgs = {}
+            case e.class.name.to_s
+            when I then images << o_to_h(e)
+            when A then audios << o_to_h(e)
+            when V then videos << o_to_h(e)
+            when T
+               texts << o_to_h(e) if e.text_type == Letter.detailed_text
+               infos << o_to_h(e) if e.text_type == Letter.detailed_info
+            when IL
+              curr_imglist_imgs = []
+              e.images.each{|il| curr_imglist_imgs << o_to_h(il, ['file_size', 'order'], nil, {:file => "image"}) }
+              ilist_imgs[:images] = curr_imglist_imgs; image_lists << ilist_imgs
+            end
+          end
+
+          h_cccc[:images] = images; h_cccc[:videos]      = videos
+          h_cccc[:audios] = audios; h_cccc[:texts]       = texts
+          h_cccc[:infos]  = infos;  h_cccc[:image_lists] = image_lists
+          l_ccc << h_cccc
+        end
+        h_cc[:detaileds] = l_ccc; l_cc << h_cc
+      end
+      h_c[:records] = l_cc; ret << h_c
+    end
+
+    ret
   end
 
   def get_info_lists()
@@ -186,6 +231,7 @@ class Map < ActiveRecord::Base
     slides
   end
 
+=begin
   def get_map_recommend_values recommend
     records ||= []
     if recommend.recommend_records.present?
@@ -268,6 +314,7 @@ class Map < ActiveRecord::Base
       records:                records
     }
   end
+=end
 
   def get_panel_videos
     ret = []
@@ -277,13 +324,15 @@ class Map < ActiveRecord::Base
 
   def get_broadcasts
     ret = []
+
     self.broadcasts.each do|c|
-      h_c = o_to_h(c, ['map_id', 'version'])
-      l_cc = []
+      h_c, l_cc = o_to_h(c, ['map_id', 'version']), []
+
       c.children_broadcasts.order_asc.each{|cc| l_cc << o_to_h(cc, ['broadcast_id']) }
       h_c[:children_broadcasts] = l_cc
       ret << h_c
     end
+
     ret
   end
 
@@ -341,37 +390,37 @@ class Map < ActiveRecord::Base
 
   def get_audio_list_categories
     ret = []
+
     self.audio_list_categories.each do|c|
-      h_c = o_to_h(c, ['map_id', 'version'])
-      l_cc = []
+      h_c, l_cc = o_to_h(c, ['map_id', 'version']), []
+
       c.audio_lists.order_asc.each do |cc|
-        h_cc = o_to_h(cc, ['audio_list_category_id'])
-        l_ccc = []
+        h_cc, l_ccc = o_to_h(cc, ['audio_list_category_id']), []
         cc.audio_list_items.order_asc.each{|ccc| l_ccc << o_to_h(ccc, ['audio_list_id']) }
-        h_cc[:audio_list_items] = l_ccc
-        l_cc << h_cc
+        h_cc[:audio_list_items] = l_ccc; l_cc << h_cc
       end
-      h_c[:audio_lists] = l_cc
-      ret << h_c
+
+      h_c[:audio_lists] = l_cc; ret << h_c
     end
+
     ret
   end
 
   def get_first_known
     ret = []
+
     self.first_knowns.each do|c|
-      h_c = o_to_h(c, ['map_id', 'version'])
-      l_cc = []
+      h_c, l_cc = o_to_h(c, ['map_id', 'version']), []
+
       c.first_known_lists.order_asc.each do |cc|
-        h_cc = o_to_h(cc, ['first_known_id'])
-        l_ccc = []
+        h_cc, l_ccc = o_to_h(cc, ['first_known_id']), []
         cc.first_known_list_items.order_asc.each{|ccc| l_ccc << o_to_h(ccc, ['first_known_list_id']) }
-        h_cc[:first_known_list_items] = l_ccc
-        l_cc << h_cc
+        h_cc[:first_known_list_items] = l_ccc; l_cc << h_cc
       end
-      h_c[:first_known_lists] = l_cc
-      ret << h_c
+
+      h_c[:first_known_lists] = l_cc; ret << h_c
     end
+
     ret
   end
 

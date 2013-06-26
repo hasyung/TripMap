@@ -9,7 +9,7 @@ class Recommend < ActiveRecord::Base
   belongs_to :map, :counter_cache => true
 
   with_options :as => :videoable, :class_name => "Video", :dependent => :destroy do |assoc|
-    assoc.has_one :recommend_video,     :conditions => { :video_type => Video.recommend_video }
+    assoc.has_one :recommend_video, :conditions => { :video_type => Video.recommend_video }
   end
 
   with_options :as => :imageable, :class_name => "Image", :dependent => :destroy do |assoc|
@@ -19,7 +19,7 @@ class Recommend < ActiveRecord::Base
   end
 
   with_options :as => :keywordable, :class_name => "Keyword", :dependent => :destroy do |assoc|
-    assoc.has_one :recommend_slug,      :conditions => { :keyword_type => Keyword.recommend_slug }
+    assoc.has_one :recommend_slug, :conditions => { :keyword_type => Keyword.recommend_slug }
   end
 
   has_many :recommend_records, :dependent => :destroy

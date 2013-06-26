@@ -84,6 +84,8 @@ class Image < ActiveRecord::Base
     :fight_slug_icon                             => 43,
 
     :first_known_cover                           => 44,
+
+    :recommend_detailed_item_cover               => 45,
   },
   :column => "image_type"
 

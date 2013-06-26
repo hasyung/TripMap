@@ -898,6 +898,8 @@
       recommend_detailed:
         recommend_detailed_cover:
           file: "封面"
+        recommend_detailed_item_cover:
+          file: "推荐详情九宫格封面"
       share:
         share_image:
           file: "分享图片"
