@@ -669,6 +669,7 @@
         special: "特色"
         county: "区县"
         city: "省市"
+        privilege: "优惠信息"
       info_list:
         map: "地图"
         name: "名称"

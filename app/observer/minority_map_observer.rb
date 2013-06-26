@@ -1,5 +1,5 @@
 class MinorityMapObserver < ActiveRecord::Observer
-  observe :minority_slide, :minority_feel
+  observe :minority_slide, :minority_feel, :image
 
   def after_save( model )
     update_map_version(model)
@@ -23,7 +23,13 @@ class MinorityMapObserver < ActiveRecord::Observer
 
   def get_map( model )
     map = nil
-    poliable = model.minority
+    if model.class.to_s != "Image"
+      poliable = model.minority
+    elsif model.imageable_type == "MinorityFeel"
+      image = model.imageable_type.constantize.find(model.imageable_id)
+      poliable = image.minority
+    end
+    return map if poliable.blank?
     ploy_type, ploy_type_id = "minorityable_type", "minorityable_id"
     ploy_object = poliable.send(ploy_type).constantize.find poliable.send(ploy_type_id)
 

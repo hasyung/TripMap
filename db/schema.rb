@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130624093601) do
+ActiveRecord::Schema.define(:version => 20130626054353) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",                                :default => "", :null => false
@@ -343,6 +343,7 @@ ActiveRecord::Schema.define(:version => 20130624093601) do
     t.string   "phone",       :limit => 12,                :null => false
     t.string   "shop_hour",   :limit => 20
     t.string   "expence",     :limit => 20
+    t.string   "privilege"
     t.string   "special"
     t.text     "description"
     t.datetime "created_at",                               :null => false

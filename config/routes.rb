@@ -214,6 +214,7 @@ TripMap::Application.routes.draw do
       end
 
       resources :merchants, only: [:index, :show]
+      resources :fights, only: [:index, :show]
 
       resources :devices, only: [:index] do
         post '/validate' => 'devices#validate', :on => :collection
