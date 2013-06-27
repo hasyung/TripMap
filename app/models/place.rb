@@ -1,10 +1,11 @@
 class Place < ActiveRecord::Base
 
+  attr_accessor :slug
   # White list
   attr_accessible :map, :map_id, :name, :subtitle, :is_free, :menu_type,
                   :place_icon_attributes, :place_slug_icon_attributes, :place_image_attributes,
                   :place_description_image_attributes, :place_video_attributes, :place_audio_attributes,
-                  :place_description_attributes, :place_slug_attributes, :place_slides_attributes
+                  :place_description_attributes, :slug, :place_slides_attributes
 
   # Associations
   belongs_to :map, :counter_cache => true
@@ -27,7 +28,7 @@ class Place < ActiveRecord::Base
   end
 
   with_options :as => :keywordable, :class_name => 'Keyword', :dependent => :destroy do|assoc|
-    assoc.has_one :place_slug,                :conditions => { :keyword_type => Keyword.place_slug }
+    assoc.has_many :place_slugs,                :conditions => { :keyword_type => Keyword.place_slugs }
   end
 
   # Validates
@@ -45,7 +46,6 @@ class Place < ActiveRecord::Base
   accepts_nested_attributes_for :place_audio,             reject_if: ->(attr){ attr[:file].blank? && attr[:id].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :place_video,             reject_if: ->(attr){ attr[:file].blank? && attr[:id].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :place_description,       :allow_destroy => true
-  accepts_nested_attributes_for :place_slug,              :allow_destroy => true
   accepts_nested_attributes_for :place_slides,            :allow_destroy => true
 
   # Scopes

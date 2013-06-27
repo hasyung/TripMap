@@ -25,7 +25,7 @@
         <tr>
           <td><%= check_box_tag "minority_ids[]", p.id, false, id: "minority_#{p.id}" %></td>
           <td><%= link_to p.name, get_delete_polymorphic_path(@parent, p.id) %></td>
-          <td><%= p.minority_slug.slug %></td>
+          <td><%= Keyword.get_slug(p.minority_slugs) %></td>
           <td><%= p.is_free %></td>
           <td><%= p.menu_type %></td>
           <td class="action">

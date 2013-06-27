@@ -4,8 +4,10 @@ class Map < ActiveRecord::Base
   include SerialNumber::Generate
   include App::Model
 
+  attr_accessor :slug
+  
   #White list
-  attr_accessible :province, :province_id, :name, :map_slug_attributes, :version,
+  attr_accessible :province, :province_id, :name, :slug, :version,
                   :map_description_attributes, :map_cover_attributes, :map_plat_attributes, :map_weather_bg_image_attributes
 
   # Associations
@@ -39,7 +41,7 @@ class Map < ActiveRecord::Base
   end
 
   with_options :as => :keywordable, :class_name => "Keyword", :dependent => :destroy do |assoc|
-    assoc.has_one :map_slug,              :conditions => { :keyword_type => Keyword.map_slug }
+    assoc.has_many :map_slugs,              :conditions => { :keyword_type => Keyword.map_slugs }
   end
 
   has_many :map_serial_numbers
@@ -55,7 +57,6 @@ class Map < ActiveRecord::Base
   accepts_nested_attributes_for :map_plat,             reject_if: lambda { |img| img[:file].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :map_weather_bg_image, reject_if: lambda { |img| img[:file].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :map_description,      :allow_destroy => true
-  accepts_nested_attributes_for :map_slug,             :allow_destroy => true
 
   # Scopes
   scope :created_desc, order("created_at DESC")
@@ -81,7 +82,7 @@ class Map < ActiveRecord::Base
       first_known:            get_first_known()
     }
   end
-
+  
   private
 
   def after_destroy

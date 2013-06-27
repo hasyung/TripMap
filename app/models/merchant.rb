@@ -1,10 +1,10 @@
 class Merchant < ActiveRecord::Base
 
-  attr_accessor :city
+  attr_accessor :city, :slug
 
   # White list
   attr_accessible :name, :title, :conuty, :county_id, :address, :phone, :shop_hour, :expence, :special, :description, :tag, :type_cd, :city,
-                  :merchant_slug_attributes, :merchant_image_attributes, :merchant_horizontal_image_attributes, :merchant_video_attributes,
+                  :slug, :merchant_image_attributes, :merchant_horizontal_image_attributes, :merchant_video_attributes,
                   :privilege
 
   #SimpleEnum
@@ -14,7 +14,7 @@ class Merchant < ActiveRecord::Base
   belongs_to :county, :counter_cache => true
 
   with_options :as => :keywordable, :class_name => "Keyword", :dependent => :destroy do|assoc|
-    assoc.has_one  :merchant_slug,    :conditions => { :keyword_type => Keyword.merchant_slug }
+    assoc.has_many  :merchant_slugs,    :conditions => { :keyword_type => Keyword.merchant_slugs }
   end
 
   with_options :as => :videoable, :class_name => "Video", :dependent => :destroy do |assoc|
@@ -43,7 +43,6 @@ class Merchant < ActiveRecord::Base
   validates :privilege,   :length => { :within => 0..300 }
 
   # Nested attributes validates
-  accepts_nested_attributes_for :merchant_slug,  :allow_destroy => true
   accepts_nested_attributes_for :merchant_image,            reject_if: ->(attr){ attr[:file].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :merchant_horizontal_image, reject_if: ->(attr){ attr[:file].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :merchant_video,            reject_if: ->(attr){ (attr[:cover].blank? && attr[:id].blank?) }, :allow_destroy => true

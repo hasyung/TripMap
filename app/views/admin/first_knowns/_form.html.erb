@@ -4,9 +4,7 @@
 
   <%= m.input :name %>
 
-  <%= m.fields_for :first_known_slug, @model.first_known_slug ||= @model.build_first_known_slug do |s|  %>
-    <%= s.input :slug, :input_html => { :class => "span-full" } %>
-  <% end %>
+  <%= m.input :slug %>
 
   <%= m.fields_for :first_known_slug_cover, @model.first_known_slug_cover ||= @model.build_first_known_slug_cover do |img|  %>  
     <%= img.input :file, :as => :file %>

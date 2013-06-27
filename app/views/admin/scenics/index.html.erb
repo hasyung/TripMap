@@ -31,7 +31,7 @@
             <%= check_box_tag "scenics_ids[]", s.id, false, id: "scenics_#{s.id}" %>
           </td>
           <td><%= s.name %></td>
-          <td><%= s.scenic_slug.slug %></td>
+          <td><%= Keyword.get_slug(s.scenic_slugs) %></td>
           <td><%= s.map.province.name %></td>
           <td><%= s.map.name %></td>
           <td><%= s.is_free %></td>

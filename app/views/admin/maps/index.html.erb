@@ -28,7 +28,7 @@
             <td><%= check_box_tag "map_ids[]", map.id, false, :id => "map_#{map.id}" %></td>
             <td><%= map.name %></td>
             <td><%= map.province.name %></td>
-            <td><%= map.map_slug.slug %></td>
+            <td><%= Keyword.get_slug(map.map_slugs) %></td>
             <td><%= map.version %></td>
             <td><%= map.scenics_count %></td>
             <td><%= map.places_count %></td>

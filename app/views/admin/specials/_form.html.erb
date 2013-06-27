@@ -1,8 +1,6 @@
 <%= simple_form_for [:admin, @special], html: { class: 'form-horizontal' } do |r| %>
   <%= r.input :name %>
- <%= r.fields_for :special_slug, @special.special_slug ||= @special.build_special_slug do |s|  %>  
-    <%= s.input :slug, :input_html => { :class => "span-full" } %>
-  <% end %>
+  <%= r.input :slug %>
   <%= r.fields_for :special_slug_icon, @special.special_slug_icon ||= @special.build_special_slug_icon do |ricon| %>
     <%= ricon.input :file, as: :file %>
     <% if @special.special_slug_icon && @special.special_slug_icon.file.present? %>

@@ -14,6 +14,7 @@ class Admin::InfosController < Admin::ApplicationController
   def create
     @info = Info.new params[:info]
     if @info.save
+      set_slug(params[:info][:slug], @info.info_slugs)
       redirect_to admin_info_list_infos_path, :notice => t('messages.infos.success')
     else
       render :new
@@ -23,12 +24,13 @@ class Admin::InfosController < Admin::ApplicationController
 
   def edit
     @info = Info.find params[:id]
+    @info.slug = Keyword.get_slug(@info.info_slugs)
     add_breadcrumb :edit
   end
 
   def update
     @info = Info.find params[:id]
-
+    set_slug(params[:info][:slug], @info.info_slugs)
     if @info.update_attributes params[:info]
       redirect_to admin_info_list_infos_path(@info.info_list_id), :notice => t('messages.infos.success')
     else

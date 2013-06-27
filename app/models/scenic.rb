@@ -1,8 +1,9 @@
 class Scenic < ActiveRecord::Base
 
+  attr_accessor :slug
   # White list
   attr_accessible :map, :map_id, :name, :subtitle, :is_free, :menu_type,
-                  :scenic_slug_attributes, :scenic_impression_attributes,
+                  :slug, :scenic_impression_attributes,
                   :scenic_route_attributes, :scenic_icon_attributes, :scenic_slug_icon_attributes,
                   :scenic_image_attributes, :scenic_description_attributes, :scenic_description_image_attributes,
                   :scenic_slides_attributes
@@ -15,7 +16,7 @@ class Scenic < ActiveRecord::Base
   end
 
   with_options :as => :keywordable, :class_name => 'Keyword', :dependent => :destroy do |assoc|
-    assoc.has_one :scenic_slug,               :conditions => { :keyword_type => Keyword.scenic_slug }
+    assoc.has_many :scenic_slugs,               :conditions => { :keyword_type => Keyword.scenic_slugs }
   end
 
   with_options :as => :videoable, :class_name => "Video", :dependent => :destroy do |assoc|
@@ -46,7 +47,6 @@ class Scenic < ActiveRecord::Base
   accepts_nested_attributes_for :scenic_image,             reject_if: ->(attr){ attr[:file].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :scenic_description,                                                  :allow_destroy => true
   accepts_nested_attributes_for :scenic_description_image, reject_if: ->(attr){ attr[:file].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :scenic_slug,                                                         :allow_destroy => true
 
   # Scopes
   scope :created_desc, order("`created_at` DESC")

@@ -1,9 +1,10 @@
 class Info < ActiveRecord::Base
   include ActiveModel::Validations
 
+  attr_accessor :slug
   # White list
   attr_accessible :info_list_id, :name, :slug, :order, :is_free,
-                  :letter_attributes, :info_slug_attributes
+                  :letter_attributes, :slug
 
   # Associations
   belongs_to :info_list, :counter_cache => true
@@ -11,7 +12,7 @@ class Info < ActiveRecord::Base
   has_one :letter, :as => :textable, :dependent => :destroy
 
   with_options :as => :keywordable, :class_name => 'Keyword', :dependent => :destroy do|assoc|
-    assoc.has_one :info_slug, :conditions => { :keyword_type => Keyword.info_slug }
+    assoc.has_many :info_slugs, :conditions => { :keyword_type => Keyword.info_slugs }
   end
 
   # Validates
@@ -25,7 +26,6 @@ class Info < ActiveRecord::Base
 
   # Nested attributes validates
   accepts_nested_attributes_for :letter, reject_if: ->(attr){ attr[:body].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :info_slug,                                         :allow_destroy => true
 
   # Scopes
   scope :order_asc,    order("`order` ASC")

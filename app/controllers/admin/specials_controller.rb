@@ -15,6 +15,7 @@ class Admin::SpecialsController < Admin::ApplicationController
   def create
     @special = Special.new params[:special]
     if @special.save
+      set_slug(params[:special][:slug], @special.special_slugs)
       redirect_to admin_specials_path, notice: t('messages.specials.success')
     else 
       render :new
@@ -24,11 +25,13 @@ class Admin::SpecialsController < Admin::ApplicationController
   def edit
     add_breadcrumb :edit
     @special = Special.find params[:id]
+    @special.slug = Keyword.get_slug(@special.special_slugs)
   end
 
   def update
     add_breadcrumb :edit
     @special = Special.find params[:id]
+    set_slug(params[:special][:slug], @special.special_slugs)
     if @special.update_attributes params[:special]
       redirect_to admin_specials_path, notice: t('messages.specials.success')
     else

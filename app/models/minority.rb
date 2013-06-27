@@ -1,8 +1,9 @@
 class Minority < ActiveRecord::Base
 
+  attr_accessor :slug
   # White list
   attr_accessible :name, :is_free, :menu_type, :minorityable_id, :minorityable_type, :order,
-                  :minority_icon_attributes, :minority_slug_icon_attributes, :minority_slug_attributes,
+                  :minority_icon_attributes, :minority_slug_icon_attributes, :slug,
                   :minority_description_attributes, :minority_video_attributes
 
   # Associations
@@ -17,7 +18,7 @@ class Minority < ActiveRecord::Base
   end
 
   with_options :as => :keywordable, :class_name => 'Keyword', :dependent => :destroy do|assoc|
-    assoc.has_one :minority_slug,        :conditions => { :keyword_type => Keyword.minority_slug }
+    assoc.has_many :minority_slugs,        :conditions => { :keyword_type => Keyword.minority_slugs }
   end
 
   with_options :dependent => :destroy do |assoc|
@@ -40,7 +41,6 @@ class Minority < ActiveRecord::Base
   # Nested attributes validates
   accepts_nested_attributes_for :minority_icon,        reject_if: ->(attr){ attr[:file].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :minority_slug_icon,   reject_if: ->(attr){ attr[:file].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :minority_slug,                                                   :allow_destroy => true
   accepts_nested_attributes_for :minority_description,                                            :allow_destroy => true 
   accepts_nested_attributes_for :minority_video,       reject_if: ->(attr){ attr[:file].blank? && attr[:id].blank? }, :allow_destroy => true
 

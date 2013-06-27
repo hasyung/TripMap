@@ -1,8 +1,8 @@
 class Fight < ActiveRecord::Base
-  attr_accessor :city
+  attr_accessor :city, :slug
   # White list
-  attr_accessible :name, :county_id, :county, :city,
-                  :fight_icon_attributes, :fight_slug_icon_attributes, :fight_slug_attributes, :fight_video_attributes
+  attr_accessible :name, :county_id, :county, :city, :slug,
+                  :fight_icon_attributes, :fight_slug_icon_attributes, :fight_video_attributes
 
   # Associations
   belongs_to :county
@@ -16,7 +16,7 @@ class Fight < ActiveRecord::Base
   end
 
   with_options :as => :keywordable, :class_name => 'Keyword', :dependent => :destroy do|assoc|
-    assoc.has_one :fight_slug,       :conditions => { :keyword_type => Keyword.fight_slug }
+    assoc.has_many :fight_slugs,       :conditions => { :keyword_type => Keyword.fight_slugs }
   end
 
   with_options :as => :videoable, :class_name => "Video", :dependent => :destroy do |assoc|
@@ -32,7 +32,6 @@ class Fight < ActiveRecord::Base
   # Nested attributes validates
   accepts_nested_attributes_for :fight_icon,      reject_if: ->(attr){ attr[:file].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :fight_slug_icon, reject_if: ->(attr){ attr[:file].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :fight_slug,                                                 :allow_destroy => true
   accepts_nested_attributes_for :fight_video,     reject_if: ->(attr){ (attr[:cover].blank? && attr[:id].blank?) }, :allow_destroy => true
 
   # Scopes

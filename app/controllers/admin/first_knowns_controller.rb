@@ -16,6 +16,7 @@ class Admin::FirstKnownsController < Admin::ApplicationController
     add_breadcrumb :new
     @model = FirstKnown.new params[:first_known]
     if @model.save
+      set_slug(params[:first_known][:slug], @model.first_known_slugs)
       redirect_to admin_first_knowns_path, notice: t('messages.commons.success')
     else
       render :new
@@ -24,6 +25,7 @@ class Admin::FirstKnownsController < Admin::ApplicationController
 
   def edit
     @model = FirstKnown.find params[:id]
+    @model.slug = Keyword.get_slug(@model.first_known_slugs)
     @images = @model.first_known_slides.order_asc
     add_breadcrumb :edit
   end
@@ -31,6 +33,7 @@ class Admin::FirstKnownsController < Admin::ApplicationController
   def update
     add_breadcrumb :edit
     @model = FirstKnown.find params[:id]
+    set_slug(params[:first_known][:slug], @model.first_known_slugs)
     if @model.update_attributes params[:first_known]
       redirect_to admin_first_knowns_path, notice: t('messages.commons.success')
     else

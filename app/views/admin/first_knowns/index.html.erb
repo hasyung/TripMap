@@ -25,7 +25,7 @@
             <td><%= check_box_tag "first_known_ids[]", m.id, false, id: "first_known_#{m.id}" %></td>
             <td><%= m.map.name %></td>
             <td><%= link_to(m.name, admin_first_known_first_known_lists_path(m)) %></td>
-            <td><%= m.first_known_slug.slug unless m.first_known_slug.blank? %></td>
+            <td><%= Keyword.get_slug(m.first_known_slugs) %></td>
             <td><%= image_tag m.first_known_slug_cover.file, :size => "35x35" unless m.first_known_slug_cover.blank? %></td>
             <td class="action">
               <%= link_to raw("<i class=\"icon-edit\"></i>"), edit_admin_first_known_path(m), title: t('links.panel_videos.edit') %>

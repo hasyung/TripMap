@@ -1,8 +1,6 @@
 <%= simple_form_for [:admin,@model], url: get_minority_form_url(@model, @parent) do |p| %>
   <%= p.input :name %>
- <%= p.fields_for :minority_slug, @model.minority_slug ||= @model.build_minority_slug do |s|  %>  
-    <%= s.input :slug, :input_html => { :class => "span-full" } %>
-  <% end %>
+  <%= p.input :slug %>
   <%= p.input :is_free %>
   <%= p.input :menu_type %>
   <%= p.input :order %>
