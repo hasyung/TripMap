@@ -3,8 +3,9 @@ class Minority < ActiveRecord::Base
   attr_accessor :slug
   # White list
   attr_accessible :name, :is_free, :menu_type, :minorityable_id, :minorityable_type, :order, :slug,
-                  :minority_icon_attributes, :minority_slug_icon_attributes, :minority_slug_attributes,
-                  :minority_description_attributes, :minority_video_attributes, :minority_slides_cover_attributes
+                  :minority_icon_attributes, :minority_slug_icon_attributes,
+                  :minority_description_attributes, :minority_video_attributes,
+                  :minority_slides_cover_attributes
 
   # Associations
   belongs_to :minorityable,    :polymorphic => true

@@ -5,7 +5,7 @@ class Place < ActiveRecord::Base
   attr_accessible :map, :map_id, :name, :subtitle, :is_free, :menu_type, :slug,
                   :place_icon_attributes, :place_slug_icon_attributes, :place_image_attributes,
                   :place_description_image_attributes, :place_video_attributes, :place_audio_attributes,
-                  :place_description_attributes, :place_slug_attributes, :place_slides_attributes,
+                  :place_description_attributes, :place_slides_attributes,
                   :place_slides_cover_attributes
 
   # Associations

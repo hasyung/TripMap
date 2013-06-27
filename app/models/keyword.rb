@@ -40,14 +40,9 @@ class Keyword < ActiveRecord::Base
     :fight_slugs                => 13,
   },
   :column => "keyword_type"
-  
-  
-  
+
   def self.get_slug(all_slug)
-    slugs = all_slug.map(&:slug)
-    slug = ""
-    slugs.each{|s| slug += slug == "" ? s : ";" + s}
-    slug
+    all_slug.map(&:slug).join(";")
   end
 
 end

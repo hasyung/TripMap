@@ -1,14 +1,6 @@
 <%= simple_form_for [:admin,@model], html: { class: 'form-horizontal' } do |p| %>
   <%= p.input :name %>
-<<<<<<< HEAD
-
-  <%= p.fields_for :place_slug, @model.place_slug ||= @model.build_place_slug do |s|  %>  
-    <%= s.input :slug, :input_html => { :class => "span-full" } %>
-  <% end %>
-
-=======
   <%= p.input :slug %>
->>>>>>> 75dcf09d7cac0ab06dc05bf841465f540f2c70ce
   <%= p.input :is_free %>
   <%= p.input :menu_type %>
   <%= p.input :subtitle %>

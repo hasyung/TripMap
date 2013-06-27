@@ -3,7 +3,7 @@ class Broadcast < ActiveRecord::Base
   attr_accessor :slug
   # White list
   attr_accessible :map_id, :name, :is_free, :menu_type, :slug,
-                  :broadcast_slug_attributes, :broadcast_slug_cover_attributes
+                  :broadcast_slug_cover_attributes
 
   # Associations
   belongs_to :map

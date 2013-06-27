@@ -24,11 +24,10 @@
       </thead>
       <tbody>
       <% @scenics.each do |s| %>
-<<<<<<< HEAD
           <tr>
             <td><%= check_box_tag "scenics_ids[]", s.id, false, id: "scenics_#{s.id}" %></td>
             <td><%= s.name %></td>
-            <td><%= s.scenic_slug.slug %></td>
+            <td><%= Keyword.get_slug(s.scenic_slugs) %></td>
             <td><%= s.map.province.name %></td>
             <td><%= s.map.name %></td>
             <td><%= s.is_free %></td>
@@ -41,29 +40,6 @@
             </td>
           </tr>
         <% end %>
-=======
-        <tr>
-          <td>
-            <%= check_box_tag "scenics_ids[]", s.id, false, id: "scenics_#{s.id}" %>
-          </td>
-          <td><%= s.name %></td>
-          <td><%= Keyword.get_slug(s.scenic_slugs) %></td>
-          <td><%= s.map.province.name %></td>
-          <td><%= s.map.name %></td>
-          <td><%= s.is_free %></td>
-          <td><%= s.menu_type %></td>
-          <td class="action">
-            <%= link_to raw("<i class=\"icon-edit\"></i>"), 
-                        edit_admin_scenic_path(s),
-                        title: t('links.places.edit') %>
-            <%= link_to raw("<i class=\"icon-trash\"></i>"),
-                        admin_scenic_path(s), 
-                        method: :delete, data: {confirm: t('links.commons.confirm')} %>
-          </td>
-        </tr>
-      <% end %>
-      <% end %>
->>>>>>> 75dcf09d7cac0ab06dc05bf841465f540f2c70ce
       </tbody>
     </table>
   </div>

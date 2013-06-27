@@ -604,6 +604,7 @@
         is_free: "免费"
         menu_type: "菜单标注"
         place_slides_cover: "图集封面"
+        slug: "简码（多个以英文分号隔开）"
       scenic:
         name: "名称"
         scenic_slug: "简码"
@@ -613,6 +614,7 @@
         is_free: "免费"
         menu_type: "菜单标注"
         scenic_slides_cover: "图集封面"
+        slug: "简码（多个以英文分号隔开）"
       recommend:
         name: "名称"
         recommend_slug: "简码"
@@ -622,6 +624,7 @@
         recommend_records_count: "推荐记录"
         is_free: "免费"
         menu_type: "菜单标注"
+        slug: "简码（多个以英文分号隔开）"
       recommend_record:  
         name: "名称"      
         recommend: "推荐名称"
@@ -680,6 +683,7 @@
         order: "排序"
         infos_count: "子信息条数"
         is_free: "免费"
+        slug: "简码（多个以英文分号隔开）"
       info:
         info_list: "信息列表"
         name: "名称"
@@ -754,6 +758,7 @@
         name: "视频名称"
         panel_video_slug: "简码"
         panel_video_slug_cover: "简码小图片"
+        slug: "简码（多个以英文分号隔开）"
       broadcast:
         map: "所属地图"
         name: "儿童广播剧名称"
@@ -761,6 +766,7 @@
         menu_type: "菜单标注"
         broadcast_slug: "简码"
         broadcast_slug_cover: "简码封面"
+        slug: "简码（多个以英文分号隔开）"
       children_broadcast:
         broadcast: "所属广播剧"
         name: "儿童广播剧名称"
@@ -777,6 +783,7 @@
         special_slug: "简码"
         is_free: "免费"
         menu_type: "菜单标注"
+        slug: "简码（多个以英文分号隔开）"
       minority:
         name: "名称"
         minority_slug: "简码"
@@ -802,6 +809,7 @@
         menu_type: "菜单标注"
         audio_list_category_slug: "简码"
         audio_list_category_slug_cover: "简码封面"
+        slug: "简码（多个以英文分号隔开）"
       audio_list:
         audio_list_category: "所属音频列表分类"
         name: "音频列表名称"
@@ -826,6 +834,7 @@
         first_known_slug: "简码"
         first_known_slug_cover: "简码封面"
         first_known_cover: "先知道封面"
+        slug: "简码（多个以英文分号隔开）"
       first_known_list:
         first_known: "所属于先知道"
         title_cn: "中文标题"

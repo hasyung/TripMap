@@ -6,7 +6,7 @@ class Map < ActiveRecord::Base
   include App::Common
 
   attr_accessor :slug
-  
+
   #White list
   attr_accessible :province, :province_id, :name, :slug, :version,
                   :map_description_attributes, :map_cover_attributes, :map_plat_attributes, :map_weather_bg_image_attributes
@@ -161,12 +161,13 @@ class Map < ActiveRecord::Base
   def get_info_lists()
     ret = []
     self.info_lists.order_asc.each do |info_list|
+      r_h = {}
       info_list.info_list_slugs.each do |s|
-        r = {
-        info_list_slug:       s.slug,
-        info_list_is_free:    info_list.is_free.to_s,
-        slug_icon:            get_file_value(info_list.infolist_slug_icon, "file", true),
-            }
+        r_h = {
+          info_list_slug:       s.slug,
+          info_list_is_free:    info_list.is_free.to_s,
+          slug_icon:            get_file_value(info_list.infolist_slug_icon, "file", true),
+        }
       end
       tmp_infos = []
       info_list.infos.order_asc.each do |o|
@@ -174,8 +175,8 @@ class Map < ActiveRecord::Base
           tmp_infos << { name: o.name, slug: s.slug, is_free: o.is_free.to_s, description: get_file_value(o.letter, "body")}
         end
       end
-      r["infos"] = tmp_infos
-      ret << r
+      r_h["infos"] = tmp_infos
+      ret << r_h
     end
     ret
   end
@@ -361,14 +362,14 @@ class Map < ActiveRecord::Base
           desc: get_file_value(c.children_broadcast_desc, "body")
         }
       end
-      b.broadcast_slugs.each do |s|
-        ret << {
-          name: b.name,
-          slug: s.slug,
-          slug_cover: get_file_value(c.broadcast_slug_cover,"file",true),
-          children_broadcasts: childrens
-        }
-      end
+      # b.broadcast_slugs.each do |s|
+        # ret << {
+          # name: b.name,
+          # slug: s.slug,
+          # slug_cover: get_file_value(s.broadcast_slug_cover, "file", true),
+          # children_broadcasts: childrens
+        # }
+      # end
     end
 
     ret
@@ -484,7 +485,7 @@ class Map < ActiveRecord::Base
     end
     knowns
   end
-  
+
   def get_first_known_slides known
     slides = []
     known.first_known_slides.order_asc.each{ |o| slides << { image: o.file.url} } if known.first_known_slides.present?
