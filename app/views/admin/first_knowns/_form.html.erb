@@ -4,9 +4,7 @@
 
   <%= m.input :name %>
 
-  <%= m.fields_for :first_known_slug, @model.first_known_slug ||= @model.build_first_known_slug do |s|  %>
-    <%= s.input :slug, :input_html => { :class => "span-full" } %>
-  <% end %>
+  <%= m.input :slug %>
 
   <%= m.fields_for :first_known_slug_cover, @model.first_known_slug_cover ||= @model.build_first_known_slug_cover do |img|  %>  
     <%= img.input :file, :as => :file %>
@@ -16,6 +14,17 @@
             <%= image_tag @model.first_known_slug_cover.file %>
           </div>
         </div>
+    <% end %>
+  <% end %>
+
+  <%= m.fields_for :first_known_cover, @model.first_known_cover ||= @model.build_first_known_cover do |img|  %>  
+  <%= img.input :file, :as => :file %>
+  <% if @model.first_known_cover && @model.first_known_cover.file.present? %>
+      <div class="control-group image">
+        <div class="controls">
+          <%= image_tag @model.first_known_cover.file %>
+        </div>
+      </div>
     <% end %>
   <% end %>
 

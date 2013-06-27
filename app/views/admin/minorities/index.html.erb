@@ -24,13 +24,13 @@
       <% @minorities.each do |p| %>
         <tr>
           <td><%= check_box_tag "minority_ids[]", p.id, false, id: "minority_#{p.id}" %></td>
-          <td><%= link_to p.name, admin_special_minority_path(params[:special_id], p.id) %></td>
-          <td><%= p.minority_slug.slug %></td>
+          <td><%= link_to p.name, get_delete_polymorphic_path(@parent, p.id) %></td>
+          <td><%= Keyword.get_slug(p.minority_slugs) %></td>
           <td><%= p.is_free %></td>
           <td><%= p.menu_type %></td>
           <td class="action">
-            <%= link_to raw("<i class=\"icon-edit\"></i>"), edit_admin_special_minority_path(params[:special_id], p.id) %>
-            <%= link_to raw("<i class=\"icon-trash\"></i>"), admin_special_minority_path(params[:special_id], p.id), method: :delete, data: {confirm: t('links.commons.confirm')} %>
+            <%= link_to raw("<i class=\"icon-edit\"></i>"), get_edit_polymorphic_path(@parent, p.id) %>
+            <%= link_to raw("<i class=\"icon-trash\"></i>"), get_delete_polymorphic_path(@parent, p.id), method: :delete, data: {confirm: t('links.commons.confirm')} %>
           </td>
         </tr>
       <% end %>

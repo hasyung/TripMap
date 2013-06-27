@@ -12,33 +12,37 @@ class Keyword < ActiveRecord::Base
   # SampleEnum. hash table is in growing.
   as_enum :type,
   {
-    :map_slug                   => 0,
+    :map_slugs                  => 0,
 
-    :scenic_slug                => 1,
+    :scenic_slugs               => 1,
 
-    :place_slug                 => 2,
+    :place_slugs                => 2,
 
-    :recommend_slug             => 3,
+    :recommend_slugs            => 3,
 
-    :info_list_slug             => 4,
-    :info_slug                  => 5,
+    :info_list_slugs            => 4,
+    :info_slugs                 => 5,
 
-    :merchant_slug              => 6,
+    :merchant_slugs             => 6,
 
-    :panel_video_slug           => 7,
+    :panel_video_slugs          => 7,
 
-    :special_slug               => 8,
+    :special_slugs              => 8,
 
-    :minority_slug              => 9,
+    :minority_slugs             => 9,
 
-    :broadcast_slug             => 10,
+    :broadcast_slugs            => 10,
 
-    :audio_list_category_slug   => 11,
+    :audio_list_category_slugs  => 11,
 
-    :first_known_slug           => 12,
+    :first_known_slugs          => 12,
 
-    :fight_slug                 => 13,
+    :fight_slugs                => 13,
   },
   :column => "keyword_type"
+
+  def self.get_slug(all_slug)
+    all_slug.map(&:slug).join(";")
+  end
 
 end

@@ -16,6 +16,7 @@ class Admin::PlacesController < Admin::ApplicationController
     add_breadcrumb :new
     @model = Place.new params[:place]
     if @model.save
+      set_slug(params[:place][:slug], @model.place_slugs)
       redirect_to admin_places_path, notice: t('messages.places.success')
     else
       render :new
@@ -24,6 +25,7 @@ class Admin::PlacesController < Admin::ApplicationController
 
   def edit
     @model = Place.find params[:id]
+    @model.slug = Keyword.get_slug(@model.place_slugs)
     @images = @model.place_slides.order_asc
     add_breadcrumb :edit
   end
@@ -31,6 +33,7 @@ class Admin::PlacesController < Admin::ApplicationController
   def update
     add_breadcrumb :edit
     @model = Place.find params[:id]
+    set_slug(params[:place][:slug], @model.place_slugs)
     if @model.update_attributes params[:place]
       redirect_to admin_places_path, notice: t('messages.places.success')
     else

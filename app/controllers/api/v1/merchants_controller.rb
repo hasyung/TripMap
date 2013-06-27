@@ -3,13 +3,15 @@ class Api::V1::MerchantsController < Api::V1::ApplicationController
   def index
     result = []
     Merchant.all.each do |m|
-      result << {
+      m.merchant_slugs.each do |s|
+        result << {
         :id => m.id, :name => m.name,
-        :slug => m.merchant_slug.slug,
+        :slug => s.slug,
         :phone => m.phone, :type => m.type_cd,
         :image => get_url(m.merchant_image),
         :horizontal_image => get_url(m.merchant_horizontal_image) 
-      }
+                  }
+      end
     end
 
     render :json => result
@@ -29,9 +31,10 @@ class Api::V1::MerchantsController < Api::V1::ApplicationController
         expence:     merchant.expence,
         description: merchant.description,
         special:     merchant.special,
+        privilege:   merchant.privilege,
         slides:      slides,
         video:       get_url(merchant.merchant_video),
-        video_cover: (merchant.merchant_video && merchant.merchant_video.cover) ? merchant.merchant_video.cover.url : ""
+        video_cover: get_file_value(merchant.merchant_video,"cover",true)
       }
     end
 

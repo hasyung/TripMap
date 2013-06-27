@@ -1,6 +1,6 @@
 <%= simple_form_for [:admin, @info_list] do |f| %>
   <%= f.input :name %>
-
+  <%= f.input :slug %>
   <%= f.fields_for :infolist_slug_icon, @info_list.infolist_slug_icon ||= @info_list.build_infolist_slug_icon do |slug_icon| %>
   <%= slug_icon.input :file, as: :file %>
     <% if @info_list.infolist_slug_icon && @info_list.infolist_slug_icon.file.present? %>
@@ -10,10 +10,6 @@
         </div>
       </div>
     <% end %>
-  <% end %>
-
-  <%= f.fields_for :info_list_slug, @info_list.info_list_slug ||= @info_list.build_info_list_slug do |s|  %>  
-    <%= s.input :slug, :input_html => { :class => "span-full" } %>
   <% end %>
 
   <%= f.input :is_free %>

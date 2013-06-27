@@ -1,8 +1,8 @@
 class Admin::MinoritiesController < Admin::ApplicationController
   before_filter :find_parent_model
-  
+
   def index
-    @minorities = Minority.page(params[:page]).per(Setting.page_size).created_desc
+    @minorities = @parent.minorities.page(params[:page]).per(Setting.page_size).created_desc
 
     add_breadcrumb :index
   end
@@ -17,7 +17,8 @@ class Admin::MinoritiesController < Admin::ApplicationController
     add_breadcrumb :new
     @model = @parent.minorities.new params[:minority]
     if @model.save
-      redirect_to admin_special_minorities_path(@model.minorityable_id), notice: t('messages.minorities.success')
+      set_slug(params[:minority][:slug], @model.minority_slugs)
+      redirect_to @path, notice: t('messages.minorities.success')
     else
       render :new
     end
@@ -25,6 +26,7 @@ class Admin::MinoritiesController < Admin::ApplicationController
 
   def edit
     @model = Minority.find params[:id]
+    @model.slug = Keyword.get_slug(@model.minority_slugs)
     @images = @model.minority_slides.order_asc
     add_breadcrumb :edit
   end
@@ -32,8 +34,9 @@ class Admin::MinoritiesController < Admin::ApplicationController
   def update
     add_breadcrumb :edit
     @model = Minority.find params[:id]
+    set_slug(params[:minority][:slug], @model.minority_slugs)
     if @model.update_attributes params[:minority]
-      redirect_to admin_special_minorities_path(@model.minorityable_id), notice: t('messages.minorities.success')
+      redirect_to @path, notice: t('messages.minorities.success')
     else
       render :edit
     end
@@ -42,22 +45,28 @@ class Admin::MinoritiesController < Admin::ApplicationController
   def destroy
     @minority = Minority.find params[:id]
     if @minority.destroy
-      redirect_to admin_special_minorities_path(@minority.minorityable_id), notice: t('messages.minorities.success')
+      redirect_to @path, notice: t('messages.minorities.success')
     else
-      redirect_to admin_special_minorities_path(@minority.minorityable_id), alert: t('messages.minorities.error')
+      redirect_to @path, alert: t('messages.minorities.error')
     end
   end
-  
+
   def show
     add_breadcrumb :show
     @model = Minority.find params[:id]
     @slides = @model.minority_slides.order_asc
     @feels = @model.minority_feels.order_asc
   end
-  
+
+  private
   def find_parent_model
-    @parent = Special.find params[:special_id] if !params[:special_id].blank?
-    @parent = Fight.find params[:fight_id] if !params[:fight_id].blank?
+    if !params[:special_id].blank?
+      @parent = Special.find params[:special_id]
+      @path = admin_special_minorities_path(params[:special_id])
+    elsif !params[:fight_id].blank?
+      @parent = Fight.find params[:fight_id]
+      @path = admin_fight_minorities_path(params[:fight_id])
+    end
   end
 
 end

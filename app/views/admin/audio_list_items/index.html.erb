@@ -15,6 +15,7 @@
           <th><%= model_class.human_attribute_name(:audio_list) %></th>
           <th><%= model_class.human_attribute_name(:title) %></th>
           <th><%= model_class.human_attribute_name(:audio_list_item_icon) %></th>
+          <th><%= model_class.human_attribute_name(:audio_list_item_cover) %></th>
           <th><%= model_class.human_attribute_name(:order) %></th>
           <th><%= model_class.human_attribute_name(:size) %></th>
           <th><%= model_class.human_attribute_name(:duration) %></th>
@@ -29,6 +30,7 @@
           <td><%= m.audio_list.name %></td>
           <td><%= m.title %></td>
           <td><%= image_tag m.audio_list_item_icon.file, :size => "35x35" unless m.audio_list_item_icon.blank? %></td>
+          <td><%= image_tag m.audio_list_item_audio_cover.file, :size => "35x35" unless m.audio_list_item_audio_cover.blank? %></td>
           <td><%= m.order %></td>
           <td><%= m.audio_list_item_audio.file_size unless m.audio_list_item_audio.blank? %></td>
           <td><%= m.audio_list_item_audio.duration unless m.audio_list_item_audio.blank? %></td>

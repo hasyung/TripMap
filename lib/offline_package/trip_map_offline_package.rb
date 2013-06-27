@@ -70,9 +70,11 @@ module TripMapOfflinePackage
     end
 
     def self.extract_slug_and_version
-      model_slug = "%s_slug"%@@model.class.name.downcase
-      keyword = @@model.send(model_slug.to_sym)
-      ret = keyword.slug, keyword.version
+      model_slug = "%s_slugs"%@@model.class.name.downcase
+      # keyword = @@model.send(model_slug.to_sym)
+      # ret = keyword.slug, keyword.version
+      keywords = @@model.send(model_slug.to_sym)
+      #ret = keyword.slug, keyword.version 
     end
 
     def self.copy_resources( src_file, media_type = I.downcase )
@@ -111,7 +113,7 @@ module TripMapOfflinePackage
           slides = []
           val.each do |img|
             copy_resources(img.file.path, I.downcase)
-            slides << { :image => "%s/%s"%[I.downcase, get_filename(img)] }
+            slides << { :image => "%s/%s"%[I.downcase, get_filename(img)], :description => img.description }
           end
           h[e] = slides; next
         end

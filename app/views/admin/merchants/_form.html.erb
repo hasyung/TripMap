@@ -1,8 +1,6 @@
 <%= simple_form_for [:admin, @model] do |p| %>
   <%= p.input :name %>
-  <%= p.fields_for :merchant_slug, @model.merchant_slug ||= @model.build_merchant_slug do |s|  %>  
-    <%= s.input :slug, :input_html => { :class => "span-full" } %>
-  <% end %>
+  <%= p.input :slug %>
   <%= p.input :title %>
   <%= p.input :tag %>
   <%= p.input :type_cd do %>
@@ -14,6 +12,7 @@
   <%= p.input :address %>
   <%= p.input :shop_hour %>
   <%= p.input :expence %>
+  <%= p.input :privilege, :as => :text %>
 
   <%= p.fields_for :merchant_image, @model.merchant_image ||= @model.build_merchant_image do |pimg|  %>  
     <%= pimg.input :file, :as => :file %>

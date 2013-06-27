@@ -30,7 +30,7 @@
             <td>
               <%= link_to r.name, admin_recommend_records_path(r) %>
             </td>
-            <td><%= r.recommend_slug.slug %></td>
+            <td><%= Keyword.get_slug(r.recommend_slugs) %></td>
             <td><%= r.map.province.name %></td>
             <td><%= r.map.name %></td>
             <td><%= t("enums.recommend.categories.#{model_class.categories.key(r.category_cd)}") %></td>

@@ -1,51 +1,41 @@
-<%= render 'base' %>
 <%- model_class = ImageList -%>
+
+<%= render 'base' %>
+
 <div class="box" %>
   <div class="box-title">
     <span class="icon"><i class="icon-th"></i></span>
     <h5><%= t('links.recommend_detaileds.index') %>
-      <%= link_to t('links.recommend_detaileds.newimage'), 
-                   admin_recommend_record_detailed_new_images_path(
-                      params[:recommend_id],
-                      params[:record_id],
-                      params[:detailed_id],
-                      params[:id]) %>
+      <%= link_to t('links.recommend_detaileds.newimage'), admin_recommend_record_detailed_new_images_path(
+          params[:recommend_id], params[:record_id], params[:detailed_id], params[:id]) %>
     </h5>
   </div>
   <div class="box-content">
   <table class="table table-bordered table-striped with-check">
   <thead>
     <tr>
-      <th>
-        <input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" />
-      </th>
+      <th><input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" /></th>
       <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:image_list_images_cover) %></th>
       <th class="action"><%= t('links.commons.action') %></th>
   </thead>
-  <% if !@imagelists.blank? %>
-  <% @imagelists.each do |i| %>
-    <tbody>
+  <tbody>
+    <% @imagelists.each do |i| %>
       <tr>
         <td><%= check_box_tag "province_ids[]", i.id, false, id: "province_#{i.id}" %></td>
-        <td>
-          <%= link_to i.name, admin_recommend_record_detailed_imageslist_path(
-                      params[:recommend_id],
-                      params[:record_id],
-                      params[:detailed_id],
-                      i) %>
-        </td>
+        <td><%= link_to i.name, admin_recommend_record_detailed_imageslist_path(params[:recommend_id], params[:record_id], params[:detailed_id], i) %></td>
+        <td><%= image_tag i.image_list_images_cover.file, :size => "35x35" unless i.image_list_images_cover.blank? %></td>
+
         <td class="action">
           <%= link_to raw("<i class=\"icon-edit\"></i>"), 
               admin_recommend_record_detailed_imagelist_edit_path(params[:recommend_id], params[:record_id], params[:detailed_id], i.id) %>
           <%= link_to raw("<i class=\"icon-trash\"></i>"), 
               admin_recommend_record_detailed_imagelist_path(params[:recommend_id], params[:record_id], params[:detailed_id], i.id), 
-              method: :delete, 
-              data: { confirm: t('links.commons.confirm')} %>
+              method: :delete, data: { confirm: t('links.commons.confirm')} %>
         </td>
       </tr>
-  <% end %>
-  <% end %>
+    <% end %>
   </tbody>
-</table>    
+</table>
 </div>
 </div>

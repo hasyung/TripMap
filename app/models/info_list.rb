@@ -1,9 +1,10 @@
 class InfoList < ActiveRecord::Base
   include ActiveModel::Validations
 
+  attr_accessor :slug
   # White list
   attr_accessible :map_id, :name, :order, :is_free,
-                  :infolist_slug_icon_attributes, :info_list_slug_attributes
+                  :infolist_slug_icon_attributes, :slug
 
   # Associations
   belongs_to :map, :counter_cache => true
@@ -13,7 +14,7 @@ class InfoList < ActiveRecord::Base
   end
 
   with_options :as => :keywordable, :class_name => 'Keyword', :dependent => :destroy do |assoc|
-    assoc.has_one :info_list_slug,     :conditions => { :keyword_type => Keyword.info_list_slug }
+    assoc.has_many :info_list_slugs,     :conditions => { :keyword_type => Keyword.info_list_slugs }
   end
 
   has_many :infos, :dependent => :destroy
@@ -29,7 +30,6 @@ class InfoList < ActiveRecord::Base
 
   # Nested attributes validates
   accepts_nested_attributes_for :infolist_slug_icon, reject_if: ->(attr){ attr[:file].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :info_list_slug,                                                :allow_destroy => true
 
   # Scopes
   scope :order_asc,     order("`order` ASC")

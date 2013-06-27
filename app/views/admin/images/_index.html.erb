@@ -13,25 +13,27 @@
       <tr>
         <th><input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" /></th>
         <th><%= model_class.human_attribute_name(:file) %></th>
+        <th><%= model_class.human_attribute_name(:url) %></th>
         <th><%= model_class.human_attribute_name(:order) %></th>
+        <th><%= model_class.human_attribute_name(:description) %></th>
         <th class="action"><%= t('links.commons.action') %></th>
       </tr>
     </thead>
     <tbody>
-    <% if !@images.blank? %>
-      <% @images.each do |img| %>
+    <% @images.each do |img| %>
         <tr>
           <td><%= check_box_tag "image_ids[]", img.id, false, :id => "image_#{img.id}" %></td>
           <td><%= image_tag(img.file, :size => "35x35") %></td>
           <td><%= img.file %></td>
           <td><%= img.order %></td>
+          <td><%= img.description.to_s.length > 20 ? img.description[0..20]+"..." : img.description %></td>
+
           <td class="action">
             <%= link_to raw("<i class=\"icon-edit\"></i>"), get_edit_image_path(@model, img.id), :title => t('links.images.edit') %>
             <%= link_to raw("<i class=\"icon-trash\"></i>"), get_delete_image_path(@model, img.id), :method => :delete, :data => { :confirm => t('links.commons.confirm') } %>
           </td>
         </tr>
       <% end %>
-    <% end %>
     </tbody>
   </table>
 </div>

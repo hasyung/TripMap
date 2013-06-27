@@ -19,6 +19,7 @@ class Admin::MerchantsController < Admin::ApplicationController
       render :new
     else
       if @model.save
+        set_slug(params[:merchant][:slug], @model.merchant_slugs)
         redirect_to admin_merchants_path, notice: t('messages.merchants.success')
       else
         render :new
@@ -28,6 +29,7 @@ class Admin::MerchantsController < Admin::ApplicationController
 
   def edit
     @model = Merchant.find params[:id]
+    @model.slug = Keyword.get_slug(@model.merchant_slugs)
     @images = @model.merchant_slides.order_asc
     add_breadcrumb :edit
   end
@@ -40,6 +42,7 @@ class Admin::MerchantsController < Admin::ApplicationController
       @images = @model.merchant_slides.order_asc
       render :edit
     else
+      set_slug(params[:merchant][:slug], @model.merchant_slugs)
       if @model.update_attributes params[:merchant]
         redirect_to admin_merchants_path, notice: t('messages.merchants.success')
       else

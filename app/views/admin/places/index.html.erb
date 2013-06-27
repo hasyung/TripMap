@@ -18,27 +18,27 @@
           <th><%= model_class.human_attribute_name(:map) %></th>
           <th><%= model_class.human_attribute_name(:is_free) %></th>
           <th><%= model_class.human_attribute_name(:menu_type) %></th>
+          <th><%= model_class.human_attribute_name(:place_slides_cover) %></th>
           <th class="action"><%= t('links.commons.action') %></th>
         </tr>
       </thead>
       <tbody>
-      <% if !@places.blank? %>
       <% @places.each do |p| %>
         <tr>
           <td><%= check_box_tag "place_ids[]", p.id, false, id: "place_#{p.id}" %></td>
           <td><%= p.name %></td>
-          <td><%= p.place_slug.slug %></td>
+          <td><%= Keyword.get_slug(p.place_slugs) %></td>
           <td><%= p.map.province.name %></td>
           <td><%= p.map.name %></td>
           <td><%= p.is_free %></td>
           <td><%= p.menu_type %></td>
+          <td><%= image_tag p.place_slides_cover.file, :size => "35x35" unless p.place_slides_cover.blank? %></td>
+
           <td class="action">
-            <%= link_to raw("<i class=\"icon-edit\"></i>"), edit_admin_place_path(p), 
-                                                            title: t('links.places.edit') %>
+            <%= link_to raw("<i class=\"icon-edit\"></i>"), edit_admin_place_path(p), title: t('links.places.edit') %>
             <%= link_to raw("<i class=\"icon-trash\"></i>"), admin_place_path(p), method: :delete, data: {confirm: t('links.commons.confirm')} %>
           </td>
         </tr>
-      <% end %>
       <% end %>
       </tbody>
     </table>

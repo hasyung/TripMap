@@ -67,6 +67,8 @@
       index: "音频列表"
     first_knowns:
       index: "先知道"
+    fights:
+      index: "PK"
 
   breadcrumbs:
     admin:
@@ -191,8 +193,8 @@
         new: "添加民族图集"
         edit: "修改民族图集"
       minority_feels:
-        new: "添加民族风情"
-        edit: "修改民族风情"
+        new: "添加延伸阅读"
+        edit: "修改延伸阅读"
       broadcasts:
         index: "广播剧"
         new: "添加广播剧"
@@ -221,6 +223,10 @@
         index: "先知道列表子项"
         new: "添加先知道列表子项"
         edit: "编辑先知道列表子项"
+      fights:
+        index: "PK列表"
+        new: "添加PK"
+        edit: "修改PK"
 
   links:
     home:
@@ -360,14 +366,18 @@
       new: "添加民族专题"
       edit: "修改民族专题"
       show: "查看民族专题"
+      back_show: "返回民族专题"
+      back_index: "返回民族列表"
+      back_special: "返回专题列表"
+      back_fight: "返回PK列表"
     minority_slides:
       index: "民族图集"
       new: "添加民族图集"
       edit: "修改民族图集"
     minority_feels:
-      index: "民族风情"
-      new: "添加民族风情"
-      edit: "修改民族风情"
+      index: "延伸阅读"
+      new: "添加延伸阅读"
+      edit: "修改延伸阅读"
     broadcasts:
       index: "广播剧"
       edit: "编辑广播剧"
@@ -400,6 +410,10 @@
       edit: "编辑先知道列表子项"
       new: "新建先知道列表子项"
       first_known_list: "返回到先知道列表"
+    fights:
+      index: "PK列表"
+      new: "添加PK"
+      edit: "修改PK"
 
   messages:
     maps:
@@ -491,8 +505,11 @@
       success: "操作民族图集成功！"
       error: "操作民族图集失败！"
     minority_feels:
-      success: "操作民族风情成功！"
-      error: "操作民族风情失败！"
+      success: "操作延伸阅读成功！"
+      error: "操作延伸阅读失败！"
+    fights:
+      success: "操作PK成功！"
+      error: "操作PK失败！"
     settings:
       success: "设置成功！"
     lijiang_mailboxes:
@@ -554,7 +571,7 @@
       special: "专题列表"
       minority: "民族专题"
       minority_slide: "民族图集"
-      minority_feel: "民族风情"
+      minority_feel: "延伸阅读"
       broadcast: "广播剧"
       audio_list_category: "音频列表分类"
       audio_list: "音频列表"
@@ -562,6 +579,7 @@
       first_known: "先知道"
       first_known_list: "先知道子项列表"
       first_known_list_item: "先知道子项列表子项"
+      fight: "PK"
 
     attributes:
       map:
@@ -585,6 +603,8 @@
         province: "省市"
         is_free: "免费"
         menu_type: "菜单标注"
+        place_slides_cover: "图集封面"
+        slug: "简码（多个以英文分号隔开）"
       scenic:
         name: "名称"
         scenic_slug: "简码"
@@ -593,6 +613,8 @@
         province: "省市"
         is_free: "免费"
         menu_type: "菜单标注"
+        scenic_slides_cover: "图集封面"
+        slug: "简码（多个以英文分号隔开）"
       recommend:
         name: "名称"
         recommend_slug: "简码"
@@ -602,6 +624,7 @@
         recommend_records_count: "推荐记录"
         is_free: "免费"
         menu_type: "菜单标注"
+        slug: "简码（多个以英文分号隔开）"
       recommend_record:  
         name: "名称"      
         recommend: "推荐名称"
@@ -618,6 +641,7 @@
         audio_file_size: "音频大小"
         image_file: "图片文件"
         imageslist: "图集名称"
+        image_list_images_cover: "图集封面"
         images_file: "图片文件"
         text_body: "内容"
         order: "排序"
@@ -651,6 +675,7 @@
         special: "特色"
         county: "区县"
         city: "省市"
+        privilege: "优惠信息"
       info_list:
         map: "地图"
         name: "名称"
@@ -658,6 +683,7 @@
         order: "排序"
         infos_count: "子信息条数"
         is_free: "免费"
+        slug: "简码（多个以英文分号隔开）"
       info:
         info_list: "信息列表"
         name: "名称"
@@ -675,6 +701,10 @@
       image:
         file: "图片"
         order: "排序"
+        url: "地址"
+        description: "描述"
+      image_list:
+        image_list_images_cover: "图集封面"
       map_serial_number:
         map: "地图"
         code: "序列号"
@@ -728,10 +758,20 @@
         name: "视频名称"
         panel_video_slug: "简码"
         panel_video_slug_cover: "简码小图片"
+        slug: "简码（多个以英文分号隔开）"
+      broadcast:
+        map: "所属地图"
+        name: "儿童广播剧名称"
+        is_free: "是否免费"
+        menu_type: "菜单标注"
+        broadcast_slug: "简码"
+        broadcast_slug_cover: "简码封面"
+        slug: "简码（多个以英文分号隔开）"
       children_broadcast:
         broadcast: "所属广播剧"
         name: "儿童广播剧名称"
         children_broadcast_cover: "封面"
+        children_broadcast_audio_cover: "广播音频封面"
         children_broadcast_audio: "音频"
         children_broadcast_desc: "描述"
         order: "排序号"
@@ -743,6 +783,7 @@
         special_slug: "简码"
         is_free: "免费"
         menu_type: "菜单标注"
+        slug: "简码（多个以英文分号隔开）"
       minority:
         name: "名称"
         minority_slug: "简码"
@@ -755,21 +796,20 @@
         minority_slide_description: "内容"
         order: "排序"
       minority_feel:
-        minority: "民族专题"
+        minority: "延伸阅读"
         name: "名称"
         minority_feel_icon: "图片"
+        minority_feel_slides_cover: "图集封面"
         minority_feel_description: "内容"
         order: "排序"
-      broadcast:
-        map: "所属地图"
-        name: "儿童广播剧名称"
-        broadcast_slug: "简码"
-        broadcast_slug_cover: "简码封面"
       audio_list_category:
         map: "所属地图"
         name: "音频列表分类名称"
+        is_free: "是否免费"
+        menu_type: "菜单标注"
         audio_list_category_slug: "简码"
         audio_list_category_slug_cover: "简码封面"
+        slug: "简码（多个以英文分号隔开）"
       audio_list:
         audio_list_category: "所属音频列表分类"
         name: "音频列表名称"
@@ -780,15 +820,21 @@
         audio_list: "所属音频列表"
         title: "音频列表子项名称"
         abstract: "音频列表子项简介"
+        size: "音频大小"
         audio_list_item_icon: "音频列表子项图标"
+        audio_list_item_cover: "音频封面图"
         audio_list_item_desc: "音频列表子项描述"
         order: "音频列表子项序号"
         duration: "音频播放时长"
       first_known:
         map: "所属地图"
         name: "名称"
+        is_free: "是否免费"
+        menu_type: "菜单标注"
         first_known_slug: "简码"
         first_known_slug_cover: "简码封面"
+        first_known_cover: "先知道封面"
+        slug: "简码（多个以英文分号隔开）"
       first_known_list:
         first_known: "所属于先知道"
         title_cn: "中文标题"
@@ -803,6 +849,11 @@
         description: "简介"
         first_known_list_item_icon: "图标"
         order: "序号"
+      fight:
+        name: "名称"
+        city: "省市"
+        county: "区县"
+        fight_slug: "简码"
 
   simple_form:
     labels:
@@ -835,6 +886,8 @@
           order: "排序"
         place_description:
           body: "内容"
+        place_slides_cover:
+          file: "图集封面"
       scenic:
         scenic_impression:
           file: "初识印象"
@@ -856,6 +909,8 @@
           file: "景点描述"
         scenic_description:
           body: "内容"
+        scenic_slides_cover:
+          file: "图集封面"
       recommend:
         recommend_cover:
           file: "背景图"
@@ -874,6 +929,8 @@
       recommend_detailed:
         recommend_detailed_cover:
           file: "封面"
+        recommend_detailed_item_cover:
+          file: "推荐详情九宫格封面"
       share:
         share_image:
           file: "分享图片"
@@ -882,8 +939,11 @@
       image:
         file: "图片文件"
         order: "图片排序"
+        description: "图片文字描述"
       image_list:
         name: "名称"
+        image_list_images_cover:
+          file: "图集封面"
         order: "排序"
       letter:
         body: "内容"
@@ -916,6 +976,10 @@
         children_broadcast_audio:
           file: "音频"
           duration: "音频时长（秒）"
+        children_broadcast_cover:
+          file: "封面"
+        children_broadcast_audio_cover:
+          file: "广播音频封面"
         children_broadcast_desc:
           body: "描述"
         order: "序号"
@@ -939,9 +1003,13 @@
       minority_feel:
         minority_feel_icon: 
           file: "图片"
+        minority_feel_slides_cover:
+          file: "图集封面"
         minority_feel_description:
           body: "内容"
       audio_list_item:
+        audio_list_item_audio_cover:
+          file: "音频封面"
         audio_list_item_icon:
           file: "音频列表子项图标"
         audio_list_item_desc:
@@ -957,11 +1025,25 @@
           file: "视频"
           cover: "视频封面"
           duration: "视频时长"
+      fight:
+        fight_slug_icon: 
+          file: "简码小图"
+        fight_icon:
+          file: "PK图片"
+        fight_video:
+          file: "视频"
+          cover: "视频封面"
+          duration: "视频时长"
       version:
         platform: "平台"
         value: "版本号"
         app: "应用程序(ipa | apk后缀)"
         url: "iOS app连接网址"
+      first_known:
+        first_known_slug_cover:
+          file: "简码图片"
+        first_known_cover:
+          file: "先知道封面"
 
   helpers:
     links:

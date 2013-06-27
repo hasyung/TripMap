@@ -25,7 +25,7 @@
             <td><%= check_box_tag "panel_video_ids[]", m.id, false, id: "panel_video_#{m.id}" %></td>
             <td><%= m.map.name %></td>
             <td><%= m.name %></td>
-            <td><%= m.panel_video_slug.slug %></td>
+            <td><%= Keyword.get_slug(m.panel_video_slugs) %></td>
             <td>
               <% unless m.panel_video_slug_cover.blank? %>
                 <%= image_tag m.panel_video_slug_cover.file, :size => "50x50" %>

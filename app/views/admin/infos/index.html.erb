@@ -28,7 +28,7 @@
           <tr>
             <td><%= check_box_tag "info_ids[]", info.id, false, :id => "info_#{info.id}" %></td>
             <td><%= info.name %></td>
-            <td><%= info.info_slug.slug %></td>
+            <td><%= Keyword.get_slug(info.info_slugs) %></td>
             <td><%= info.letter.nil? ? "NULL": info.letter.body %></td>
             <td><%= info.info_list.name %></td>
             <td><%= info.order %></td>

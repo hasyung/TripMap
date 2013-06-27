@@ -29,7 +29,7 @@ module TripMap
 
     config.active_record.whitelist_attributes = true
 
-    config.active_record.observers = :trip_map_observer
+    config.active_record.observers = :trip_map_observer, :minority_map_observer
 
     config.assets.enabled = true
 

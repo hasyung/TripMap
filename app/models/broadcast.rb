@@ -1,14 +1,15 @@
 class Broadcast < ActiveRecord::Base
 
+  attr_accessor :slug
   # White list
-  attr_accessible :map_id, :name,
-                  :broadcast_slug_attributes, :broadcast_slug_cover_attributes
+  attr_accessible :map_id, :name, :is_free, :menu_type, :slug,
+                  :broadcast_slug_cover_attributes
 
   # Associations
   belongs_to :map
 
   with_options :as => :keywordable, :class_name => "Keyword", :dependent => :destroy do |assoc|
-    assoc.has_one :broadcast_slug,        :conditions => { :keyword_type => Keyword.broadcast_slug }
+    assoc.has_many :broadcast_slugs,        :conditions => { :keyword_type => Keyword.broadcast_slugs }
   end
 
   with_options :as => :imageable, :class_name => 'Image', :dependent => :destroy do |assoc|
@@ -25,7 +26,6 @@ class Broadcast < ActiveRecord::Base
 
   # Nested attributes validates
   accepts_nested_attributes_for :broadcast_slug_cover, reject_if: ->(attr){ attr[:file].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :broadcast_slug,                                                  :allow_destroy => true
 
   # Scopes
   scope :created_desc, order("created_at DESC")

@@ -16,6 +16,7 @@ class Admin::RecommendsController < Admin::ApplicationController
     add_breadcrumb :new
     @model = Recommend.new params[:recommend]
     if @model.save
+      set_slug(params[:recommend][:slug], @model.recommend_slugs)
       redirect_to admin_recommends_path, notice: t('messages.recommends.success')
     else 
       render :new
@@ -25,12 +26,14 @@ class Admin::RecommendsController < Admin::ApplicationController
   def edit
     add_breadcrumb :edit
     @model = Recommend.find params[:id]
+    @model.slug = Keyword.get_slug(@model.recommend_slugs)
     @images = @model.recommend_slides.order_asc
   end
 
   def update
     add_breadcrumb :edit
     @model = Recommend.find params[:id]
+    set_slug(params[:recommend][:slug], @model.recommend_slugs)
     if @model.update_attributes params[:recommend]
       redirect_to admin_recommends_path, notice: t('messages.recommends.success')
     else

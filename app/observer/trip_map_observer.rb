@@ -13,9 +13,8 @@ class TripMapObserver < ActiveRecord::Observer
           :audio_list, :first_known_list, :minority,
 
           :image_list, :audio_list_item, :first_known_list_item,              # Level 3.
-          :minority_feel, :minority_slide,
 
-          :audio, :video, :image, :letter                           # Atom.
+          :audio, :video, :image, :letter                                     # Atom.
 
   NAV_PATH_OPTIONS = {
     # class name           path to map
@@ -54,7 +53,7 @@ class TripMapObserver < ActiveRecord::Observer
 
   def after_save( model )
     update_map_version(model)
-    create_offline_package(model)
+    #create_offline_package(model)
   end
 
   def after_destroy( model )
@@ -74,11 +73,14 @@ class TripMapObserver < ActiveRecord::Observer
   end
 
   def update_keyword( model, attr )
-    model_slug = "%s_slug"%model.class.name.downcase
-    keyword = model.send(model_slug)
-    keyword.version = Time.now.to_i if attr == TYPES[0]
-    keyword.file_size = get_file_size_in_mega(keyword.version) if attr == TYPES[1]
-    keyword.save
+    model_slug = "%s_slugs"%model.class.name.downcase
+    keywords = model.send(model_slug)
+         #binding.pry
+    keywords.each do |keyword|
+      keyword.version = Time.now.to_i if attr == TYPES[0]
+      keyword.file_size = get_file_size_in_mega(keyword.version) if attr == TYPES[1]
+      keyword.save
+    end
   end
 
   def get_file_size_in_mega( version )

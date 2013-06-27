@@ -15,6 +15,7 @@
           <th><%= model_class.human_attribute_name(:broadcast) %></th>
           <th><%= model_class.human_attribute_name(:name) %></th>
           <th><%= model_class.human_attribute_name(:children_broadcast_cover) %></th>
+          <th><%= model_class.human_attribute_name(:children_broadcast_audio_cover) %></th>
           <th><%= model_class.human_attribute_name(:order) %></th>
           <th><%= model_class.human_attribute_name(:size) %></th>
           <th><%= model_class.human_attribute_name(:duration) %></th>
@@ -28,21 +29,11 @@
             <td><%= check_box_tag "children_broadcast_ids[]", m.id, false, id: "children_broadcast_#{m.id}" %></td>
             <td><%= m.broadcast.name %></td>
             <td><%= m.name %></td>
-
-            <td>
-              <%= image_tag m.children_broadcast_cover.file, :size => "50x50" unless m.children_broadcast_cover.blank? %>
-            </td>
-
+            <td><%= image_tag m.children_broadcast_cover.file, :size => "50x50" unless m.children_broadcast_cover.blank? %></td>
+            <td><%= image_tag m.children_broadcast_audio_cover.file, :size => "50x50" unless m.children_broadcast_audio_cover.blank? %></td>
             <td><%= m.order %></td>
-
-            <td>
-              <%= m.children_broadcast_audio.file_size unless m.children_broadcast_audio.blank? %>
-            </td>
-
-            <td>
-              <%= m.children_broadcast_audio.duration unless m.children_broadcast_audio.blank? %>
-            </td>
-
+            <td><%= m.children_broadcast_audio.file_size unless m.children_broadcast_audio.blank? %></td>
+            <td><%= m.children_broadcast_audio.duration unless m.children_broadcast_audio.blank? %></td>
             <td><%= m.children_broadcast_desc.body[0...20] %></td>
 
             <td class="action">

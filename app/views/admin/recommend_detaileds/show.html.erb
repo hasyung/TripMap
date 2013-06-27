@@ -1,11 +1,14 @@
 <%= render 'base' %>
+
 <% if @recommend.category_cd == 1 %>
-	<%= render 'videos' %>
-	<%= render 'audios' %>
-	<%= render 'imagelists' %>
+  <%= render 'videos' %>
+  <%= render 'audios' %>
+  <%= render 'imagelists' %>
 <% end %>
+
 <% if @recommend.category_cd != 3 %>
-	<%= render 'image' %>
+  <%= render 'image' %>
 <% end %>
+
 <%= render 'texts' %>
 <%= render 'detailed_infos' %>

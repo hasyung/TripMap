@@ -29,7 +29,7 @@
           <tr>
             <td><%= check_box_tag "info_list_ids[]", e.id, false, :id => "info_list_#{e.id}" %></td>
             <td><%= link_to e.name, admin_info_list_infos_path(e) %></td>
-            <td><%= e.info_list_slug.slug %></td>
+            <td><%= Keyword.get_slug(e.info_list_slugs) %></td>
             <td><%= e.map.name %></td>
             <td><%= e.infos_count %></td>
             <td><%= e.order %></td>
