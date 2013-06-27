@@ -11,7 +11,21 @@
                             params[:detailed_id],
                             @imagelist) do |t| %>
   <%= t.input :name %>
+
+  <%= t.fields_for :image_list_images_cover, @imagelist.image_list_images_cover ||= @imagelist.build_image_list_images_cover do |img|  %>
+    <%= img.input :file, :as => :file %>
+
+    <% if @imagelist.image_list_images_cover && @imagelist.image_list_images_cover.file.present? %>
+        <div class="control-group image">
+          <div class="controls">
+            <%= image_tag @imagelist.image_list_images_cover.file %>
+          </div>
+        </div>
+    <% end %>
+  <% end %>
+
   <%= t.input :order %>
+
   <div class="form-actions">
     <%= t.button :submit, :class => 'btn-primary' %>
   </div>

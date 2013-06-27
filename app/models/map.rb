@@ -96,15 +96,16 @@ class Map < ActiveRecord::Base
   end
 
   def get_places()
-    places = []
-    self.places.each{ |o| places << get_map_place_values(o) } if self.places_count > 0
-    places
+    ret = []
+    #self.places.each{ |o| places << get_map_place_values(o) } if self.places_count > 0
+    self.places.each{|c| ret << o_to_h(c, ['map', 'map_id', 'version'], ['id']) }
+    ret
   end
 
   def get_scenics()
-    scenics = []
-    self.scenics.each{ |o| scenics << get_map_scenic_values(o) } if self.scenics_count > 0
-    scenics
+    ret = []
+    self.scenics.each{|c| ret << o_to_h(c, ['map', 'map_id', 'version'], ['id']) }
+    ret
   end
 
   def get_recommends()
@@ -129,18 +130,17 @@ class Map < ActiveRecord::Base
           all_avi = all_avi.sort {|a,b| a[:order] <=> b[:order] }
 
           all_avi.each do |e|
-            ilist_imgs = {}
             case e.class.name.to_s
-            when I then images << o_to_h(e)
-            when A then audios << o_to_h(e)
-            when V then videos << o_to_h(e)
+            when I then images << o_to_h(e, ['file_size', 'order'], nil, {:file => "image"})
+            when A then audios << o_to_h(e, nil, nil, {:file => "audio"})
+            when V then videos << o_to_h(e, nil, nil, {:file => "video"})
             when T
                texts << o_to_h(e) if e.text_type == Letter.detailed_text
                infos << o_to_h(e) if e.text_type == Letter.detailed_info
             when IL
-              curr_imglist_imgs = []
+              imglist_img_h, curr_imglist_imgs = o_to_h(e, ['name', 'order']), []
               e.images.each{|il| curr_imglist_imgs << o_to_h(il, ['file_size', 'order'], nil, {:file => "image"}) }
-              ilist_imgs[:images] = curr_imglist_imgs; image_lists << ilist_imgs
+              imglist_img_h[:images] = curr_imglist_imgs; image_lists << imglist_img_h
             end
           end
 
@@ -392,7 +392,7 @@ class Map < ActiveRecord::Base
     ret = []
 
     self.audio_list_categories.each do|c|
-      h_c, l_cc = o_to_h(c, ['map_id', 'version']), []
+      h_c, l_cc = o_to_h(c, ['map_id', 'version'], nil, {:slug_cover => "slug_icon"}), []
 
       c.audio_lists.order_asc.each do |cc|
         h_cc, l_ccc = o_to_h(cc, ['audio_list_category_id']), []

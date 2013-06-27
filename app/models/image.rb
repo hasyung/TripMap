@@ -1,7 +1,7 @@
 class Image < ActiveRecord::Base
 
   # White list
-  attr_accessible  :file, :file_size, :order
+  attr_accessible  :file, :file_size, :order, :description
 
   # Associations
   belongs_to :imageable, :polymorphic => true
@@ -86,6 +86,20 @@ class Image < ActiveRecord::Base
     :first_known_cover                           => 44,
 
     :recommend_detailed_item_cover               => 45,
+
+    :audio_list_item_audio_cover                 => 46,
+
+    :children_broadcast_audio_cover              => 47,
+
+    :image_list_cover                            => 48,
+
+    :scenic_slides_cover                         => 49,
+
+    :place_slides_cover                          => 50,
+
+    :minority_feel_slides_cover                  => 51,
+
+    :minority_slides_cover                       => 52,
   },
   :column => "image_type"
 

@@ -1,21 +1,32 @@
 <%= simple_form_for [:admin, @model], url: get_minority_feel_form_url(@model, params[:minority_id], @parent) do |p| %>
   <%= p.input :name %>
+
   <%= p.fields_for :minority_feel_icon, @model.minority_feel_icon ||= @model.build_minority_feel_icon do |picon|  %>  
     <%= picon.input :file, :as => :file %>
     <% if @model.minority_feel_icon && @model.minority_feel_icon.file.present? %>
         <div class="control-group image">
-          <div class="controls">
-            <%= image_tag @model.minority_feel_icon.file %>
-          </div>
+          <div class="controls"><%= image_tag @model.minority_feel_icon.file %></div>
         </div>
     <% end %>
   <% end %>
-  <%= p.fields_for :minority_feel_description, 
-                   @model.minority_feel_description ||= @model.build_minority_feel_description do |pd|  %>  
+
+  <%= p.fields_for :minority_feel_slides_cover, @model.minority_feel_slides_cover ||= @model.build_minority_feel_slides_cover do |picon|  %>  
+    <%= picon.input :file, :as => :file %>
+    <% if @model.minority_feel_slides_cover && @model.minority_feel_slides_cover.file.present? %>
+        <div class="control-group image">
+          <div class="controls"><%= image_tag @model.minority_feel_slides_cover.file %></div>
+        </div>
+    <% end %>
+  <% end %>
+
+  <%= p.fields_for :minority_feel_description, @model.minority_feel_description ||= @model.build_minority_feel_description do |pd| %>
     <%= pd.input :body, :as => :text, input_html: { :class => "span-full"} %>
   <% end %>
+
   <%= p.input :order %>
+
   <div class="form-actions">
     <%= p.button :submit, :class => 'btn-primary' %>
   </div>
+
 <% end %>

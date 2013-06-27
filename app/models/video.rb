@@ -33,6 +33,8 @@ class Video < ActiveRecord::Base
     :merchant_video         => 5,
 
     :fight_video            => 6,
+
+    :first_known_video      => 7,
   },
   :column => "video_type"
 

@@ -1,8 +1,9 @@
 class FirstKnown < ActiveRecord::Base
 
   # White list
-  attr_accessible :map_id, :name,
-                  :first_known_slug_attributes, :first_known_slug_cover_attributes, :first_known_cover_attributes
+  attr_accessible :map_id, :name, :is_free, :menu_type,
+                  :first_known_slug_attributes, :first_known_slug_cover_attributes, :first_known_cover_attributes,
+                  :first_known_slides
 
   # Associations
   belongs_to :map

@@ -111,7 +111,7 @@ module TripMapOfflinePackage
           slides = []
           val.each do |img|
             copy_resources(img.file.path, I.downcase)
-            slides << { :image => "%s/%s"%[I.downcase, get_filename(img)] }
+            slides << { :image => "%s/%s"%[I.downcase, get_filename(img)], :description => img.description }
           end
           h[e] = slides; next
         end

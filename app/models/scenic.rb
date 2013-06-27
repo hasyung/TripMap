@@ -5,7 +5,7 @@ class Scenic < ActiveRecord::Base
                   :scenic_slug_attributes, :scenic_impression_attributes,
                   :scenic_route_attributes, :scenic_icon_attributes, :scenic_slug_icon_attributes,
                   :scenic_image_attributes, :scenic_description_attributes, :scenic_description_image_attributes,
-                  :scenic_slides_attributes
+                  :scenic_slides_attributes, :scenic_slides_cover_attributes
 
   # Associations
   belongs_to :map, :counter_cache => true
@@ -28,12 +28,13 @@ class Scenic < ActiveRecord::Base
     assoc.has_one  :scenic_slug_icon,         :conditions => { :image_type => Image.scenic_slug_icon }
     assoc.has_one  :scenic_description_image, :conditions => { :image_type => Image.scenic_description_image }
     assoc.has_one  :scenic_image,             :conditions => { :image_type => Image.scenic_image }
+    assoc.has_one  :scenic_slides_cover,      :conditions => { :image_type => Image.scenic_slides_cover }
     assoc.has_many :scenic_slides,            :conditions => { :image_type => Image.scenic_slides }
   end
 
   # Validates
   with_options :presence => true do |column|
-    column.validates :name, :length => { :within => 2..20 }, :uniqueness => true
+    column.validates :name, :length => { :within => 2..20 }
     column.validates :map_id
     column.validates :subtitle, :length => { :within => 2..30 }
   end
@@ -44,8 +45,9 @@ class Scenic < ActiveRecord::Base
   accepts_nested_attributes_for :scenic_icon,              reject_if: ->(attr){ attr[:file].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :scenic_slug_icon,         reject_if: ->(attr){ attr[:file].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :scenic_image,             reject_if: ->(attr){ attr[:file].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :scenic_description,                                                  :allow_destroy => true
   accepts_nested_attributes_for :scenic_description_image, reject_if: ->(attr){ attr[:file].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :scenic_slides_cover,      reject_if: ->(attr){ attr[:file].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :scenic_description,                                                  :allow_destroy => true
   accepts_nested_attributes_for :scenic_slug,                                                         :allow_destroy => true
 
   # Scopes

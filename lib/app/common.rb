@@ -28,6 +28,12 @@ module App
     }
     ARRAY_FIELD     = [ 'slides' ]
 
+    ## Extract a model instance's attributes to hash.##
+    # -model-     model instance
+    # -excludes-  excludes attributes you don't need
+    # -includes-  includes attributes you need but exist in table.
+    # -renames-   rename hash key to your passed key.
+    # note: all associations' objects should be added to white list!
     def o_to_h( model, excludes = [], includes = [], renames = {} )
       return {} if model.nil?
 
@@ -37,7 +43,8 @@ module App
     private
 
     def extract_attrs( model, excludes = [], includes = [])
-      attrs = includes || []
+      excludes = excludes || []
+      attrs    = includes || []
       model._accessible_attributes[:default].to_a.each do |e|
         e = e.gsub(/_attributes/, "")
         next if e.blank? || excludes.include?(e)
@@ -73,10 +80,7 @@ module App
         # Slides
         if ARRAY_FIELD.include?(e)
           slides = []
-          val.each do |img|
-            copy_resources(img.file.path, I.downcase)
-            slides << { :image => img.file.url }
-          end
+          val.each{|img| slides << { :image => img.file.url, :description => img.description.to_s }}
           h[e] = slides; next
         end
 

@@ -1,7 +1,7 @@
 class AudioListCategory < ActiveRecord::Base
 
   # White list
-  attr_accessible :map_id, :name,
+  attr_accessible :map_id, :name, :is_free, :menu_type,
                   :audio_list_category_slug_attributes, :audio_list_category_slug_cover_attributes
 
   # Associations

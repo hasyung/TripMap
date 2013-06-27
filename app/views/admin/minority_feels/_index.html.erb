@@ -17,6 +17,7 @@
           <th><input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" /></th>
           <th><%= model_class.human_attribute_name(:name) %></th>
           <th><%= model_class.human_attribute_name(:minority_feel_icon) %></th>
+          <th><%= model_class.human_attribute_name(:minority_feel_slides_cover) %></th>
           <th><%= model_class.human_attribute_name(:minority_feel_description) %></th>
           <th><%= model_class.human_attribute_name(:order) %></th>
           <th class="action"><%= t('links.commons.action') %></th>
@@ -29,7 +30,9 @@
             <td><%= check_box_tag "feel_ids[]", img.id, false, :id => "feel_#{img.id}" %></td>
             <td><%= img.name %></td>
             <td><%= img.minority_feel_icon.file %></td>
+            <td><%= image_tag img.minority_feel_slides_cover.file, :size => "35x35" unless img.minority_feel_slides_cover.blank? %></td>
             <td><%= truncate(img.minority_feel_description.body, :length => 30, :separator => '...')%></td>
+
             <td><%= img.order %></td>
             <td class="action">
               <% if params[:special_id].present? %>

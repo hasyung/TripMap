@@ -603,6 +603,7 @@
         province: "省市"
         is_free: "免费"
         menu_type: "菜单标注"
+        place_slides_cover: "图集封面"
       scenic:
         name: "名称"
         scenic_slug: "简码"
@@ -611,6 +612,7 @@
         province: "省市"
         is_free: "免费"
         menu_type: "菜单标注"
+        scenic_slides_cover: "图集封面"
       recommend:
         name: "名称"
         recommend_slug: "简码"
@@ -636,6 +638,7 @@
         audio_file_size: "音频大小"
         image_file: "图片文件"
         imageslist: "图集名称"
+        image_list_images_cover: "图集封面"
         images_file: "图片文件"
         text_body: "内容"
         order: "排序"
@@ -694,6 +697,10 @@
       image:
         file: "图片"
         order: "排序"
+        url: "地址"
+        description: "描述"
+      image_list:
+        image_list_images_cover: "图集封面"
       map_serial_number:
         map: "地图"
         code: "序列号"
@@ -747,10 +754,18 @@
         name: "视频名称"
         panel_video_slug: "简码"
         panel_video_slug_cover: "简码小图片"
+      broadcast:
+        map: "所属地图"
+        name: "儿童广播剧名称"
+        is_free: "是否免费"
+        menu_type: "菜单标注"
+        broadcast_slug: "简码"
+        broadcast_slug_cover: "简码封面"
       children_broadcast:
         broadcast: "所属广播剧"
         name: "儿童广播剧名称"
         children_broadcast_cover: "封面"
+        children_broadcast_audio_cover: "广播音频封面"
         children_broadcast_audio: "音频"
         children_broadcast_desc: "描述"
         order: "排序号"
@@ -777,16 +792,14 @@
         minority: "延伸阅读"
         name: "名称"
         minority_feel_icon: "图片"
+        minority_feel_slides_cover: "图集封面"
         minority_feel_description: "内容"
         order: "排序"
-      broadcast:
-        map: "所属地图"
-        name: "儿童广播剧名称"
-        broadcast_slug: "简码"
-        broadcast_slug_cover: "简码封面"
       audio_list_category:
         map: "所属地图"
         name: "音频列表分类名称"
+        is_free: "是否免费"
+        menu_type: "菜单标注"
         audio_list_category_slug: "简码"
         audio_list_category_slug_cover: "简码封面"
       audio_list:
@@ -799,13 +812,17 @@
         audio_list: "所属音频列表"
         title: "音频列表子项名称"
         abstract: "音频列表子项简介"
+        size: "音频大小"
         audio_list_item_icon: "音频列表子项图标"
+        audio_list_item_cover: "音频封面图"
         audio_list_item_desc: "音频列表子项描述"
         order: "音频列表子项序号"
         duration: "音频播放时长"
       first_known:
         map: "所属地图"
         name: "名称"
+        is_free: "是否免费"
+        menu_type: "菜单标注"
         first_known_slug: "简码"
         first_known_slug_cover: "简码封面"
         first_known_cover: "先知道封面"
@@ -860,6 +877,8 @@
           order: "排序"
         place_description:
           body: "内容"
+        place_slides_cover:
+          file: "图集封面"
       scenic:
         scenic_impression:
           file: "初识印象"
@@ -881,6 +900,8 @@
           file: "景点描述"
         scenic_description:
           body: "内容"
+        scenic_slides_cover:
+          file: "图集封面"
       recommend:
         recommend_cover:
           file: "背景图"
@@ -909,8 +930,11 @@
       image:
         file: "图片文件"
         order: "图片排序"
+        description: "图片文字描述"
       image_list:
         name: "名称"
+        image_list_images_cover:
+          file: "图集封面"
         order: "排序"
       letter:
         body: "内容"
@@ -943,6 +967,10 @@
         children_broadcast_audio:
           file: "音频"
           duration: "音频时长（秒）"
+        children_broadcast_cover:
+          file: "封面"
+        children_broadcast_audio_cover:
+          file: "广播音频封面"
         children_broadcast_desc:
           body: "描述"
         order: "序号"
@@ -966,9 +994,13 @@
       minority_feel:
         minority_feel_icon: 
           file: "图片"
+        minority_feel_slides_cover:
+          file: "图集封面"
         minority_feel_description:
           body: "内容"
       audio_list_item:
+        audio_list_item_audio_cover:
+          file: "音频封面"
         audio_list_item_icon:
           file: "音频列表子项图标"
         audio_list_item_desc:

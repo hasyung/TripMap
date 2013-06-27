@@ -3,7 +3,7 @@ class Minority < ActiveRecord::Base
   # White list
   attr_accessible :name, :is_free, :menu_type, :minorityable_id, :minorityable_type, :order,
                   :minority_icon_attributes, :minority_slug_icon_attributes, :minority_slug_attributes,
-                  :minority_description_attributes, :minority_video_attributes
+                  :minority_description_attributes, :minority_video_attributes, :minority_slides_cover_attributes
 
   # Associations
   belongs_to :minorityable,    :polymorphic => true
@@ -12,8 +12,9 @@ class Minority < ActiveRecord::Base
   has_many   :minority_slides, :dependent => :destroy
 
   with_options :as => :imageable, :class_name => "Image", :dependent => :destroy do|assoc|
-    assoc.has_one  :minority_icon,       :conditions => { :image_type => Image.minority_icon }
-    assoc.has_one  :minority_slug_icon,  :conditions => { :image_type => Image.minority_slug_icon }
+    assoc.has_one  :minority_icon,         :conditions => { :image_type => Image.minority_icon }
+    assoc.has_one  :minority_slug_icon,    :conditions => { :image_type => Image.minority_slug_icon }
+    assoc.has_one  :minority_slides_cover, :conditions => { :image_type => Image.minority_slides_cover }
   end
 
   with_options :as => :keywordable, :class_name => 'Keyword', :dependent => :destroy do|assoc|

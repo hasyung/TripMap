@@ -5,7 +5,7 @@
 <div class="box">
   <div class="box-title">
     <span class="icon"><i class="icon-th"></i></span>
-    <h5><%= t('links.children_broadcasts.index') %></h5>
+    <h5><%= t('links.broadcasts.index') %></h5>
   </div>
   <div class="box-content">
     <table class="table table-bordered table-striped with-check">
@@ -14,6 +14,8 @@
           <th><input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" /></th>
           <th><%= model_class.human_attribute_name(:map) %></th>
           <th><%= model_class.human_attribute_name(:name) %></th>
+          <th><%= model_class.human_attribute_name(:is_free) %></th>
+          <th><%= model_class.human_attribute_name(:menu_type) %></th>
           <th><%= model_class.human_attribute_name(:broadcast_slug) %></th>
           <th><%= model_class.human_attribute_name(:broadcast_slug_cover) %></th>
           <th class="action"><%= t('links.commons.action') %></th>
@@ -25,6 +27,8 @@
             <td><%= check_box_tag "panel_video_ids[]", m.id, false, id: "panel_video_#{m.id}" %></td>
             <td><%= m.map.name %></td>
             <td><%= link_to(m.name, admin_broadcast_children_broadcasts_path(m)) %></td>
+            <td><%= m.is_free %></td>
+            <td><%= m.menu_type %></td>
             <td><%= m.broadcast_slug.slug unless m.broadcast_slug.blank? %></td>
             <td><%= image_tag m.broadcast_slug_cover.file, :size => "50x50" unless m.broadcast_slug_cover.blank? %></td>
             <td class="action">

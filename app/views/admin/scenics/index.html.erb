@@ -18,39 +18,33 @@
           <th><%= model_class.human_attribute_name(:map) %></th>
           <th><%= model_class.human_attribute_name(:is_free) %></th>
           <th><%= model_class.human_attribute_name(:menu_type) %></th>
-          <th class="action">
-            <%= t('links.commons.action') %>
-          </th>
+          <th><%= model_class.human_attribute_name(:scenic_slides_cover) %></th>
+          <th class="action"><%= t('links.commons.action') %></th>
         </tr>
       </thead>
       <tbody>
-      <% if !@scenics.blank? %>
       <% @scenics.each do |s| %>
-        <tr>
-          <td>
-            <%= check_box_tag "scenics_ids[]", s.id, false, id: "scenics_#{s.id}" %>
-          </td>
-          <td><%= s.name %></td>
-          <td><%= s.scenic_slug.slug %></td>
-          <td><%= s.map.province.name %></td>
-          <td><%= s.map.name %></td>
-          <td><%= s.is_free %></td>
-          <td><%= s.menu_type %></td>
-          <td class="action">
-            <%= link_to raw("<i class=\"icon-edit\"></i>"), 
-                        edit_admin_scenic_path(s),
-                        title: t('links.places.edit') %>
-            <%= link_to raw("<i class=\"icon-trash\"></i>"),
-                        admin_scenic_path(s), 
-                        method: :delete, data: {confirm: t('links.commons.confirm')} %>
-          </td>
-        </tr>
-      <% end %>
-      <% end %>
+          <tr>
+            <td><%= check_box_tag "scenics_ids[]", s.id, false, id: "scenics_#{s.id}" %></td>
+            <td><%= s.name %></td>
+            <td><%= s.scenic_slug.slug %></td>
+            <td><%= s.map.province.name %></td>
+            <td><%= s.map.name %></td>
+            <td><%= s.is_free %></td>
+            <td><%= s.menu_type %></td>
+            <td><%= image_tag s.scenic_slides_cover.file, :size => "35x35" unless s.scenic_slides_cover.blank? %></td>
+
+            <td class="action">
+              <%= link_to raw("<i class=\"icon-edit\"></i>"), edit_admin_scenic_path(s), title: t('links.places.edit') %>
+              <%= link_to raw("<i class=\"icon-trash\"></i>"), admin_scenic_path(s), method: :delete, data: {confirm: t('links.commons.confirm')} %>
+            </td>
+          </tr>
+        <% end %>
       </tbody>
     </table>
   </div>
 </div>
+
 <div class="table-footer clearfix">
   <div class="paginates-info"><%= page_entries_info @scenics %></div>
   <%= paginate @scenics, :theme => "admin" %>

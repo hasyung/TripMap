@@ -3,16 +3,14 @@
   <%= s.fields_for :scenic_slug, @model.scenic_slug ||= @model.build_scenic_slug do |l|  %>  
     <%= l.input :slug, :input_html => { :class => "span-full" } %>
   <% end %>
+
   <%= s.input :is_free %>
   <%= s.input :menu_type %>
   <%= s.input :subtitle %>
-  <%= s.association :map, collection: Map.all, 
-                          prompt: t("helpers.links.select", 
-                          :model_name => Map.model_name.human) %>
+  <%= s.association :map, collection: Map.all, prompt: t("helpers.links.select", :model_name => Map.model_name.human) %>
 
-  <%= s.fields_for :scenic_icon,
-                 @model.scenic_icon ||= @model.build_scenic_icon do |sicon| %>
-  <%= sicon.input :file, as: :file %>
+  <%= s.fields_for :scenic_icon, @model.scenic_icon ||= @model.build_scenic_icon do |sicon| %>
+    <%= sicon.input :file, as: :file %>
     <% if @model.scenic_icon && @model.scenic_icon.file.present? %>
       <div class="control-group image">
         <div class="controls">
@@ -22,9 +20,8 @@
     <% end %>
   <% end %>
 
-  <%= s.fields_for :scenic_slug_icon,
-                 @model.scenic_slug_icon ||= @model.build_scenic_slug_icon do |sicon| %>
-  <%= sicon.input :file, as: :file %>
+  <%= s.fields_for :scenic_slug_icon, @model.scenic_slug_icon ||= @model.build_scenic_slug_icon do |sicon| %>
+    <%= sicon.input :file, as: :file %>
     <% if @model.scenic_slug_icon && @model.scenic_slug_icon.file.present? %>
       <div class="control-group image">
         <div class="controls">
@@ -34,8 +31,7 @@
     <% end %>
   <% end %>
 
-  <%= s.fields_for :scenic_image,
-                   @model.scenic_image ||= @model.build_scenic_image do |simage| %>
+  <%= s.fields_for :scenic_image, @model.scenic_image ||= @model.build_scenic_image do |simage| %>
     <%= simage.input :file, as: :file %>
     <% if @model.scenic_image && @model.scenic_image.file.present? %>
     <div class="control-group image">
@@ -46,8 +42,7 @@
     <% end %>
   <% end %>
 
-  <%= s.fields_for :scenic_impression, 
-                   @model.scenic_impression ||=  @model.build_scenic_impression do |si| %>
+  <%= s.fields_for :scenic_impression, @model.scenic_impression ||=  @model.build_scenic_impression do |si| %>
     <%= si.input :file, as: :file %>
     <%= si.input :cover, as: :file %>
     <%= si.input :duration %>
@@ -63,8 +58,7 @@
     <% end %>
   <% end %>
 
-  <%= s.fields_for :scenic_route,
-                   @model.scenic_route ||= @model.build_scenic_route do |sr| %>
+  <%= s.fields_for :scenic_route, @model.scenic_route ||= @model.build_scenic_route do |sr| %>
     <%= sr.input :file, as: :file %>
     <%= sr.input :cover, as: :file %>
     <%= sr.input :duration %>
@@ -76,14 +70,25 @@
         </div>
       </div>
     <% end %>
-
   <% end %>
 
-  <%= s.fields_for :scenic_description,
-                   @model.scenic_description ||= @model.build_scenic_description do |sd| %>
+  <%= s.fields_for :scenic_slides_cover, @model.scenic_slides_cover ||= @model.build_scenic_slides_cover do |sicon| %>
+    <%= sicon.input :file, as: :file %>
+    <% if @model.scenic_slides_cover && @model.scenic_slides_cover.file.present? %>
+      <div class="control-group image">
+        <div class="controls">
+          <%= image_tag @model.scenic_slides_cover.file %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+
+  <%= s.fields_for :scenic_description, @model.scenic_description ||= @model.build_scenic_description do |sd| %>
     <%= sd.input :body, as: :text %>
   <% end %>
+
   <div class="form-actions">
     <%= s.button :submit, :class => 'btn-primary' %>
   </div>
+
 <% end %>

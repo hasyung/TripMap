@@ -17,6 +17,18 @@
     <% end %>
   <% end %>
 
+  <%= m.fields_for :audio_list_item_audio_cover, @model.audio_list_item_audio_cover ||= @model.build_audio_list_item_audio_cover do |img|  %>
+    <%= img.input :file, :as => :file %>
+
+    <% if @model.audio_list_item_audio_cover && @model.audio_list_item_audio_cover.file.present? %>
+        <div class="control-group image">
+          <div class="controls">
+            <%= image_tag @model.audio_list_item_audio_cover.file %>
+          </div>
+        </div>
+    <% end %>
+  <% end %>
+
   <%= m.fields_for :audio_list_item_audio, @model.audio_list_item_audio ||= @model.build_audio_list_item_audio do |o|  %>
     <%= o.input :file, :as => :file %>
 

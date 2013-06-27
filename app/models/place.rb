@@ -4,7 +4,8 @@ class Place < ActiveRecord::Base
   attr_accessible :map, :map_id, :name, :subtitle, :is_free, :menu_type,
                   :place_icon_attributes, :place_slug_icon_attributes, :place_image_attributes,
                   :place_description_image_attributes, :place_video_attributes, :place_audio_attributes,
-                  :place_description_attributes, :place_slug_attributes, :place_slides_attributes
+                  :place_description_attributes, :place_slug_attributes, :place_slides_attributes,
+                  :place_slides_cover_attributes
 
   # Associations
   belongs_to :map, :counter_cache => true
@@ -19,6 +20,7 @@ class Place < ActiveRecord::Base
     assoc.has_one  :place_slug_icon,          :conditions => { :image_type => Image.place_slug_icon }
     assoc.has_one  :place_description_image,  :conditions => { :image_type => Image.place_description_image }
     assoc.has_one  :place_image,              :conditions => { :image_type => Image.place_image }
+    assoc.has_one  :place_slides_cover,       :conditions => { :image_type => Image.place_slides_cover }
     assoc.has_many :place_slides,             :conditions => { :image_type => Image.place_slides }
   end
 
@@ -42,6 +44,7 @@ class Place < ActiveRecord::Base
   accepts_nested_attributes_for :place_slug_icon,         reject_if: ->(attr){ attr[:file].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :place_description_image, reject_if: ->(attr){ attr[:file].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :place_image,             reject_if: ->(attr){ attr[:file].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :place_slides_cover,      reject_if: ->(attr){ attr[:file].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :place_audio,             reject_if: ->(attr){ attr[:file].blank? && attr[:id].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :place_video,             reject_if: ->(attr){ attr[:file].blank? && attr[:id].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :place_description,       :allow_destroy => true

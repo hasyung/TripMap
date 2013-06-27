@@ -1,6 +1,6 @@
 <%= simple_form_for [:admin,@model], url: get_minority_form_url(@model, @parent) do |p| %>
   <%= p.input :name %>
- <%= p.fields_for :minority_slug, @model.minority_slug ||= @model.build_minority_slug do |s|  %>  
+  <%= p.fields_for :minority_slug, @model.minority_slug ||= @model.build_minority_slug do |s|  %>  
     <%= s.input :slug, :input_html => { :class => "span-full" } %>
   <% end %>
   <%= p.input :is_free %>
@@ -19,7 +19,18 @@
   <% end %>
 
   <%= p.fields_for :minority_slug_icon, @model.minority_slug_icon ||= @model.build_minority_slug_icon do |picon| %>
-  <%= picon.input :file, as: :file %>
+    <%= picon.input :file, as: :file %>
+    <% if @model.minority_slug_icon && @model.minority_slug_icon.file.present? %>
+      <div class="control-group image">
+        <div class="controls">
+          <%= image_tag @model.minority_slug_icon.file %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+
+  <%= p.fields_for :minority_slug_icon, @model.minority_slug_icon ||= @model.build_minority_slug_icon do |picon| %>
+    <%= picon.input :file, as: :file %>
     <% if @model.minority_slug_icon && @model.minority_slug_icon.file.present? %>
       <div class="control-group image">
         <div class="controls">
@@ -43,8 +54,7 @@
     <% end %>
   <% end %>
 
-  <%= p.fields_for :minority_description, 
-                   @model.minority_description ||= @model.build_minority_description do |pd|  %>  
+  <%= p.fields_for :minority_description, @model.minority_description ||= @model.build_minority_description do |pd|  %>
     <%= pd.input :body, :as => :text, input_html: { :class => "span-full"} %>
   <% end %>
 
