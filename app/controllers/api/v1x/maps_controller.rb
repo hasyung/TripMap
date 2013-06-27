@@ -18,12 +18,14 @@ class  Api::V1x::MapsController < Api::V1x::ApplicationController
     Map.all.each do |map|
       serials_tmp = []
       ar_map_serial.each{|e| serials_tmp << e[:code] if e[:map_id] == map.id }
-
-      result << {
-        :id => map.id, :name => map.name, :slug => map.map_slug.slug,
+      map.map_slugs.each do |s|
+        result << {
+        :id => map.id, :name => map.name, :slug => s.slug,
         :version => map.version.to_s, :cover => map.map_cover.file.url,
         :serial => serials_tmp
-      }
+                  }
+      end
+      
     end
 
     render :json => result

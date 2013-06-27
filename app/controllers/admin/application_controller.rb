@@ -6,6 +6,12 @@ class Admin::ApplicationController < ApplicationController
   def set_slug(slug, model)
     slugs = slug.split(";")
     model.each{|m| m.destroy}
-    slugs.each{|s| model.create slug: s}
+    #binding.pry 
+    #slugs.each{|s| model.create slug: s}
+     slugs.each do |s|
+       m = model.new
+       m.slug = s
+       m.save
+     end
   end
 end

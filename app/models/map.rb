@@ -97,33 +97,37 @@ class Map < ActiveRecord::Base
 
   def get_places()
     places = []
-    self.places.each{ |o| places << get_map_place_values(o) } if self.places_count > 0
+    self.places.each{ |o| places += get_map_place_values(o) } if self.places_count > 0
     places
   end
 
   def get_scenics()
     scenics = []
-    self.scenics.each{ |o| scenics << get_map_scenic_values(o) } if self.scenics_count > 0
+    self.scenics.each{ |o| scenics += get_map_scenic_values(o) } if self.scenics_count > 0
     scenics
   end
 
   def get_recommends()
     recommends = []
-    self.recommends.each{ |o| recommends << get_map_recommend_values(o) } if self.recommends_count > 0
+    self.recommends.each{ |o| recommends += get_map_recommend_values(o) } if self.recommends_count > 0
     recommends
   end
 
   def get_info_lists()
     ret = []
     self.info_lists.order_asc.each do |info_list|
-      r = {
-        info_list_slug:       get_file_value(info_list.info_list_slug, "slug"),
+      info_list.info_list_slugs.each do |s|
+        r = {
+        info_list_slug:       s.slug,
         info_list_is_free:    info_list.is_free.to_s,
         slug_icon:            get_file_value(info_list.infolist_slug_icon, "file", true),
-      }
+            }
+      end
       tmp_infos = []
       info_list.infos.order_asc.each do |o|
-        tmp_infos << { name: o.name, slug: get_file_value( o.info_slug, "slug"), is_free: o.is_free.to_s, description: get_file_value(o.letter, "body")}
+        o.info_slugs.each do |s|
+          tmp_infos << { name: o.name, slug: s.slug, is_free: o.is_free.to_s, description: get_file_value(o.letter, "body")}
+        end
       end
       r["infos"] = tmp_infos
       ret << r
@@ -132,13 +136,16 @@ class Map < ActiveRecord::Base
   end
 
   def get_map_place_values place
-    {
+    places = []
+    place.place_slugs.each do |s|
+      places <<
+      {
       id:                     place.id,
       name:                   place.name,
       is_free:                place.is_free.to_s,
       menu_type:              place.menu_type,
       subtitle:               place.subtitle,
-      slug:                   get_file_value(place.place_slug, "slug"),
+      slug:                   s.slug,
       icon:                   get_file_value(place.place_icon, "file", true),
       slug_icon:              get_file_value(place.place_slug_icon, "file", true),
       image:                  get_file_value(place.place_image, "file", true),
@@ -150,7 +157,9 @@ class Map < ActiveRecord::Base
       video_duration:         get_file_value(place.place_video, "duration"),
       description:            get_file_value(place.place_description, "body"),
       slides:                 get_place_slides(place)
-    }
+      }
+    end
+    places
   end
 
   def get_place_slides place
@@ -160,13 +169,16 @@ class Map < ActiveRecord::Base
   end
 
   def get_map_scenic_values scenic
-    {
+    scenics = []
+    scenic.scenic_slugs.each do |s|
+      scenics <<
+      {
       id:                     scenic.id,
       name:                   scenic.name,
       is_free:                scenic.is_free.to_s,
       menu_type:              scenic.menu_type,
       subtitle:               scenic.subtitle,
-      slug:                   get_file_value( scenic.scenic_slug, "slug"),
+      slug:                   s.slug,
       icon:                   get_file_value(scenic.scenic_icon, "file", true),
       slug_icon:              get_file_value(scenic.scenic_slug_icon, "file", true),
       image:                  get_file_value(scenic.scenic_image, "file", true),
@@ -178,7 +190,9 @@ class Map < ActiveRecord::Base
       route_duration:         get_file_value(scenic.scenic_route, "duration"),
       description:            get_file_value(scenic.scenic_description, "body"),
       slides:                 get_scenic_slides(scenic)
-    }
+      }
+    end
+    scenics
   end
 
   def get_scenic_slides scenic
@@ -188,7 +202,7 @@ class Map < ActiveRecord::Base
   end
 
   def get_map_recommend_values recommend
-    records ||= []
+    recommends, records = [], []
     if recommend.recommend_records.present?
       recommend.recommend_records.order_asc.each do |record|
         detaileds ||= []
@@ -253,10 +267,11 @@ class Map < ActiveRecord::Base
         records << { name: record.name, description: get_file_value(record.recommend_record_description,"body", false), cover: get_file_value(record.recommend_record_cover,"file", true), detaileds: detaileds }
       end
     end
-
-    {
+    recommend.recommend_slugs.each do |s|
+      recommends <<
+      {
       name:                   recommend.name,
-      slug:                   get_file_value(recommend.recommend_slug, "slug"),
+      slug:                   s.slug,
       is_free:                recommend.is_free.to_s,
       menu_type:              recommend.menu_type,
       category:               recommend.category_cd,
@@ -267,23 +282,48 @@ class Map < ActiveRecord::Base
       video_cover:            get_file_value(recommend.recommend_video,"cover",true),
       cover:                  get_file_value(recommend.recommend_cover,"file",true),
       records:                records
-    }
+      }
+    end
+    recommends
   end
 
   def get_panel_videos
     ret = []
-    self.panel_videos.each{|c| ret << o_to_h(c, ['map_id', 'version']) }
+    self.panel_videos.each do |panel|
+      panel.panel_video_slugs.each do |s|
+        ret << {
+          name: panel.name,
+          video: get_file_value(panel,"video",true),
+          slug: s.slug,
+          slug_cover: get_file_value(panel.panel_video_slug_cover,"file",true)
+        }
+      end
+    end
     ret
   end
 
   def get_broadcasts
     ret = []
-    self.broadcasts.each do|c|
-      h_c = o_to_h(c, ['map_id', 'version'])
-      l_cc = []
-      c.children_broadcasts.order_asc.each{|cc| l_cc << o_to_h(cc, ['broadcast_id']) }
-      h_c[:children_broadcasts] = l_cc
-      ret << h_c
+    self.broadcasts.each do |b|
+      childrens = []
+      b.children_broadcasts.order_asc.each do |c|
+        childrens << {
+          name: c.name,
+          cover: get_file_value(c.children_broadcast_cover,"file",true),
+          audio_size: get_file_value(c.children_broadcast_audio,"file_size",false),
+          audio_duration: get_file_value(c.children_broadcast_audio,"duration",false),
+          audio: get_file_value(c.children_broadcast_audio,"file",true),
+          desc: get_file_value(c.children_broadcast_desc, "body")
+        }
+      end
+      b.broadcast_slugs.each do |s|
+        ret << {
+          name: b.name,
+          slug: s.slug,
+          slug_cover: get_file_value(c.broadcast_slug_cover,"file",true),
+          children_broadcasts: childrens
+        }
+      end
     end
     ret
   end
@@ -311,9 +351,10 @@ class Map < ActiveRecord::Base
             slides:      sl
           }
         end
-        minorities << {
+        m.minority_slugs.each do |slug|
+          minorities << {
           name:           m.name,
-          slug:           get_file_value(m.minority_slug, "slug"),
+          slug:           slug.slug,
           slug_icon:      get_file_value(m.minority_slug_icon, "file", true),
           is_free:        m.is_free.to_s,
           menu_type:      m.menu_type,
@@ -325,17 +366,22 @@ class Map < ActiveRecord::Base
           description:    get_file_value(m.minority_description,"body"),
           slides:         slides,
           feels:          feels
-        }
+                        }
+        end
+        
       end
-      specials << { 
+      s.special_slugs.each do |slug|
+        specials << { 
         name:             s.name, 
-        slug:             get_file_value(s.special_slug, "slug"),
+        slug:             slug.slug,
         slug_icon:        get_file_value(s.special_slug_icon, "file", true),
         is_free:          s.is_free.to_s,
         menu_type:        s.menu_type,
         image:            get_file_value(s.special_icon, "file", true),
         minorities:       minorities
-      }
+                    }
+      end
+      
     end
     specials
   end
@@ -359,21 +405,44 @@ class Map < ActiveRecord::Base
   end
 
   def get_first_known
-    ret = []
-    self.first_knowns.each do|c|
-      h_c = o_to_h(c, ['map_id', 'version'])
-      l_cc = []
-      c.first_known_lists.order_asc.each do |cc|
-        h_cc = o_to_h(cc, ['first_known_id'])
-        l_ccc = []
-        cc.first_known_list_items.order_asc.each{|ccc| l_ccc << o_to_h(ccc, ['first_known_list_id']) }
-        h_cc[:first_known_list_items] = l_ccc
-        l_cc << h_cc
+    knowns = []
+    self.first_knowns.each do |known|
+      lists = []
+      known.first_known_lists.order_asc.each do |list|
+        items = []
+        list.first_known_list_items.order_asc.each do |item|
+          items << {
+            title: item.title,
+            description: item.description,
+            icon: get_file_value(item.first_known_list_item_icon, "file", true)
+                   }
+        end
+        lists << {
+          title_cn: list.title_cn,
+          title_en: list.title_en,
+          url: list.url,
+          abstract: list.abstract,
+          icon: get_file_value(list.first_known_list_icon, "file", true),
+          first_known_list_items: items
+        }
       end
-      h_c[:first_known_lists] = l_cc
-      ret << h_c
+      known.first_known_slugs.each do |s|
+        knowns << {
+          name: known.name,
+          slug: s.slug,
+          slug_cover: get_file_value(known.first_known_slug_cover, "file", true),
+          slides: get_first_known_slides(known),
+          first_known_lists: lists
+        }
+      end
     end
-    ret
+    knowns
+  end
+  
+  def get_first_known_slides known
+    slides = []
+    known.first_known_slides.order_asc.each{ |o| slides << { image: o.file.url} } if known.first_known_slides.present?
+    slides
   end
 
   def get_file_value( file, field, url = false )
