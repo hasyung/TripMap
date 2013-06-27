@@ -10,7 +10,7 @@ class Recommend < ActiveRecord::Base
   belongs_to :map, :counter_cache => true
 
   with_options :as => :videoable, :class_name => "Video", :dependent => :destroy do |assoc|
-    assoc.has_one :recommend_video,     :conditions => { :video_type => Video.recommend_video }
+    assoc.has_one :recommend_video, :conditions => { :video_type => Video.recommend_video }
   end
 
   with_options :as => :imageable, :class_name => "Image", :dependent => :destroy do |assoc|

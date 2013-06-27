@@ -16,6 +16,7 @@
           <th><%= model_class.human_attribute_name(:name) %></th>
           <th><%= model_class.human_attribute_name(:first_known_slug) %></th>
           <th><%= model_class.human_attribute_name(:first_known_slug_cover) %></th>
+          <th><%= model_class.human_attribute_name(:first_known_cover) %></th>
           <th class="action"><%= t('links.commons.action') %></th>
         </tr>
       </thead>
@@ -27,6 +28,8 @@
             <td><%= link_to(m.name, admin_first_known_first_known_lists_path(m)) %></td>
             <td><%= Keyword.get_slug(m.first_known_slugs) %></td>
             <td><%= image_tag m.first_known_slug_cover.file, :size => "35x35" unless m.first_known_slug_cover.blank? %></td>
+            <td><%= image_tag m.first_known_cover.file, :size => "35x35" unless m.first_known_cover.blank? %></td>
+
             <td class="action">
               <%= link_to raw("<i class=\"icon-edit\"></i>"), edit_admin_first_known_path(m), title: t('links.panel_videos.edit') %>
               <%= link_to raw("<i class=\"icon-trash\"></i>"), admin_first_known_path(m), method: :delete, data: {confirm: t('links.commons.confirm')} %>

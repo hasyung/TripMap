@@ -3,6 +3,7 @@ require 'app/common'
 class Map < ActiveRecord::Base
   include SerialNumber::Generate
   include App::Model
+  include App::Common
 
   attr_accessor :slug
   
@@ -325,6 +326,7 @@ class Map < ActiveRecord::Base
         }
       end
     end
+
     ret
   end
 
@@ -388,19 +390,19 @@ class Map < ActiveRecord::Base
 
   def get_audio_list_categories
     ret = []
+
     self.audio_list_categories.each do|c|
-      h_c = o_to_h(c, ['map_id', 'version'])
-      l_cc = []
+      h_c, l_cc = o_to_h(c, ['map_id', 'version']), []
+
       c.audio_lists.order_asc.each do |cc|
-        h_cc = o_to_h(cc, ['audio_list_category_id'])
-        l_ccc = []
+        h_cc, l_ccc = o_to_h(cc, ['audio_list_category_id']), []
         cc.audio_list_items.order_asc.each{|ccc| l_ccc << o_to_h(ccc, ['audio_list_id']) }
-        h_cc[:audio_list_items] = l_ccc
-        l_cc << h_cc
+        h_cc[:audio_list_items] = l_ccc; l_cc << h_cc
       end
-      h_c[:audio_lists] = l_cc
-      ret << h_c
+
+      h_c[:audio_lists] = l_cc; ret << h_c
     end
+
     ret
   end
 

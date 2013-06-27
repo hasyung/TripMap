@@ -808,6 +808,7 @@
         name: "名称"
         first_known_slug: "简码"
         first_known_slug_cover: "简码封面"
+        first_known_cover: "先知道封面"
       first_known_list:
         first_known: "所属于先知道"
         title_cn: "中文标题"
@@ -898,6 +899,8 @@
       recommend_detailed:
         recommend_detailed_cover:
           file: "封面"
+        recommend_detailed_item_cover:
+          file: "推荐详情九宫格封面"
       share:
         share_image:
           file: "分享图片"
@@ -995,6 +998,11 @@
         value: "版本号"
         app: "应用程序(ipa | apk后缀)"
         url: "iOS app连接网址"
+      first_known:
+        first_known_slug_cover:
+          file: "简码图片"
+        first_known_cover:
+          file: "先知道封面"
 
   helpers:
     links:

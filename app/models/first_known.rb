@@ -3,7 +3,7 @@ class FirstKnown < ActiveRecord::Base
   attr_accessor :slug
   # White list
   attr_accessible :map_id, :name,
-                  :slug, :first_known_slug_cover_attributes
+                  :slug, :first_known_slug_cover_attributes, :first_known_cover_attributes
 
   # Associations
   belongs_to :map
@@ -16,6 +16,7 @@ class FirstKnown < ActiveRecord::Base
 
   with_options :as => :imageable, :class_name => 'Image', :dependent => :destroy do |assoc|
     assoc.has_one  :first_known_slug_cover, :conditions => { :image_type => Image.first_known_slug_cover }
+    assoc.has_one  :first_known_cover,      :conditions => { :image_type => Image.first_known_cover }
     assoc.has_many :first_known_slides,     :conditions => { :image_type => Image.first_known_slides }
   end
 
@@ -27,6 +28,7 @@ class FirstKnown < ActiveRecord::Base
 
   # Nested attributes validates
   accepts_nested_attributes_for :first_known_slug_cover, reject_if: ->(attr){ attr[:file].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :first_known_cover,      reject_if: ->(attr){ attr[:file].blank? }, :allow_destroy => true
 
   # Scopes
   scope :created_desc, order("created_at DESC")

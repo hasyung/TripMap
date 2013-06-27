@@ -23,15 +23,16 @@ class Admin::WeathersController < Admin::ApplicationController
     all = get_today_weather(options)
 
     w = nil
-    if all.empty?
+
+    unless all.empty?
+      w = all.first
+    else
       w = get_weather(@map.name, options)
       if w.nil?
         old_data = get_today_weather(options, true)
         ( render :text => I18n.t("errors.weather.disabled"); return ) if old_data.empty?
         w = old_data.last
       end
-    else
-      w = all.first
     end
 
     surr_cities = SurroundCity.where(map_id: mid.to_i)
@@ -46,6 +47,7 @@ class Admin::WeathersController < Admin::ApplicationController
           c_w = get_weather(city.city_name, ploy_options)
           if c_w.nil?
             tmp_old_data = get_today_weather(ploy_options)
+            tmp_old_data = get_today_weather(ploy_options, true) if tmp_old_data.empty?
             next if tmp_old_data.empty?
             c_w = tmp_old_data.last
           end
@@ -70,22 +72,22 @@ class Admin::WeathersController < Admin::ApplicationController
     w
   end
 
-  def e_to_h( weather_entity, isExtendModel = false )
-    w = weather_entity
+  def get_today_weather( ploy_options, use_old_data = false )
+    ret = use_old_data ? Weather.where(ploy_options) :
+          Weather.where(ploy_options).select{|e| (Time.now.to_i - e.created_at.to_i) < UPDATE_SECONDS }
+  end
+
+  def e_to_h( weather_entity, is_extend_model = false )
+    w  = weather_entity
     tw = w.tmp_today.split('/')
 
-    ret = isExtendModel ? { tmp_today_low: tw[0], tmp_today_high: tw[1], tmp_pic_to: w.tmp_pic_to } :
+    ret = is_extend_model ? { tmp_today_low: tw[0], tmp_today_high: tw[1], tmp_pic_to: w.tmp_pic_to } :
           {
             tmp_current:  w.tmp_current,  tmp_today_low: tw[0], tmp_today_high: tw[1],
             tmp_desc:     w.tmp_desc,     tmp_wind:   w.tmp_wind,
             tmp_pic_from: w.tmp_pic_from, tmp_pic_to: w.tmp_pic_to,
             tmp_humidity: w.tmp_humidity
           }
-  end
-
-  def get_today_weather( ploy_options, isUseOldData = false )
-    ret = isUseOldData ? w_arr = Weather.where(ploy_options) :
-          Weather.where(ploy_options).select{|e| (Time.now.to_i - e.created_at.to_i) < UPDATE_SECONDS }
   end
 
   # Methods access scope declares
