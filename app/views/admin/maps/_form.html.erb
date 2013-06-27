@@ -1,8 +1,6 @@
 <%= simple_form_for [:admin, @model], :html => { :class => 'form-horizontal' } do |f| %>
   <%= f.input :name %>
-  <%= f.fields_for :map_slug, @model.map_slug ||= @model.build_map_slug do |s|  %>  
-    <%= s.input :slug, :input_html => { :class => "span-full" } %>
-  <% end %>
+  <%= f.input :slug %>
   <%= f.association :province, :collection => Province.all, :prompt => t("helpers.links.select", :model_name => Province.model_name.human) %>
   <%= f.fields_for :map_cover, @model.map_cover ||= @model.build_map_cover do |c| %>
     <%= c.input :file, :as => :file %>

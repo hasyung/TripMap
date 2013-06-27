@@ -17,6 +17,7 @@ class Admin::MinoritiesController < Admin::ApplicationController
     add_breadcrumb :new
     @model = @parent.minorities.new params[:minority]
     if @model.save
+      set_slug(params[:minority][:slug], @model.minority_slugs)
       redirect_to @path, notice: t('messages.minorities.success')
     else
       render :new
@@ -25,6 +26,7 @@ class Admin::MinoritiesController < Admin::ApplicationController
 
   def edit
     @model = Minority.find params[:id]
+    @model.slug = Keyword.get_slug(@model.minority_slugs)
     @images = @model.minority_slides.order_asc
     add_breadcrumb :edit
   end
@@ -32,6 +34,7 @@ class Admin::MinoritiesController < Admin::ApplicationController
   def update
     add_breadcrumb :edit
     @model = Minority.find params[:id]
+    set_slug(params[:minority][:slug], @model.minority_slugs)
     if @model.update_attributes params[:minority]
       redirect_to @path, notice: t('messages.minorities.success')
     else

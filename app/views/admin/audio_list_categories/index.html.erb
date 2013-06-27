@@ -27,9 +27,13 @@
             <td><%= check_box_tag "panel_video_ids[]", m.id, false, id: "panel_video_#{m.id}" %></td>
             <td><%= m.map.name %></td>
             <td><%= link_to(m.name, admin_audio_list_category_audio_lists_path(m)) %></td>
+<<<<<<< HEAD
             <td><%= m.is_free %></td>
             <td><%= m.menu_type %></td>
             <td><%= m.audio_list_category_slug.slug unless m.audio_list_category_slug.blank? %></td>
+=======
+            <td><%= Keyword.get_slug(m.audio_list_category_slugs) %></td>
+>>>>>>> 75dcf09d7cac0ab06dc05bf841465f540f2c70ce
             <td><%= image_tag m.audio_list_category_slug_cover.file, :size => "35x35" unless m.audio_list_category_slug_cover.blank? %></td>
             <td class="action">
               <%= link_to raw("<i class=\"icon-edit\"></i>"), edit_admin_audio_list_category_path(m), title: t('links.panel_videos.edit') %>

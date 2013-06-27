@@ -25,7 +25,7 @@
             <td>
               <%= link_to r.name, admin_fight_minorities_path(r.id) %>
             </td>
-            <td><%= r.fight_slug.slug if r.fight_slug.present? %></td>
+            <td><%= Keyword.get_slug(r.fight_slugs) %></td>
             <td><%= r.county.name %></td>
             <td class="action">
               <%= link_to raw("<i class=\"icon-edit\"></i>"), edit_admin_fight_path(r) %>

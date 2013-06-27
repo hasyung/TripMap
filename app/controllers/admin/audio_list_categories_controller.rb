@@ -16,6 +16,7 @@ class Admin::AudioListCategoriesController < Admin::ApplicationController
     add_breadcrumb :new
     @model = AudioListCategory.new params[:audio_list_category]
     if @model.save
+      set_slug(params[:audio_list_category][:slug], @model.audio_list_category_slugs)
       redirect_to admin_audio_list_categories_path, notice: t('messages.commons.success')
     else
       render :new
@@ -24,12 +25,14 @@ class Admin::AudioListCategoriesController < Admin::ApplicationController
 
   def edit
     @model = AudioListCategory.find params[:id]
+    @model.slug = Keyword.get_slug(@model.audio_list_category_slugs)
     add_breadcrumb :edit
   end
 
   def update
     add_breadcrumb :edit
     @model = AudioListCategory.find params[:id]
+    set_slug(params[:audio_list_category][:slug], @model.audio_list_category_slugs)
     if @model.update_attributes params[:audio_list_category]
       redirect_to admin_audio_list_categories_path, notice: t('messages.commons.success')
     else

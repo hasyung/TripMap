@@ -28,7 +28,7 @@
         <tr>
           <td><%= check_box_tag "merchant_ids[]", p.id, false, id: "merchant_#{p.id}" %></td>
           <td><%= p.name %></td>
-          <td><%= p.merchant_slug.slug %></td>
+          <td><%= Keyword.get_slug(p.merchant_slugs) %></td>
           <td><%= p.title %></td>
           <td><%= t("activerecord.enums.merchant.types.#{model_class.types.key(p.type_cd)}") %></td>
           <td><%= p.county.city.name if p.county.present? && p.county.city.present? %></td>

@@ -13,6 +13,7 @@ class Admin::MapsController < Admin::ApplicationController
   def create
     @model = Map.new params[:map]
     if @model.save
+      set_slug(params[:map][:slug], @model.map_slugs)
       redirect_to admin_maps_path, :notice => t('messages.maps.success')
     else
       render :new
@@ -22,12 +23,14 @@ class Admin::MapsController < Admin::ApplicationController
 
   def edit
     @model = Map.find params[:id]
+    @model.slug = Keyword.get_slug(@model.map_slugs)
     @images = @model.map_slides.order_asc
     add_breadcrumb :edit
   end
 
   def update
     @model = Map.find params[:id]
+    set_slug(params[:map][:slug], @model.map_slugs)
     if @model.update_attributes params[:map]
       redirect_to admin_maps_path, :notice => t('messages.maps.success')
     else

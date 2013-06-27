@@ -3,12 +3,14 @@ class Api::V1::FightsController < Api::V1::ApplicationController
   def index
     result = []
     Fight.all.each do |m|
-      result << {
-        name:         m.name,
-        slug:         m.fight_slug.slug,
-        slug_icon:    get_url(m.fight_slug_icon),
-        image:        get_url(m.fight_icon)
-       }
+      m.fight_slugs.each do |s|
+        result << {
+          name:         m.name,
+          slug:         s.slug,
+          slug_icon:    get_url(m.fight_slug_icon),
+          image:        get_url(m.fight_icon)
+                  }
+       end
     end
 
     render :json => result
@@ -26,7 +28,7 @@ class Api::V1::FightsController < Api::V1::ApplicationController
           slides << {
             image:       get_file_value(ms.minority_slide_icon, "file", true),
             description: get_file_value(ms.minority_slide_description,"body")
-          }
+                    }
         end
         m.minority_feels.order_asc.each do |mf|
           sl ||= []
@@ -36,11 +38,12 @@ class Api::V1::FightsController < Api::V1::ApplicationController
             image:       get_file_value(mf.minority_feel_icon, "file", true),
             description: get_file_value(mf.minority_feel_description,"body"),
             slides:      sl
-          }
+                   }
         end
-        minorities << {
+        m.minority_slugs.each do |s|
+          minorities << {
           name:           m.name,
-          slug:           get_file_value(m.minority_slug, "slug"),
+          slug:           s.slug,
           slug_icon:      get_file_value(m.minority_slug_icon, "file", true),
           is_free:        m.is_free.to_s,
           menu_type:      m.menu_type,
@@ -52,13 +55,15 @@ class Api::V1::FightsController < Api::V1::ApplicationController
           description:    get_file_value(m.minority_description,"body"),
           slides:         slides,
           feels:          feels
-        }
+                        }
+        end
+        
       end
       result = {
         video:        get_url(fight.fight_video),
         video_cover:  get_file_value(fight.fight_video,"cover",true),
         minorities:   minorities
-       }
+               }
     end
 
     render :json => result

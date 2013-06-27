@@ -6,9 +6,7 @@
   <%= m.input :is_free %>
   <%= m.input :menu_type %>
 
-  <%= m.fields_for :broadcast_slug, @model.broadcast_slug ||= @model.build_broadcast_slug do |s|  %>
-    <%= s.input :slug, :input_html => { :class => "span-full" } %>
-  <% end %>
+  <%= m.input :slug %>
 
   <%= m.fields_for :broadcast_slug_cover, @model.broadcast_slug_cover ||= @model.build_broadcast_slug_cover do |img|  %>  
     <%= img.input :file, :as => :file %>

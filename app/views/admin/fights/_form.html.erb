@@ -2,9 +2,7 @@
   <%= r.input :name %>
   <%= r.input :city, collection: City.all, input_html: {onchange: "getcity()"}, prompt: t("helpers.links.select", :model_name => City.model_name.human) %>
   <%= r.association :county, collection: (@city.present?? @city.counties : (@fight.county_id.present?? [@fight.county] : [])), prompt: t("helpers.links.select", :model_name => County.model_name.human) %>
-  <%= r.fields_for :fight_slug, @fight.fight_slug ||= @fight.build_fight_slug do |s|  %>  
-    <%= s.input :slug, :input_html => { :class => "span-full" } %>
-  <% end %>
+  <%= r.input :slug %>
   <%= r.fields_for :fight_slug_icon, @fight.fight_slug_icon ||= @fight.build_fight_slug_icon do |ricon| %>
     <%= ricon.input :file, as: :file %>
     <% if @fight.fight_slug_icon && @fight.fight_slug_icon.file.present? %>

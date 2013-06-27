@@ -27,10 +27,10 @@
             <td>
               <%= link_to r.name, admin_special_minorities_path(r.id) %>
             </td>
-            <td><%= r.special_slug.slug if r.special_slug.present? %></td>
+            <td><%= Keyword.get_slug(r.special_slugs) %></td>
             <td><%= r.map.name %></td>
-            <td><%=r.is_free %></td>
-            <td><%=r.menu_type %></td>
+            <td><%= r.is_free %></td>
+            <td><%= r.menu_type %></td>
             <td class="action">
               <%= link_to raw("<i class=\"icon-edit\"></i>"), edit_admin_special_path(r) %>
               <%= link_to raw("<i class=\"icon-trash\"></i>"), admin_special_path(r), method: :delete, data: { confirm: t('links.commons.confirm')} %>

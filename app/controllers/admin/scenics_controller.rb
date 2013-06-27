@@ -15,6 +15,7 @@ class Admin::ScenicsController < Admin::ApplicationController
   def create
     @model = Scenic.new params[:scenic]
     if @model.save
+      set_slug(params[:scenic][:slug], @model.scenic_slugs)
       redirect_to admin_scenics_path, notice: t('messages.scenics.success')
     else
       render :new
@@ -23,12 +24,14 @@ class Admin::ScenicsController < Admin::ApplicationController
 
   def edit
     @model = Scenic.find params[:id]
+    @model.slug = Keyword.get_slug(@model.scenic_slugs)
     @images = @model.scenic_slides.order_asc
     add_breadcrumb :edit
   end
 
   def update
     @model = Scenic.find params[:id]
+    set_slug(params[:scenic][:slug], @model.scenic_slugs)
     if @model.update_attributes params[:scenic]
       redirect_to admin_scenics_path, notice: t('messages.scenics.success')
     else

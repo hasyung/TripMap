@@ -19,6 +19,7 @@ class Admin::FightsController < Admin::ApplicationController
       render :new
     else
       if @fight.save
+        set_slug(params[:fight][:slug], @fight.fight_slugs)
         redirect_to admin_fights_path, notice: t('messages.fights.success')
       else 
         render :new
@@ -30,6 +31,7 @@ class Admin::FightsController < Admin::ApplicationController
   def edit
     add_breadcrumb :edit
     @fight = Fight.find params[:id]
+    @fight.slug = Keyword.get_slug(@fight.map_slugs)
   end
 
   def update
@@ -39,6 +41,7 @@ class Admin::FightsController < Admin::ApplicationController
       @city = City.find params[:fight][:city].to_i if params[:fight][:city].to_i != 0
       render :edit
     else
+      set_slug(params[:fight][:slug], @fight.fight_slugs)
       if @fight.update_attributes params[:fight]
         redirect_to admin_fights_path, notice: t('messages.fights.success')
       else

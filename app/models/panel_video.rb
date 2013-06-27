@@ -1,14 +1,15 @@
 class PanelVideo < ActiveRecord::Base
 
+  attr_accessor :slug
   # White list
   attr_accessible :map_id, :name, :video,
-                  :panel_video_slug_attributes, :panel_video_slug_cover_attributes
+                  :slug, :panel_video_slug_cover_attributes
 
   # Associations
   belongs_to :map
 
   with_options :as => :keywordable, :class_name => "Keyword", :dependent => :destroy do |assoc|
-    assoc.has_one :panel_video_slug,          :conditions => { :keyword_type => Keyword.panel_video_slug }
+    assoc.has_many :panel_video_slugs,          :conditions => { :keyword_type => Keyword.panel_video_slugs }
   end
 
   with_options :as => :imageable, :class_name => 'Image', :dependent => :destroy do |assoc|
@@ -24,7 +25,6 @@ class PanelVideo < ActiveRecord::Base
 
   # Nested attributes validates
   accepts_nested_attributes_for :panel_video_slug_cover, reject_if: ->(attr){ attr[:file].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :panel_video_slug,                                                  :allow_destroy => true
 
   # Carrierwave
   mount_uploader :video, VideoUploader do
